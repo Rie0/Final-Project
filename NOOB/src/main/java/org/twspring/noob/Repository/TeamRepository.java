@@ -6,4 +6,5 @@ import org.twspring.noob.Model.Team;
 
 @Repository
 public interface TeamRepository extends JpaRepository<Team, Integer> {
+    Team findTeamById(Integer id);
 }

@@ -38,4 +38,9 @@ public class PlayerDTO {
     @CreationTimestamp
     private final LocalDateTime joinedAt = LocalDateTime.now();
 
+    @NotEmpty(message = "Bio cannot be empty")
+    @NotBlank(message = "Bio cannot be blank")
+    @Size(min= 25, max = 150, message = "Bio must have between 25 to 150 characters")
+    private String bio;
+
 }
