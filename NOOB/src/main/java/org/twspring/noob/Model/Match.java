@@ -1,0 +1,63 @@
+package org.twspring.noob.Model;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import java.time.LocalDateTime;
+
+@Entity
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+
+@Table(name = "game_match") // Renaming the table to avoid reserved keyword issues
+
+public class Match {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+    @ManyToOne
+    @JoinColumn(name = "participant1_id")
+    private Participant participant1; // Reference to the first participant
+
+    @ManyToOne
+    @JoinColumn(name = "participant2_id")
+    private Participant participant2; // Reference to the second participant
+
+    @ManyToOne
+    @JoinColumn(name = "winner_id")
+    private Participant winner; // Reference to the winning participant
+
+    @ManyToOne
+    @JoinColumn(name = "loser_id")
+    private Participant loser; // Reference to the losing participant
+
+    @Column(columnDefinition = "INT")
+    private Integer roundNumber; // The round number in which this match is played
+
+    @Column(columnDefinition = "TIMESTAMP")
+    private LocalDateTime startTime; // Start time of the match
+
+    @Column(columnDefinition = "TIMESTAMP")
+    private LocalDateTime endTime; // End time of the match
+
+    @Column(columnDefinition = "VARCHAR(50) NOT NULL")
+    private String status; // Status of the match (e.g., "PENDING", "IN_PROGRESS", "COMPLETED")
+
+    @Column(columnDefinition = "VARCHAR(20)")
+    private String score; // Score of the match (e.g., "2-1")
+
+    @ManyToOne
+    @JoinColumn(name = "tournament_id")
+    private Tournament tournament; // Reference to the Tournament this match belongs to
+
+    @ManyToOne
+    @JoinColumn(name = "round_id")
+    private Round round; // Reference to the Round this match is part of
+}
