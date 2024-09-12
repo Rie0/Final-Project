@@ -13,6 +13,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -49,6 +50,9 @@ public class Player {
     @ManyToOne
     @JsonIgnore
     private Team team;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
+    private Set<TeamInvite> teamInvites;
 
     //GAMES
 }

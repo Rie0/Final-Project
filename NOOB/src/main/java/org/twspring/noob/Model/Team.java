@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Entity
 @Getter
 @Setter
@@ -38,4 +40,6 @@ public class Team {
     @MapsId
     private User user;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
+    private Set<TeamInvite> teamInvites;
 }

@@ -3,11 +3,14 @@ package org.twspring.noob.Service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.twspring.noob.Api.ApiException;
 import org.twspring.noob.DTO.PlayerDTO;
 import org.twspring.noob.Model.Player;
+import org.twspring.noob.Model.TeamInvite;
 import org.twspring.noob.Model.User;
 import org.twspring.noob.Repository.AuthRepository;
 import org.twspring.noob.Repository.PlayerRepository;
+import org.twspring.noob.Repository.TeamInviteRepository;
 
 import java.util.List;
 
@@ -16,6 +19,7 @@ import java.util.List;
 public class PlayerService {
     private final PlayerRepository playerRepository;
     private final AuthRepository authRepository;
+    private final TeamInviteRepository teamInviteRepository;
 
     //START OF CRUD
     public List<Player> getPlayers() {
@@ -57,4 +61,28 @@ public class PlayerService {
         authRepository.deleteById(playerId);
     }
     //END OF CRUD
+
+    //PLAYER INVITES
+    public List<TeamInvite> getInvitesByPlayerId(Integer playerId) {
+        return teamInviteRepository.findTeamInvitesByPlayerId(playerId);
+    }
+
+    public void acceptInvite(Integer playerId, Integer teamInviteId) {
+        TeamInvite invite = teamInviteRepository.findTeamInviteById(teamInviteId);
+        Player player = playerRepository.findPlayerById(playerId);
+
+        if (invite==null){
+            throw new ApiException("No invite found");
+        }
+        if (!invite.getPlayer().equals(player)){
+            throw new ApiException("Player doesn't own this invite");
+        }
+        invite.setStatus(TeamInvite.Status.DECLINED);
+        teamInviteRepository.save(invite);
+
+        //ADD PLAYER TO TEAM
+        
+    }
+
+    public void declineInvite(TeamInvite teamInvite) {}
 }
