@@ -11,6 +11,7 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -58,11 +59,11 @@ public class Tournament {
 
     @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Participant> participants;
+    private Set<Participant> participants;
 
     @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
     @JsonIgnore
-    private List<Match> matches;
+    private Set<Match> matches;
 
     @OneToOne(mappedBy = "tournament", cascade = CascadeType.ALL)
     private Bracket bracket;

@@ -1,5 +1,6 @@
 package org.twspring.noob.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -20,11 +22,12 @@ public class Round {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "bracket_id")
+    @JoinColumn(name = "bracket_id" )
+    @JsonIgnore
     private Bracket bracket;
 
     private Integer roundNumber;
 
-    @ElementCollection
-    private List<Integer> matchIds;
+    @OneToMany(mappedBy = "round", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Match> matches;
 }

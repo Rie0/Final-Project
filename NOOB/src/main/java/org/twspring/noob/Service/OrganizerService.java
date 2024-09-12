@@ -2,6 +2,7 @@ package org.twspring.noob.Service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.twspring.noob.Api.ApiException;
 import org.twspring.noob.Model.Organizer;
 import org.twspring.noob.Repository.OrganizerRepository;
 
@@ -35,6 +36,11 @@ public class OrganizerService {
     }
 
     public void deleteOrganizer(Integer organizerId) {
+        Organizer organizer = organizerRepository.findOrganizerById(organizerId);
+        if (organizer == null) {
+            throw new ApiException("Organizer not found");
+        }
+
         organizerRepository.deleteById(organizerId);
     }
 }

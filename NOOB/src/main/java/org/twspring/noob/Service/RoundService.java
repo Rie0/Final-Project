@@ -28,7 +28,6 @@ public class RoundService {
         Round round = roundRepository.findRoundById(roundId);
         if (round != null) {
             round.setRoundNumber(updatedRound.getRoundNumber());
-            round.setMatchIds(updatedRound.getMatchIds());
             round.setBracket(updatedRound.getBracket());
             roundRepository.save(round);
         }

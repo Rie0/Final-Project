@@ -46,6 +46,9 @@ public class ParticipantService {
             throw new ApiException("Player is already registered for this tournament");
         }
 
+
+        tournament.setCurrentParticipants(tournament.getCurrentParticipants() + 1);
+
         participant.setPlayer(player);
         participant.setTournament(tournament);
         participantRepository.save(participant);
@@ -59,7 +62,6 @@ public class ParticipantService {
             participant.setSeed(updatedParticipant.getSeed());
             participant.setStatus(updatedParticipant.getStatus());
             participant.setPlayer(updatedParticipant.getPlayer());
-            participant.setTournament(updatedParticipant.getTournament());
             participantRepository.save(participant);
         }
     }

@@ -1,6 +1,8 @@
 package org.twspring.noob.Controller;
 
+import org.twspring.noob.Model.Bracket;
 import org.twspring.noob.Model.Tournament;
+import org.twspring.noob.Service.BracketService;
 import org.twspring.noob.Service.TournamentService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 public class TournamentController {
 
     private final TournamentService tournamentService;
+    private final BracketService bracketService;
+
 
     @GetMapping("/get")
     public ResponseEntity getTournaments() {
@@ -37,5 +41,14 @@ public class TournamentController {
     public ResponseEntity deleteTournament(@PathVariable Integer id) {
         tournamentService.deleteTournament(id);
         return ResponseEntity.status(HttpStatus.OK).body("Tournament deleted successfully");
+    }
+    @PostMapping("/{tournamentId}/initializeBracket")
+    public ResponseEntity initializeBracket(@PathVariable Integer tournamentId) {
+        try {
+            Bracket bracket = bracketService.initializeBracket(tournamentId);
+            return ResponseEntity.ok(bracket);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 }

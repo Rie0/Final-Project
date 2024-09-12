@@ -37,4 +37,27 @@ public class MatchController {
         matchService.deleteMatch(id);
         return ResponseEntity.status(HttpStatus.OK).body("Match deleted successfully");
     }
+
+    @PatchMapping("/{matchId}/ready/participant1/{playerId}")
+    public ResponseEntity setParticipant1Ready(@PathVariable Integer matchId, @PathVariable Integer playerId) {
+         matchService.setParticipant1Ready(matchId, playerId);
+
+            return ResponseEntity.ok("Participant 1 is now ready.");
+
+    }
+
+    @PatchMapping("/{matchId}/ready/participant2/{playerId}")
+    public ResponseEntity<String> setParticipant2Ready(@PathVariable Integer matchId, @PathVariable Integer playerId) {
+        matchService.setParticipant2Ready(matchId, playerId);
+            return ResponseEntity.ok("Participant 2 is now ready.");
+
+    }
+
+    @GetMapping("/{matchId}/players")
+    public ResponseEntity getMatchParticipants(@PathVariable Integer matchId) {
+        return ResponseEntity.ok(
+                matchService.getMatchParticipants(matchId)
+        );
+    }
+
 }

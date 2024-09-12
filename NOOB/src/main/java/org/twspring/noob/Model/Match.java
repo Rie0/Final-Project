@@ -1,5 +1,6 @@
 package org.twspring.noob.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -24,22 +25,35 @@ public class Match {
 
     @ManyToOne
     @JoinColumn(name = "participant1_id")
+    @JsonIgnore
+
     private Participant participant1; // Reference to the first participant
 
     @ManyToOne
     @JoinColumn(name = "participant2_id")
+    @JsonIgnore
+
     private Participant participant2; // Reference to the second participant
 
     @ManyToOne
     @JoinColumn(name = "winner_id")
+    @JsonIgnore
+
     private Participant winner; // Reference to the winning participant
 
     @ManyToOne
     @JoinColumn(name = "loser_id")
+    @JsonIgnore
+
     private Participant loser; // Reference to the losing participant
 
-    @Column(columnDefinition = "INT")
-    private Integer roundNumber; // The round number in which this match is played
+
+    @Column(name = "participant1_ready", nullable = false)
+    private boolean participant1Ready = false;
+
+    @Column(name = "participant2_ready", nullable = false)
+    private boolean participant2Ready = false;
+
 
     @Column(columnDefinition = "TIMESTAMP")
     private LocalDateTime startTime; // Start time of the match
@@ -55,9 +69,12 @@ public class Match {
 
     @ManyToOne
     @JoinColumn(name = "tournament_id")
+    @JsonIgnore
     private Tournament tournament; // Reference to the Tournament this match belongs to
 
     @ManyToOne
     @JoinColumn(name = "round_id")
+    @JsonIgnore
+
     private Round round; // Reference to the Round this match is part of
 }
