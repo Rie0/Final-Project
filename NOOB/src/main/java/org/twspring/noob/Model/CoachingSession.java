@@ -1,8 +1,6 @@
 package org.twspring.noob.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -21,7 +19,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CoachingSession {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer coachingSessionId;
 
     @NotNull(message = "Scheduled time is mandatory")
     private LocalDateTime scheduledTime;
