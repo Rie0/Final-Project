@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.twspring.noob.Api.ApiResponse;
 import org.twspring.noob.DTO.TeamDTO;
+import org.twspring.noob.DTO.TeamInviteDTO;
 import org.twspring.noob.Service.TeamService;
 
 @RestController
@@ -33,5 +34,20 @@ public class TeamController {
     public ResponseEntity deleteMyAccount(@PathVariable Integer teamId){
         teamService.deleteTeam(teamId);
         return ResponseEntity.status(200).body(new ApiResponse("Team deleted successfully"));
+    }
+
+    //INVITES
+    @PostMapping("/{teamId}/invite/{PlayerUsername}")
+    public ResponseEntity invitePlayerToTeam(@PathVariable Integer teamId,
+                                             @PathVariable String PlayerUsername,
+                                             @RequestBody@Valid TeamInviteDTO teamInviteDTO){
+        teamService.invitePlayerToTeam(teamId,PlayerUsername,teamInviteDTO);
+        return ResponseEntity.status(200).body(new ApiResponse("Player invited successfully"));
+    }
+    @DeleteMapping("/{teamId}/invite/{inviteId}/delete")
+    public ResponseEntity deleteTeamInvite(@PathVariable Integer teamId,
+                                           @PathVariable Integer inviteId){
+        teamService.deleteTeamInvite(teamId,inviteId);
+        return ResponseEntity.status(200).body(new ApiResponse("Invite deleted successfully"));
     }
 }

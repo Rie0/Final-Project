@@ -85,17 +85,17 @@ public class TeamService {
         }
 
         Player player = playerRepository.findPlayerById(user.getId());
-        if (player.getTeam()!=null){
-            if (player.getTeam()==team){
+        if (player.getTeam() != null) {
+            if (player.getTeam().getId()==team.getId()){
                 throw new ApiException("Player is already a member of this team");
             }
-            throw new ApiException("Player is already a member of a team");
         }
 
         //create a team invite.
         TeamInvite teamInvite = new TeamInvite();
         teamInvite.setTeam(team);
         teamInvite.setPlayer(player);
+        teamInvite.setTeamName(team.getUser().getUsername());
         teamInvite.setStatus(TeamInvite.Status.PENDING);
         teamInvite.setTitle(teamInviteDTO.getTitle());
         teamInvite.setMessage(teamInviteDTO.getMessage());

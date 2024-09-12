@@ -15,6 +15,9 @@ public class TeamInviteDTO {
     @NotBlank(message = "Title cannot be blank")
     private String title;
 
+    //is set in the service
+    private String teamName;
+
     @NotEmpty(message = "Message cannot be empty")
     @NotBlank(message = "Message cannot be blank")
     private String message;

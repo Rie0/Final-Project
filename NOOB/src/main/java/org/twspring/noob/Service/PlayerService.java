@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
 import org.twspring.noob.DTO.PlayerDTO;
 import org.twspring.noob.Model.Player;
+import org.twspring.noob.Model.Team;
 import org.twspring.noob.Model.TeamInvite;
 import org.twspring.noob.Model.User;
 import org.twspring.noob.Repository.AuthRepository;
@@ -77,12 +78,46 @@ public class PlayerService {
         if (!invite.getPlayer().equals(player)){
             throw new ApiException("Player doesn't own this invite");
         }
-        invite.setStatus(TeamInvite.Status.DECLINED);
+        if (player.getTeam()!=null){
+            throw new ApiException("You are already in a team, leave your current team to accept this invite");
+        }
+        if (invite.getStatus()!= TeamInvite.Status.PENDING){
+            throw new ApiException("Only pending invites can be accepted");
+        }
+        invite.setStatus(TeamInvite.Status.APPROVED);
         teamInviteRepository.save(invite);
 
         //ADD PLAYER TO TEAM
-        
+        player.setTeam(invite.getTeam());
+        playerRepository.save(player);
     }
 
-    public void declineInvite(TeamInvite teamInvite) {}
+    public void declineInvite(Integer playerId, Integer teamInviteId) {
+        TeamInvite invite = teamInviteRepository.findTeamInviteById(teamInviteId);
+        Player player = playerRepository.findPlayerById(playerId);
+
+        if (invite==null){
+            throw new ApiException("No invite found");
+        }
+        if (!invite.getPlayer().equals(player)){
+            throw new ApiException("Player doesn't own this invite");
+        }
+        if (invite.getStatus()!= TeamInvite.Status.PENDING){
+            throw new ApiException("Only pending invites can be declined");
+        }
+
+        invite.setStatus(TeamInvite.Status.DECLINED);
+        teamInviteRepository.save(invite);
+    }
+
+    //TEAM
+
+    public void leaveTeam(Integer playerId) {
+        Player player = playerRepository.findPlayerById(playerId);
+        if (player.getTeam()==null){
+            throw new ApiException("You are not in a team");
+        }
+        player.setTeam(null);
+        playerRepository.save(player);
+    }
 }

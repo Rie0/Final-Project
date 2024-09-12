@@ -41,5 +41,8 @@ public class Team {
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
+    private Set<Player> players;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
     private Set<TeamInvite> teamInvites;
 }

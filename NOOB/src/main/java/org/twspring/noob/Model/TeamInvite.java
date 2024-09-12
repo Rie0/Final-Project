@@ -21,6 +21,9 @@ public class TeamInvite {
     @Column(columnDefinition = "VARCHAR(25)")
     private String title;
 
+    @Column(columnDefinition = "VARCHAR(25)")
+    private String teamName;
+
     @Column(columnDefinition = "VARCHAR(500)")
     private String message;
 
@@ -41,6 +44,5 @@ public class TeamInvite {
     @ManyToOne
     @JsonIgnore
     private Player player;
-
 
 }
