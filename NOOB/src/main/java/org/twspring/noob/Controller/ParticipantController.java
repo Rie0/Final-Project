@@ -39,4 +39,10 @@ public class ParticipantController {
         participantService.deleteParticipant(id);
         return ResponseEntity.status(HttpStatus.OK).body("Participant deleted successfully");
     }
+
+    //Extra
+    @GetMapping("/get/{participantId}")
+    public ResponseEntity getParticipant(@PathVariable Integer participantId) {
+        return ResponseEntity.status(200).body(participantService.getParticipantById(participantId));
+    }
 }

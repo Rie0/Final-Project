@@ -3,9 +3,11 @@ package org.twspring.noob.Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
+import org.twspring.noob.Model.League;
 import org.twspring.noob.Model.Participant;
 import org.twspring.noob.Model.Player;
 import org.twspring.noob.Model.Tournament;
+import org.twspring.noob.Repository.LeagueRepository;
 import org.twspring.noob.Repository.ParticipantRepository;
 import org.twspring.noob.Repository.PlayerRepository;
 import org.twspring.noob.Repository.TournamentRepository;
@@ -18,6 +20,7 @@ public class ParticipantService {
     private final ParticipantRepository participantRepository;
     private final TournamentRepository tournamentRepository;
     private final PlayerRepository playerRepository;
+    private final LeagueRepository leagueRepository;
 
     public List<Participant> getParticipants() {
         return participantRepository.findAll();
@@ -73,4 +76,5 @@ public class ParticipantService {
         }
         participantRepository.deleteById(participantId);
     }
+
 }

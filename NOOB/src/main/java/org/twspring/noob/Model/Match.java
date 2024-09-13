@@ -79,6 +79,5 @@ public class Match {
     @ManyToOne
     @JoinColumn(name = "round_id")
     @JsonIgnore
-
     private Round round; // Reference to the Round this match is part of
 }

@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -28,6 +30,13 @@ public class Round {
 
     private Integer roundNumber;
 
+    @Column(columnDefinition = "DATE")
+    private LocalDate date;
+
     @OneToMany(mappedBy = "round", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Match> matches;
+
+    @ManyToOne
+    @JsonIgnore
+    private League league;
 }

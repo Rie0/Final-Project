@@ -66,4 +66,7 @@ public class League {
 
     @ManyToOne
     private Organizer organizer; // Reference to the Organizer creating the tournament
+
+    @OneToMany(mappedBy = "league", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Round> rounds;
 }
