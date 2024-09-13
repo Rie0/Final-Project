@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -56,6 +54,14 @@ public class Tournament {
     @Column(columnDefinition = "INT")
     private Integer currentParticipants;
 
+    @Column(columnDefinition = "VARCHAR(100) NOT NULL")
+    private String game; // Game associated with the tournament (e.g., "Chess", "Soccer")
+
+    @Column(columnDefinition = "VARCHAR(100) NOT NULL")
+    private String city; // City where the tournament is held
+
+    @Column(columnDefinition = "VARCHAR(50) NOT NULL")
+    private String attendanceType; // Attendance type (e.g., "Online", "Onsite")
 
     @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
     @JsonIgnore

@@ -25,9 +25,9 @@ public class TournamentController {
     }
 
     @PostMapping("/add/{organizer}")
-    public ResponseEntity addTournament(@Valid @RequestBody Tournament tournament ,
+    public ResponseEntity addTournament(@Valid @RequestBody Tournament tournament,
                                         @PathVariable Integer organizer) {
-        tournamentService.saveTournament(tournament,organizer);
+        tournamentService.saveTournament(tournament, organizer);
         return ResponseEntity.status(HttpStatus.OK).body("Tournament added successfully");
     }
 
@@ -42,13 +42,89 @@ public class TournamentController {
         tournamentService.deleteTournament(id);
         return ResponseEntity.status(HttpStatus.OK).body("Tournament deleted successfully");
     }
+
     @PostMapping("/{tournamentId}/initializeBracket")
     public ResponseEntity initializeBracket(@PathVariable Integer tournamentId) {
-        try {
-            Bracket bracket = bracketService.initializeBracket(tournamentId);
-            return ResponseEntity.ok(bracket);
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        Bracket bracket = bracketService.createBracketForTournament(tournamentId);
+        return ResponseEntity.ok(bracket);
+
+    }
+    @GetMapping("/by-game")
+    public ResponseEntity getTournamentsByGame(@RequestParam String game) {
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentsByGame(game));
+    }
+
+    @GetMapping("/by-city")
+    public ResponseEntity  getTournamentsByCity(@RequestParam String city) {
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentsByCity(city));
+    }
+
+    @GetMapping("/online")
+    public ResponseEntity  getTournamentsByAttendanceTypeOnline() {
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentsByAttendanceTypeOnline());
+    }
+
+    @GetMapping("/onsite")
+    public ResponseEntity getTournamentsByAttendanceTypeOnsite() {
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentsByAttendanceTypeOnsite());
+    }
+
+    @GetMapping("/status/ongoing")
+    public ResponseEntity  getTournamentsByStatusOngoing() {
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentsByStatusOngoing());
+    }
+
+    @GetMapping("/status/active")
+    public ResponseEntity  getTournamentsByStatusActive() {
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentsByStatusActive());
+    }
+
+    @GetMapping("/status/closing-soon")
+    public ResponseEntity getTournamentsByStatusClosingSoon() {
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentsByStatusClosingSoon());
+    }
+
+    @GetMapping("/status/finished")
+    public ResponseEntity getTournamentsByStatusFinished() {
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentsByStatusFinished());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Tournament> getTournamentById(@PathVariable Integer id) {
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentById(id));
+    }
+
+    @GetMapping("/{id}/description")
+    public ResponseEntity<String> getTournamentDescriptionById(@PathVariable Integer id) {
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentDescriptionById(id));
+    }
+
+    @GetMapping("/{id}/matches")
+    public ResponseEntity getTournamentMatchesById(@PathVariable Integer id) {
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentMatchesById(id));
+    }
+
+    @GetMapping("/{id}/bracket")
+    public ResponseEntity<Bracket> getTournamentBracketById(@PathVariable Integer id) {
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentBracketById(id));
+    }
+
+    @GetMapping("/{id}/standing")
+    public ResponseEntity  getTournamentStandingById(@PathVariable Integer id) {
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentStandingById(id));
+    }
+    @GetMapping("/tournament/{tournamentId}/matches/completed")
+    public ResponseEntity getMatchesByStatusCompleted(@PathVariable Integer tournamentId) {
+        return ResponseEntity.ok(tournamentService.getMatchesByStatusCompleted(tournamentId));
+    }
+
+    @GetMapping("/tournament/{tournamentId}/matches/in-progress")
+    public ResponseEntity getMatchesByStatusInProgress(@PathVariable Integer tournamentId) {
+        return ResponseEntity.ok(tournamentService.getMatchesByStatusInProgress(tournamentId));
+    }
+
+    @GetMapping("/tournament/{tournamentId}/matches/not-started")
+    public ResponseEntity getMatchesByStatusNotStarted(@PathVariable Integer tournamentId) {
+        return ResponseEntity.ok(tournamentService.getMatchesByStatusNotStarted(tournamentId));
     }
 }

@@ -40,16 +40,16 @@ public class MatchController {
 
     @PatchMapping("/{matchId}/ready/participant1/{playerId}")
     public ResponseEntity setParticipant1Ready(@PathVariable Integer matchId, @PathVariable Integer playerId) {
-         matchService.setParticipant1Ready(matchId, playerId);
+        matchService.setParticipant1Ready(matchId, playerId);
 
-            return ResponseEntity.ok("Participant 1 is now ready.");
+        return ResponseEntity.ok("Participant 1 is now ready.");
 
     }
 
     @PatchMapping("/{matchId}/ready/participant2/{playerId}")
     public ResponseEntity<String> setParticipant2Ready(@PathVariable Integer matchId, @PathVariable Integer playerId) {
         matchService.setParticipant2Ready(matchId, playerId);
-            return ResponseEntity.ok("Participant 2 is now ready.");
+        return ResponseEntity.ok("Participant 2 is now ready.");
 
     }
 
@@ -59,5 +59,23 @@ public class MatchController {
                 matchService.getMatchParticipants(matchId)
         );
     }
+
+    @PatchMapping("/{matchId}/setWinner")
+    public ResponseEntity<String> setWinnerAndLoser(
+            @PathVariable Integer matchId,
+            @RequestParam Integer winnerId) {
+
+        matchService.setMatchWinnerAndLoser(matchId, winnerId);
+        return ResponseEntity.ok("Winner and loser have been set successfully.");
+    }
+
+    @PatchMapping("/{matchId}/advanceWinner")
+    public ResponseEntity advanceWinner(@PathVariable Integer matchId) {
+
+            matchService.advanceWinnerToNextMatch(matchId);
+            return ResponseEntity.ok("Winner advanced to the next match successfully.");
+
+    }
+
 
 }
