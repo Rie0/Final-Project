@@ -10,6 +10,8 @@ import org.twspring.noob.DTO.TeamDTO;
 import org.twspring.noob.DTO.TeamInviteDTO;
 import org.twspring.noob.Service.TeamService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/team")
 @RequiredArgsConstructor
@@ -36,7 +38,23 @@ public class TeamController {
         return ResponseEntity.status(200).body(new ApiResponse("Team deleted successfully"));
     }
 
+    //EXTRA
+    @GetMapping("/get/{teamId}")
+    public ResponseEntity GetTeamById(@PathVariable Integer teamId){
+        return ResponseEntity.status(200).body(teamService.getTeamById(teamId));
+    }
+
+    @GetMapping("/{teamId}/players/get-all")
+    public ResponseEntity GetAllTeamPlayers(@PathVariable Integer teamId){
+        return ResponseEntity.status(200).body(teamService.getPlayersByTeamId(teamId));
+    }
+
     //INVITES
+    @GetMapping("/{teamId}/invite/get-invites")
+    public ResponseEntity GetInvites(@PathVariable Integer teamId){
+        return ResponseEntity.status(200).body(teamService.getInvitesByTeamId(teamId));
+    }
+
     @PostMapping("/{teamId}/invite/{PlayerUsername}")
     public ResponseEntity invitePlayerToTeam(@PathVariable Integer teamId,
                                              @PathVariable String PlayerUsername,
@@ -44,6 +62,15 @@ public class TeamController {
         teamService.invitePlayerToTeam(teamId,PlayerUsername,teamInviteDTO);
         return ResponseEntity.status(200).body(new ApiResponse("Player invited successfully"));
     }
+
+    @PostMapping("/{teamId}/invite-multiple-players") //not working
+    public ResponseEntity inviteMultiplePlayersToTeam(@PathVariable Integer teamId,
+                                                      @RequestBody @Valid TeamInviteDTO teamInviteDTO,
+                                                      @RequestBody List<String> playerUsername) {
+        teamService.inviteMultiPlayersToTeam(teamId,playerUsername, teamInviteDTO);
+        return ResponseEntity.status(200).body(new ApiResponse("Players invited successfully"));
+    }
+
     @DeleteMapping("/{teamId}/invite/{inviteId}/delete")
     public ResponseEntity deleteTeamInvite(@PathVariable Integer teamId,
                                            @PathVariable Integer inviteId){

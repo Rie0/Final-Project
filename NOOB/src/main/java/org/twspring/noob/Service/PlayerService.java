@@ -63,6 +63,13 @@ public class PlayerService {
     }
     //END OF CRUD
 
+    //GENERAL EXTRA
+    public Player getPlayerById(Integer playerId) {
+        Player player = playerRepository.findPlayerById(playerId);
+        if (player == null) {throw new ApiException("Player not found");}
+        return player;
+    }
+
     //PLAYER INVITES
     public List<TeamInvite> getInvitesByPlayerId(Integer playerId) {
         return teamInviteRepository.findTeamInvitesByPlayerId(playerId);

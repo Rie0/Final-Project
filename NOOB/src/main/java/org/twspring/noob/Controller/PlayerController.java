@@ -34,6 +34,13 @@ public class PlayerController {
         return ResponseEntity.status(200).body(new ApiResponse("Player deleted successfully"));
     }
 
+    //EXTRA
+
+    @GetMapping("/get/{playerId}")
+    public ResponseEntity getPlayer(@PathVariable Integer playerId){
+        return ResponseEntity.status(200).body(playerService.getPlayerById(playerId));
+    }
+
     //
 
     @GetMapping("/{playerId}/invites/get-invites")
