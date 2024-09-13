@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
 import org.twspring.noob.Model.League;
+import org.twspring.noob.Model.Organizer;
 import org.twspring.noob.Repository.LeagueRepository;
+import org.twspring.noob.Repository.OrganizerRepository;
 
 import java.util.List;
 
@@ -12,6 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LeagueService {
     private final LeagueRepository leagueRepository;
+    private final OrganizerRepository organizerRepository;
 
     public List<League> getLeagues() {
         return leagueRepository.findAll();
@@ -25,8 +28,12 @@ public class LeagueService {
         return league;
     }
 
-    public League saveLeague(League league) {
-        return leagueRepository.save(league);
+    public void saveLeague(Integer organizerId, League league) {
+        Organizer organizer = organizerRepository.findOrganizerById(organizerId);
+
+
+        league.setOrganizer(organizer);
+        leagueRepository.save(league);
     }
 
     public void updateLeague(Integer leagueId, League updatedLeague) {

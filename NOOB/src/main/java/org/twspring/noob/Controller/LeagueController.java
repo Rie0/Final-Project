@@ -20,9 +20,10 @@ public class LeagueController {
         return ResponseEntity.status(HttpStatus.OK).body(leagueService.getLeagues());
     }
 
-    @PostMapping("/add")
-    public ResponseEntity addLeague(@Valid @RequestBody League league) {
-        leagueService.saveLeague(league);
+    @PostMapping("/organizer/{organizerId}/add")
+    public ResponseEntity addLeague(@PathVariable Integer organizerId,
+                                    @Valid @RequestBody League league) {
+        leagueService.saveLeague(organizerId, league);
         return ResponseEntity.status(HttpStatus.OK).body("League added successfully");
     }
 

@@ -56,11 +56,11 @@ public class League {
     private Integer currentParticipants;
 
 
-    @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "league", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Participant> participants;
 
-    @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "league", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Match> matches;
 
