@@ -1,0 +1,41 @@
+package org.twspring.noob.Model;
+
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.Set;
+
+@Entity
+@Setter
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+public class Subscription {
+
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @NotEmpty(message = "Subscription Tie   can not be empty")
+    @Column(columnDefinition = "varchar(30) not null")
+    private String subscriptionTie;
+    @NotEmpty(message = "price can not be empty")
+    @Column(columnDefinition = "int not null")
+    private double price;
+    @NotEmpty(message = "Subscription Hours can not be empty")
+    @Column(columnDefinition = "int not null")
+    private int subscriptionHours;
+    @NotEmpty(message = "members can not be empty")
+    @Column(columnDefinition = "int not null")
+private int members;
+
+
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "subscription")
+    private Set<SubscripeBy>subscribeBy;
+
+}
