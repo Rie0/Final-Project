@@ -1,11 +1,14 @@
 package org.twspring.noob.Controller;
 
+import org.twspring.noob.DTO.DateTimeDTO;
 import org.twspring.noob.Model.League;
 import org.twspring.noob.Service.LeagueService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @RestController
 @RequiredArgsConstructor
@@ -63,5 +66,25 @@ public class LeagueController {
                                              @PathVariable Integer participantId){
         leagueService.withdrawFromLeague(leagueId, participantId);
         return ResponseEntity.status(200).body("Player withdrawn from league successfully");
+    }
+
+    //SETTING DATES
+
+    @PutMapping("/organizer/{organizerId}/league/{leagueId}/round/{roundId}")
+    public ResponseEntity setLeagueRoundDate(@PathVariable Integer organizerId,
+                                             @PathVariable Integer leagueId,
+                                             @PathVariable Integer roundId,
+                                             @RequestBody LocalDate date){
+        leagueService.setLeagueRoundDate(organizerId,leagueId,roundId,date);
+        return ResponseEntity.status(200).body("League round date set successfully");
+    }
+
+    @PutMapping("/organizer/{organizerId}/league/{leagueId}/match/{matchId}")
+    public ResponseEntity setLeagueMatchDate(@PathVariable Integer organizerId,
+                                             @PathVariable Integer leagueId,
+                                             @PathVariable Integer matchId,
+                                             @RequestBody DateTimeDTO dates){
+        leagueService.setLeagueMatchDate(organizerId,leagueId,matchId,dates);
+        return ResponseEntity.status(200).body("League match date set successfully");
     }
 }

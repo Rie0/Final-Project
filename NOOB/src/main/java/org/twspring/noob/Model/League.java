@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -34,11 +35,11 @@ public class League {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(columnDefinition = "Date")
-    private LocalDate startDate;
+    @Column(columnDefinition = "TIMESTAMP")
+    private LocalDateTime startDate;
 
-    @Column(columnDefinition = "Date")
-    private LocalDate endDate;
+    @Column(columnDefinition = "TIMESTAMP")
+    private LocalDateTime endDate;
 
     @Column(columnDefinition = "VARCHAR(50) NOT NULL")
     private String status; // Status of the tournament (e.g., "PENDING", "ONGOING", "COMPLETED")
