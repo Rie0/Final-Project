@@ -36,4 +36,10 @@ public class Participant {
     @ManyToOne
     @JoinColumn(name = "tournament_id", columnDefinition = "INT")
     private Tournament tournament; // Reference to the Tournament this participant is associated with
+
+    @ManyToOne
+    private League league; // Reference to the League this participant is associated with
+
+
+
 }
