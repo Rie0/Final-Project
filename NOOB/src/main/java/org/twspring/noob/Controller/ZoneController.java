@@ -36,4 +36,8 @@ private final ZoneService zoneService;
         zoneService.deleteZone(id);
         return ResponseEntity.status(200).body("Zone deleted successfully");
     }
+    @GetMapping("/get-zoneBy/{pcCentreId}")
+    public ResponseEntity getZoneByPccentre(@PathVariable Integer pcCentreId){
+        return ResponseEntity.status(200).body(zoneService.getZoneByPcCentre(pcCentreId));
+    }
 }

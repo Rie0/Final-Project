@@ -15,25 +15,30 @@ public class PcController {
     private final PcService pcService;
 
     @GetMapping("/get-all")
-    public ResponseEntity getAllPc(){
+    public ResponseEntity getAllPc() {
         return ResponseEntity.status(200).body(pcService.getAllPc());
     }
 
     @PostMapping("add-pc")
-public ResponseEntity addPc(@Valid @RequestBody PC pc){
+    public ResponseEntity addPc(@Valid @RequestBody PC pc) {
         pcService.addPc(pc);
         return ResponseEntity.status(200).body("pc added successfully");
 
     }
+
     @PutMapping("update-pc/{id}")
-    public ResponseEntity updatePc(@PathVariable Integer id,@Valid @RequestBody PC pc){
-        pcService.updatePc(id,pc);
+    public ResponseEntity updatePc(@PathVariable Integer id, @Valid @RequestBody PC pc) {
+        pcService.updatePc(id, pc);
         return ResponseEntity.status(200).body("pc updated successfully");
     }
+
     @DeleteMapping("/delete-pc/{id}")
-    public ResponseEntity deletePc(@PathVariable Integer id){
+    public ResponseEntity deletePc(@PathVariable Integer id) {
         pcService.deletePc(id);
         return ResponseEntity.status(200).body("pc deleted successfully");
+
     }
+
+
 
 }

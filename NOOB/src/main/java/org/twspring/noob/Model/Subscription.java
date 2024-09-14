@@ -1,5 +1,6 @@
 package org.twspring.noob.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
@@ -37,5 +38,9 @@ private int members;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "subscription")
     private Set<SubscripeBy>subscribeBy;
+
+    @ManyToOne
+    @JsonIgnore
+    private PcCentres pcCentres;
 
 }

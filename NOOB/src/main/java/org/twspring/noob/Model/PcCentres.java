@@ -2,6 +2,7 @@ package org.twspring.noob.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.AssertFalse;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -41,6 +42,7 @@ public class PcCentres {
 //    @Column(columnDefinition = "varchar(10) not null")
 //    @Pattern(regexp = "/^(009665|9665|\\+9665|05|5)(5|0|3|6|4|9|1|8|7)([0-9]{7})$/")
     private String contactNumber;
+    @AssertFalse
     private boolean approved;
 //    @NotEmpty(message = "rating can not be empty")
 //    @Column(columnDefinition = "int not null")
@@ -53,4 +55,13 @@ public class PcCentres {
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "pcCentre")
     private Set<Zone> zone;
+
+    @ManyToOne
+    @JsonIgnore
+    private Vendor vendor;
+
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "pcCentres")
+    private Set<Subscription>subscriptions;
+
 }

@@ -56,8 +56,12 @@ private final PcCentresRepository pcCentresRepository;
         zoneRepository.delete(zone);
     }
 
-    public List<Zone> getallzoneb(Integer pcCentreId){
-        return zoneRepository.findZoneByPcCentreId(pcCentreId);
+    public List<Zone> getZoneByPcCentre(Integer pcCentreId){
+        PcCentres pcCentre = pcCentresRepository.findPcCentreById(pcCentreId);
+        if(pcCentre == null) {
+            throw new ApiException("PcCentre not found");
+        }
+   return zoneRepository.findZoneByPcCentreId(pcCentreId);
     }
 
 }

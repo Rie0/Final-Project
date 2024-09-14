@@ -17,6 +17,7 @@ public class PcService {
     private final PcRepository pcRepository;
     private final AuthRepository authRepository;
 
+
     public List<PC> getAllPc() {
         return pcRepository.findAll();
     }

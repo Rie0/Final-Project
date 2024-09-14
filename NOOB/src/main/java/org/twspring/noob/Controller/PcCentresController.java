@@ -19,9 +19,9 @@ public class PcCentresController {
         return ResponseEntity.status(200).body(pcCentresService.getAllPcCentres());
     }
 
-    @PostMapping("add-pcCentre")
-    public ResponseEntity addPcCentres(@Valid @RequestBody PcCentres pcCentres){
-        pcCentresService.addPcCentres(pcCentres);
+    @PostMapping("add-pcCentre/{vendorId}")
+    public ResponseEntity addPcCentres( @PathVariable Integer vendorId,@Valid @RequestBody PcCentres pcCentres){
+        pcCentresService.addPcCentres(pcCentres,vendorId);
         return ResponseEntity.status(200).body("PC Centre added successfully");
 
     }
@@ -34,6 +34,19 @@ public class PcCentresController {
     public ResponseEntity deletePcCentres(@PathVariable Integer id){
         pcCentresService.deletePcCentres(id);
         return ResponseEntity.status(200).body("PC Centres deleted successfully");
+    }
+
+
+    @GetMapping("/get-pcCentre-by-Vendor/{vendorId}")
+    public ResponseEntity getPcCentreByVendor(@PathVariable Integer vendorId){
+        return ResponseEntity.status(200).body(pcCentresService.getPcCentresByVendorID(vendorId));
+    }
+
+
+    @PostMapping("/admin-Aproved-pcCenter/{adminId}/{PcCenterId}")
+    public ResponseEntity approvedPcCenter(@PathVariable Integer adminId, @PathVariable Integer PcCenterId) {
+        pcCentresService.adminAprovedPcCenter(adminId,PcCenterId);
+        return ResponseEntity.status(200).body("approved PC Center successfully");
     }
 
 }

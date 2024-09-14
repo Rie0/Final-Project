@@ -73,6 +73,11 @@ public class User {
     @PrimaryKeyJoinColumn
     private Team team;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
+    @PrimaryKeyJoinColumn
+    private Vendor vendor;
+
 
     //USER DETAILS METHODS (after security)
 

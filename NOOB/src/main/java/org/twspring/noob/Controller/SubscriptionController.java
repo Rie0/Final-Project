@@ -38,4 +38,6 @@ public class SubscriptionController {
         subscriptionService.deleteSubscription(id);
         return ResponseEntity.status(200).body("subscription deleted successfully");
     }
+
+
 }
