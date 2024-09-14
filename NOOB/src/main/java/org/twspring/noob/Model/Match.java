@@ -67,6 +67,11 @@ public class Match {
     @Column(columnDefinition = "VARCHAR(20)")
     private String score; // Score of the match (e.g., "2-1")
 
+    @Column(columnDefinition = "VARCHAR(50) NOT NULL")
+    private String participant1Name;
+    @Column(columnDefinition = "VARCHAR(50) NOT NULL")
+    private String participant2Name;
+
     @ManyToOne
     @JoinColumn(name = "tournament_id")
     @JsonIgnore

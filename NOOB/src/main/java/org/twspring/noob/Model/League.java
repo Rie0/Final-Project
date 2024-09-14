@@ -13,7 +13,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -36,13 +35,21 @@ public class League {
     private String description;
 
     @Column(columnDefinition = "TIMESTAMP")
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @Column(columnDefinition = "TIMESTAMP")
-    private LocalDateTime endDate;
+    private LocalDate endDate;
 
-    @Column(columnDefinition = "VARCHAR(50) NOT NULL")
-    private String status; // Status of the tournament (e.g., "PENDING", "ONGOING", "COMPLETED")
+    @Enumerated(EnumType.STRING)
+    private Status status= Status.INACTIVE;
+
+    public enum Status{
+        INACTIVE, //CREATED BUT DATES AREN'T SPECIFIED
+        OPEN, //PLAYERS CAN NOW PARTICIPATE
+        FULL, //PARTICIPANTS ARE MAXED, NO PLAYERS CAN JOIN BUT CAN STILL WITHDRAW
+        ONGOING, //LEAGUE STARTED, MATCHES ARE NOW TAKING PLACE
+        ENDED //LEAGUE ENDED
+    }
 
     @Column(columnDefinition = "VARCHAR(255)")
     private String location;

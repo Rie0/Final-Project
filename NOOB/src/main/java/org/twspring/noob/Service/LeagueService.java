@@ -3,6 +3,7 @@ package org.twspring.noob.Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
+import org.twspring.noob.DTO.DateDTO;
 import org.twspring.noob.DTO.DateTimeDTO;
 import org.twspring.noob.Model.*;
 import org.twspring.noob.Repository.*;
@@ -41,7 +42,7 @@ public class LeagueService {
             throw new ApiException("Max participants number must be even");
         }
 
-        league.setStatus("PENDING");
+        league.setStatus(League.Status.INACTIVE);
         league.setOrganizer(organizer);
         leagueRepository.save(league);
 
@@ -58,6 +59,8 @@ public class LeagueService {
                 match.setLeague(league);
                 match.setRound(round);
                 match.setScore("TBA");
+                match.setParticipant1Name("TBA");
+                match.setParticipant2Name("TBA");
                 matchRepository.save(match);
             }
         }
@@ -133,6 +136,7 @@ public class LeagueService {
         if (!league.getParticipants().contains(participant)) {
             throw new ApiException("Participant is not registered for this league");
         }
+        if (league.getStatus()== League.Status.ONGOING){}
         league.getParticipants().remove(participant);
         participant.setPlayer(null);
         participantRepository.delete(participant);
@@ -162,10 +166,10 @@ public class LeagueService {
         }
 
         //validate the dates
-        if (roundDate.isBefore(league.getStartDate().toLocalDate())){
+        if (roundDate.isBefore(league.getStartDate())){
             throw new ApiException("Round cannot start before the league start date");
         }
-        if (roundDate.isAfter(league.getEndDate().toLocalDate())){
+        if (roundDate.isAfter(league.getEndDate())){
             throw new ApiException("Round cannot end before the league end date");
         }
         round.setDate(roundDate);
@@ -203,5 +207,127 @@ public class LeagueService {
         match.setStartTime(matchDate.getStartDate());
         match.setEndTime(matchDate.getEndDate());
         matchRepository.save(match);
+
+        //check if the league can now be activated (dates are set)
+        for (Match m: league.getMatches()) {
+            if (m.getStartTime()==null){
+                league.setStatus(League.Status.INACTIVE);
+                break;
+            }
+            league.setStatus(League.Status.OPEN);
+        }
+        leagueRepository.save(league);
     }
+
+    public void changeLeagueDates(Integer organizerId, Integer leagueId, DateDTO dates) { //enter new dates only when inactive
+        Organizer organizer = organizerRepository.findOrganizerById(organizerId);
+        League league = leagueRepository.findLeagueById(leagueId);
+        LocalDate startDate = dates.getStartDate();
+        LocalDate endDate = dates.getEndDate();
+
+        if(league==null){
+            throw new ApiException("League not found");
+        }
+        if (league.getOrganizer().getId() != organizer.getId()) {
+            throw new ApiException("Organizer doesn't own this league");
+        }
+        if (league.getStatus()!=League.Status.INACTIVE){
+            throw new ApiException("You cannot change the league dates after activating it");
+        }
+        //validate the dates
+        if (startDate.isBefore(endDate)){
+            throw new ApiException("End date cannot be before start date");
+        }
+        //resets rounds and matches dates
+        for (Round round: league.getRounds()) {
+            round.setDate(null);
+        }
+        for (Match match: league.getMatches()) {
+            match.setEndTime(null);
+            match.setStartTime(null);
+        }
+
+        league.setStartDate(startDate);
+        league.setEndDate(endDate);
+        leagueRepository.save(league);
+    }
+
+    //===========================================================================================================
+    //===============================================MATCHES=====================================================
+
+    public void setLeagueToReady(Integer organizerId, Integer leagueId) {
+        League league = leagueRepository.findLeagueById(leagueId);
+        Organizer organizer = organizerRepository.findOrganizerById(organizerId);
+
+        if (league == null) {
+            throw new ApiException("League not found");
+        }
+        if (!league.getOrganizer().getId().equals(organizer.getId())) {
+            throw new ApiException("Organizer doesn't own this league");
+        }
+
+        if (league.getStatus() != League.Status.OPEN&&league.getStatus() != League.Status.FULL) {
+            throw new ApiException("League must be in 'OPEN' or 'FULL' status to be set to 'READY'");
+        }
+        //organizers can start the match while the maximum players aren't reached
+        if (league.getCurrentParticipants()%2!=0){
+            throw new ApiException("You can only start the league when the number of players is even");
+        }
+
+        //add date condition when finished when testing
+
+
+        //Randomize players in matches, making sure each player verses the other ONCE
+        List<Participant> participants = participantRepository.findParticipantByLeagueId(leagueId);
+        int numberOfParticipants = participants.size();
+
+        List<Round> rounds = roundRepository.findRoundByLeagueId(leagueId);
+
+        for (int roundNumber = 0; roundNumber < numberOfParticipants - 1; roundNumber++) {
+            Round round = rounds.get(roundNumber);
+
+            List<Match> matches = matchRepository.findMatchByRoundId(round.getId());
+            int numberOfMatches = numberOfParticipants / 2;
+
+            for (int matchNumber = 0; matchNumber < numberOfMatches; matchNumber++) {
+                Participant player1 = participants.get(matchNumber);
+                Participant player2 = participants.get(numberOfParticipants - matchNumber - 1);
+
+                Match match = matches.get(matchNumber);
+                match.setParticipant1(player1);
+                match.setParticipant2(player2);
+                match.setParticipant1Name(player1.getName());
+                match.setParticipant2Name(player2.getName());
+                matchRepository.save(match);
+            }
+            // Rotate participants for the next round, except the first one.
+            participants.add(1, participants.remove(participants.size() - 1));
+        }
+        league.setStatus(League.Status.ONGOING);
+        leagueRepository.save(league);
+    }
+
+
+
+    //===========================================================================================================
+    //===============================================GET INFO====================================================
+
+    public List<Match> getLeagueMatches(int leagueId){
+        League league = leagueRepository.findLeagueById(leagueId);
+        if (league == null) {
+            throw new ApiException("League not found");
+        }
+        return matchRepository.findMatchByLeagueId(leagueId);
+    }
+
+    public List<Round> getLeagueRounds(Integer leagueId){
+        League league = leagueRepository.findLeagueById(leagueId);
+        if (league == null) {
+            throw new ApiException("League not found");
+        }
+        return roundRepository.findRoundByLeagueId(leagueId);
+    }
+
+
+
 }

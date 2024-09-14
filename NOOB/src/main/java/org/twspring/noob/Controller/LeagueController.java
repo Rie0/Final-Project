@@ -1,5 +1,6 @@
 package org.twspring.noob.Controller;
 
+import org.twspring.noob.DTO.DateDTO;
 import org.twspring.noob.DTO.DateTimeDTO;
 import org.twspring.noob.Model.League;
 import org.twspring.noob.Service.LeagueService;
@@ -69,8 +70,15 @@ public class LeagueController {
     }
 
     //SETTING DATES
+    @PutMapping("/organizer/{organizerId}/league/{leagueId}/change-dates")
+    public ResponseEntity changeLeagueDates(@PathVariable Integer organizerId,
+                                            @PathVariable Integer leagueId,
+                                            @RequestBody DateDTO dates){
+        leagueService.changeLeagueDates(organizerId,leagueId,dates);
+        return ResponseEntity.status(200).body("League dates changed successfully");
+    }
 
-    @PutMapping("/organizer/{organizerId}/league/{leagueId}/round/{roundId}")
+    @PutMapping("/organizer/{organizerId}/league/{leagueId}/round/{roundId}/set-dates")
     public ResponseEntity setLeagueRoundDate(@PathVariable Integer organizerId,
                                              @PathVariable Integer leagueId,
                                              @PathVariable Integer roundId,
@@ -79,7 +87,7 @@ public class LeagueController {
         return ResponseEntity.status(200).body("League round date set successfully");
     }
 
-    @PutMapping("/organizer/{organizerId}/league/{leagueId}/match/{matchId}")
+    @PutMapping("/organizer/{organizerId}/league/{leagueId}/match/{matchId}/set-dates")
     public ResponseEntity setLeagueMatchDate(@PathVariable Integer organizerId,
                                              @PathVariable Integer leagueId,
                                              @PathVariable Integer matchId,
@@ -87,4 +95,25 @@ public class LeagueController {
         leagueService.setLeagueMatchDate(organizerId,leagueId,matchId,dates);
         return ResponseEntity.status(200).body("League match date set successfully");
     }
+
+    //starting League
+
+    @PutMapping("/organizer/{organizerId}/league/{leagueId}/set-ready")
+    public ResponseEntity setLeagueToReady(@PathVariable Integer organizerId,
+                                           @PathVariable Integer leagueId){
+        leagueService.setLeagueToReady(organizerId,leagueId);
+        return ResponseEntity.status(200).body("League ready set successfully");
+    }
+
+    //GET INFO
+    @GetMapping("/{leagueId}/get-rounds")
+    public ResponseEntity getRounds(@PathVariable Integer leagueId) {
+        return ResponseEntity.status(200).body(leagueService.getLeagueRounds(leagueId));
+    }
+    @GetMapping("/{leagueId}/get-matches")
+    public ResponseEntity getMatches(@PathVariable Integer leagueId) {
+        return ResponseEntity.status(200).body(leagueService.getLeagueMatches(leagueId));
+    }
+
+
 }

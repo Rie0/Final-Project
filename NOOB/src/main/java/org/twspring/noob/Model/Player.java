@@ -37,8 +37,7 @@ public class Player {
     //RELATIONSHIP RELATED VARS
 
     //for team
-    @CreationTimestamp
-    @Column(columnDefinition = "timestamp default current_timestamp")
+    @Column(columnDefinition = "timestamp")
     private LocalDateTime JoinedTeamAt;
 
 
