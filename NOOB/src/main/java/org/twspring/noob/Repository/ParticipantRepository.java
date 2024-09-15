@@ -14,6 +14,8 @@ public interface ParticipantRepository extends JpaRepository<Participant, Intege
 
     Participant findParticipantByPlayerId(Integer playerId);
     List<Participant> findParticipantByLeagueId(Integer leagueId);
+    Participant findParticipantByPlayerIdAndLeagueId(Integer playerId, Integer league);
+    List<Participant> findParticipantByLeagueIdOrderByScoreDesc(Integer leagueId);
 
 
     @Query(value = "SELECT * FROM Participant WHERE tournament_id = ?1 ORDER BY seed ASC LIMIT ?2", nativeQuery = true)

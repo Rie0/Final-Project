@@ -42,6 +42,7 @@ public class LeagueController {
         return ResponseEntity.status(200).body("League deleted successfully");
     }
     //EXTRA
+
     @GetMapping("/get/{leagueId}")
     public ResponseEntity getLeague(@PathVariable Integer leagueId) {
         return ResponseEntity.status(200).body(leagueService.getLeagueById(leagueId));
@@ -58,14 +59,14 @@ public class LeagueController {
     public ResponseEntity participateInLeague(@PathVariable Integer leagueId,
                                               @PathVariable Integer playerId,
                                               @RequestBody String name) {
-        leagueService.participateInLeague(leagueId, playerId, name);
+        leagueService.participateInLeague(playerId, leagueId, name);
         return ResponseEntity.status(200).body("Player participated successfully in league");
     }
 
-    @PutMapping("/participant/{participantId}/league/{leagueId}/withdraw")
+    @PutMapping("/player/{playerId}/league/{leagueId}/withdraw")
     public ResponseEntity withdrawFromLeague(@PathVariable Integer leagueId,
-                                             @PathVariable Integer participantId){
-        leagueService.withdrawFromLeague(leagueId, participantId);
+                                             @PathVariable Integer playerId){
+        leagueService.withdrawFromLeague(playerId, leagueId);
         return ResponseEntity.status(200).body("Player withdrawn from league successfully");
     }
 
@@ -97,7 +98,6 @@ public class LeagueController {
     }
 
     //League Management
-
     @PutMapping("/organizer/{organizerId}/league/{leagueId}/set-ready")
     public ResponseEntity setLeagueToReady(@PathVariable Integer organizerId,
                                            @PathVariable Integer leagueId){
@@ -126,15 +126,32 @@ public class LeagueController {
         leagueService.add1toParticipant2Score(organizerId,leagueId,matchId);
         return ResponseEntity.status(200).body("Score added successfully to participant2");
     }
-
-    //add remove?
-
+    @PutMapping("/organizer/{organizerId}/league/{leagueId}/match/{matchId}/sub-1score-from-participant1")
+    public ResponseEntity sub1fromParticipant1Score(@PathVariable Integer organizerId,
+                                                    @PathVariable Integer leagueId,
+                                                    @PathVariable Integer matchId){
+        leagueService.subtract1fromParticipant1Score(organizerId,leagueId,matchId);
+        return ResponseEntity.status(200).body("Score removed successfully from participant1");
+    }
+    @PutMapping("/organizer/{organizerId}/league/{leagueId}/match/{matchId}/sub-1score-from-participant2")
+    public ResponseEntity sub1fromParticipant2Score(@PathVariable Integer organizerId,
+                                                  @PathVariable Integer leagueId,
+                                                  @PathVariable Integer matchId){
+        leagueService.subtract1fromParticipant2Score(organizerId,leagueId,matchId);
+        return ResponseEntity.status(200).body("Score removed successfully from participant2");
+    }
     @PutMapping("/organizer/{organizerId}/league/{leagueId}/match/{matchId}/finish-match")
     public ResponseEntity finishMatch(@PathVariable Integer organizerId,
                                       @PathVariable Integer leagueId,
                                       @PathVariable Integer matchId){
         leagueService.finishMatch(organizerId,leagueId,matchId);
         return ResponseEntity.status(200).body("Match ended successfully");
+    }
+    @PutMapping("/organizer/{organizerId}/league/{leagueId}/finalize")
+    public ResponseEntity finalizeLeague(@PathVariable Integer organizerId,
+                                         @PathVariable Integer leagueId){
+        leagueService.finalizeLeague(organizerId,leagueId);
+        return ResponseEntity.status(200).body("League finalized successfully");
     }
 
 
@@ -147,10 +164,14 @@ public class LeagueController {
     public ResponseEntity getMatches(@PathVariable Integer leagueId) {
         return ResponseEntity.status(200).body(leagueService.getLeagueMatches(leagueId));
     }
+    @GetMapping("/{leagueId}/leaderboard")
+    public ResponseEntity getLeaderboard(@PathVariable Integer leagueId) {
+        return ResponseEntity.status(200).body(leagueService.getLeaderBoard(leagueId));
+    }
 
       //for participant
       @GetMapping("/get-by-participant/{participantId}")
-      public ResponseEntity getMatchParticipantById(@PathVariable Integer participantId) {
+      public ResponseEntity getParticipantMatches(@PathVariable Integer participantId) {
           return ResponseEntity.status(200).body(leagueService.participantGetMatches(participantId));
     }
 

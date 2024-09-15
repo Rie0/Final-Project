@@ -31,6 +31,9 @@ public class Participant {
     @Column(columnDefinition = "INT")
     private int prize =0; // prize for the participant
 
+    @Column(columnDefinition = "INT DEFAULT 0")
+    private int score = 0;
+
     @Enumerated(EnumType.STRING)
     @NotNull(message = "Status cannot be null")
     private Status status= Status.REGISTERED;
