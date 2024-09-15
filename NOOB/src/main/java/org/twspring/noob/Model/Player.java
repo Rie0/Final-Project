@@ -3,9 +3,7 @@ package org.twspring.noob.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,11 +32,25 @@ public class Player {
     @Size(min= 25, max = 150, message = "Bio must have between 25 to 150 characters")
     private String bio;
 
+//    @NotNull(message = "Gold wins must not be null")
+//    @Column(columnDefinition = "INT NOT NULL DEFAULT 0")
+//    @PositiveOrZero(message = "Gold wins cannot be a negative or a zero")
+//    private int leaguesGoldWins;
+//
+//    @NotNull(message = "Silver wins must not be null")
+//    @Column(columnDefinition = "INT NOT NULL DEFAULT 0")
+//    @PositiveOrZero(message = "Silver wins cannot be a negative or a zero")
+//    private int leaguesSilverWins;
+//
+//    @NotNull(message = "Bronze wins must not be null")
+//    @Column(columnDefinition = "INT NOT NULL DEFAULT 0")
+//    @PositiveOrZero(message = "Bronze wins cannot be a negative or a zero")
+//    private int leaguesBronzeWins;
+
     //RELATIONSHIP RELATED VARS
 
     //for team
-    @CreationTimestamp
-    @Column(columnDefinition = "timestamp default current_timestamp")
+    @Column(columnDefinition = "timestamp")
     private LocalDateTime JoinedTeamAt;
 
 
@@ -53,6 +65,10 @@ public class Player {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     private Set<TeamInvite> teamInvites;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
+    @JsonIgnore
+    private Set<Participant> participants;
 
     //GAMES
 }
