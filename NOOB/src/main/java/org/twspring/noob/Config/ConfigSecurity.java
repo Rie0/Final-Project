@@ -38,18 +38,20 @@ public class ConfigSecurity {
                 .requestMatchers("/api/v1/tournament/get").permitAll() // Anyone can view tournaments
                 .requestMatchers("/api/v1/match/get").permitAll() // Anyone can view matches
                 .requestMatchers("/api/v1/participant/get").permitAll() // Anyone can view participants
+                .requestMatchers("/api/v1/player/register").permitAll() // Anyone can Register player
 
                 // Specific roles required for other endpoints
                 .requestMatchers("/api/v1/tournament/update/**",
                         "/api/v1/tournament/*/initializeBracket",
                         "/api/v1/tournament/*/start",
+                        "/api/v1/tournament/delete/**",
                         "/api/v1/tournament/*/finalize").hasAuthority("ORGANIZER")
                 .requestMatchers("/api/v1/tournament/*/participant/*/checkin").hasAnyAuthority("ADMIN", "ORGANIZER")
 
                 .requestMatchers("/api/v1/participant/add/**",
                         "/api/v1/participant/update/**",
+                        ("/api/v1/participant/get/**"),
                         "/api/v1/participant/delete/**").hasAnyAuthority("PLAYER", "ADMIN")
-                .requestMatchers("/api/v1/participant/get/**").hasAnyAuthority("ADMIN", "PLAYER")
 
                 .requestMatchers("/api/v1/bracket/get",
                         "/api/v1/bracket/add",

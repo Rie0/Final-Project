@@ -17,4 +17,7 @@ public interface TournamentRepository extends JpaRepository<Tournament, Integer>
     List<Tournament> findByStatus(String status);
     @Query("SELECT t FROM Tournament t WHERE t.startDate >= CURRENT_DATE")
     List<Tournament> findUpcomingTournaments();
+
+    @Query("SELECT t FROM Tournament t WHERE t.id = ?1 AND t.organizer.id = ?2")
+    Tournament findByTournamentIdAndOrganizerId(Integer tournamentId, Integer organizerId);
 }

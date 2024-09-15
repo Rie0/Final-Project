@@ -22,30 +22,23 @@ public class ParticipantController {
         return ResponseEntity.status(HttpStatus.OK).body(participantService.getParticipants());
     }
 
-    @PostMapping("/add/{tournamentId}/{playerId}")
+    @PostMapping("/add/{tournamentId}")
     public ResponseEntity addParticipant(@AuthenticationPrincipal User user,
                                          @Valid @RequestBody Participant participant,
-                                         @PathVariable Integer tournamentId,
-                                         @PathVariable Integer playerId) {
+                                         @PathVariable Integer tournamentId
+                                         ) {
         // The security check is handled by the security configuration
-        participantService.saveParticipant(participant, tournamentId, playerId);
+        participantService.saveParticipant(participant, tournamentId, user.getId());
         return ResponseEntity.status(HttpStatus.OK).body("Participant added successfully");
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity updateParticipant(@AuthenticationPrincipal User user,
-                                            @Valid @RequestBody Participant participant,
-                                            @PathVariable Integer id) {
-        // The security check is handled by the security configuration
-        participantService.updateParticipant(id, participant);
-        return ResponseEntity.status(HttpStatus.OK).body("Participant updated successfully");
-    }
 
-    @DeleteMapping("/delete/{id}")
+
+    @DeleteMapping("/delete/{tournamentId}")
     public ResponseEntity deleteParticipant(@AuthenticationPrincipal User user,
-                                            @PathVariable Integer id) {
+                                            @PathVariable Integer tournamentId) {
         // The security check is handled by the security configuration
-        participantService.deleteParticipant(id);
+        participantService.deleteParticipant(user.getId(),tournamentId);
         return ResponseEntity.status(HttpStatus.OK).body("Participant deleted successfully");
     }
 

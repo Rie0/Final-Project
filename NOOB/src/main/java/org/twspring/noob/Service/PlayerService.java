@@ -2,6 +2,7 @@ package org.twspring.noob.Service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
 import org.twspring.noob.DTO.PlayerDTO;
@@ -28,10 +29,10 @@ public class PlayerService {
     }
 
     public void registerPlayer(PlayerDTO playerDTO) {
-        //String hash= new BCryptPasswordEncoder().encode(customerDTO.getPassword());
+        String hash= new BCryptPasswordEncoder().encode(playerDTO.getPassword());
         User user = new User();
         user.setUsername(playerDTO.getUsername());
-        user.setPassword(playerDTO.getPassword());
+        user.setPassword(hash);
         user.setEmail(playerDTO.getEmail());
         user.setPhoneNumber(playerDTO.getPhoneNumber());
         user.setRole("PLAYER");
