@@ -49,6 +49,12 @@ public class TournamentController {
         return ResponseEntity.ok(bracket);
 
     }
+    @PostMapping("/{id}/start")
+    public ResponseEntity startTournament(@PathVariable Integer id) {
+            tournamentService.startTournament(id);
+            return ResponseEntity.ok("Tournament started successfully.");
+
+    }
     @GetMapping("/by-game")
     public ResponseEntity getTournamentsByGame(@RequestParam String game) {
         return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentsByGame(game));
@@ -127,4 +133,46 @@ public class TournamentController {
     public ResponseEntity getMatchesByStatusNotStarted(@PathVariable Integer tournamentId) {
         return ResponseEntity.ok(tournamentService.getMatchesByStatusNotStarted(tournamentId));
     }
-}
+
+    @PostMapping("/{tournamentId}/finalize")
+    public ResponseEntity finalizeTournament(@PathVariable Integer tournamentId) {
+            tournamentService.finalizeTournament(tournamentId);
+            return ResponseEntity.status(HttpStatus.OK).body("Tournament finalized successfully.");
+
+    }
+    @PostMapping("/{tournamentId}/participant/{participantId}/checkin")
+    public ResponseEntity<String> checkInParticipant(@PathVariable Integer tournamentId, @PathVariable Integer participantId) {
+
+            tournamentService.checkInParticipant(tournamentId, participantId);
+            return ResponseEntity.ok("Participant checked in successfully for the tournament.");
+
+    }
+
+
+        @GetMapping("/{tournamentId}/matches/completed")
+        public ResponseEntity getTournamentMatchesByStatusCompleted(@PathVariable Integer tournamentId) {
+
+                return ResponseEntity.ok(
+                        tournamentService.getTournamentMatchesByStatusCompleted(tournamentId)
+                );
+
+        }
+
+        @GetMapping("/{tournamentId}/matches/in-progress")
+        public ResponseEntity getTournamentMatchesByStatusInProgress(@PathVariable Integer tournamentId) {
+                ;
+                return ResponseEntity.ok(tournamentService.getTournamentMatchesByStatusInProgress(tournamentId));
+
+        }
+
+        @GetMapping("/{tournamentId}/matches/not-started")
+        public ResponseEntity getTournamentMatchesByStatusNotStarted(@PathVariable Integer tournamentId) {
+                return ResponseEntity.ok(tournamentService.getTournamentMatchesByStatusNotStarted(tournamentId));
+
+        }
+
+
+
+    }
+
+

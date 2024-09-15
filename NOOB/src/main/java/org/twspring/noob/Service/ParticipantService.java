@@ -34,9 +34,12 @@ public class ParticipantService {
         }
 
         Player player = playerRepository.findPlayerById(playerId);
+
         if (player == null) {
             throw new ApiException("Player not found");
         }
+
+
 
         // Check if the player is already registered in the tournament
         Participant existingParticipant = participantRepository.findParticipantByPlayerIdAndTournamentId(playerId, tournamentId);
@@ -46,6 +49,9 @@ public class ParticipantService {
             throw new ApiException("Player is already registered for this tournament");
         }
 
+        if (tournament.getCurrentParticipants() >= tournament.getMaxParticipants()) {
+            throw new ApiException("Tournament is full");
+        }
 
         tournament.setCurrentParticipants(tournament.getCurrentParticipants() + 1);
 

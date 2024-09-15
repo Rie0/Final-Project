@@ -9,6 +9,7 @@ import org.twspring.noob.Repository.ParticipantRepository;
 import org.twspring.noob.Repository.PlayerRepository;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -140,8 +141,10 @@ public class MatchService {
 
     public void advanceWinnerToNextMatch(Integer matchId) {
         // Retrieve the current match
-        Match currentMatch = matchRepository.findById(matchId)
-                .orElseThrow(() -> new RuntimeException("Match not found"));
+        Match currentMatch = matchRepository.findMatchById(matchId);
+        if (currentMatch == null) {
+            throw new ApiException("Match not found");
+        }
 
         // Check if a winner has been set
         Participant winner = currentMatch.getWinner();
@@ -202,6 +205,62 @@ public class MatchService {
             }
         }
         return null; // Return null if no match is found with an available slot
+    }
+
+    public void setMatchWinnerByBye(Integer matchId, Integer participantId) {
+        // Retrieve the current match
+        Match match = matchRepository.findMatchById(matchId);
+        if (match == null) {
+            throw new ApiException("Match not found");
+        }
+
+        // Retrieve the participant
+        Participant participant = participantRepository.findParticipantById(participantId);
+        if (participant == null) {
+            throw new ApiException("Participant not found");
+        }
+
+        // Check if the participant is part of this match
+        if (!participant.equals(match.getParticipant1()) && !participant.equals(match.getParticipant2())) {
+            throw new IllegalArgumentException("The participant is not in this match.");
+        }
+
+        // Determine which participant is the winner
+        Participant winner;
+        Participant loser = null;
+
+        if (match.getParticipant1() == null || match.getParticipant2() == null) {
+            // Set the participant as the winner because the other slot is empty
+            winner = participant;
+            // If both slots are empty, it's an invalid match setup
+            if (match.getParticipant1() == null && match.getParticipant2() == null) {
+                throw new IllegalStateException("Both participants cannot be null for a match.");
+            }
+        } else {
+            throw new IllegalStateException("This method should only be used for matches with a bye.");
+        }
+
+        // Set the winner and update the match status
+        match.setWinner(winner);
+        match.setLoser(loser); // No loser in a bye match
+        match.setStatus("COMPLETED_BYE");  // Custom status for a bye match
+
+        // Save the updated match object
+        matchRepository.save(match);
+    }
+
+    public Map<Integer, List<Match>> getMatchHistoryBetweenPlayersGroupedByWinner(Integer playerId1, Integer playerId2) {
+        List<Match> matchHistory = matchRepository.findMatchHistoryBetweenPlayers(playerId1, playerId2);
+        if (matchHistory.isEmpty()) {
+            throw new ApiException("No matches found between the given players");
+        }
+
+        // Group matches by the winner's ID
+        Map<Integer, List<Match>> matchesGroupedByWinner = matchHistory.stream()
+                .filter(match -> match.getWinner() != null) // Ensure there is a winner
+                .collect(Collectors.groupingBy(match -> match.getWinner().getId()));
+
+        return matchesGroupedByWinner;
     }
 
 
