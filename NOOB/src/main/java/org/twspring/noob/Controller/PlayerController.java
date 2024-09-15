@@ -18,6 +18,7 @@ public class PlayerController {
     public ResponseEntity getAllPlayers(){
         return ResponseEntity.status(200).body(playerService.getPlayers());
     }
+
     @PostMapping("/register")
     public ResponseEntity registerPlayer(@RequestBody@Valid PlayerDTO playerDTO){
         playerService.registerPlayer(playerDTO);

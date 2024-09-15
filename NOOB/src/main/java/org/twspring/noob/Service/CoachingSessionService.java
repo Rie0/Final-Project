@@ -4,7 +4,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
 import org.twspring.noob.Model.CoachingSession;
+import org.twspring.noob.Model.Player;
+import org.twspring.noob.Model.Schedule;
 import org.twspring.noob.Repository.CoachingSessionRepository;
+import org.twspring.noob.Repository.PlayerRepository;
+import org.twspring.noob.Repository.ScheduleRepository;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -15,6 +19,8 @@ import java.util.List;
 public class CoachingSessionService {
 
     private final CoachingSessionRepository coachingSessionRepository;
+    private final ScheduleRepository scheduleRepository;
+    private final PlayerRepository playerRepository;
 
     // CRUD get all
     public List<CoachingSession> getAllCoachingSessions() {
@@ -56,6 +62,29 @@ public class CoachingSessionService {
             throw new ApiException("Coaching session not found");
         }
         return coachingSession;
+    }
+
+    public void bookCoachingSession(Integer scheduleId, Integer playerId) {
+        Schedule schedule = scheduleRepository.findById(scheduleId).orElse(null);
+        if (schedule == null) {
+            throw new ApiException("Schedule not found");
+        }
+
+        Player player = playerRepository.findById(playerId).orElse(null);
+        if (player == null) {
+            throw new ApiException("Player not found");
+        }
+
+        if (schedule.getIsBooked()) {
+            throw new ApiException("Schedule is already booked");
+        }
+
+        schedule.setIsBooked(true);
+        CoachingSession coachingSession = new CoachingSession();
+        coachingSession.setPlayer(player);
+        coachingSession.setSchedule(schedule);
+        coachingSessionRepository.save(coachingSession);
+        scheduleRepository.save(schedule);
     }
 
     public void requestReschedule(Integer coachingSessionId, LocalDate newDate, LocalTime newStartTime, LocalTime newEndTime) {

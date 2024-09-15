@@ -61,5 +61,9 @@ public class CoachingSession {
     @JsonIgnore
     private Schedule schedule;
 
+    @ManyToOne
+    @JoinColumn(name = "player_id", nullable = false)
+    @NotNull(message = "Player is mandatory")
+    private Player player;
 
 }
