@@ -9,8 +9,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -32,19 +30,21 @@ public class Tournament {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(columnDefinition = "VARCHAR(50) NOT NULL")
-    private String type; // Type of tournament (e.g., "SINGLE_ELIMINATION", "DOUBLE_ELIMINATION")
 
+
+    @FutureOrPresent(message = "Date must be in the future or today")
     @Column(columnDefinition = "Date")
     private LocalDate startDate;
 
     @Column(columnDefinition = "Date")
+    @Future(message = "Date must be in the future or today")
     private LocalDate endDate;
 
     @Column(columnDefinition = "VARCHAR(50) NOT NULL")
-    private String status; // Status of the tournament (e.g., "PENDING", "ONGOING", "COMPLETED")
+    private String status = "OPEN"; // Status of the tournament (e.g., "OPEN", "ONGOING", "COMPLETED")
 
     @Column(columnDefinition = "VARCHAR(255)")
+
     private String location;
 
     @NotNull(message = "Maximum participants must not be null")
@@ -52,10 +52,30 @@ public class Tournament {
     @Column(columnDefinition = "INT NOT NULL")
     private Integer maxParticipants;
 
-    @Min(value = 0, message = "Current participants cannot be negative")
     @Column(columnDefinition = "INT")
-    private Integer currentParticipants;
+    private Integer currentParticipants = 0;
 
+    @Column(columnDefinition = "VARCHAR(100) NOT NULL")
+    private String game; // Game associated with the tournament (e.g., "Chess", "Soccer")
+
+    @Column(columnDefinition = "VARCHAR(100) NOT NULL")
+    private String type; // teams or players
+
+    @Column(columnDefinition = "VARCHAR(100) NOT NULL")
+
+    private String city; // City where the tournament is held
+
+    @Column(columnDefinition = "VARCHAR(50) NOT NULL")
+    private String attendanceType; // Attendance type (e.g., "Online", "Onsite")
+
+    @Column(columnDefinition = "INT")
+    @Positive(message = "Prize pool must be a positive number")
+    private int prizePool;
+
+
+    @Column(columnDefinition = "INT")
+    @Positive(message = "ParticipantsPrize must be a positive number")
+    private int participantsPrize;
 
     @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
     @JsonIgnore

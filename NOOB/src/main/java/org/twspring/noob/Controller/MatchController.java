@@ -38,18 +38,18 @@ public class MatchController {
         return ResponseEntity.status(HttpStatus.OK).body("Match deleted successfully");
     }
 
-    @PatchMapping("/{matchId}/ready/participant1/{playerId}")
+    @PostMapping("/{matchId}/ready/participant1/{playerId}")
     public ResponseEntity setParticipant1Ready(@PathVariable Integer matchId, @PathVariable Integer playerId) {
-         matchService.setParticipant1Ready(matchId, playerId);
+        matchService.setParticipant1Ready(matchId, playerId);
 
-            return ResponseEntity.ok("Participant 1 is now ready.");
+        return ResponseEntity.ok("Participant 1 is now ready.");
 
     }
 
-    @PatchMapping("/{matchId}/ready/participant2/{playerId}")
+    @PostMapping("/{matchId}/ready/participant2/{playerId}")
     public ResponseEntity<String> setParticipant2Ready(@PathVariable Integer matchId, @PathVariable Integer playerId) {
         matchService.setParticipant2Ready(matchId, playerId);
-            return ResponseEntity.ok("Participant 2 is now ready.");
+        return ResponseEntity.ok("Participant 2 is now ready.");
 
     }
 
@@ -60,9 +60,44 @@ public class MatchController {
         );
     }
 
+<<<<<<< HEAD
     @GetMapping("/get-by-id/{matchId}")
     public ResponseEntity getMatchById(@PathVariable Integer matchId) {
         return ResponseEntity.ok(matchService.getMatchById(matchId));
     }
 
+=======
+    @PostMapping("/{matchId}/setWinner")
+    public ResponseEntity<String> setWinnerAndLoser(
+            @PathVariable Integer matchId,
+            @RequestParam Integer winnerId) {
+
+        matchService.setMatchWinnerAndLoser(matchId, winnerId);
+        return ResponseEntity.ok("Winner and loser have been set successfully.");
+    }
+
+    @PostMapping("/{matchId}/advanceWinner")
+    public ResponseEntity advanceWinner(@PathVariable Integer matchId) {
+
+            matchService.advanceWinnerToNextMatch(matchId);
+            return ResponseEntity.ok("Winner advanced to the next match successfully.");
+
+    }
+
+    @PostMapping("/{matchId}/winner/bye")
+    public ResponseEntity<String> setMatchWinnerByBye(@PathVariable Integer matchId, @RequestParam Integer participantId) {
+        matchService.setMatchWinnerByBye(matchId, participantId);
+        return ResponseEntity.ok("Winner set by bye successfully.");
+    }
+    @GetMapping("/history-between-two-players")
+    public ResponseEntity getMatchHistoryBetweenPlayers(
+            @RequestParam Integer playerId1,
+            @RequestParam Integer playerId2) {
+        return ResponseEntity.ok(
+                matchService.getMatchHistoryBetweenPlayersGroupedByWinner(playerId1, playerId2));
+    }
+
+
+
+>>>>>>> Hussam
 }

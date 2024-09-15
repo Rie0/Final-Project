@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -36,9 +37,13 @@ public class Organizer {
 
     @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL)
     @JsonIgnore
+<<<<<<< HEAD
     private List<Tournament> tournaments; // List of tournaments created by the organizer
 
     @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<League> leagues; // List of leagues created by the organizer
+=======
+    private Set<Tournament> tournaments; // List of tournaments created by the organizer
+>>>>>>> Hussam
 }
