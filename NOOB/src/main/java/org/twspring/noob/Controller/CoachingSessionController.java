@@ -1,10 +1,14 @@
 package org.twspring.noob.Controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.twspring.noob.Api.ApiResponse;
+import org.twspring.noob.Model.Coach;
 import org.twspring.noob.Model.CoachingSession;
+import org.twspring.noob.Service.CoachService;
 import org.twspring.noob.Service.CoachingSessionService;
 
 import java.util.List;
@@ -16,34 +20,40 @@ public class CoachingSessionController {
 
     private final CoachingSessionService coachingSessionService;
 
+
+    // CRUD get all
     @GetMapping("/get-all")
-    public ResponseEntity<List<CoachingSession>> getAllCoachingSessions() {
-        List<CoachingSession> coachingSessions = coachingSessionService.getAllCoachingSessions();
-        return ResponseEntity.ok(coachingSessions);
+    public ResponseEntity getAllCoachingSessions() {
+        return ResponseEntity.status(200).body(coachingSessionService.getAllCoachingSessions());
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Void> addCoachingSession(@RequestBody CoachingSession coachingSession) {
+    // CRUD register
+    @PostMapping("/register")
+    public ResponseEntity registerCoachingSession(@RequestBody @Valid CoachingSession coachingSession) {
         coachingSessionService.addCoachingSession(coachingSession);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(200).body(new ApiResponse("Coaching session registered successfully"));
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Void> updateCoachingSession(@PathVariable Integer id, @RequestBody CoachingSession coachingSessionDetails) {
-        coachingSessionService.updateCoachingSession(id, coachingSessionDetails);
-        return ResponseEntity.ok().build();
+    // CRUD update
+    @PutMapping("/update/{sessionId}")
+    public ResponseEntity updateCoachingSession(@PathVariable Integer sessionId, @RequestBody @Valid CoachingSession coachingSessionDetails) {
+        coachingSessionService.updateCoachingSession(sessionId, coachingSessionDetails);
+        return ResponseEntity.status(200).body(new ApiResponse("Coaching session updated successfully"));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteCoachingSession(@PathVariable Integer id) {
-        coachingSessionService.deleteCoachingSession(id);
-        return ResponseEntity.noContent().build();
+    // CRUD delete
+    @DeleteMapping("/delete/{sessionId}")
+    public ResponseEntity deleteCoachingSession(@PathVariable Integer sessionId) {
+        coachingSessionService.deleteCoachingSession(sessionId);
+        return ResponseEntity.status(200).body(new ApiResponse("Coaching session deleted successfully"));
+    }
+    // EXTRA endpoint: getting a coaching session by id
+    @GetMapping("/get/{sessionId}")
+    public ResponseEntity getCoachingSessionById(@PathVariable Integer sessionId) {
+        return ResponseEntity.status(200).body(coachingSessionService.getCoachingSessionById(sessionId));
     }
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<CoachingSession> getCoachingSessionById(@PathVariable Integer id) {
-        CoachingSession coachingSession = coachingSessionService.getCoachingSessionById(id);
-        return ResponseEntity.ok(coachingSession);
-    }
+
+
 
 }

@@ -24,7 +24,7 @@ public class TeamService {
     private final TeamRepository teamRepository;
     private final AuthRepository authRepository;
     private final PlayerRepository playerRepository;
-    private final TeamInviteService teamInviteService;
+   // private final TeamInviteService teamInviteService;
     private final TeamInviteRepository teamInviteRepository;
 
     //START OF CRUD

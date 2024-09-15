@@ -1,14 +1,13 @@
 package org.twspring.noob.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Getter
@@ -17,10 +16,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Coach {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer coachId;
+    private Integer id;
 
     @NotBlank(message = "Name is mandatory")
     @Size(max = 100, message = "Name should not exceed 100 characters")
@@ -38,5 +36,12 @@ public class Coach {
     @Max(value = 5, message = "Rating should not be more than 5")
     private Float rating;
 
+    @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
+    private Set<Schedule> schedules;
 
+    @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
+    private Set<MasterClass> masterClasses;
+
+    @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
+    private Set<CoachingSession> coachingSessions;
 }

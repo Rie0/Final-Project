@@ -1,9 +1,11 @@
 package org.twspring.noob.Controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.twspring.noob.Api.ApiResponse;
 import org.twspring.noob.Model.Schedule;
 import org.twspring.noob.Service.ScheduleService;
 
@@ -16,33 +18,70 @@ public class ScheduleController {
 
     private final ScheduleService scheduleService;
 
+    // CRUD get all
     @GetMapping("/get-all")
-    public ResponseEntity<List<Schedule>> getAllSchedules() {
-        List<Schedule> schedules = scheduleService.getAllSchedules();
+    public ResponseEntity getAllSchedules() {
+        return ResponseEntity.status(200).body(scheduleService.getAllSchedules());
+    }
+
+    // CRUD register
+    @PostMapping("/register/{coachId}")
+    public ResponseEntity registerSchedule(@RequestBody @Valid Schedule schedule,
+    @PathVariable Integer coachId) {
+        scheduleService.addSchedule(schedule, coachId);
+        return ResponseEntity.status(200).body(new ApiResponse("Schedule registered successfully"));
+    }
+
+    // CRUD update
+    @PutMapping("/update/{scheduleId}")
+    public ResponseEntity updateSchedule(@PathVariable Integer scheduleId, @RequestBody @Valid Schedule scheduleDetails) {
+        scheduleService.updateSchedule(scheduleId, scheduleDetails);
+        return ResponseEntity.status(200).body(new ApiResponse("Schedule updated successfully"));
+    }
+
+    // CRUD delete
+    @DeleteMapping("/delete/{scheduleId}")
+    public ResponseEntity deleteSchedule(@PathVariable Integer scheduleId) {
+        scheduleService.deleteSchedule(scheduleId);
+        return ResponseEntity.status(200).body(new ApiResponse("Schedule deleted successfully"));
+    }
+
+    // EXTRA endpoint: getting a schedule by id
+    @GetMapping("/get/{scheduleId}")
+    public ResponseEntity getScheduleById(@PathVariable Integer scheduleId) {
+        return ResponseEntity.status(200).body(scheduleService.getScheduleById(scheduleId));
+    }
+
+
+
+    // EXTRA endpoint: getting schedules by coach id
+    @GetMapping("/get-by-coach/{coachId}")
+    public ResponseEntity<List<Schedule>> getSchedulesByCoachId(@PathVariable Integer coachId) {
+        List<Schedule> schedules = scheduleService.getSchedulesByCoachId(coachId);
         return ResponseEntity.ok(schedules);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Void> addSchedule(@RequestBody Schedule schedule) {
-        scheduleService.addSchedule(schedule);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    // EXTRA endpoint: booking a coaching session
+    @PostMapping("/book/{scheduleId}")
+    public ResponseEntity<ApiResponse> bookCoachingSession(@PathVariable Integer scheduleId, @RequestParam Integer playerId) {
+        scheduleService.bookCoachingSession(scheduleId, playerId);
+        return ResponseEntity.status(200).body(new ApiResponse("Coaching session booked successfully"));
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Void> updateSchedule(@PathVariable Integer id, @RequestBody Schedule scheduleDetails) {
-        scheduleService.updateSchedule(id, scheduleDetails);
-        return ResponseEntity.ok().build();
+    // EXTRA endpoint: request a reschedule
+    @PostMapping("/request-reschedule/{scheduleId}")
+    public ResponseEntity<ApiResponse> requestReschedule(@PathVariable Integer scheduleId, @RequestParam String newTime) {
+        scheduleService.requestReschedule(scheduleId, newTime);
+        return ResponseEntity.status(200).body(new ApiResponse("Reschedule request submitted successfully"));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteSchedule(@PathVariable Integer id) {
-        scheduleService.deleteSchedule(id);
-        return ResponseEntity.noContent().build();
+    // EXTRA endpoint: respond to a reschedule request
+    @PostMapping("/respond-reschedule/{scheduleId}")
+    public ResponseEntity<ApiResponse> respondReschedule(@PathVariable Integer scheduleId, @RequestParam boolean accept) {
+        scheduleService.respondReschedule(scheduleId, accept);
+        return ResponseEntity.status(200).body(new ApiResponse("Reschedule request response submitted successfully"));
     }
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<Schedule> getScheduleById(@PathVariable Integer id) {
-        Schedule schedule = scheduleService.getScheduleById(id);
-        return ResponseEntity.ok(schedule);
-    }
 }
+
+

@@ -7,5 +7,7 @@ import org.twspring.noob.Model.CoachingSession;
 
 @Repository
 public interface CoachingSessionRepository extends JpaRepository<CoachingSession, Integer> {
+
     CoachingSession findCoachingSessionById(Integer id);
+
 }

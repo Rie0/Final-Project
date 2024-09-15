@@ -1,9 +1,11 @@
 package org.twspring.noob.Controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.twspring.noob.Api.ApiResponse;
 import org.twspring.noob.Model.Coach;
 import org.twspring.noob.Service.CoachService;
 
@@ -16,33 +18,38 @@ public class CoachController {
 
     private final CoachService coachService;
 
+    // CRUD get all
     @GetMapping("/get-all")
-    public ResponseEntity<List<Coach>> getAllCoaches() {
-        List<Coach> coaches = coachService.getAllCoaches();
-        return ResponseEntity.ok(coaches);
+    public ResponseEntity getAllCoaches() {
+        return ResponseEntity.status(200).body(coachService.getAllCoaches());
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Void> addCoach(@RequestBody Coach coach) {
+    // CRUD register
+    @PostMapping("/register")
+    public ResponseEntity registerCoach(@RequestBody @Valid Coach coach) {
         coachService.addCoach(coach);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(200).body(new ApiResponse("Coach registered successfully"));
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Void> updateCoach(@PathVariable Integer id, @RequestBody Coach coachDetails) {
-        coachService.updateCoach(id, coachDetails);
-        return ResponseEntity.ok().build();
+    // CRUD update
+    @PutMapping("/update/{coachId}")
+    public ResponseEntity updateMyInfo(@PathVariable Integer coachId, @RequestBody @Valid Coach coachDetails) {
+        coachService.updateCoach(coachId, coachDetails);
+        return ResponseEntity.status(200).body(new ApiResponse("Coach updated successfully"));
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteCoach(@PathVariable Integer id) {
-        coachService.deleteCoach(id);
-        return ResponseEntity.noContent().build();
+    // CRUD delete
+    @DeleteMapping("/delete/{coachId}")
+    public ResponseEntity deleteMyAccount(@PathVariable Integer coachId) {
+        coachService.deleteCoach(coachId);
+        return ResponseEntity.status(200).body(new ApiResponse("Coach deleted successfully"));
     }
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<Coach> getCoachById(@PathVariable Integer id) {
-        Coach coach = coachService.getCoachById(id);
-        return ResponseEntity.ok(coach);
+    // EXTRA endpoint: getting a coach by id
+    @GetMapping("/get/{coachId}")
+    public ResponseEntity getCoachById(@PathVariable Integer coachId) {
+        return ResponseEntity.status(200).body(coachService.getCoachById(coachId));
     }
+
+
 }

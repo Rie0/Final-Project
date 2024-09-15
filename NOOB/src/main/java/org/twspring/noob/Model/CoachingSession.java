@@ -1,8 +1,7 @@
 package org.twspring.noob.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -21,7 +20,9 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class CoachingSession {
 
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @NotNull(message = "Scheduled time is mandatory")
     private LocalDateTime scheduledTime;
@@ -37,9 +38,18 @@ public class CoachingSession {
     @Min(value = 0, message = "Pricing should not be less than 0")
     private Integer pricing;
 
-
     @ManyToOne
     @JoinColumn(name = "coach_id", nullable = false)
     @NotNull(message = "Coach is mandatory")
+    @JsonIgnore
     private Coach coach;
+
+
+    @OneToOne
+    @JoinColumn(name = "schedule_id", nullable = false)
+    @NotNull(message = "Schedule is mandatory")
+    @JsonIgnore
+    private Schedule schedule;
+
+
 }

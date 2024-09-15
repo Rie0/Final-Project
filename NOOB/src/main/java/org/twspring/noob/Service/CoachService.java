@@ -16,28 +16,44 @@ public class CoachService {
 
     private final CoachRepository coachRepository;
 
+
+    // CRUD get all
     public List<Coach> getAllCoaches() {
         return coachRepository.findAll();
     }
 
+    // CRUD register
     public void addCoach(Coach coach) {
         coachRepository.save(coach);
     }
 
+    // CRUD update
     public void updateCoach(Integer id, Coach coachDetails) {
-        Coach coach = coachRepository.findById(id).orElseThrow(() -> new ApiException("Coach not found"));
+        Coach coach = coachRepository.findCoachById(id);
+        if (coach == null) {
+            throw new ApiException("Coach not found");
+        }
         coach.setName(coachDetails.getName());
         coach.setExpertise(coachDetails.getExpertise());
         coachRepository.save(coach);
     }
 
+    // CRUD delete
     public void deleteCoach(Integer id) {
-        Coach coach = coachRepository.findById(id).orElseThrow(() -> new ApiException("Coach not found"));
+        Coach coach = coachRepository.findCoachById(id);
+        if (coach == null) {
+            throw new ApiException("Coach not found");
+        }
         coachRepository.delete(coach);
     }
 
+    // EXTRA endpoint: getting a coach by id
     public Coach getCoachById(Integer id) {
-        return coachRepository.findById(id).orElseThrow(() -> new ApiException("Coach not found"));
+        Coach coach = coachRepository.findCoachById(id);
+        if (coach == null) {
+            throw new ApiException("Coach not found");
+        }
+        return coach;
     }
 
 }

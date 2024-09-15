@@ -10,4 +10,5 @@ public interface CoachRepository extends JpaRepository<Coach, Integer> {
 
 
     Coach findCoachById(Integer id);
+
 }
