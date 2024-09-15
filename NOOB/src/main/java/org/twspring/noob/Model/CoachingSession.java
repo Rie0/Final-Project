@@ -11,7 +11,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 @Entity
 @Getter
@@ -37,6 +39,14 @@ public class CoachingSession {
     @NotNull(message = "Pricing is mandatory")
     @Min(value = 0, message = "Pricing should not be less than 0")
     private Integer pricing;
+
+    private boolean rescheduleRequested = false;
+
+    private LocalDate newDate;
+
+    private LocalTime newStartTime;
+
+    private LocalTime newEndTime;
 
     @ManyToOne
     @JoinColumn(name = "coach_id", nullable = false)

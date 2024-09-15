@@ -11,6 +11,7 @@ import org.twspring.noob.Repository.PlayerRepository;
 import org.twspring.noob.Repository.ScheduleRepository;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Service
@@ -31,7 +32,9 @@ public class ScheduleService {
             throw new ApiException("Coach not found");
         }
         schedule.setCoach(coach);
+        coach.getSchedules().add(schedule);
         scheduleRepository.save(schedule);
+        coachRepository.save(coach);
     }
 
     public void updateSchedule(Integer id, Schedule scheduleDetails) {
@@ -89,33 +92,6 @@ public class ScheduleService {
 
 
 
-    // EXTRA endpoint: request a reschedule
-    public void requestReschedule(Integer scheduleId, String newTime) {
-        Schedule schedule = scheduleRepository.findScheduleById(scheduleId);
-        if (schedule == null) {
-            throw new ApiException("Schedule not found");
-        }
-        schedule.setRescheduleRequested(true);
-        schedule.setNewTime(newTime);
-        scheduleRepository.save(schedule);
-    }
-
-    // EXTRA endpoint: respond to a reschedule request
-    public void respondReschedule(Integer scheduleId, boolean accept) {
-        Schedule schedule = scheduleRepository.findScheduleById(scheduleId);
-        if (schedule == null) {
-            throw new ApiException("Schedule not found");
-        }
-        if (!schedule.isRescheduleRequested()) {
-            throw new ApiException("No reschedule request found");
-        }
-        if (accept) {
-            schedule.setStartTime(LocalDate.parse(schedule.getNewTime()));
-        }
-        schedule.setRescheduleRequested(false);
-        schedule.setNewTime(null);
-        scheduleRepository.save(schedule);
-    }
 
 }
 

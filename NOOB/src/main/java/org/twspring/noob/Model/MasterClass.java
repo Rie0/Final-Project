@@ -10,7 +10,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,9 +33,9 @@ public class MasterClass {
     @JsonIgnore
     private Coach coach;
 
-    @OneToMany(mappedBy = "masterClass", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Set<Schedule> schedules;
+//    @OneToMany(mappedBy = "masterClass", cascade = CascadeType.ALL)
+//    @JsonIgnore
+//    private Set<Schedule> schedules;
 
     @ManyToMany
     @JoinTable(
@@ -51,10 +53,16 @@ public class MasterClass {
     private String description;
 
     @NotNull(message = "Start date is mandatory")
-    private LocalDateTime startDate;
+    private LocalDate startDate;
 
     @NotNull(message = "End date is mandatory")
-    private LocalDateTime endDate;
+    private LocalDate endDate;
+
+    @NotNull(message = "Start time is mandatory")
+    private LocalTime startTime;
+
+    @NotNull(message = "End time is mandatory")
+    private LocalTime endTime;
 
     @NotBlank(message = "Status is mandatory")
     @Size(max = 50, message = "Status should not exceed 50 characters")

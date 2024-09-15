@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Set;
 
 @Entity
@@ -31,23 +32,20 @@ public class Schedule {
     private LocalDate date;
 
     @NotNull(message = "Start time is mandatory")
-    private LocalDate startTime;
+    private LocalTime startTime;
 
     @NotNull(message = "End time is mandatory")
-    private LocalDate endTime;
+    private LocalTime endTime;
 
     @NotNull(message = "Booking status is mandatory")
     private Boolean isBooked = false;
 
 
-    private boolean rescheduleRequested;
-
-    private String newTime;
 
 
-    @ManyToOne
-    @JoinColumn(name = "master_class_id")
-    private MasterClass masterClass;
+//    @ManyToOne
+//    @JoinColumn(name = "master_class_id")
+//    private MasterClass masterClass;
 
     @OneToOne(mappedBy = "schedule", cascade = CascadeType.ALL)
     @JsonIgnore

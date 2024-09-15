@@ -9,6 +9,8 @@ import org.twspring.noob.Api.ApiResponse;
 import org.twspring.noob.Model.Schedule;
 import org.twspring.noob.Service.ScheduleService;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @RestController
@@ -68,19 +70,6 @@ public class ScheduleController {
         return ResponseEntity.status(200).body(new ApiResponse("Coaching session booked successfully"));
     }
 
-    // EXTRA endpoint: request a reschedule
-    @PostMapping("/request-reschedule/{scheduleId}")
-    public ResponseEntity<ApiResponse> requestReschedule(@PathVariable Integer scheduleId, @RequestParam String newTime) {
-        scheduleService.requestReschedule(scheduleId, newTime);
-        return ResponseEntity.status(200).body(new ApiResponse("Reschedule request submitted successfully"));
-    }
-
-    // EXTRA endpoint: respond to a reschedule request
-    @PostMapping("/respond-reschedule/{scheduleId}")
-    public ResponseEntity<ApiResponse> respondReschedule(@PathVariable Integer scheduleId, @RequestParam boolean accept) {
-        scheduleService.respondReschedule(scheduleId, accept);
-        return ResponseEntity.status(200).body(new ApiResponse("Reschedule request response submitted successfully"));
-    }
 
 }
 

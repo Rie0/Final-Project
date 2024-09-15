@@ -11,6 +11,8 @@ import org.twspring.noob.Model.CoachingSession;
 import org.twspring.noob.Service.CoachService;
 import org.twspring.noob.Service.CoachingSessionService;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @RestController
@@ -53,7 +55,16 @@ public class CoachingSessionController {
         return ResponseEntity.status(200).body(coachingSessionService.getCoachingSessionById(sessionId));
     }
 
+    @PostMapping("/{id}/request-reschedule/{newDate}/{newStartTime}/{newEndTime}")
+    public ResponseEntity<ApiResponse> requestReschedule(@PathVariable Integer id, @PathVariable String newDate, @PathVariable String newStartTime, @PathVariable String newEndTime) {
+        coachingSessionService.requestReschedule(id, LocalDate.parse(newDate), LocalTime.parse(newStartTime), LocalTime.parse(newEndTime));
+        return ResponseEntity.status(200).body(new ApiResponse("Reschedule request submitted successfully"));
+    }
 
-
+    @PostMapping("/respond-reschedule/{id}/{accept}")
+    public ResponseEntity<ApiResponse> respondReschedule(@PathVariable Integer id, @PathVariable boolean accept) {
+        coachingSessionService.respondReschedule(id, accept);
+        return ResponseEntity.status(200).body(new ApiResponse("Reschedule response submitted successfully"));
+    }
 
 }
