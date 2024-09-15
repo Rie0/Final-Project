@@ -31,8 +31,7 @@ public class MasterClass {
     @JsonIgnore
     private Coach coach;
 
-
-    @OneToMany(mappedBy = "schedule", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "masterClass", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Schedule> schedules;
 

@@ -45,13 +45,10 @@ public class Schedule {
     private String newTime;
 
 
-    // Change to many to one
     @ManyToOne
-    @JoinColumn(name = "schedule_id", nullable = false)
-    @JsonIgnore
+    @JoinColumn(name = "master_class_id")
     private MasterClass masterClass;
 
-    // Change to one to one
     @OneToOne(mappedBy = "schedule", cascade = CascadeType.ALL)
     @JsonIgnore
     private CoachingSession coachingSession;
