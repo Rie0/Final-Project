@@ -121,7 +121,7 @@ public class LeagueService {
         participant.setName(name);
         participant.setPlayer(player);
         participant.setLeague(league);
-        participant.setStatus("ACTIVE");
+        participant.setStatus(Participant.Status.ACTIVE);
         participantRepository.save(participant);
 
         league.setCurrentParticipants(league.getCurrentParticipants() + 1);

@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b947b4ef-297e-4c50-811c-9161e0997d87" name="Changes" comment="changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< HEAD
+
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/MatchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/MatchController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Match.java" afterDir="false" />
@@ -15,7 +15,7 @@
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/MatchRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/MatchRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/LeagueService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/LeagueService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/MatchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/MatchService.java" afterDir="false" />
-=======
+
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/MatchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/MatchController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/TournamentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/TournamentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Match.java" afterDir="false" />
@@ -30,7 +30,7 @@
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/MatchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/MatchService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/ParticipantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/ParticipantService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/TournamentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/TournamentService.java" afterDir="false" />
->>>>>>> Hussam
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,13 +85,10 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.NoobApplication.executor": "Run",
     "com.codeium.enabled": "true",
-<<<<<<< HEAD
     "com.google.cloudcode.ide_session_index": "20240911_0000",
     "git-widget-placeholder": "Rafeef",
-=======
     "com.google.cloudcode.ide_session_index": "20240915_0001",
     "git-widget-placeholder": "Hussam",
->>>>>>> Hussam
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Rafeef/IdeaProjects/Exercise-Repository",
     "node.js.detected.package.eslint": "true",

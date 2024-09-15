@@ -23,11 +23,6 @@ public class Round {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "bracket_id" )
-    @JsonIgnore
-    private Bracket bracket;
-
     private Integer roundNumber;
 
     @Column(columnDefinition = "DATE")
@@ -35,6 +30,11 @@ public class Round {
 
     @OneToMany(mappedBy = "round", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Match> matches;
+
+    @ManyToOne
+    @JoinColumn(name = "bracket_id" )
+    @JsonIgnore
+    private Bracket bracket;
 
     @ManyToOne
     @JsonIgnore

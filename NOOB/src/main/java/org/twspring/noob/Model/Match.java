@@ -25,34 +25,22 @@ public class Match {
 
     @ManyToOne
     @JoinColumn(name = "participant1_id")
-<<<<<<< HEAD
     //@JsonIgnore
-=======
-
->>>>>>> Hussam
-
     private Participant participant1; // Reference to the first participant
 
     @ManyToOne
     @JoinColumn(name = "participant2_id")
-<<<<<<< HEAD
     //@JsonIgnore
-=======
-
-
->>>>>>> Hussam
     private Participant participant2; // Reference to the second participant
 
     @ManyToOne
     @JoinColumn(name = "winner_id")
     @JsonIgnore
-
     private Participant winner; // Reference to the winning participant
 
     @ManyToOne
     @JoinColumn(name = "loser_id")
     @JsonIgnore
-
     private Participant loser; // Reference to the losing participant
 
 

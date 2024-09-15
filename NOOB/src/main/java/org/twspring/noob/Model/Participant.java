@@ -8,11 +8,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-<<<<<<< HEAD
-=======
-import java.util.Set;
->>>>>>> Hussam
 
 @Entity
 @Getter
@@ -36,37 +31,34 @@ public class Participant {
     @Column(columnDefinition = "INT")
     private int prize =0; // prize for the participant
 
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "Status cannot be null")
+    private Status status= Status.REGISTERED;
 
-    @Column(columnDefinition = "VARCHAR(50) NOT NULL")
-    private String status = "REGISTERED"; // Status of the participant (e.g., "ACTIVE", "ELIMINATED")
+    public enum Status{
+        REGISTERED,//Player is registered
+        CHECKED_IN,
+        ACTIVE, //player is in an ongoing tournament/league
+        ELIMINATED,
+        FINALIZED
+    }
 
     @ManyToOne
     @JoinColumn(name = "player_id")
     @JsonIgnore
-
     private Player player; // Reference to the Player associated with this participant
+
+    @ManyToOne
+    @JoinColumn(name = "team_id")
+    @JsonIgnore
+    private Team team;
 
     @ManyToOne
     @JoinColumn(name = "tournament_id", columnDefinition = "INT")
     @JsonIgnore
-
     private Tournament tournament; // Reference to the Tournament this participant is associated with
 
-<<<<<<< HEAD
     @ManyToOne
     @JsonIgnore
     private League league; // Reference to the League this participant is associated with
-
-    //wins loses ties
-
-=======
-
-    @OneToMany(mappedBy = "participant1", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Set<Match> matchesAsParticipant1; // List of matches where this participant is 'participant1'
-
-    @OneToMany(mappedBy = "participant2", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Set<Match> matchesAsParticipant2; // List of matches where this participant is 'participant2'
->>>>>>> Hussam
 }

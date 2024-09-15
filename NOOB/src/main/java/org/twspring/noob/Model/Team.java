@@ -1,6 +1,7 @@
 package org.twspring.noob.Model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -45,4 +46,8 @@ public class Team {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
     private Set<TeamInvite> teamInvites;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
+    @JsonIgnore
+    private Set<Participant> participants;
 }

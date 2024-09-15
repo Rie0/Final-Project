@@ -40,8 +40,15 @@ public class Tournament {
     @Future(message = "Date must be in the future or today")
     private LocalDate endDate;
 
-    @Column(columnDefinition = "VARCHAR(50) NOT NULL")
-    private String status = "OPEN"; // Status of the tournament (e.g., "OPEN", "ONGOING", "COMPLETED")
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "Status cannot be null")
+    private Status status= Status.OPEN;
+
+    public enum Status{
+        OPEN,
+        ACTIVE,
+        FINISHED
+    } // Status of the tournament
 
     @Column(columnDefinition = "VARCHAR(255)")
 

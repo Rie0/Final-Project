@@ -60,13 +60,10 @@ public class MatchController {
         );
     }
 
-<<<<<<< HEAD
     @GetMapping("/get-by-id/{matchId}")
     public ResponseEntity getMatchById(@PathVariable Integer matchId) {
         return ResponseEntity.ok(matchService.getMatchById(matchId));
     }
-
-=======
     @PostMapping("/{matchId}/setWinner")
     public ResponseEntity<String> setWinnerAndLoser(
             @PathVariable Integer matchId,
@@ -96,8 +93,4 @@ public class MatchController {
         return ResponseEntity.ok(
                 matchService.getMatchHistoryBetweenPlayersGroupedByWinner(playerId1, playerId2));
     }
-
-
-
->>>>>>> Hussam
 }

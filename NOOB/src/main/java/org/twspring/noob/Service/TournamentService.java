@@ -70,10 +70,10 @@ public class TournamentService {
         }
 
         // Check if the tournament is already active or completed
-        if ("ACTIVE".equalsIgnoreCase(tournament.getStatus())) {
+        if (tournament.getStatus().equals(Tournament.Status.ACTIVE)) {
             throw new ApiException("Tournament is already active");
-        } else if ("COMPLETED".equalsIgnoreCase(tournament.getStatus())) {
-            throw new ApiException("Tournament has already been completed");
+        } else if (tournament.getStatus().equals(Tournament.Status.FINISHED)) {
+            throw new ApiException("Tournament has already been finished");
         }
 
         // Check if the start date is today or in the future
@@ -83,7 +83,7 @@ public class TournamentService {
         }
 
         // Change the status to active
-        tournament.setStatus("ACTIVE");
+        tournament.setStatus(Tournament.Status.ACTIVE);
         tournamentRepository.save(tournament);
     }
     public void checkInParticipant(Integer tournamentId, Integer participantId) {
@@ -105,7 +105,7 @@ public class TournamentService {
         }
 
         // Check-in the participant by changing the status
-        participant.setStatus("CHECKED_IN");
+        participant.setStatus(Participant.Status.CHECKED_IN);
         participantRepository.save(participant);
     }
 
@@ -243,12 +243,12 @@ public class TournamentService {
         for (int i = 0; i < sortedParticipants.size(); i++) {
             Participant participant = sortedParticipants.get(i);
             participant.setSeed(i + 1); // Seed starts from 1 for the winner
-            participant.setStatus("FINALIZED");
+            participant.setStatus(Participant.Status.FINALIZED);
             participantRepository.save(participant);
         }
 
         // Update the tournament status to finished
-        tournament.setStatus("FINISHED");
+        tournament.setStatus(Tournament.Status.FINISHED);
         tournamentRepository.save(tournament);
     }
 

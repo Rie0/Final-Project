@@ -9,10 +9,6 @@ import java.util.List;
 @Repository
 public interface RoundRepository extends JpaRepository<Round, Integer> {
     Round findRoundById(Integer id);
-<<<<<<< HEAD
     List<Round> findRoundByLeagueId(Integer leagueId);
-=======
 
-
->>>>>>> Hussam
 }

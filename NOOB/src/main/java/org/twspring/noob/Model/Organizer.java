@@ -37,13 +37,9 @@ public class Organizer {
 
     @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL)
     @JsonIgnore
-<<<<<<< HEAD
     private List<Tournament> tournaments; // List of tournaments created by the organizer
 
     @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<League> leagues; // List of leagues created by the organizer
-=======
-    private Set<Tournament> tournaments; // List of tournaments created by the organizer
->>>>>>> Hussam
 }

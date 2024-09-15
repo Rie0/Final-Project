@@ -13,7 +13,6 @@ import java.util.List;
 @Repository
 public interface MatchRepository extends JpaRepository<Match, Integer> {
     Match findMatchById(Integer id);
-<<<<<<< HEAD
     List<Match> findMatchByRoundId(Integer roundId);
     List<Match> findMatchByLeagueId(Integer leagueId);
 
@@ -25,7 +24,6 @@ public interface MatchRepository extends JpaRepository<Match, Integer> {
     @Query("SELECT m from Match m where m.participant1.player.id=?1 OR m.participant2.player.id=?1")
     List<Match> findMatchByParticipantId(Integer participantId);
 
-=======
     List<Match> findByTournament(Tournament tournament);
     List<Match> findByTournamentAndStatus(Tournament tournament, String status);
 
@@ -34,6 +32,4 @@ public interface MatchRepository extends JpaRepository<Match, Integer> {
             "OR (m.participant1.player.id = ?2 AND m.participant2.player.id = ?1)")
     List<Match> findMatchHistoryBetweenPlayers(Integer playerId1, Integer playerId2);// Custom query to find matches by tournament
 
-
->>>>>>> Hussam
 }

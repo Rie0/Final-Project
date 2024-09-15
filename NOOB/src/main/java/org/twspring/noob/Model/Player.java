@@ -32,27 +32,11 @@ public class Player {
     @Size(min= 25, max = 150, message = "Bio must have between 25 to 150 characters")
     private String bio;
 
-//    @NotNull(message = "Gold wins must not be null")
-//    @Column(columnDefinition = "INT NOT NULL DEFAULT 0")
-//    @PositiveOrZero(message = "Gold wins cannot be a negative or a zero")
-//    private int leaguesGoldWins;
-//
-//    @NotNull(message = "Silver wins must not be null")
-//    @Column(columnDefinition = "INT NOT NULL DEFAULT 0")
-//    @PositiveOrZero(message = "Silver wins cannot be a negative or a zero")
-//    private int leaguesSilverWins;
-//
-//    @NotNull(message = "Bronze wins must not be null")
-//    @Column(columnDefinition = "INT NOT NULL DEFAULT 0")
-//    @PositiveOrZero(message = "Bronze wins cannot be a negative or a zero")
-//    private int leaguesBronzeWins;
 
     //RELATIONSHIP RELATED VARS
-
     //for team
-    @Column(columnDefinition = "timestamp")
+    @Column(columnDefinition = "DATE")
     private LocalDateTime JoinedTeamAt;
-
 
     //RELATIONSHIPS
     @OneToOne
