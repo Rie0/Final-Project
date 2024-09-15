@@ -4,8 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a9644da5-5f07-4fbf-aece-32244b4e84b4" name="Changes" comment="changes" />
-    <list id="e8beecc2-02a2-4007-876a-af3952fc19c7" name="Changes by hasso" comment="" />
+    <list default="true" id="a9644da5-5f07-4fbf-aece-32244b4e84b4" name="Changes" comment="changes">
+      <change afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Config/ConfigSecurity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/MyUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/User.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
