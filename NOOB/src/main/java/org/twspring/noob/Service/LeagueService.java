@@ -44,6 +44,7 @@ public class LeagueService {
 
         league.setStatus(League.Status.INACTIVE);
         league.setOrganizer(organizer);
+        league.setCurrentParticipants(0);
         leagueRepository.save(league);
 
         //Create rounds
@@ -58,7 +59,8 @@ public class LeagueService {
                 match.setStatus("PENDING");
                 match.setLeague(league);
                 match.setRound(round);
-                match.setScore("TBA");
+                match.setParticipant1score(0);
+                match.setParticipant2score(0);
                 match.setParticipant1Name("TBA");
                 match.setParticipant2Name("TBA");
                 matchRepository.save(match);
@@ -112,7 +114,7 @@ public class LeagueService {
         if (league.getParticipants().contains(participantRepository.findParticipantById(playerId))) {
             throw new ApiException("Participant is already registered for this league");
         }
-        if (league.getCurrentParticipants() >= league.getMaxParticipants()) {
+        if (league.getStatus()== League.Status.FULL) {
             throw new ApiException("League has reached it's maximum number of participants");
         }
         Participant participant = new Participant();
@@ -123,6 +125,9 @@ public class LeagueService {
         participantRepository.save(participant);
 
         league.setCurrentParticipants(league.getCurrentParticipants() + 1);
+        if (league.getCurrentParticipants() >= league.getMaxParticipants()) {
+            league.setStatus(League.Status.FULL);
+        }
         leagueRepository.save(league);
     }
 
@@ -253,7 +258,7 @@ public class LeagueService {
     }
 
     //===========================================================================================================
-    //===============================================MATCHES=====================================================
+    //===========================================MATCHES/ROUNDS==================================================
 
     public void setLeagueToReady(Integer organizerId, Integer leagueId) {
         League league = leagueRepository.findLeagueById(leagueId);
@@ -275,7 +280,6 @@ public class LeagueService {
         }
 
         //add date condition when finished when testing
-
 
         //Randomize players in matches, making sure each player verses the other ONCE
         List<Participant> participants = participantRepository.findParticipantByLeagueId(leagueId);
@@ -306,6 +310,133 @@ public class LeagueService {
         league.setStatus(League.Status.ONGOING);
         leagueRepository.save(league);
     }
+
+
+    public List<Match> participantGetMatches(Integer participantId) {
+        Participant participant = participantRepository.findParticipantById(participantId);
+        return matchRepository.findMatchByParticipantId(participant.getId());
+    }
+
+    public void startMatch(Integer organizerId, Integer leagueId, Integer matchId) {
+        League league = leagueRepository.findLeagueById(leagueId);
+        Match match = matchRepository.findMatchById(matchId);
+        if (league == null) {
+            throw new ApiException("League not found");
+        }
+        if (!league.getOrganizer().getId().equals(organizerId)) {
+            throw new ApiException("Organizer doesn't own this league");
+        }
+        if (match == null) {
+            throw new ApiException("Match not found");
+        }
+        if (match.getLeague().getId()!=league.getId()) {
+            throw new ApiException("This match doesn't belong to this league");
+        }
+        if (!match.isParticipant1Ready()&&!match.isParticipant2Ready()) {
+            throw new ApiException("You can only start the match when the all participants are ready");
+        }
+
+        match.setStatus("IN_PROGRESS");
+        matchRepository.save(match);
+    }
+
+    public void add1toParticipant1Score(Integer organizerId, Integer leagueId, Integer matchId) {
+        League league = leagueRepository.findLeagueById(leagueId);
+        Match match = matchRepository.findMatchById(matchId);
+        if (league == null) {
+            throw new ApiException("League not found");
+        }
+        if (!league.getOrganizer().getId().equals(organizerId)) {
+            throw new ApiException("Organizer doesn't own this league");
+        }
+        if (match == null) {
+            throw new ApiException("Match not found");
+        }
+        if (match.getLeague().getId()!=league.getId()) {
+            throw new ApiException("This match doesn't belong to this league");
+        }
+        if(!match.getStatus().equals("IN_PROGRESS")){
+            throw new ApiException("Match is not in progress");
+        }
+        match.setParticipant1score(match.getParticipant1score()+1);
+        matchRepository.save(match);
+    }
+
+    public void add1toParticipant2Score(Integer organizerId, Integer leagueId, Integer matchId) {
+        League league = leagueRepository.findLeagueById(leagueId);
+        Match match = matchRepository.findMatchById(matchId);
+        if (league == null) {
+            throw new ApiException("League not found");
+        }
+        if (!league.getOrganizer().getId().equals(organizerId)) {
+            throw new ApiException("Organizer doesn't own this league");
+        }
+        if (match == null) {
+            throw new ApiException("Match not found");
+        }
+        if (match.getLeague().getId()!=league.getId()) {
+            throw new ApiException("This match doesn't belong to this league");
+        }
+        if(!match.getStatus().equals("IN_PROGRESS")){
+            throw new ApiException("Match is not in progress");
+        }
+        match.setParticipant2score(match.getParticipant2score()+1);
+        matchRepository.save(match);
+    }
+
+    public void finishMatch(Integer organizerId, Integer leagueId, Integer matchId) {
+        League league = leagueRepository.findLeagueById(leagueId);
+        Match match = matchRepository.findMatchById(matchId);
+        if (league == null) {
+            throw new ApiException("League not found");
+        }
+        if (!league.getOrganizer().getId().equals(organizerId)) {
+            throw new ApiException("Organizer doesn't own this league");
+        }
+        if (match == null) {
+            throw new ApiException("Match not found");
+        }
+        if (match.getLeague().getId()!=league.getId()) {
+            throw new ApiException("This match doesn't belong to this league");
+        }
+        if(!match.getStatus().equals("IN_PROGRESS")){
+            throw new ApiException("Match is not in progress");
+        }
+        if (match.getParticipant1score()==match.getParticipant2score()){
+            throw new ApiException("Match cannot end in tie");
+        }
+        Participant participant1 = match.getParticipant1();
+        Participant participant2 = match.getParticipant2();
+        match.setStatus("FINISHED");
+        if (match.getParticipant1score()>match.getParticipant2score()) {
+            match.setWinner(participant1);
+            match.setLoser(participant2);
+        }else {
+            match.setWinner(participant2);
+            match.setLoser(participant1);
+        }
+        matchRepository.save(match);
+    }
+
+    public void finalizeLeague(Integer organizerId, Integer leagueId){
+        League league = leagueRepository.findLeagueById(leagueId);
+        List<Match> matches = matchRepository.findMatchByLeagueId(league.getId());
+
+        if (league == null) {
+            throw new ApiException("League not found");
+        }
+        if (!league.getOrganizer().getId().equals(organizerId)) {
+            throw new ApiException("Organizer doesn't own this league");
+        }
+        //make sure all matches are finished
+        for (Match match : matches) {
+            if (!match.getStatus().equals("FINISHED")) {
+                throw new ApiException("All matches must be finished before finalizing the league");
+            }
+        }
+
+    }
+    public List<Participant> getLeaderBoard(Integer leagueId){return null;} //add a score to the participant.
 
 
 

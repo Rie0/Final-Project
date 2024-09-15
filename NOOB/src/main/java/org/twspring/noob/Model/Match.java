@@ -25,14 +25,13 @@ public class Match {
 
     @ManyToOne
     @JoinColumn(name = "participant1_id")
-    @JsonIgnore
+    //@JsonIgnore
 
     private Participant participant1; // Reference to the first participant
 
     @ManyToOne
     @JoinColumn(name = "participant2_id")
-    @JsonIgnore
-
+    //@JsonIgnore
     private Participant participant2; // Reference to the second participant
 
     @ManyToOne
@@ -64,11 +63,18 @@ public class Match {
     @Column(columnDefinition = "VARCHAR(50) NOT NULL")
     private String status; // Status of the match (e.g., "PENDING", "IN_PROGRESS", "COMPLETED")
 
-    @Column(columnDefinition = "VARCHAR(20)")
-    private String score; // Score of the match (e.g., "2-1")
+//    @Column(columnDefinition = "VARCHAR(20)")
+//    private String score; // Score of the match (e.g., "2-1")
+
+    @Column(columnDefinition = "INT NOT NULL DEFAULT 0")
+    private Integer participant1score;
+
+    @Column(columnDefinition = "INT NOT NULL DEFAULT 0")
+    private Integer participant2score;
 
     @Column(columnDefinition = "VARCHAR(50) NOT NULL")
     private String participant1Name;
+
     @Column(columnDefinition = "VARCHAR(50) NOT NULL")
     private String participant2Name;
 

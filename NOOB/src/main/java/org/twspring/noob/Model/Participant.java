@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -38,8 +40,9 @@ public class Participant {
     private Tournament tournament; // Reference to the Tournament this participant is associated with
 
     @ManyToOne
+    @JsonIgnore
     private League league; // Reference to the League this participant is associated with
 
-
+    //wins loses ties
 
 }

@@ -96,14 +96,47 @@ public class LeagueController {
         return ResponseEntity.status(200).body("League match date set successfully");
     }
 
-    //starting League
+    //League Management
 
     @PutMapping("/organizer/{organizerId}/league/{leagueId}/set-ready")
     public ResponseEntity setLeagueToReady(@PathVariable Integer organizerId,
                                            @PathVariable Integer leagueId){
         leagueService.setLeagueToReady(organizerId,leagueId);
-        return ResponseEntity.status(200).body("League ready set successfully");
+        return ResponseEntity.status(200).body("League set to ready successfully");
     }
+
+    @PutMapping("/organizer/{organizerId}/league/{leagueId}/match/{matchId}/start-match")
+    public ResponseEntity startMatch(@PathVariable Integer organizerId,
+                                     @PathVariable Integer leagueId,
+                                     @PathVariable Integer matchId) {
+        leagueService.startMatch(organizerId,leagueId,matchId);
+        return ResponseEntity.status(200).body("Match started successfully");
+    }
+    @PutMapping("/organizer/{organizerId}/league/{leagueId}/match/{matchId}/add-1score-to-participant1")
+    public ResponseEntity add1toParticipant1Score(@PathVariable Integer organizerId,
+                                                  @PathVariable Integer leagueId,
+                                                  @PathVariable Integer matchId){
+        leagueService.add1toParticipant1Score(organizerId,leagueId,matchId);
+        return ResponseEntity.status(200).body("Score added successfully to participant1");
+    }
+    @PutMapping("/organizer/{organizerId}/league/{leagueId}/match/{matchId}/add-1score-to-participant2")
+    public ResponseEntity add1toParticipant2Score(@PathVariable Integer organizerId,
+                                                  @PathVariable Integer leagueId,
+                                                  @PathVariable Integer matchId){
+        leagueService.add1toParticipant2Score(organizerId,leagueId,matchId);
+        return ResponseEntity.status(200).body("Score added successfully to participant2");
+    }
+
+    //add remove?
+
+    @PutMapping("/organizer/{organizerId}/league/{leagueId}/match/{matchId}/finish-match")
+    public ResponseEntity finishMatch(@PathVariable Integer organizerId,
+                                      @PathVariable Integer leagueId,
+                                      @PathVariable Integer matchId){
+        leagueService.finishMatch(organizerId,leagueId,matchId);
+        return ResponseEntity.status(200).body("Match ended successfully");
+    }
+
 
     //GET INFO
     @GetMapping("/{leagueId}/get-rounds")
@@ -115,5 +148,10 @@ public class LeagueController {
         return ResponseEntity.status(200).body(leagueService.getLeagueMatches(leagueId));
     }
 
+      //for participant
+      @GetMapping("/get-by-participant/{participantId}")
+      public ResponseEntity getMatchParticipantById(@PathVariable Integer participantId) {
+          return ResponseEntity.status(200).body(leagueService.participantGetMatches(participantId));
+    }
 
 }

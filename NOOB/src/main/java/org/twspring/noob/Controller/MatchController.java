@@ -60,4 +60,9 @@ public class MatchController {
         );
     }
 
+    @GetMapping("/get-by-id/{matchId}")
+    public ResponseEntity getMatchById(@PathVariable Integer matchId) {
+        return ResponseEntity.ok(matchService.getMatchById(matchId));
+    }
+
 }

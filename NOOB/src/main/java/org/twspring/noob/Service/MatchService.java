@@ -41,7 +41,7 @@ public class MatchService {
             match.setStartTime(updatedMatch.getStartTime());
             match.setEndTime(updatedMatch.getEndTime());
             match.setStatus(updatedMatch.getStatus());
-            match.setScore(updatedMatch.getScore());
+            //match.setScore(updatedMatch.getScore());
             match.setTournament(updatedMatch.getTournament());
             match.setRound(updatedMatch.getRound());
             matchRepository.save(match);
