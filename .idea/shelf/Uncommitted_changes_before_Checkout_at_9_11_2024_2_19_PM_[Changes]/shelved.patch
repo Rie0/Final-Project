@@ -1,0 +1,18 @@
+Index: NOOB/src/main/java/org/twspring/noob/Model/Player.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package org.twspring.noob.Model;\r\n\r\npublic class Player {\r\n}\r\n
+===================================================================
+diff --git a/NOOB/src/main/java/org/twspring/noob/Model/Player.java b/NOOB/src/main/java/org/twspring/noob/Model/Player.java
+--- a/NOOB/src/main/java/org/twspring/noob/Model/Player.java	
++++ b/NOOB/src/main/java/org/twspring/noob/Model/Player.java	
+@@ -1,4 +1,9 @@
+ package org.twspring.noob.Model;
+ 
+ public class Player {
++
++
++
++
++
+ }

@@ -24,7 +24,6 @@ public class TeamService {
     private final TeamRepository teamRepository;
     private final AuthRepository authRepository;
     private final PlayerRepository playerRepository;
-   // private final TeamInviteService teamInviteService;
     private final TeamInviteRepository teamInviteRepository;
 
     //START OF CRUD
@@ -69,6 +68,19 @@ public class TeamService {
     }
     //END OF CRUD
 
+    //GENERAL EXTRA
+    public Team getTeamById(Integer teamId) {
+        Team team = teamRepository.findTeamById(teamId);
+        if(team == null) {
+            throw new ApiException("Team not found");
+        }
+        return team;
+    }
+
+    public List<Player> getPlayersByTeamId(Integer teamId) {
+        return playerRepository.findPlayerByTeamId(teamId);
+    }
+
     //START OF TEAM INVITES
     public List<TeamInvite> getInvitesByTeamId(Integer teamId) {
         return teamInviteRepository.findTeamInvitesByTeamId(teamId);
@@ -86,21 +98,53 @@ public class TeamService {
         }
 
         Player player = playerRepository.findPlayerById(user.getId());
-        if (player.getTeam()!=null){
-            if (player.getTeam()==team){
+        if (player.getTeam() != null) {
+            if (player.getTeam().getId()==team.getId()){
                 throw new ApiException("Player is already a member of this team");
             }
-            throw new ApiException("Player is already a member of a team");
         }
 
         //create a team invite.
         TeamInvite teamInvite = new TeamInvite();
         teamInvite.setTeam(team);
         teamInvite.setPlayer(player);
+        teamInvite.setTeamName(team.getUser().getUsername());
         teamInvite.setStatus(TeamInvite.Status.PENDING);
         teamInvite.setTitle(teamInviteDTO.getTitle());
         teamInvite.setMessage(teamInviteDTO.getMessage());
         teamInviteRepository.save(teamInvite);
+    }
+
+    //not working
+    public void inviteMultiPlayersToTeam(Integer teamId,List<String> playerUsernames,TeamInviteDTO teamInviteDTO) {
+        Team team = teamRepository.findTeamById(teamId);
+
+        for (String playerUsername : playerUsernames) {
+            User user = authRepository.findByUsername(playerUsername);
+
+            if (user == null) {
+                throw new ApiException("Player with username" + playerUsername + " not found");
+            }
+            if (!user.getRole().equals("PLAYER")) {
+                throw new ApiException("Only players can be invited to teams, user " + user.getUsername() + " is not a player");
+            }
+            Player player = playerRepository.findPlayerById(user.getId());
+            if (player.getTeam() != null) {
+                if (player.getTeam() == team) {
+                    throw new ApiException("Player is already a member of this team");
+                }
+                throw new ApiException("Player " + playerUsername + " is already a member of another team");
+            }
+
+            //create a team invite.
+            TeamInvite teamInvite = new TeamInvite();
+            teamInvite.setTeam(team);
+            teamInvite.setPlayer(player);
+            teamInvite.setStatus(TeamInvite.Status.PENDING);
+            teamInvite.setTitle(teamInviteDTO.getTitle());
+            teamInvite.setMessage(teamInviteDTO.getMessage());
+            teamInviteRepository.save(teamInvite);
+        }
     }
 
     public void deleteTeamInvite(Integer teamId, Integer teamInviteId) {

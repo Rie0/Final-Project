@@ -74,6 +74,8 @@ public class User {
     private Team team;
 
 
+
+
     //USER DETAILS METHODS (after security)
 
 }

@@ -3,9 +3,7 @@ package org.twspring.noob.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,13 +32,11 @@ public class Player {
     @Size(min= 25, max = 150, message = "Bio must have between 25 to 150 characters")
     private String bio;
 
+
     //RELATIONSHIP RELATED VARS
-
     //for team
-    @CreationTimestamp
-    @Column(columnDefinition = "timestamp default current_timestamp")
+    @Column(columnDefinition = "DATE")
     private LocalDateTime JoinedTeamAt;
-
 
     //RELATIONSHIPS
     @OneToOne
@@ -53,6 +49,10 @@ public class Player {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     private Set<TeamInvite> teamInvites;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
+    @JsonIgnore
+    private Set<Participant> participants;
 
     //GAMES
 }

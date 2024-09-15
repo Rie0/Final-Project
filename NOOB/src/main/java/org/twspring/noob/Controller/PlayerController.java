@@ -34,4 +34,37 @@ public class PlayerController {
         playerService.deletePlayer(playerId);
         return ResponseEntity.status(200).body(new ApiResponse("Player deleted successfully"));
     }
+
+    //EXTRA
+
+    @GetMapping("/get/{playerId}")
+    public ResponseEntity getPlayer(@PathVariable Integer playerId){
+        return ResponseEntity.status(200).body(playerService.getPlayerById(playerId));
+    }
+
+    //
+
+    @GetMapping("/{playerId}/invites/get-invites")
+    public ResponseEntity getInvites(@PathVariable Integer playerId){
+        return ResponseEntity.status(200).body(playerService.getInvitesByPlayerId(playerId));
+    }
+
+    @PutMapping("/{playerId}/invites/{inviteId}/accept")
+    public ResponseEntity acceptInvite(@PathVariable Integer playerId, @PathVariable Integer inviteId){
+        playerService.acceptInvite(playerId, inviteId);
+        return ResponseEntity.status(200).body(new ApiResponse("Invite accepted successfully, you're now a member of the team"));
+    }
+
+    @PutMapping("/{playerId}/invites/{inviteId}/decline")
+    public ResponseEntity declineInvite(@PathVariable Integer playerId, @PathVariable Integer inviteId) {
+        playerService.declineInvite(playerId, inviteId);
+        return ResponseEntity.status(200).body(new ApiResponse("Invite declined successfully"));
+    }
+
+    @PutMapping("/{playerId}/team/leave")
+    public ResponseEntity leaveTeam(@PathVariable Integer playerId){
+        playerService.leaveTeam(playerId);
+        return ResponseEntity.status(200).body(new ApiResponse("You left the team successfully"));
+    }
+
 }
