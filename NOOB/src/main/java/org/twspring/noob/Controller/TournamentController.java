@@ -34,31 +34,34 @@ public class TournamentController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity updateTournament(@Valid @RequestBody Tournament tournament,
-                                           @PathVariable Integer id,
-                                           @AuthenticationPrincipal User user) {
+    public ResponseEntity updateTournament(
+                                           @AuthenticationPrincipal User user,
+                                           @Valid @RequestBody Tournament tournament,
+                                           @PathVariable Integer id) {
         tournamentService.updateTournament(id, tournament, user.getId());
         return ResponseEntity.status(HttpStatus.OK).body("Tournament updated successfully");
     }
 
     @DeleteMapping("/delete/{tournamentId}")
-    public ResponseEntity deleteTournament(@PathVariable Integer tournamentId,
-                                           @AuthenticationPrincipal User user) {
+    public ResponseEntity deleteTournament(
+                                            @AuthenticationPrincipal User user,
+                                            @PathVariable Integer tournamentId) {
         tournamentService.deleteTournament(tournamentId, user.getId());
         return ResponseEntity.status(HttpStatus.OK).body("Tournament deleted successfully");
     }
 
     @PostMapping("/{tournamentId}/initializeBracket")
-    public ResponseEntity initializeBracket(@PathVariable Integer tournamentId,
-                                            @AuthenticationPrincipal User user) {
+    public ResponseEntity initializeBracket( @AuthenticationPrincipal User user,
+                                             @PathVariable Integer tournamentId
+                                           ) {
         tournamentService.checkOrganizerAuthorization(tournamentId, user.getId());
         Bracket bracket = bracketService.createBracketForTournament(tournamentId);
         return ResponseEntity.ok(bracket);
     }
 
     @PostMapping("/{id}/start")
-    public ResponseEntity startTournament(@PathVariable Integer id,
-                                          @AuthenticationPrincipal User user) {
+    public ResponseEntity startTournament(
+            @AuthenticationPrincipal User user, @PathVariable Integer id) {
         tournamentService.startTournament(id, user.getId());
         return ResponseEntity.ok("Tournament started successfully.");
     }
@@ -129,16 +132,17 @@ public class TournamentController {
     }
 
     @PostMapping("/{tournamentId}/finalize")
-    public ResponseEntity finalizeTournament(@PathVariable Integer tournamentId,
-                                             @AuthenticationPrincipal User user) {
+    public ResponseEntity finalizeTournament(
+            @AuthenticationPrincipal User user,
+            @PathVariable Integer tournamentId) {
         tournamentService.finalizeTournament(tournamentId, user.getId());
         return ResponseEntity.status(HttpStatus.OK).body("Tournament finalized successfully.");
     }
 
     @PostMapping("/{tournamentId}/participant/{participantId}/checkin")
     public ResponseEntity checkInParticipant(@PathVariable Integer tournamentId,
-                                                     @PathVariable Integer participantId,
-                                                     @AuthenticationPrincipal User user) {
+                                             @PathVariable Integer participantId,
+                                             @AuthenticationPrincipal User user) {
         tournamentService.checkInParticipant(tournamentId, participantId, user.getId());
         return ResponseEntity.ok("Participant checked in successfully for the tournament.");
     }
