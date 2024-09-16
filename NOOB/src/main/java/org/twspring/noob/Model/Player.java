@@ -67,4 +67,9 @@ public class Player { //Rafeef
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     private Set<SubscripeBy> subscripeBIES;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
+    @JsonIgnore
+    private Set<Participant> participants;
+
 }

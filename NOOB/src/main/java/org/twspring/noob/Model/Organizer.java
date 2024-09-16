@@ -46,3 +46,4 @@ public class Organizer {
     @MapsId
     private User user; // User associated with the organizer
 }
+

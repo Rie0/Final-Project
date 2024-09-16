@@ -75,12 +75,13 @@ public class ParticipantService {
         }
     }
 
-    public void deleteParticipant(Integer participantId) {
-        Participant participant = participantRepository.findParticipantById(participantId);
+    public void deleteParticipant(Integer participantId,Integer tournamentId) {
+        Participant participant = participantRepository.findParticipantByPlayerIdAndTournamentId(participantId,tournamentId);
+
         if (participant == null) {
             throw new ApiException("Participant not found");
         }
-        participantRepository.deleteById(participantId);
+        participantRepository.delete(participant);
     }
 
 }

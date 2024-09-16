@@ -67,9 +67,6 @@ public class OrganizerService {
         existingUser.setPassword(hash);
         existingUser.setEmail(organizerDTO.getEmail());
         existingUser.setPhoneNumber(organizerDTO.getPhoneNumber());
-        existingUser.setBirthday(organizerDTO.getBirthday());
-        existingUser.setRole("ORGANIZER");
-        existingUser.setAge(Period.between(existingUser.getBirthday(), LocalDate.now()).getYears());
         userRepository.save(existingUser);
 
         existingOrganizer.setName(organizerDTO.getName());

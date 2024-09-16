@@ -26,6 +26,7 @@ public class PlayerService {
 
     //START OF CRUD
     public List<Player> getPlayers() {
+
         return playerRepository.findAll();
     }
 

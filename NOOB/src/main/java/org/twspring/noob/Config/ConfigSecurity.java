@@ -1,6 +1,5 @@
 package org.twspring.noob.Config;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,9 +30,11 @@ public class ConfigSecurity {
         http
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .and() //Authorization
+                .and()
                 .authenticationProvider(daoAuthenticationProvider())
                 .authorizeHttpRequests()
+
+               //ALL
                 .requestMatchers(
                         //player
                         "/api/v1/player/get-all",
@@ -44,10 +45,62 @@ public class ConfigSecurity {
                         "/api/v1/team/register",
                         "/api/v1/team/get/{teamId}"
                         ).permitAll()
+                .requestMatchers("/api/v1/organizer/add").permitAll() // Anyone can add an organizer
+                .requestMatchers("/api/v1/tournament/get").permitAll() // Anyone can view tournaments
+                .requestMatchers("/api/v1/match/get").permitAll() // Anyone can view matches
+                .requestMatchers("/api/v1/participant/get").permitAll() // Anyone can view participants
+                .requestMatchers("/api/v1/player/register").permitAll() // Anyone can Register player
+                .requestMatchers("/api/v1/coach/register").permitAll() // Open registration for coaches
+                .requestMatchers("/api/v1/coach/get-all").permitAll()
+                .requestMatchers("/api/v1/coach/get/**").permitAll()
+
                 //COACH
-                //.requestMatchers().hasAuthority("COACH")
+                .requestMatchers("/api/v1/coach/update/**", "/api/v1/coach/delete/**").hasAuthority("COACH")
+
                 //ORGANIZER
-                //.requestMatchers().hasAuthority("ORGANIZER")
+                .requestMatchers(
+                        //tournaments
+                        "/api/v1/tournament/update/**",
+                        "/api/v1/tournament/*/initializeBracket",
+                        "/api/v1/tournament/*/start",
+                        "/api/v1/tournament/delete/**",
+                        "/api/v1/tournament/*/finalize",
+                        //rounds
+                        "/api/v1/round/add",
+                        "/api/v1/round/update/**",
+                        "/api/v1/round/delete/**",
+                        //organizer
+                        "/api/v1/organizer/update/**",
+                        "/api/v1/organizer/delete/**"
+                ).hasAuthority("ORGANIZER")
+
+                //ADMIN AND ORGANIZER
+                .requestMatchers(
+                        "/api/v1/tournament/*/participant/*/checkin",
+                        "/api/v1/bracket/get",
+                        "/api/v1/bracket/add",
+                        "/api/v1/bracket/update/**",
+                        "/api/v1/round/get",
+                        "/api/v1/match/add",
+                        "/api/v1/match/update/**",
+                        "/api/v1/match/delete/**",
+                        "/api/v1/match/*/winner/bye"
+                ).hasAnyAuthority("ADMIN", "ORGANIZER")
+
+                //PLAYER AND ADMIN
+                .requestMatchers("/api/v1/participant/add/**",
+                        "/api/v1/participant/update/**",
+                        ("/api/v1/participant/get/**"),
+                        "/api/v1/participant/delete/**").hasAnyAuthority("PLAYER", "ADMIN")
+
+                //ADMIN ORGANIZER PLAYER
+                .requestMatchers(
+                        "/api/v1/match/history-between-two-players",
+                        "/api/v1/match/*/ready/**",
+                        "/api/v1/match/*/setWinner",
+                        "/api/v1/match/*/advanceWinner"
+                ).hasAnyAuthority("ADMIN", "ORGANIZER", "PLAYER")
+
                 //PLAYER
                 .requestMatchers(
                         "/api/v1/player/update-my-info",
@@ -58,8 +111,12 @@ public class ConfigSecurity {
                         "/api/v1/player/invites/{inviteId}/decline",
                         "/api/v1/player/team/leave"
                 ).hasAuthority("PLAYER")
+
                 //ADMIN
-                //.requestMatchers().hasAuthority("ADMIN")
+                .requestMatchers(
+                        "/api/v1/bracket/delete/**"
+                ).hasAuthority("ADMIN")
+
                 //TEAM
                 .requestMatchers(
                         "/api/v1/team/update-my-info",
