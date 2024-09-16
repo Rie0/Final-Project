@@ -21,9 +21,9 @@ public class SubscribeByController {
         return ResponseEntity.status(200).body(subscribeByService.getAllsubscribeBy());
     }
 
-    @PostMapping("add-SubscripeBy")
-    public ResponseEntity addSubscripeBy(@Valid @RequestBody SubscripeBy subscripeBy){
-        subscribeByService.addSubscripeBy(subscripeBy);
+    @PostMapping("add-SubscripeBy/{vendorId}/{pcCenterID}/{zoneId}")
+    public ResponseEntity addSubscripeBy(@PathVariable Integer vendorId,@PathVariable Integer pcCenterID,@PathVariable Integer zoneId,@Valid @RequestBody SubscripeBy subscripeBy){
+        subscribeByService.addSubscripeBy(subscripeBy,vendorId,pcCenterID,zoneId);
         return ResponseEntity.status(200).body("Subscribe By added successfully");
 
     }
@@ -37,4 +37,14 @@ public class SubscribeByController {
         subscribeByService.deleteSubscripeBy(id);
         return ResponseEntity.status(200).body("Subscribe By deleted successfully");
     }
+
+////
+@GetMapping("/get-supscripe-by/{playerId}")
+    public ResponseEntity getSubscripeByPlayerId(@PathVariable Integer playerId){
+        return ResponseEntity.status(200).body(subscribeByService.getSubscribedByPlayerId(playerId));
+}
+
+
+
+
 }

@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
 import org.twspring.noob.Model.Game;
+import org.twspring.noob.Model.PC;
 import org.twspring.noob.Repository.GameRepository;
+import org.twspring.noob.Repository.PcRepository;
 
 import java.util.List;
 
@@ -12,14 +14,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GameService {
     private final GameRepository gameRepository;
-
+private final PcRepository pcRepository;
 
     public List<Game> getAllGame() {
         return gameRepository.findAll();
     }
 
 
-    public void addGame(Game game) {
+    public void addGame(Game game,Integer pcId) {
+        PC pc= pcRepository.findPCById(pcId);
+        if(pc==null) {
+            throw new ApiException("PC not found");
+        }
         gameRepository.save(game);
 
     }
@@ -41,4 +47,8 @@ game1.setGameName(game.getGameName());
         }
         gameRepository.delete(game);
     }
+
+
+
+
 }

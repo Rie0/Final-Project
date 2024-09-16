@@ -19,9 +19,9 @@ public class PcController {
         return ResponseEntity.status(200).body(pcService.getAllPc());
     }
 
-    @PostMapping("add-pc")
-    public ResponseEntity addPc(@Valid @RequestBody PC pc) {
-        pcService.addPc(pc);
+    @PostMapping("add-pc/{pcCenterID}/{vendorId}")
+    public ResponseEntity addPc(@PathVariable Integer pcCenterID,@PathVariable Integer vendorId ,@Valid @RequestBody PC pc) {
+        pcService.addPc(pc,vendorId,pcCenterID);
         return ResponseEntity.status(200).body("pc added successfully");
 
     }

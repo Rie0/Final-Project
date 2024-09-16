@@ -32,7 +32,7 @@ public class PcCentresService {
             throw new ApiException("Vendor with ID " + vendorID + " not found");
         }
 
-        pcCentres.setVendor(vendor);
+
         pcCentresRepository.save(pcCentres);
 
     }
@@ -61,14 +61,14 @@ public class PcCentresService {
     }
 
     public List<PcCentres>getPcCentresByVendorID(Integer vendorId) {
+Vendor vendor=vendorRepository.findVendorById(vendorId);
+if (vendor==null){
+    throw new ApiException("Vendor with ID " + vendorId + " not found");
+}
+if (vendor.getPcCentres()==null){
+    throw new ApiException("PC Centres not found");
+}
 
-        PcCentres pcCentres=pcCentresRepository.findPcCentreById(vendorId);
-        if (pcCentres == null) {
-            throw new ApiException("PC Centres not found");
-        }
-        if (vendorId == null) {
-            throw new ApiException("Vendor ID not found");
-        }
         return pcCentresRepository.getPcCentresByVendorId(vendorId);
 
     }
@@ -98,7 +98,28 @@ public class PcCentresService {
     ///=============
 
     public List<PcCentres>getPcCentresByRating(Integer rating){
-
+if (rating == null) {
+    throw new ApiException("Rating not found");
+}
         return pcCentresRepository.findPcCentresByRating(rating);
+    }
+
+    public List<PcCentres> getPcCentresByRatingRange(int minRating, int maxRating) {
+        return pcCentresRepository.findByRatingBetween(minRating, maxRating);
+    }
+
+    public PcCentres getPcCentreByCentreName(String centreName) {
+        PcCentres pcCentres = pcCentresRepository.findPcCentresByCentreName(centreName);
+        if (pcCentres == null) {
+            throw new ApiException("PC Centre not found");
+        }
+        return pcCentres;
+    }
+
+    public List<PcCentres>getPcCentreByLocation(String location) {
+        if (location == null) {
+        throw new ApiException("Location not found");
+        }
+        return pcCentresRepository.findPcCentresByLocation(location);
     }
 }

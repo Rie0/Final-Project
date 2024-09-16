@@ -14,7 +14,7 @@ public class AdminService {
 
     //ADMIN
     public void createAdmin(User user) {
-        user.setRole("USER");
+        user.setRole("ADMIN");
         authRepository.save(user);
     }
 }

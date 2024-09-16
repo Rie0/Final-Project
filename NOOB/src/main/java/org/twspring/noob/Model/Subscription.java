@@ -3,11 +3,13 @@ package org.twspring.noob.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -24,15 +26,16 @@ public class Subscription {
     @NotEmpty(message = "Subscription Tie   can not be empty")
     @Column(columnDefinition = "varchar(30) not null")
     private String subscriptionTie;
-    @NotEmpty(message = "price can not be empty")
+    @NotNull(message = "price can not be empty")
     @Column(columnDefinition = "int not null")
     private double price;
-    @NotEmpty(message = "Subscription Hours can not be empty")
+    @NotNull(message = "Subscription Hours can not be empty")
     @Column(columnDefinition = "int not null")
     private int subscriptionHours;
-    @NotEmpty(message = "members can not be empty")
+    @NotNull(message = "members can not be empty")
     @Column(columnDefinition = "int not null")
 private int members;
+private Date subscriptionDate;
 
 
 
@@ -42,5 +45,9 @@ private int members;
     @ManyToOne
     @JsonIgnore
     private PcCentres pcCentres;
+
+
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "subscription")
+    private Set<Zone> zones;
 
 }

@@ -4,8 +4,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
 import org.twspring.noob.Model.PC;
+import org.twspring.noob.Model.PcCentres;
+import org.twspring.noob.Model.Vendor;
 import org.twspring.noob.Repository.AuthRepository;
+import org.twspring.noob.Repository.PcCentresRepository;
 import org.twspring.noob.Repository.PcRepository;
+import org.twspring.noob.Repository.VendorRepository;
 
 import java.util.List;
 
@@ -16,15 +20,27 @@ public class PcService {
 
     private final PcRepository pcRepository;
     private final AuthRepository authRepository;
-
+private final VendorRepository vendorRepository;
+private final PcCentresRepository pcCentresRepository;
 
     public List<PC> getAllPc() {
         return pcRepository.findAll();
     }
 
 
-    public void addPc(PC pc) {
-        pcRepository.save(pc);
+    public void addPc(PC pc,Integer pcCenterId,Integer vendorId) {
+        Vendor vendor=vendorRepository.findVendorById(vendorId);
+        PcCentres pcCentres=pcCentresRepository.findPcCentreById(pcCenterId);
+        if(pcCentres==null) {
+            throw new ApiException("Pc Centre Not Found");
+        }
+        if(vendor==null) {
+            throw new ApiException("Vendor Not Found");
+        }
+//        if (vendor.getId()!=pcCentres.getId()) {
+//            throw new ApiException("Vendor Id Not Match");
+//        }
+
 
     }
 

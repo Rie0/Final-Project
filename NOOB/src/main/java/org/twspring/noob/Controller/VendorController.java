@@ -37,6 +37,7 @@ public class VendorController {
         vendorService.deleteVendor(vendorId);
         return ResponseEntity.status(200).body(new ApiResponse("Vendor deleted successfully"));
     }
+    /////
     @GetMapping("/get-vendorbyid/{vendorId}")
     public ResponseEntity getVendor(@PathVariable Integer vendorId){
         return ResponseEntity.status(200).body(vendorService.getVendorById(vendorId));

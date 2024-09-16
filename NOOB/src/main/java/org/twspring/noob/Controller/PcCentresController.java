@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import org.twspring.noob.Model.PcCentres;
 import org.twspring.noob.Service.PcCentresService;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/pc-centre")
 @RequiredArgsConstructor
@@ -36,17 +38,46 @@ public class PcCentresController {
         return ResponseEntity.status(200).body("PC Centres deleted successfully");
     }
 
-
+/////
     @GetMapping("/get-pcCentre-by-Vendor/{vendorId}")
     public ResponseEntity getPcCentreByVendor(@PathVariable Integer vendorId){
         return ResponseEntity.status(200).body(pcCentresService.getPcCentresByVendorID(vendorId));
     }
 
-
+/////
     @PostMapping("/admin-Aproved-pcCenter/{adminId}/{PcCenterId}")
     public ResponseEntity approvedPcCenter(@PathVariable Integer adminId, @PathVariable Integer PcCenterId) {
         pcCentresService.adminAprovedPcCenter(adminId,PcCenterId);
         return ResponseEntity.status(200).body("approved PC Center successfully");
     }
+
+/////
+    @GetMapping("/ratings/{rating}")
+    public ResponseEntity getRatings(@PathVariable Integer rating){
+        return ResponseEntity.status(200).body(pcCentresService.getPcCentresByRating(rating));
+
+
+
+    }
+
+//////
+    @GetMapping("/ratings/{minRating}/{maxRating}")
+    public List<PcCentres> getPcCentresByRatingRange(@PathVariable int minRating, @PathVariable int maxRating) {
+        return pcCentresService.getPcCentresByRatingRange(minRating, maxRating);
+    }
+
+    ///
+
+    @GetMapping("/get-pc-centre-by-name/{name}")
+    public ResponseEntity getPcCentreByName(@PathVariable String name){
+        return ResponseEntity.status(200).body(pcCentresService.getPcCentreByCentreName(name));
+    }
+
+    @GetMapping("/get-pcCentre/by/location/{location}")
+    public ResponseEntity getPcCentreByLocation(String location){
+        return ResponseEntity.status(200).body(pcCentresService.getPcCentreByLocation(location));
+
+    }
+
 
 }

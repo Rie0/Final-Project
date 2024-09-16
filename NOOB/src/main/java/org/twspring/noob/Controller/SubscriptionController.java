@@ -1,6 +1,7 @@
 package org.twspring.noob.Controller;
 
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,6 +39,13 @@ public class SubscriptionController {
         subscriptionService.deleteSubscription(id);
         return ResponseEntity.status(200).body("subscription deleted successfully");
     }
+
+    /////
+@PostMapping("/supscripe/{playerId}/{SubscrptionId}/{zoneId}")
+    public ResponseEntity supscribe(@PathVariable Integer playerId,@PathVariable Integer SubscrptionId,@PathVariable Integer zoneId){
+        subscriptionService.subscribePlayerToSubscription(playerId,SubscrptionId,zoneId);
+        return ResponseEntity.status(200).body("subscription added successfully");
+}
 
 
 }

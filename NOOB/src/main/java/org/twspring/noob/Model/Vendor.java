@@ -21,9 +21,10 @@ public class Vendor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-//    @NotEmpty(message = "Zone Capacity   can not be empty")
-//    @Column(columnDefinition = "int not null")
+    @NotEmpty(message = "Venue Name    can not be empty")
+    @Column(columnDefinition = "varchar(30) not null")
     private String VenueName;
+
 
     @OneToOne
     @MapsId

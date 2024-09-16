@@ -54,5 +54,11 @@ public class Player {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     private Set<TeamInvite> teamInvites;
 
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
+    private Set<SubscripeBy> subscripeBIES;
+
+
+
     //GAMES
 }

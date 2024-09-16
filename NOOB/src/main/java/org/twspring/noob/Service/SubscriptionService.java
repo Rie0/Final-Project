@@ -18,7 +18,8 @@ public class SubscriptionService {
     private final PlayerRepository playerRepository;
     private final AuthRepository authRepository;
     private final SubscribeByRepository subscribeByRepository;
-
+private final  VendorRepository vendorRepository;
+private final ZoneRepository zoneRepository;
 
     public List<Subscription> getAllsubscription() {
         return subscriptionRepository.findAll();
@@ -59,46 +60,41 @@ subscriptionRepository.save(subscription1);    }
         }
         return subscriptionRepository.findSubscriptionByPcCentresId(pcCentreId);
     }
-//
-//    public void PlayerSubscribe(Integer subscriptionId, Integer playerId) {
-//        User user = authRepository.findUserById(playerId);
-//        if (!user.getRole().equals("PLAYER")) {
-//            throw new ApiException("Only players can be subscribe");
-//        }
-//        Subscription subscription = subscriptionRepository.findSubscriptionById(subscriptionId);
-//        if (subscription == null) {
-//            throw new ApiException("subscription not found");
-//        }
-//
-//
-//
-//    }
 
 
-    public void subscribePlayer(Integer playerId, Integer subscriptionId) {
+
+    public void subscribePlayerToSubscription(Integer playerId, Integer subscriptionId,Integer zoneId) {
+
         Player player = playerRepository.findPlayerById(playerId);
         if (player == null) {
             throw new ApiException("player not found");
         }
+
+        Zone zone=zoneRepository.findZoneById(zoneId);
+        if (zone == null) {
+            throw new ApiException("zone not found");
+        }
+
+
+
+
         Subscription subscription = subscriptionRepository.findSubscriptionById(subscriptionId);
-               if (subscription == null) {
-                   throw new ApiException("subscription not found");
-               }
+        if (subscription == null) {
+            throw new ApiException("subscription not found");
+        }
+
+
+
+
 
         SubscripeBy subscripeBy = new SubscripeBy();
-        subscripeBy.setStartDate(new Date());
-        subscripeBy.setEndDate(calculateEndDate(subscription.getSubscriptionHours()));
-        subscripeBy.setStatus(true);
-        subscripeBy.setRemainingHours(subscription.getSubscriptionHours());
+        subscripeBy.setPlayer(player);
         subscripeBy.setSubscription(subscription);
+        subscripeBy.setStartDate(new Date());
+        subscripeBy.setRemainingHours(subscription.getSubscriptionHours());
+        subscripeBy.setStatus(true);
 
         subscribeByRepository.save(subscripeBy);
     }
 
-    private Date calculateEndDate(int subscriptionHours) {
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR, subscriptionHours); // Assuming subscription hours refers to actual hours
-        return calendar.getTime();
-    }
 }

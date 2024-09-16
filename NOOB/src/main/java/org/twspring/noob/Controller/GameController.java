@@ -18,10 +18,10 @@ public class GameController {
     public ResponseEntity getAllPc(){
         return ResponseEntity.status(200).body(gameService.getAllGame());
     }
-
-    @PostMapping("add-game")
-    public ResponseEntity addGame(@Valid @RequestBody Game game){
-        gameService.addGame(game);
+////
+    @PostMapping("add-game/{pcId}")
+    public ResponseEntity addGame(@PathVariable Integer pcId,@Valid @RequestBody Game game){
+        gameService.addGame(game,pcId);
         return ResponseEntity.status(200).body("game added successfully");
 
     }
