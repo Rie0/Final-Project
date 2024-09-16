@@ -4,33 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b947b4ef-297e-4c50-811c-9161e0997d87" name="Changes" comment="changes">
+    <list default="true" id="a9644da5-5f07-4fbf-aece-32244b4e84b4" name="Changes" comment="changes">
+      <change afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Config/ConfigSecurity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/MyUserDetailsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/MatchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/MatchController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Match.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Participant.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Participant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/MatchRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/MatchRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/LeagueService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/LeagueService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/MatchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/MatchService.java" afterDir="false" />
-
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/MatchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/MatchController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/TournamentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/TournamentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Match.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Organizer.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Organizer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Participant.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Participant.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Tournament.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Tournament.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/MatchRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/MatchRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/ParticipantRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/ParticipantRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/RoundRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/RoundRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/TournamentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/TournamentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/MatchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/MatchService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/ParticipantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/ParticipantService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/TournamentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/TournamentService.java" afterDir="false" />
-
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,12 +38,12 @@
     &quot;assignee&quot;: &quot;HussamMohammed7&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Rie0/Final-Project",
-    "accountId": "d65f7d57-37c1-4f96-a452-80e67abc9340"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Rie0/Final-Project&quot;,
+    &quot;accountId&quot;: &quot;d65f7d57-37c1-4f96-a452-80e67abc9340&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -85,10 +64,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "Spring Boot.NoobApplication.executor": "Run",
     "com.codeium.enabled": "true",
-    "com.google.cloudcode.ide_session_index": "20240911_0000",
-    "git-widget-placeholder": "Rafeef",
     "com.google.cloudcode.ide_session_index": "20240915_0001",
-    "git-widget-placeholder": "Hussam",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Rafeef/IdeaProjects/Exercise-Repository",
     "node.js.detected.package.eslint": "true",
@@ -110,14 +87,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
-        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
