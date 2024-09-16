@@ -34,15 +34,31 @@ public class ConfigSecurity {
                 .and() //Authorization
                 .authenticationProvider(daoAuthenticationProvider())
                 .authorizeHttpRequests()
-                .requestMatchers("/api/v1/**").permitAll()
+                .requestMatchers(
+
+                        //player
+                        "/api/v1/player/get-all",
+                        "/api/v1/player/register",
+                        "/api/v1/player/get/{playerId}"
+                        ).permitAll()
                 //COACH
                 //.requestMatchers().hasAuthority("COACH")
-                //OEGANIZER
+                //ORGANIZER
                 //.requestMatchers().hasAuthority("ORGANIZER")
                 //PLAYER
-                //.requestMatchers().hasAuthority("PLAYER")
+                .requestMatchers(
+                        "/api/v1/player/{playerId}/update-my-info",
+                        "/api/v1/player/{playerId}/edit-bio",
+                        "/api/v1/player/{playerId}/delete-my-account",
+                        "/api/v1/player/{playerId}/invites/get-invites",
+                        "/api/v1/player/{playerId}/invites/{inviteId}/accept",
+                        "/api/v1/player/{playerId}/invites/{inviteId}/decline",
+                        "/api/v1/player/{playerId}/team/leave"
+                ).hasAuthority("PLAYER")
                 //ADMIN
-                //.requestMatchers().hasAuthority("ADMIN"")
+                //.requestMatchers().hasAuthority("ADMIN")
+                //TEAM
+                //.requestMatchers().hasAuthority("TEAM")
                 .and()
                 .logout().logoutUrl("/api/v1/auth/logout").logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID")

@@ -3,9 +3,11 @@ package org.twspring.noob.Controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.twspring.noob.Api.ApiResponse;
 import org.twspring.noob.DTO.PlayerDTO;
+import org.twspring.noob.Model.User;
 import org.twspring.noob.Service.PlayerService;
 
 @RestController
@@ -25,13 +27,13 @@ public class PlayerController {
         return ResponseEntity.status(200).body(new ApiResponse("Player registered successfully"));
     }
     @PutMapping("/{playerId}/update-my-info")
-    public ResponseEntity updateMyInfo(@PathVariable Integer playerId, @RequestBody@Valid  PlayerDTO playerDTO){
-        playerService.updatePlayer(playerId, playerDTO);
+    public ResponseEntity updateMyInfo(@AuthenticationPrincipal User player, @RequestBody@Valid  PlayerDTO playerDTO){
+        playerService.updatePlayer(player.getId(), playerDTO);
         return ResponseEntity.status(200).body(new ApiResponse("Player updated successfully"));
     }
     @DeleteMapping("/{playerId}/delete-my-account")
-    public ResponseEntity deleteMyAccount(@PathVariable Integer playerId){
-        playerService.deletePlayer(playerId);
+    public ResponseEntity deleteMyAccount(@AuthenticationPrincipal User player){
+        playerService.deletePlayer(player.getId());
         return ResponseEntity.status(200).body(new ApiResponse("Player deleted successfully"));
     }
 
@@ -43,31 +45,31 @@ public class PlayerController {
     }
 
     @PutMapping("/{playerId}/edit-bio")
-    public ResponseEntity editBio(@PathVariable Integer playerId, @RequestBody String bio){
-        playerService.updateBio(playerId, bio);
+    public ResponseEntity editBio(@AuthenticationPrincipal User player, @RequestBody String bio){
+        playerService.updateBio(player.getId(), bio);
         return ResponseEntity.status(200).body(new ApiResponse("Player bio updated successfully"));
     }
 
     @GetMapping("/{playerId}/invites/get-invites")
-    public ResponseEntity getInvites(@PathVariable Integer playerId){
-        return ResponseEntity.status(200).body(playerService.getInvitesByPlayerId(playerId));
+    public ResponseEntity getInvites(@AuthenticationPrincipal User player){
+        return ResponseEntity.status(200).body(playerService.getInvitesByPlayerId(player.getId()));
     }
 
     @PutMapping("/{playerId}/invites/{inviteId}/accept")
-    public ResponseEntity acceptInvite(@PathVariable Integer playerId, @PathVariable Integer inviteId){
-        playerService.acceptInvite(playerId, inviteId);
+    public ResponseEntity acceptInvite(@AuthenticationPrincipal User player, @PathVariable Integer inviteId){
+        playerService.acceptInvite(player.getId(), inviteId);
         return ResponseEntity.status(200).body(new ApiResponse("Invite accepted successfully, you're now a member of the team"));
     }
 
     @PutMapping("/{playerId}/invites/{inviteId}/decline")
-    public ResponseEntity declineInvite(@PathVariable Integer playerId, @PathVariable Integer inviteId) {
-        playerService.declineInvite(playerId, inviteId);
+    public ResponseEntity declineInvite(@AuthenticationPrincipal User player, @PathVariable Integer inviteId) {
+        playerService.declineInvite(player.getId(), inviteId);
         return ResponseEntity.status(200).body(new ApiResponse("Invite declined successfully"));
     }
 
     @PutMapping("/{playerId}/team/leave")
-    public ResponseEntity leaveTeam(@PathVariable Integer playerId){
-        playerService.leaveTeam(playerId);
+    public ResponseEntity leaveTeam(@AuthenticationPrincipal User player){
+        playerService.leaveTeam(player.getId());
         return ResponseEntity.status(200).body(new ApiResponse("You left the team successfully"));
     }
 

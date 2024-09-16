@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
+import org.twspring.noob.DTO.ProfileDTO;
 import org.twspring.noob.DTO.TeamDTO;
 import org.twspring.noob.DTO.TeamInviteDTO;
 import org.twspring.noob.Model.Player;
@@ -80,6 +81,14 @@ public class TeamService {
             throw new ApiException("Team not found");
         }
         return team;
+    }
+
+    public ProfileDTO getTeamProfile(Integer teamId){
+        Team team = getTeamById(teamId);
+        if(team == null) {
+            throw new ApiException("Team not found");
+        }
+        return new ProfileDTO(team.getUser().getUsername(),team.getBio());
     }
 
     public List<Player> getPlayersByTeamId(Integer teamId) {

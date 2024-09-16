@@ -35,6 +35,11 @@ public class Player {
     @Size(max = 150, message = "Bio must have between 0 to 150 characters")
     private String bio ="";//bio can be empty.
 
+
+    @Column(columnDefinition = "VARCHAR(150)") //only for minors (under 18)
+    @Size(max = 150, message = "parent approval must have between 20 to 150 characters")
+    private String parentApproval;
+
     //RELATIONSHIP RELATED VARS
 
     //for team

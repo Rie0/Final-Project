@@ -6,10 +6,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
 import org.twspring.noob.DTO.PlayerDTO;
-import org.twspring.noob.Model.Player;
-import org.twspring.noob.Model.Team;
-import org.twspring.noob.Model.TeamInvite;
-import org.twspring.noob.Model.User;
+import org.twspring.noob.DTO.PlayerProfileDTO;
+import org.twspring.noob.Model.*;
 import org.twspring.noob.Repository.AuthRepository;
 import org.twspring.noob.Repository.PlayerRepository;
 import org.twspring.noob.Repository.TeamInviteRepository;
@@ -72,6 +70,14 @@ public class PlayerService {
         Player player = playerRepository.findPlayerById(playerId);
         if (player == null) {throw new ApiException("Player not found");}
         return player;
+    }
+
+    public PlayerProfileDTO getPlayerProfile(Integer playerId) {
+        Player player= playerRepository.findPlayerById(playerId);
+        if (player == null) {
+            throw new ApiException("Player not found");
+        }
+        return new PlayerProfileDTO(player.getUser().getUsername(),player.getUser().getAge(),player.getBio(),player.getTeam().getUser().getUsername());
     }
 
     public void updateBio(Integer playerId, String bio) {
