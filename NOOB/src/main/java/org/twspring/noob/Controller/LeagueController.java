@@ -1,8 +1,10 @@
 package org.twspring.noob.Controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.twspring.noob.DTO.DateDTO;
 import org.twspring.noob.DTO.DateTimeDTO;
 import org.twspring.noob.Model.League;
+import org.twspring.noob.Model.User;
 import org.twspring.noob.Service.LeagueService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,15 +25,16 @@ public class LeagueController {
         return ResponseEntity.status(200).body(leagueService.getLeagues());
     }
 
-    @PostMapping("/organizer/{organizerId}/add")
-    public ResponseEntity addLeague(@PathVariable Integer organizerId,
+    @PostMapping("/create-new")
+    public ResponseEntity addLeague(@AuthenticationPrincipal User organizer,
                                     @Valid @RequestBody League league) {
-        leagueService.createLeague(organizerId, league);
+        leagueService.createLeague(organizer.getId(), league);
         return ResponseEntity.status(200).body("League added successfully");
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity updateLeague(@Valid @RequestBody League league, @PathVariable Integer id) {
+    public ResponseEntity updateLeague(@PathVariable Integer id,
+                                       @Valid @RequestBody League league) {
         leagueService.updateLeague(id, league);
         return ResponseEntity.status(200).body("League updated successfully");
     }
