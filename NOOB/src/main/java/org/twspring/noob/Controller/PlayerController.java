@@ -26,12 +26,12 @@ public class PlayerController {
         playerService.registerPlayer(playerDTO);
         return ResponseEntity.status(200).body(new ApiResponse("Player registered successfully"));
     }
-    @PutMapping("/{playerId}/update-my-info")
+    @PutMapping("update-my-info")
     public ResponseEntity updateMyInfo(@AuthenticationPrincipal User player, @RequestBody@Valid  PlayerDTO playerDTO){
         playerService.updatePlayer(player.getId(), playerDTO);
         return ResponseEntity.status(200).body(new ApiResponse("Player updated successfully"));
     }
-    @DeleteMapping("/{playerId}/delete-my-account")
+    @DeleteMapping("delete-my-account")
     public ResponseEntity deleteMyAccount(@AuthenticationPrincipal User player){
         playerService.deletePlayer(player.getId());
         return ResponseEntity.status(200).body(new ApiResponse("Player deleted successfully"));
@@ -44,30 +44,30 @@ public class PlayerController {
         return ResponseEntity.status(200).body(playerService.getPlayerById(playerId));
     }
 
-    @PutMapping("/{playerId}/edit-bio")
+    @PutMapping("/edit-bio")
     public ResponseEntity editBio(@AuthenticationPrincipal User player, @RequestBody String bio){
         playerService.updateBio(player.getId(), bio);
         return ResponseEntity.status(200).body(new ApiResponse("Player bio updated successfully"));
     }
 
-    @GetMapping("/{playerId}/invites/get-invites")
+    @GetMapping("/invites/get-invites")
     public ResponseEntity getInvites(@AuthenticationPrincipal User player){
         return ResponseEntity.status(200).body(playerService.getInvitesByPlayerId(player.getId()));
     }
 
-    @PutMapping("/{playerId}/invites/{inviteId}/accept")
+    @PutMapping("/invites/{inviteId}/accept")
     public ResponseEntity acceptInvite(@AuthenticationPrincipal User player, @PathVariable Integer inviteId){
         playerService.acceptInvite(player.getId(), inviteId);
         return ResponseEntity.status(200).body(new ApiResponse("Invite accepted successfully, you're now a member of the team"));
     }
 
-    @PutMapping("/{playerId}/invites/{inviteId}/decline")
+    @PutMapping("/invites/{inviteId}/decline")
     public ResponseEntity declineInvite(@AuthenticationPrincipal User player, @PathVariable Integer inviteId) {
         playerService.declineInvite(player.getId(), inviteId);
         return ResponseEntity.status(200).body(new ApiResponse("Invite declined successfully"));
     }
 
-    @PutMapping("/{playerId}/team/leave")
+    @PutMapping("/team/leave")
     public ResponseEntity leaveTeam(@AuthenticationPrincipal User player){
         playerService.leaveTeam(player.getId());
         return ResponseEntity.status(200).body(new ApiResponse("You left the team successfully"));

@@ -25,11 +25,10 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotEmpty(message = "Bio cannot be empty")
-    @NotBlank(message = "Bio cannot be blank")
     @Column(columnDefinition = "VARCHAR(150) NOT NULL")
-    @Size(min= 2, max = 150, message = "Bio must have between 2 to 150 characters")
-    private String bio;
+    @NotNull(message = "bio cannot be null")
+    @Size(max = 150, message = "Bio must have between 0 to 150 characters")
+    private String bio ="";//bio can be empty.
 
     @NotNull(message = "Winnings must not be null")
     @Column(columnDefinition = "DOUBLE NOT NULL DEFAULT 0")

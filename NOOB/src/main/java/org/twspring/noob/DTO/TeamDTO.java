@@ -42,6 +42,4 @@ public class TeamDTO {
     @CreationTimestamp
     private final LocalDateTime joinedAt = LocalDateTime.now();
 
-
-
 }

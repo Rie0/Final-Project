@@ -23,7 +23,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class TeamService {
+public class TeamService { //RAFEEF
 
     private final TeamRepository teamRepository;
     private final AuthRepository authRepository;
@@ -42,17 +42,17 @@ public class TeamService {
         user.setPassword(hash);
         user.setEmail(teamDTO.getEmail());
         user.setPhoneNumber(teamDTO.getPhoneNumber());
-        user.setRole("TEAM");
         user.setBirthday(teamDTO.getBirthday());
         user.setAge(Period.between(user.getBirthday(), LocalDate.now()).getYears());
         if (user.getAge()<13){
             throw new ApiException("Players under the age of 13 are prohibited from registering in our system");
         }
+        user.setRole("TEAM");
         authRepository.save(user);
 
         Team team = new Team();
-        team.setWinnings(0.0);
         team.setUser(user);
+        team.setWinnings(0.0);
         teamRepository.save(team);
     }
 

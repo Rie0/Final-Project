@@ -35,11 +35,14 @@ public class ConfigSecurity {
                 .authenticationProvider(daoAuthenticationProvider())
                 .authorizeHttpRequests()
                 .requestMatchers(
-
                         //player
                         "/api/v1/player/get-all",
                         "/api/v1/player/register",
-                        "/api/v1/player/get/{playerId}"
+                        "/api/v1/player/get/{playerId}",
+                        //team
+                        "/api/v1/team/get-all",
+                        "/api/v1/team/register",
+                        "/api/v1/team/get/{teamId}"
                         ).permitAll()
                 //COACH
                 //.requestMatchers().hasAuthority("COACH")
@@ -47,18 +50,26 @@ public class ConfigSecurity {
                 //.requestMatchers().hasAuthority("ORGANIZER")
                 //PLAYER
                 .requestMatchers(
-                        "/api/v1/player/{playerId}/update-my-info",
-                        "/api/v1/player/{playerId}/edit-bio",
-                        "/api/v1/player/{playerId}/delete-my-account",
-                        "/api/v1/player/{playerId}/invites/get-invites",
-                        "/api/v1/player/{playerId}/invites/{inviteId}/accept",
-                        "/api/v1/player/{playerId}/invites/{inviteId}/decline",
-                        "/api/v1/player/{playerId}/team/leave"
+                        "/api/v1/player/update-my-info",
+                        "/api/v1/player/edit-bio",
+                        "/api/v1/player/delete-my-account",
+                        "/api/v1/player/invites/get-invites",
+                        "/api/v1/player/invites/{inviteId}/accept",
+                        "/api/v1/player/invites/{inviteId}/decline",
+                        "/api/v1/player/team/leave"
                 ).hasAuthority("PLAYER")
                 //ADMIN
                 //.requestMatchers().hasAuthority("ADMIN")
                 //TEAM
-                //.requestMatchers().hasAuthority("TEAM")
+                .requestMatchers(
+                        "/api/v1/team/update-my-info",
+                        "/api/v1/team/delete-my-account",
+                        "/api/v1/team/players/get-all",
+                        "/api/v1/team/invites/get-invites",
+                        "/api/v1/team/invites/invite/{PlayerUsername}",
+                        "/api/v1/team/invite-multiple-players",
+                        "/api/v1/team/invites/{inviteId}/delete"
+                ).hasAuthority("TEAM")
                 .and()
                 .logout().logoutUrl("/api/v1/auth/logout").logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID")

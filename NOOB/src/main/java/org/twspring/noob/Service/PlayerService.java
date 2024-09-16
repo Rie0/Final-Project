@@ -13,6 +13,7 @@ import org.twspring.noob.Repository.PlayerRepository;
 import org.twspring.noob.Repository.TeamInviteRepository;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
 
@@ -113,6 +114,7 @@ public class PlayerService {
 
         //ADD PLAYER TO TEAM
         player.setTeam(invite.getTeam());
+        player.setJoinedTeamAt(LocalDateTime.now());
         playerRepository.save(player);
     }
 
@@ -141,6 +143,7 @@ public class PlayerService {
             throw new ApiException("You are not in a team");
         }
         player.setTeam(null);
+        player.setJoinedTeamAt(null);
         playerRepository.save(player);
     }
 }

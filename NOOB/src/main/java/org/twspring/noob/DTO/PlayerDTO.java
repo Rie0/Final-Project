@@ -1,7 +1,6 @@
 package org.twspring.noob.DTO;
 
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

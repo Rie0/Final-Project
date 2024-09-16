@@ -22,7 +22,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Player {
+public class Player { //Rafeef
 
     //VARIABLES
 
@@ -43,28 +43,28 @@ public class Player {
     //RELATIONSHIP RELATED VARS
 
     //for team
-    @CreationTimestamp
-    @Column(columnDefinition = "timestamp default current_timestamp")
+    @Column(columnDefinition = "DATE")
     private LocalDateTime JoinedTeamAt;
 
 
     //RELATIONSHIPS
+    //Rafeef
     @OneToOne
     @MapsId
     private User user;
 
+
+    //Rafeef
     @ManyToOne
     @JsonIgnore
     private Team team;
 
+    //Rafeef
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
+    @JsonIgnore
     private Set<TeamInvite> teamInvites;
 
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     private Set<SubscripeBy> subscripeBIES;
-
-
-
-    //GAMES
 }
