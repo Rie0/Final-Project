@@ -1,6 +1,6 @@
 package org.twspring.noob.DTO;
 
-
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-public class TeamDTO {
+public class OrganizerDTO {
 
     @NotEmpty(message = "Username cannot be empty")
     @Size(min=4,max = 10,
@@ -35,13 +35,25 @@ public class TeamDTO {
             message = "Phone number must be a valid Saudi phone number")
     private String phoneNumber;
 
+    @NotEmpty(message = "Name cannot be empty")
+    @Column(columnDefinition = "VARCHAR(100) NOT NULL")
+    @Size(min = 2, max = 100, message = "Name must have between 2 to 100 characters")
+    private String name; // Name of the organizer
+
     @Past(message = "Birthdate cannot be in the past")
     @NotNull(message = "Birthday cannot be null")
-    private LocalDate birthday; //of the player using this team account
+    private LocalDate birthday;
+
+    @NotEmpty(message = "Contact information cannot be empty")
+    @Column(columnDefinition = "VARCHAR(255) NOT NULL")
+    private String contactInfo; // Contact information (email, phone, etc.)
+
+    @NotEmpty(message = "Organization name cannot be empty")
+    @Column(columnDefinition = "VARCHAR(100) NOT NULL")
+    @Size(min = 2, max = 100, message = "Organization name must have between 2 to 100 characters")
+    private String organizationName; // Name of the organization
 
     @CreationTimestamp
     private final LocalDateTime joinedAt = LocalDateTime.now();
-
-
 
 }

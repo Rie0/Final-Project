@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -34,6 +35,10 @@ public class VendotDTO {
     @Pattern(regexp = "^\\+9665\\d{8}$",
             message = "Phone number must be a valid Saudi phone number")
     private String phoneNumber;
+
+    @Past(message = "Birthdate cannot be in the past")
+    @NotNull(message = "Birthday cannot be null")
+    private LocalDate birthday;
 
     @CreationTimestamp
     private final LocalDateTime joinedAt = LocalDateTime.now();

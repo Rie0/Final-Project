@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,11 +30,10 @@ public class Player {
     @Id
     private Integer id;
 
-    @NotEmpty(message = "Bio cannot be empty")
-    @NotBlank(message = "Bio cannot be blank")
     @Column(columnDefinition = "VARCHAR(150) NOT NULL")
-    @Size(min= 25, max = 150, message = "Bio must have between 25 to 150 characters")
-    private String bio;
+    @NotNull(message = "bio cannot be null")
+    @Size(max = 150, message = "Bio must have between 0 to 150 characters")
+    private String bio ="";//bio can be empty.
 
     //RELATIONSHIP RELATED VARS
 

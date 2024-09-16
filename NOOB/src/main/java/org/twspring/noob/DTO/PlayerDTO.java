@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -35,12 +36,11 @@ public class PlayerDTO {
             message = "Phone number must be a valid Saudi phone number")
     private String phoneNumber;
 
+    @Past(message = "Birthdate cannot be in the past")
+    @NotNull(message = "Birthday cannot be null")
+    private LocalDate birthday;
+
     @CreationTimestamp
     private final LocalDateTime joinedAt = LocalDateTime.now();
-
-    @NotEmpty(message = "Bio cannot be empty")
-    @NotBlank(message = "Bio cannot be blank")
-    @Size(min= 25, max = 150, message = "Bio must have between 25 to 150 characters")
-    private String bio;
 
 }

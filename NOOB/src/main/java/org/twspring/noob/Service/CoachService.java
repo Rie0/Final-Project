@@ -56,4 +56,9 @@ public class CoachService {
         return coach;
     }
 
+    public void updateBio(Integer id, String bio) {
+        Coach coach = coachRepository.findCoachById(id);
+        coach.setBio(bio);
+    }
+
 }

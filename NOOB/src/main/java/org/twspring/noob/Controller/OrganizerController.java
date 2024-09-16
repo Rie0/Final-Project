@@ -1,6 +1,9 @@
 package org.twspring.noob.Controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.twspring.noob.DTO.OrganizerDTO;
 import org.twspring.noob.Model.Organizer;
+import org.twspring.noob.Model.User;
 import org.twspring.noob.Service.OrganizerService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,25 +19,26 @@ public class OrganizerController {
     private final OrganizerService organizerService;
 
     @GetMapping("/get")
-    public ResponseEntity getOrganizers() {
+    public ResponseEntity getOrganizers( @AuthenticationPrincipal User user) {
         return ResponseEntity.status(HttpStatus.OK).body(organizerService.getOrganizers());
     }
 
     @PostMapping("/add")
-    public ResponseEntity addOrganizer(@Valid @RequestBody Organizer organizer) {
-        organizerService.saveOrganizer(organizer);
+    public ResponseEntity addOrganizer( @Valid @RequestBody OrganizerDTO organizer) {
+        organizerService.registerOrganizer(organizer);
         return ResponseEntity.status(HttpStatus.OK).body("Organizer added successfully");
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity updateOrganizer(@Valid @RequestBody Organizer organizer, @PathVariable Integer id) {
-        organizerService.updateOrganizer(id, organizer);
+    public ResponseEntity updateOrganizer(@Valid @RequestBody OrganizerDTO organizer,
+                                          @AuthenticationPrincipal User user ) {
+        organizerService.updateOrganizer(user.getId(), organizer);
         return ResponseEntity.status(HttpStatus.OK).body("Organizer updated successfully");
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity deleteOrganizer(@PathVariable Integer id) {
-        organizerService.deleteOrganizer(id);
+    public ResponseEntity deleteOrganizer(@AuthenticationPrincipal User user) {
+        organizerService.deleteOrganizer(user.getId());
         return ResponseEntity.status(HttpStatus.OK).body("Organizer deleted successfully");
     }
 }

@@ -2,6 +2,7 @@ package org.twspring.noob.Service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
 import org.twspring.noob.DTO.TeamDTO;
@@ -15,6 +16,8 @@ import org.twspring.noob.Repository.PlayerRepository;
 import org.twspring.noob.Repository.TeamInviteRepository;
 import org.twspring.noob.Repository.TeamRepository;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @Service
@@ -32,17 +35,21 @@ public class TeamService {
     }
 
     public void registerTeam(TeamDTO teamDTO) {
-        //String hash= new BCryptPasswordEncoder().encode(customerDTO.getPassword());
+        String hash= new BCryptPasswordEncoder().encode(teamDTO.getPassword());
         User user = new User();
         user.setUsername(teamDTO.getUsername());
-        user.setPassword(teamDTO.getPassword());
+        user.setPassword(hash);
         user.setEmail(teamDTO.getEmail());
         user.setPhoneNumber(teamDTO.getPhoneNumber());
         user.setRole("TEAM");
+        user.setBirthday(teamDTO.getBirthday());
+        user.setAge(Period.between(user.getBirthday(), LocalDate.now()).getYears());
+        if (user.getAge()<13){
+            throw new ApiException("Players under the age of 13 are prohibited from registering in our system");
+        }
         authRepository.save(user);
 
         Team team = new Team();
-        team.setBio(teamDTO.getBio());
         team.setWinnings(0.0);
         team.setUser(user);
         teamRepository.save(team);
@@ -52,14 +59,12 @@ public class TeamService {
         Team oldTeam = teamRepository.findTeamById(teamId);
         User oldUser = oldTeam.getUser();
 
-        //String hash= new BCryptPasswordEncoder().encode(customerDTO.getPassword());
+        String hash= new BCryptPasswordEncoder().encode(teamDTO.getPassword());
 
         oldUser.setEmail(teamDTO.getEmail());
-        oldUser.setPassword(teamDTO.getPassword());
+        oldUser.setPassword(hash);
         oldUser.setPhoneNumber(teamDTO.getPhoneNumber());
         authRepository.save(oldUser);
-
-        oldTeam.setBio(teamDTO.getBio());
         teamRepository.save(oldTeam);
     }
 
@@ -84,6 +89,12 @@ public class TeamService {
     //START OF TEAM INVITES
     public List<TeamInvite> getInvitesByTeamId(Integer teamId) {
         return teamInviteRepository.findTeamInvitesByTeamId(teamId);
+    }
+
+    public void updateBio (Integer teamId, String bio) {
+        Team team = teamRepository.findTeamById(teamId);
+        team.setBio(bio);
+        teamRepository.save(team);
     }
 
     public void invitePlayerToTeam(Integer teamId, String playerUsername, TeamInviteDTO teamInviteDTO) {

@@ -9,6 +9,8 @@ import org.twspring.noob.Model.Vendor;
 import org.twspring.noob.Repository.AuthRepository;
 import org.twspring.noob.Repository.VendorRepository;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @Service
@@ -29,6 +31,11 @@ public class VendorService {
         user.setEmail(vendotDTO.getEmail());
         user.setPhoneNumber(vendotDTO.getPhoneNumber());
         user.setRole("VENDOR");
+        user.setBirthday(vendotDTO.getBirthday());
+        user.setAge(Period.between(user.getBirthday(), LocalDate.now()).getYears());
+        if (user.getAge()<18){
+            throw new ApiException("Vendors under the age of 18 are prohibited from registering in our system");
+        }
         authRepository.save(user);
 
         Vendor vendor = new Vendor();

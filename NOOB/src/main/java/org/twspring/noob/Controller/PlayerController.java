@@ -42,7 +42,11 @@ public class PlayerController {
         return ResponseEntity.status(200).body(playerService.getPlayerById(playerId));
     }
 
-    //
+    @PutMapping("/{playerId}/edit-bio")
+    public ResponseEntity editBio(@PathVariable Integer playerId, @RequestBody String bio){
+        playerService.updateBio(playerId, bio);
+        return ResponseEntity.status(200).body(new ApiResponse("Player bio updated successfully"));
+    }
 
     @GetMapping("/{playerId}/invites/get-invites")
     public ResponseEntity getInvites(@PathVariable Integer playerId){

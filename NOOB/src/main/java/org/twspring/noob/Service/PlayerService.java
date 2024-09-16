@@ -2,6 +2,7 @@ package org.twspring.noob.Service;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
 import org.twspring.noob.DTO.PlayerDTO;
@@ -13,6 +14,8 @@ import org.twspring.noob.Repository.AuthRepository;
 import org.twspring.noob.Repository.PlayerRepository;
 import org.twspring.noob.Repository.TeamInviteRepository;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.List;
 
 @Service
@@ -28,17 +31,21 @@ public class PlayerService {
     }
 
     public void registerPlayer(PlayerDTO playerDTO) {
-        //String hash= new BCryptPasswordEncoder().encode(customerDTO.getPassword());
+        String hash= new BCryptPasswordEncoder().encode(playerDTO.getPassword());
         User user = new User();
         user.setUsername(playerDTO.getUsername());
-        user.setPassword(playerDTO.getPassword());
+        user.setPassword(hash);
         user.setEmail(playerDTO.getEmail());
         user.setPhoneNumber(playerDTO.getPhoneNumber());
+        user.setBirthday(playerDTO.getBirthday());
+        user.setAge(Period.between(user.getBirthday(), LocalDate.now()).getYears());
+        if (user.getAge()<13){
+            throw new ApiException("Players under the age of 13 are prohibited from registering in our system");
+        }
         user.setRole("PLAYER");
         authRepository.save(user);
 
         Player player = new Player();
-        player.setBio(playerDTO.getBio());
         player.setUser(user);
         playerRepository.save(player);
 
@@ -47,15 +54,12 @@ public class PlayerService {
         Player oldPlayer = playerRepository.findPlayerById(playerId);
         User oldUser = oldPlayer.getUser();
 
-        //String hash= new BCryptPasswordEncoder().encode(customerDTO.getPassword());
+        String hash= new BCryptPasswordEncoder().encode(playerDTO.getPassword());
 
         oldUser.setEmail(playerDTO.getEmail());
-        oldUser.setPassword(playerDTO.getPassword());
+        oldUser.setPassword(hash);
         oldUser.setPhoneNumber(playerDTO.getPhoneNumber());
         authRepository.save(oldUser);
-
-        oldPlayer.setBio(playerDTO.getBio());
-        playerRepository.save(oldPlayer);
     }
 
     public void deletePlayer(Integer playerId) {
@@ -68,6 +72,13 @@ public class PlayerService {
         Player player = playerRepository.findPlayerById(playerId);
         if (player == null) {throw new ApiException("Player not found");}
         return player;
+    }
+
+    public void updateBio(Integer playerId, String bio) {
+        Player player = playerRepository.findPlayerById(playerId);
+
+        player.setBio(bio);
+        playerRepository.save(player);
     }
 
     //PLAYER INVITES
@@ -118,7 +129,6 @@ public class PlayerService {
     }
 
     //TEAM
-
     public void leaveTeam(Integer playerId) {
         Player player = playerRepository.findPlayerById(playerId);
         if (player.getTeam()==null){

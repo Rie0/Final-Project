@@ -8,10 +8,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.validator.constraints.URL;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
@@ -61,10 +63,15 @@ public class User implements UserDetails {
     @Column(columnDefinition = "VARCHAR(15) NOT NULL UNIQUE")
     private String phoneNumber;
 
+    @Column(columnDefinition = "DATE NOT NULL")
+    private LocalDate birthday;
+
+    @Column(columnDefinition = "INT NOT NULL")
+    private Integer age;
+
     @CreationTimestamp
     @Column(updatable = false, columnDefinition = "timestamp default current_timestamp")
     private final LocalDateTime joinedAt = LocalDateTime.now();
-
 
     //RELATIONSHIPS
 
@@ -82,8 +89,6 @@ public class User implements UserDetails {
     @JsonIgnore
     @PrimaryKeyJoinColumn
     private Vendor vendor;
-
-
 
 
     //USER DETAILS METHODS (after security)
