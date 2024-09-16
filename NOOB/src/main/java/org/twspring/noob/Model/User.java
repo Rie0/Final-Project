@@ -79,6 +79,8 @@ public class User {
     private Vendor vendor;
 
 
+
+
     //USER DETAILS METHODS (after security)
 
 }
