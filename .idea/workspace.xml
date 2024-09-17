@@ -6,15 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b947b4ef-297e-4c50-811c-9161e0997d87" name="Changes" comment="Security Added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Config/ConfigSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Config/ConfigSecurity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/TournamentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/TournamentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/TournamentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/TournamentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/TournamentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/TournamentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Config/ConfigSecurity.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Config/ConfigSecurity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/TournamentController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/TournamentController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Repository/TournamentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Repository/TournamentRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/TournamentService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/TournamentService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/target/test-classes/org/twspring/noob/TournamentControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/test-classes/org/twspring/noob/TournamentControllerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/BracketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/BracketController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,23 +141,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TournamentControllerTest.getTournamentsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="NOOB" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.twspring.noob.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.twspring.noob" />
-      <option name="MAIN_CLASS_NAME" value="org.twspring.noob.TournamentControllerTest" />
-      <option name="METHOD_NAME" value="getTournamentsTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TournamentRepositoryTest.findUpcomingTournamentsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TournamentRepositoryTest.findByGameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="NOOB" />
       <extension name="coverage">
         <pattern>
@@ -175,7 +151,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.twspring.noob" />
       <option name="MAIN_CLASS_NAME" value="org.twspring.noob.TournamentRepositoryTest" />
-      <option name="METHOD_NAME" value="findUpcomingTournamentsTest" />
+      <option name="METHOD_NAME" value="findByGameTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TournamentRepositoryTest.findTournamentByIdTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="NOOB" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.twspring.noob.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.twspring.noob" />
+      <option name="MAIN_CLASS_NAME" value="org.twspring.noob.TournamentRepositoryTest" />
+      <option name="METHOD_NAME" value="findTournamentByIdTest" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -190,11 +182,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TournamentRepositoryTest.findByGameTest" />
+        <item itemvalue="JUnit.TournamentControllerTest.getAllTournamentsTest" />
+        <item itemvalue="JUnit.TournamentRepositoryTest.findTournamentByIdTest" />
         <item itemvalue="JUnit.TournamentControllerTest.getTournamentsByGameTest" />
         <item itemvalue="JUnit.TournamentControllerTest.addTournamentTest" />
-        <item itemvalue="JUnit.TournamentControllerTest.getAllTournamentsTest" />
-        <item itemvalue="JUnit.TournamentControllerTest.getTournamentsTest" />
-        <item itemvalue="JUnit.TournamentRepositoryTest.findUpcomingTournamentsTest" />
       </list>
     </recent_temporary>
   </component>
@@ -288,7 +280,15 @@
       <option name="project" value="LOCAL" />
       <updated>1726491292367</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Security Added">
+      <option name="closed" value="true" />
+      <created>1726557099229</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1726557099229</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
