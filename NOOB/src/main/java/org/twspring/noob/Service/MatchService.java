@@ -272,4 +272,11 @@ public class MatchService {
         }
         return null;
     }
+
+
+    //rafeef
+    public List<Match> participantGetMatches(Integer participantId) {
+        Participant participant = participantRepository.findParticipantById(participantId);
+        return matchRepository.findMatchByParticipantId(participant.getId());
+    }
 }

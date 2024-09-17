@@ -91,4 +91,11 @@ public class MatchController {
         return ResponseEntity.ok(
                 matchService.getMatchHistoryBetweenPlayersGroupedByWinner(playerId1, playerId2));
     }
+
+    //move to part
+    //for participant
+    @GetMapping("/get-by-participant/{participantId}")
+    public ResponseEntity getParticipantMatches(@PathVariable Integer participantId) {
+        return ResponseEntity.status(200).body(matchService.participantGetMatches(participantId));
+    }
 }

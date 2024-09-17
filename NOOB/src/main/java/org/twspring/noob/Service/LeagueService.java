@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class LeagueService {
+public class LeagueService { //RAFEEF
     private final LeagueRepository leagueRepository;
     private final OrganizerRepository organizerRepository;
     private final PlayerRepository playerRepository;
@@ -313,12 +313,6 @@ public class LeagueService {
         }
         league.setStatus(League.Status.ONGOING);
         leagueRepository.save(league);
-    }
-
-
-    public List<Match> participantGetMatches(Integer participantId) {
-        Participant participant = participantRepository.findParticipantById(participantId);
-        return matchRepository.findMatchByParticipantId(participant.getId());
     }
 
     public void startMatch(Integer organizerId, Integer leagueId, Integer matchId) {

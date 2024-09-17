@@ -43,7 +43,16 @@ public class ConfigSecurity {
                         //team
                         "/api/v1/team/get-all",
                         "/api/v1/team/register",
-                        "/api/v1/team/get/{teamId}"
+                        "/api/v1/team/get/{teamId}",
+                        //league
+                        "/api/v1/league/get",
+                        "/api/v1/league/get/{leagueId}",
+                        "/api/v1/league/{leagueId}/get-all-participants",
+                        "/api/v1/league/{leagueId}/get-rounds",
+                        "/api/v1/league/{leagueId}/get-matches",
+                        "/api/v1/league/{leagueId}/leaderboard",
+                        //matches
+                        "api/v1/match/get-by-participant/{participantId}"
                         ).permitAll()
                 .requestMatchers("/api/v1/organizer/add").permitAll() // Anyone can add an organizer
                 .requestMatchers("/api/v1/tournament/get").permitAll() // Anyone can view tournaments
@@ -71,7 +80,19 @@ public class ConfigSecurity {
                         "/api/v1/round/delete/**",
                         //organizer
                         "/api/v1/organizer/update/**",
-                        "/api/v1/organizer/delete/**"
+                        "/api/v1/organizer/delete/**",
+                        //league
+                        "/api/v1/league/create-new",
+                        "/api/v1/league/{leagueId}/change-dates",
+                        "/api/v1/league/{leagueId}/round/{roundId}/set-dates",
+                        "/api/v1/league/{leagueId}/match/{matchId}/set-dates",
+                        "/api/v1/league/{leagueId}/set-ready",
+                        "/api/v1/league/{leagueId}/match/{matchId}/start-match",
+                        "/api/v1/league/{leagueId}/match/{matchId}/add-1score-to-participant1",
+                        "/api/v1/league/{leagueId}/match/{matchId}/add-1score-to-participant2",
+                        "/api/v1/league/{leagueId}/match/{matchId}/sub-1score-from-participant1",
+                        "/api/v1/league/{leagueId}/match/{matchId}/sub-1score-from-participant2",
+                        "/api/v1/league/{leagueId}/finalize"
                 ).hasAuthority("ORGANIZER")
 
                 //ADMIN AND ORGANIZER
@@ -109,7 +130,10 @@ public class ConfigSecurity {
                         "/api/v1/player/invites/get-invites",
                         "/api/v1/player/invites/{inviteId}/accept",
                         "/api/v1/player/invites/{inviteId}/decline",
-                        "/api/v1/player/team/leave"
+                        "/api/v1/player/team/leave",
+                        //league
+                        "/api/v1/league/{leagueId}/participate",
+                        "/api/v1/league/{leagueId}/withdraw"
                 ).hasAuthority("PLAYER")
 
                 //ADMIN
