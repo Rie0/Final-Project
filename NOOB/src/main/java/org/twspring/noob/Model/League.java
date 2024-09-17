@@ -63,6 +63,10 @@ public class League {
     @Column(columnDefinition = "INT")
     private Integer currentParticipants;
 
+    //add game+prize
+
+    @ManyToOne
+    private Organizer organizer;
 
     @OneToMany(mappedBy = "league", cascade = CascadeType.ALL)
     @JsonIgnore
@@ -71,9 +75,6 @@ public class League {
     @OneToMany(mappedBy = "league", cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Match> matches;
-
-    @ManyToOne
-    private Organizer organizer; // Reference to the Organizer creating the tournament
 
     @OneToMany(mappedBy = "league", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Round> rounds;

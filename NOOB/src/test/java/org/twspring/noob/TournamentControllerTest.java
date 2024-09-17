@@ -52,7 +52,7 @@ public class TournamentControllerTest {
     @BeforeEach
     void setUp() {
 
-        user = new User(1, "OrganizerUser", "ORGANIZER", "org@example.com", "password", "+966577345678", null, null, null, null, null);
+        user = new User(1, "OrganizerUser", "ORGANIZER", "org@example.com", "password", "+966577345678", null, null, null, null, null, null, null);
         organizer = new Organizer(null, "Organizer1", "contact@example.com", "Organization1", null, null, user); // Set ID to null for generated ID
 
         tournament1 = new Tournament(null, "Tournament1", "Description1", LocalDate.now(), LocalDate.now().plusDays(1), Tournament.Status.OPEN, "Location1", 10, 0, "Chess", "Players", "City1", "Online", 1000, 500, null, null, null, organizer);

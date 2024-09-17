@@ -41,7 +41,7 @@ public class TournamentRepositoryTest {
     void setUp() {
 
         // Create a new User entity and save it to the repository
-        user = new User(null, "Hussam-77", "Hussam@77", "ORGANIZER", "Hussamalie@gamil.com", "+966577345678", null, null, null, null, null);
+        user = new User(1, "OrganizerUser", "ORGANIZER", "org@example.com", "password", "+966577345678", null, null, null, null, null, null, null);
         userRepository.save(user);
 
         // Create the Organizer entity with the user entity already persisted
