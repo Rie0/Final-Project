@@ -48,7 +48,7 @@ public class Participant {
 
     @ManyToOne
     @JoinColumn(name = "player_id")
-    //@JsonIgnore
+    @JsonIgnore
     private Player player; // Reference to the Player associated with this participant
 
     @ManyToOne

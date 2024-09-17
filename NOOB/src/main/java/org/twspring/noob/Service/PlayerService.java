@@ -45,7 +45,7 @@ public class PlayerService { //RAFEEF
         if (user.getAge()<13){
             throw new ApiException("Players under the age of 13 are prohibited from registering in our system");
         }
-        if ((user.getAge()>13&&user.getAge()<18)&&playerDTO.getParentApproval()==null){
+        if ((user.getAge()<18)&&playerDTO.getParentApproval()==null){
             throw new ApiException("Minors must include a parental approval before registering");
         }
         user.setRole("PLAYER");
