@@ -83,6 +83,17 @@ public class User implements UserDetails {
     @PrimaryKeyJoinColumn
     private Vendor vendor;
 
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
+    @PrimaryKeyJoinColumn
+    private Organizer organizer;
+
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+    @JsonIgnore
+    @PrimaryKeyJoinColumn
+    private Coach coach;
+
 
 
 
