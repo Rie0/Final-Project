@@ -27,8 +27,8 @@ public class CoachingSessionService {
         return coachingSessionRepository.findAll();
     }
 
-    // CRUD register
-    public void reserveCoachingSession(Integer scheduleId, Integer playerId, DateTimeDTO dateTimeDTO, String sessionStyle) {
+    // CRUD register String sessionStyle
+    public void reserveCoachingSession(Integer scheduleId, Integer playerId, DateTimeDTO dateTimeDTO) {
 
 
         Player player = playerRepository.findPlayerById(playerId);
@@ -42,7 +42,7 @@ public class CoachingSessionService {
                 }
         Coach coach = schedule.getCoach();
 
-        if (!schedule.getIsBooked()) {
+        if (schedule.getIsBooked()) {
             throw new ApiException("Invalid or unavailable schedule for this coach");
         }
 
@@ -51,12 +51,14 @@ public class CoachingSessionService {
         coachingSession.setPlayer(player);
         coachingSession.setCoach(coach);
         coachingSession.setSchedule(schedule);
-        coachingSession.setSessionStyle(sessionStyle);
+        //coachingSession.setSessionStyle(sessionStyle);
         coachingSession.setStartDate(dateTimeDTO.getStartDate());
         coachingSession.setEndDate(dateTimeDTO.getEndDate());
 
-        coachingSessionRepository.save(coachingSession);
+        schedule.setIsBooked(true);
 
+        coachingSessionRepository.save(coachingSession);
+        scheduleRepository.save(schedule);
     }
     // CRUD update
     public void updateCoachingSession(Integer id, CoachingSession coachingSessionDetails) {
@@ -64,7 +66,7 @@ public class CoachingSessionService {
         if (coachingSession == null) {
             throw new ApiException("Coaching session not found");
         }
-        coachingSession.setSessionStyle(coachingSession.getSessionStyle());
+       // coachingSession.setSessionStyle(coachingSession.getSessionStyle());
         coachingSession.setCoach(coachingSessionDetails.getCoach());
         coachingSessionRepository.save(coachingSession);
         
@@ -141,6 +143,17 @@ public class CoachingSessionService {
 
         coachingSessionRepository.save(coachingSession);
 
+    }
+
+
+    public void endCoachingSession(Integer coachingSessionId) {
+        CoachingSession coachingSession = coachingSessionRepository.findCoachingSessionById(coachingSessionId);
+        if (coachingSession == null) {
+            new ApiException("Coaching session not found");
+        }
+
+        coachingSession.setStatus("Ended");
+        coachingSessionRepository.save(coachingSession);
     }
 
 

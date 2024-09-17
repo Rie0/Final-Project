@@ -29,7 +29,6 @@ public class MasterClass {
 
     @ManyToOne
     @JoinColumn(name = "coach_id", nullable = false)
-    @NotNull(message = "Coach is mandatory")
     @JsonIgnore
     private Coach coach;
 
@@ -43,7 +42,7 @@ public class MasterClass {
             joinColumns = @JoinColumn(name = "masterclass_id"),
             inverseJoinColumns = @JoinColumn(name = "player_id")
     )
-    private Set<Player> players = new HashSet<>();
+    private Set<Player> players;
 
     @NotBlank(message = "Title is mandatory")
     @Size(max = 100, message = "Title should not exceed 100 characters")
@@ -66,5 +65,10 @@ public class MasterClass {
 
     @NotBlank(message = "Status is mandatory")
     @Size(max = 50, message = "Status should not exceed 50 characters")
-    private String status;
+    private String status= "Available";
+
+    @NotNull(message = "Max players is mandatory")
+    private Integer maxPlayers;
+
+
 }

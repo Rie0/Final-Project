@@ -26,7 +26,7 @@ public class MasterClassController {
     }
 
     // CRUD register
-    @PostMapping("/register")
+    @PostMapping("/register/{coachId}")
     public ResponseEntity registerMasterClass(@RequestBody @Valid MasterClass masterClass, @PathVariable Integer coachId) {
         masterClassService.addMasterClass(masterClass, coachId);
         return ResponseEntity.status(200).body(new ApiResponse("MasterClass registered successfully"));

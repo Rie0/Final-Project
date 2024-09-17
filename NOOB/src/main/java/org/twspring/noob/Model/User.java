@@ -71,7 +71,6 @@ public class User implements UserDetails {
     //RELATIONSHIPS
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    @JsonIgnore
     @PrimaryKeyJoinColumn
     private Player player;
 

@@ -47,8 +47,7 @@ public class ConfigSecurity {
                 .logout().logoutUrl("/api/v1/auth/logout").logoutSuccessUrl("/")
                 .deleteCookies("JSESSIONID")
                 .invalidateHttpSession(true)
-                .and()
-                .httpBasic();
+                .and();
 
         return http.build();
     }

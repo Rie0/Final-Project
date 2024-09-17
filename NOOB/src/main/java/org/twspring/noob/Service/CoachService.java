@@ -44,7 +44,8 @@ public class CoachService {
         if (coach == null) {
             throw new ApiException("Coach not found");
         }
-        coachRepository.delete(coach);
+        User user = authRepository.findUserById(id);
+        authRepository.delete(user);
     }
 
     // EXTRA endpoint: getting a coach by id

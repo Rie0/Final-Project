@@ -85,7 +85,6 @@ public class ScheduleService {
             throw new ApiException("Player not found");
         }
         schedule.setIsBooked(true);
-        schedule.setPlayer(player);
         scheduleRepository.save(schedule);
     }
 

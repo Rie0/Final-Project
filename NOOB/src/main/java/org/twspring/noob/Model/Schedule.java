@@ -41,17 +41,11 @@ public class Schedule {
 
 
 
-//    @ManyToOne
-//    @JoinColumn(name = "master_class_id")
-//    private MasterClass masterClass;
 
     @OneToOne(mappedBy = "schedule", cascade = CascadeType.ALL)
     @JsonIgnore
     private CoachingSession coachingSession;
 
-    @ManyToOne
-    @JoinColumn(name = "player_id")
-    private Player player;
 
 
 

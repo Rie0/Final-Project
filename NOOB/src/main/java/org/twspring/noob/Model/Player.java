@@ -46,6 +46,8 @@ public class Player {
     //RELATIONSHIPS
     @OneToOne
     @MapsId
+    @JsonIgnore
+
     private User user;
 
     @ManyToOne

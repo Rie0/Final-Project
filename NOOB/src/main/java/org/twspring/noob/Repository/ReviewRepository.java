@@ -3,6 +3,7 @@ package org.twspring.noob.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+import org.twspring.noob.Model.Player;
 import org.twspring.noob.Model.Review;
 
 import java.util.List;
@@ -29,4 +30,6 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
     // Find all reviews by both player ID and coach ID
     @Query("SELECT r FROM Review r WHERE r.player.id = ?1 AND r.coach.id = ?2")
     List<Review> findReviewsByPlayerIdAndCoachId(Integer playerId, Integer coachId);
+
+    List<Review> findByPlayer(Player player);
 }

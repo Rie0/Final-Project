@@ -1,5 +1,6 @@
 package org.twspring.noob.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -34,18 +35,22 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "player_id", nullable = false)
     @NotNull(message = "User is mandatory")
+    @JsonIgnore
+
     private Player player;
 
     // Relationship with Coach
     @ManyToOne
     @JoinColumn(name = "coach_id", nullable = false)
     @NotNull(message = "Coach is mandatory")
+    @JsonIgnore
     private Coach coach;
 
     // Relationship with CoachingSession
     @OneToOne
     @JoinColumn(name = "session_id", nullable = false)
     @NotNull(message = "Coaching session is mandatory")
+    @JsonIgnore
     private CoachingSession coachingSession;
 
 }
