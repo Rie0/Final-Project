@@ -25,7 +25,7 @@ public class Participant {
     private String name; // Name of the participant (player or team)
 
     @Column(columnDefinition = "INT")
-    private Integer seed; // Seed number of the participant for bracket placement
+    private Integer seed=0; // Seed number of the participant for bracket placement
 
 
     @Column(columnDefinition = "INT")
@@ -54,7 +54,7 @@ public class Participant {
     private Team team;
 
     @ManyToOne
-    @JoinColumn(name = "tournament_id", columnDefinition = "INT")
+    @JoinColumn(name = "tournament_id")
     @JsonIgnore
     private Tournament tournament; // Reference to the Tournament this participant is associated with
 

@@ -25,11 +25,9 @@ public class TournamentController {
         return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournaments());
     }
 
-    @PostMapping("/add/{organizer}")
-    public ResponseEntity addTournament(@Valid @RequestBody Tournament tournament,
-                                        @PathVariable Integer organizer,
-                                        @AuthenticationPrincipal User user) {
-        tournamentService.saveTournament(tournament, organizer);
+    @PostMapping("/add")
+    public ResponseEntity addTournament(@AuthenticationPrincipal User user,@Valid @RequestBody Tournament tournament) {
+        tournamentService.saveTournament(tournament, user.getId());
         return ResponseEntity.status(HttpStatus.OK).body("Tournament added successfully");
     }
 
@@ -48,6 +46,21 @@ public class TournamentController {
                                             @PathVariable Integer tournamentId) {
         tournamentService.deleteTournament(tournamentId, user.getId());
         return ResponseEntity.status(HttpStatus.OK).body("Tournament deleted successfully");
+    }
+    @PostMapping("/{tournamentId}/initializeDoubleEliminationBracket")
+    public ResponseEntity initializeDoubleEliminationBracket(@AuthenticationPrincipal User user,
+                                                             @PathVariable Integer tournamentId) {
+        // Ensure the user has the correct authorization
+        tournamentService.checkOrganizerAuthorization(tournamentId, user.getId());
+        // Call the service method to create a double elimination bracket
+        Bracket doubleEliminationBracket = bracketService.createDoubleEliminationBracket(tournamentId);
+        return ResponseEntity.ok(doubleEliminationBracket);
+    }
+    @PostMapping("/{tournamentId}/distribute-prizes")
+    public ResponseEntity distributePrizes(@PathVariable Integer tournamentId) {
+        tournamentService.distributePrizes(tournamentId);
+        return ResponseEntity.ok("Prizes have been successfully distributed for tournament ID: " + tournamentId);
+
     }
 
     @PostMapping("/{tournamentId}/initializeBracket")

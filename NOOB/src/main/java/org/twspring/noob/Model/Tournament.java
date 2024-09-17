@@ -47,11 +47,11 @@ public class Tournament {
     public enum Status{
         OPEN,
         ACTIVE,
+        FULL,
         FINISHED
     } // Status of the tournament
 
     @Column(columnDefinition = "VARCHAR(255)")
-
     private String location;
 
     @NotNull(message = "Maximum participants must not be null")

@@ -324,4 +324,48 @@ public class TournamentService {
         }
         return matchRepository.findByTournamentAndStatus(tournament, "NOT_STARTED");
     }
+
+    public void distributePrizes(Integer tournamentId) {
+        Tournament tournament = tournamentRepository.findTournamentById(tournamentId);
+        if (tournament == null) {
+            throw new ApiException("Tournament not found");
+        }
+
+        // Check if the tournament status is "COMPLETED"
+        if (tournament.getStatus() != Tournament.Status.FINISHED) {
+            throw new ApiException("Prizes can only be distributed for a completed tournament.");
+        }
+
+        int participantsPrize = tournament.getParticipantsPrize(); // Number of participants to receive prizes
+        List<Participant> participants = participantRepository.findTopParticipantsByTournamentId(tournamentId, participantsPrize);
+
+        double totalPrizePool = tournament.getPrizePool(); // Total prize pool to be distributed
+
+        // Distribute prizes to top participants dynamically
+        double[] prizeDistribution = calculatePrizeDistribution(participantsPrize, totalPrizePool);
+
+        for (int i = 0; i < participants.size(); i++) {
+            Participant participant = participants.get(i);
+            participant.setPrize((int) prizeDistribution[i]); // Set prize to the participant
+            participantRepository.save(participant);
+        }
+    }
+
+    // Method to calculate prize distribution dynamically
+    private double[] calculatePrizeDistribution(int participantsPrize, double prizePool) {
+        double[] prizeDistribution = new double[participantsPrize];
+        double totalRatio = 0;
+
+        // Calculate the total ratio for prize distribution
+        for (int i = 1; i <= participantsPrize; i++) {
+            totalRatio += 1.0 / i;
+        }
+
+        // Calculate the individual prize for each rank
+        for (int i = 1; i <= participantsPrize; i++) {
+            prizeDistribution[i - 1] = prizePool * ((1.0 / i) / totalRatio);
+        }
+
+        return prizeDistribution;
+    }
 }

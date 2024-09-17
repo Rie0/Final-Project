@@ -34,11 +34,11 @@ public class ConfigSecurity {
                 .authenticationProvider(daoAuthenticationProvider())
                 .authorizeHttpRequests()
                 // Allow open access for specific endpoints
-                .requestMatchers("/api/v1/organizer/add").permitAll() // Anyone can add an organizer
-                .requestMatchers("/api/v1/match/get").permitAll() // Anyone can view matches
-                .requestMatchers("/api/v1/participant/get").permitAll() // Anyone can view participants
-                .requestMatchers("/api/v1/player/register").permitAll() // Anyone can Register player
-                .requestMatchers("/api/v1/coach/register").permitAll() // Open registration for coaches
+                .requestMatchers("/api/v1/organizer/add").permitAll()
+                .requestMatchers("/api/v1/match/get").permitAll()
+                .requestMatchers("/api/v1/participant/get").permitAll()
+                .requestMatchers("/api/v1/player/register").permitAll()
+                .requestMatchers("/api/v1/coach/register").permitAll()
                 .requestMatchers("/api/v1/coach/get-all").permitAll()
                 .requestMatchers("/api/v1/coach/get/**").permitAll()
                 .requestMatchers("/api/v1/tournament/get",
@@ -59,20 +59,20 @@ public class ConfigSecurity {
                         "/api/v1/tournament/{tournamentId}/matches/in-progress",
                         "/api/v1/tournament/{tournamentId}/matches/not-started").permitAll()
 
-                // Admin and Coach can view all coaches
-                .requestMatchers("/api/v1/coach/update/**", "/api/v1/coach/delete/**").hasAuthority("COACH") // Only the coach can update or delete their info
-                // Admin and Coach can get coach details
-                // Specific roles required for other endpoints
+                // Specific rules for endpoints that require authorization
                 .requestMatchers("/api/v1/tournament/update/**",
+                        "/api/v1/tournament/add",
                         "/api/v1/tournament/*/initializeBracket",
+                        "/api/v1/tournament/*/initializeDoubleEliminationBracket",
                         "/api/v1/tournament/*/start",
                         "/api/v1/tournament/delete/**",
                         "/api/v1/tournament/*/finalize").hasAuthority("ORGANIZER")
+
                 .requestMatchers("/api/v1/tournament/*/participant/*/checkin").hasAnyAuthority("ADMIN", "ORGANIZER")
 
                 .requestMatchers("/api/v1/participant/add/**",
                         "/api/v1/participant/update/**",
-                        ("/api/v1/participant/get/**"),
+                        "/api/v1/participant/get/**",
                         "/api/v1/participant/delete/**").hasAnyAuthority("PLAYER", "ADMIN")
 
                 .requestMatchers("/api/v1/bracket/get",

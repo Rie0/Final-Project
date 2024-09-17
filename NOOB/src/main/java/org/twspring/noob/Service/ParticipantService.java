@@ -30,39 +30,48 @@ public class ParticipantService {
         return participantRepository.findParticipantById(id);
     }
 
-    public void saveParticipant(Participant participant, Integer tournamentId , Integer playerId) {
+    public void participateInTournament(Integer playerId, Integer tournamentId, String name) {
+        // Find the player and tournament using their respective repositories
+        Player player = playerRepository.findPlayerById(playerId);
         Tournament tournament = tournamentRepository.findTournamentById(tournamentId);
+        // Check if the tournament exists
         if (tournament == null) {
             throw new ApiException("Tournament not found");
         }
-
-        Player player = playerRepository.findPlayerById(playerId);
-
-        if (player == null) {
-            throw new ApiException("Player not found");
-        }
-
-
-
         // Check if the player is already registered in the tournament
         Participant existingParticipant = participantRepository.findParticipantByPlayerIdAndTournamentId(playerId, tournamentId);
-        System.out.println(existingParticipant);
-
         if (existingParticipant != null) {
-            throw new ApiException("Player is already registered for this tournament");
+            throw new ApiException("Participant is already registered for this tournament");
         }
 
+        // Check if the tournament is full
         if (tournament.getCurrentParticipants() >= tournament.getMaxParticipants()) {
-            throw new ApiException("Tournament is full");
+            throw new ApiException("Tournament has reached its maximum number of participants");
         }
 
-        tournament.setCurrentParticipants(tournament.getCurrentParticipants() + 1);
-
+        // Create a new participant
+        Participant participant = new Participant();
+        participant.setName(name);
         participant.setPlayer(player);
         participant.setTournament(tournament);
+        participant.setStatus(Participant.Status.REGISTERED);
+
+        // Save the new participant
         participantRepository.save(participant);
 
+        // Update the number of current participants in the tournament
+        tournament.setCurrentParticipants(tournament.getCurrentParticipants() + 1);
+
+        // Update the status of the tournament to FULL if the maximum number of participants is reached
+        if (tournament.getCurrentParticipants() >= tournament.getMaxParticipants()) {
+            tournament.setStatus(Tournament.Status.FULL);
+        }
+        tournament.getParticipants().add(participant);
+        tournamentRepository.save(tournament);
+
+
     }
+
 
     public void updateParticipant(Integer participantId, Participant updatedParticipant) {
         Participant participant = participantRepository.findParticipantById(participantId);
