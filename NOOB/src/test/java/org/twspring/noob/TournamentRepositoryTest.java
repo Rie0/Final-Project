@@ -41,11 +41,11 @@ public class TournamentRepositoryTest {
     void setUp() {
 
         // Create a new User entity and save it to the repository
-        user = new User(1, "OrganizerUser", "ORGANIZER", "org@example.com", "password", "+966577345678", null, null, null, null, null, null, null);
+        user = new User(1, "Organizer1", "OrGANIZER!1", "ORGANIZER", "ORG@gmail.com", "+966577345678",LocalDate.parse("2000-11-01") , 20, null, null, null, null, null);
         userRepository.save(user);
 
         // Create the Organizer entity with the user entity already persisted
-        organizer = new Organizer(null, "Organizer1", "contact@example.com", "Organization1", null, null, user); // Set ID to null for generated ID
+        organizer = new Organizer(1, "Organizer1", "contact@example.com", "Organization1", null, null, user); // Set ID to null for generated ID
         organizerRepository.save(organizer); // Save the Organizer entity after the User has been saved
 
         // Create Tournament entities linked to the Organizer

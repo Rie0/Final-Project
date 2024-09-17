@@ -5,12 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a9644da5-5f07-4fbf-aece-32244b4e84b4" name="Changes" comment="changes">
-      <change afterPath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/LeagueControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/LeagueRepositoryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/League.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/League.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/TournamentControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/TournamentControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/LeagueControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/LeagueControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/LeagueRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/LeagueRepositoryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/TournamentRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/TournamentRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/TournamentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/TournamentServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Config/ConfigSecurity.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Config/ConfigSecurity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/LeagueController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/LeagueController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/MatchController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/MatchController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/League.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/League.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/LeagueService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/LeagueService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/MatchService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/MatchService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/test-classes/org/twspring/noob/TournamentControllerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/test-classes/org/twspring/noob/TournamentControllerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/test-classes/org/twspring/noob/TournamentRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/test-classes/org/twspring/noob/TournamentRepositoryTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/test-classes/org/twspring/noob/TournamentServiceTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/test-classes/org/twspring/noob/TournamentServiceTest.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,31 +65,126 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.NoobApplication.executor&quot;: &quot;Run&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;com.google.cloudcode.ide_session_index&quot;: &quot;20240915_0001&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;RafeefV2&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Rafeef/IdeaProjects/Exercise-Repository&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.LeagueControllerTest.addLeagueTest.executor": "Run",
+    "JUnit.LeagueControllerTest.getAllLeaguesTest.executor": "Run",
+    "JUnit.LeagueControllerTest.getLeagueByIdTest.executor": "Run",
+    "JUnit.LeagueRepositoryTest.findAllLeaguesTest.executor": "Run",
+    "JUnit.LeagueRepositoryTest.findLeagueByIdTest.executor": "Run",
+    "JUnit.LeagueRepositoryTest.findTournamentByIdTest.executor": "Run",
+    "JUnit.TournamentControllerTest.getAllTournamentsTest.executor": "Run",
+    "JUnit.TournamentRepositoryTest.executor": "Run",
+    "JUnit.TournamentRepositoryTest.findByAttendanceTypeTest.executor": "Run",
+    "JUnit.TournamentRepositoryTest.findByCityTest.executor": "Run",
+    "JUnit.TournamentRepositoryTest.findByGameTest.executor": "Run",
+    "JUnit.TournamentRepositoryTest.findByTournamentIdAndOrganizerIdTest.executor": "Run",
+    "JUnit.TournamentRepositoryTest.findTournamentByIdTest.executor": "Run",
+    "JUnit.TournamentRepositoryTest.findUpcomingTournamentsTest.executor": "Run",
+    "JUnit.TournamentServiceTest.getAllTournamentsTest.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.NoobApplication.executor": "Run",
+    "com.codeium.enabled": "true",
+    "com.google.cloudcode.ide_session_index": "20240915_0001",
+    "git-widget-placeholder": "RafeefV2",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Rafeef/IdeaProjects/Exercise-Repository",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager">
+}]]></component>
+  <component name="RunManager" selected="JUnit.TournamentControllerTest.getTournamentsByCityTest">
+    <configuration name="TournamentControllerTest.getAllTournamentsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="NOOB" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.twspring.noob.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.twspring.noob" />
+      <option name="MAIN_CLASS_NAME" value="org.twspring.noob.TournamentControllerTest" />
+      <option name="METHOD_NAME" value="getAllTournamentsTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TournamentControllerTest.getTournamentsByCityTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="NOOB" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.twspring.noob.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.twspring.noob" />
+      <option name="MAIN_CLASS_NAME" value="org.twspring.noob.TournamentControllerTest" />
+      <option name="METHOD_NAME" value="getTournamentsByCityTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TournamentControllerTest.getTournamentsByGameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="NOOB" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.twspring.noob.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.twspring.noob" />
+      <option name="MAIN_CLASS_NAME" value="org.twspring.noob.TournamentControllerTest" />
+      <option name="METHOD_NAME" value="getTournamentsByGameTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TournamentServiceTest.deleteTournamentUnauthorizedTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="NOOB" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.twspring.noob.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.twspring.noob" />
+      <option name="MAIN_CLASS_NAME" value="org.twspring.noob.TournamentServiceTest" />
+      <option name="METHOD_NAME" value="deleteTournamentUnauthorizedTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TournamentServiceTest.saveTournamentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="NOOB" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.twspring.noob.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.twspring.noob" />
+      <option name="MAIN_CLASS_NAME" value="org.twspring.noob.TournamentServiceTest" />
+      <option name="METHOD_NAME" value="saveTournamentTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="NoobApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="NOOB" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="org.twspring.noob.NoobApplication" />
@@ -88,6 +192,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.TournamentControllerTest.getTournamentsByCityTest" />
+        <item itemvalue="JUnit.TournamentControllerTest.getTournamentsByGameTest" />
+        <item itemvalue="JUnit.TournamentControllerTest.getAllTournamentsTest" />
+        <item itemvalue="JUnit.TournamentServiceTest.deleteTournamentUnauthorizedTest" />
+        <item itemvalue="JUnit.TournamentServiceTest.saveTournamentTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -111,6 +224,10 @@
       <workItem from="1726549113407" duration="125000" />
       <workItem from="1726549509945" duration="394000" />
       <workItem from="1726550065494" duration="3156000" />
+      <workItem from="1726555409246" duration="5039000" />
+      <workItem from="1726560526426" duration="333000" />
+      <workItem from="1726561011947" duration="322000" />
+      <workItem from="1726561395971" duration="955000" />
     </task>
     <task id="LOCAL-00001" summary="changes">
       <option name="closed" value="true" />
@@ -862,11 +979,6 @@
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/League.java</url>
           <line>65</line>
           <option name="timeStamp" value="127" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/LeagueRepositoryTest.java</url>
-          <line>55</line>
-          <option name="timeStamp" value="128" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

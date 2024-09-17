@@ -42,7 +42,7 @@ public class TournamentServiceTest {
     @BeforeEach
     void setUp() {
 
-        user = new User(null, "johnDoe", "ORGANIZER", "john@example.com", "password", "+966512345678", null, null, null, null, null);
+        user = new User(null, "johnDoe", "ORGANIZER", "john@example.com", "password", "+966512345678", null, null,null,null, null, null, null);
         organizer = new Organizer(1, "Organizer1", "contact@example.com", "Organization1",null,null,user);
         tournament1 = new Tournament(1, "Tournament1", "Description1", LocalDate.now(), LocalDate.now().plusDays(1), Tournament.Status.ACTIVE, "Location1", 10, 5, "Chess", "Teams", "City1", "Onsite", 1000, 200, null, null, null, organizer);
         tournament2 = new Tournament(2, "Tournament2", "Description2", LocalDate.now(), LocalDate.now().plusDays(1), Tournament.Status.FINISHED, "Location2", 20, 10, "Soccer", "Players", "City2", "Online", 5000, 500, null, null, null, organizer);
