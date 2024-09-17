@@ -28,7 +28,7 @@ public class Team {     //rafeef
     @Column(columnDefinition = "VARCHAR(150) NOT NULL")
     @NotNull(message = "bio cannot be null")
     @Size(max = 150, message = "Bio must have between 0 to 150 characters")
-    private String bio ="";//bio can be empty.
+    private String bio ="";
 
     @NotNull(message = "Winnings must not be null")
     @Column(columnDefinition = "DOUBLE NOT NULL DEFAULT 0")
@@ -46,7 +46,8 @@ public class Team {     //rafeef
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
     private Set<TeamInvite> teamInvites;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
-    @JsonIgnore
-    private Set<Participant> participants;
+    //future work
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "team")
+//    @JsonIgnore
+//    private Set<Participant> participants;
 }
