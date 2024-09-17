@@ -71,26 +71,6 @@ public class ScheduleService {
     }
 
 
-    // EXTRA endpoint: booking a coaching session
-    public void bookCoachingSession(Integer scheduleId, Integer playerId) {
-        Schedule schedule = scheduleRepository.findScheduleById(scheduleId);
-        if (schedule == null) {
-            throw new ApiException("Schedule not found");
-        }
-        if (schedule.getIsBooked()) {
-            throw new ApiException("Schedule is already booked");
-        }
-        Player player = playerRepository.findPlayerById(playerId);
-        if (player == null) {
-            throw new ApiException("Player not found");
-        }
-        schedule.setIsBooked(true);
-        scheduleRepository.save(schedule);
-    }
-
-
-
-
 }
 
 

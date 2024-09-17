@@ -93,7 +93,7 @@ public class MasterClassService {
         if (masterClass == null) {
             throw new ApiException("MasterClass not found");
         }
-        masterClass.setStatus("Active");
+        masterClass.setStatus("Started");
         masterClassRepository.save(masterClass);
     }
 
@@ -125,7 +125,7 @@ public class MasterClassService {
         if (masterClass == null) {
             throw new ApiException("MasterClass not found");
         }
-        if (!"Available".equals(masterClass.getStatus())) {
+        if (!"Available".equalsIgnoreCase(masterClass.getStatus())) {
             throw new ApiException("MasterClass is not available for joining");
         }
         if (masterClass.getPlayers().size() >= masterClass.getMaxPlayers()) {
@@ -179,5 +179,6 @@ public class MasterClassService {
             masterClass.setStatus("Available");
         }
     }
+
 
 }

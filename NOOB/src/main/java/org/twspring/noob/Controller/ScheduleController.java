@@ -63,12 +63,7 @@ public class ScheduleController {
         return ResponseEntity.ok(schedules);
     }
 
-    // EXTRA endpoint: booking a coaching session
-    @PostMapping("/book/{scheduleId}")
-    public ResponseEntity<ApiResponse> bookCoachingSession(@PathVariable Integer scheduleId, @RequestParam Integer playerId) {
-        scheduleService.bookCoachingSession(scheduleId, playerId);
-        return ResponseEntity.status(200).body(new ApiResponse("Coaching session booked successfully"));
-    }
+
 
 
 }

@@ -72,9 +72,9 @@ public class PlayerController {
 
 
     // Mohammed
-    @PostMapping("/add-review/{playerId}/{coachId}")
-    public ResponseEntity<ApiResponse> addReview(@PathVariable Integer playerId, @PathVariable Integer coachId, @RequestParam String comment, @RequestParam Float rating) {
-        playerService.addReview(playerId, coachId, comment, rating);
+    @PostMapping("/add-review/{playerId}/{coachId}/{coachingSessionId}/{comment}/{rating}")
+    public ResponseEntity addReview(@PathVariable Integer playerId, @PathVariable Integer coachId, @PathVariable Integer coachingSessionId, @PathVariable String comment, @PathVariable Float rating) {
+        playerService.addReview(playerId, coachId, coachingSessionId, comment, rating);
         return ResponseEntity.status(200).body(new ApiResponse("Review added successfully"));
     }
 

@@ -93,7 +93,7 @@ public class TeamService {
         if (user == null) {
             throw new ApiException("Player not found");
         }
-        if (!user.getRole().equals("PLAYER")) {
+        if (!user.getRole().equalsIgnoreCase("PLAYER")) {
             throw new ApiException("Only players can be invited to teams");
         }
 

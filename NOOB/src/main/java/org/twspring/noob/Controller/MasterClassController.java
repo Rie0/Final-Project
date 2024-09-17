@@ -49,13 +49,13 @@ public class MasterClassController {
 
     // EXTRA endpoint: getting a master class by id
     @GetMapping("/get/{id}")
-    public ResponseEntity<ApiResponse> getMasterClassById(@PathVariable Integer id) {
+    public ResponseEntity<MasterClass> getMasterClassById(@PathVariable Integer id) {
         MasterClass masterClass = masterClassService.getMasterClassById(id);
-        return ResponseEntity.status(200).body(new ApiResponse("MasterClass retrieved successfully"));
+        return ResponseEntity.status(200).body(masterClass);
     }
 
     // EXTRA endpoint: getting master classes by coach id
-    @GetMapping("/by-coach/{coachId}")
+    @GetMapping("/get-by-coach/{coachId}")
     public ResponseEntity<List<MasterClass>> getMasterClassesByCoachId(@PathVariable Integer coachId) {
         return ResponseEntity.ok(masterClassService.getMasterClassesByCoachId(coachId));
     }
