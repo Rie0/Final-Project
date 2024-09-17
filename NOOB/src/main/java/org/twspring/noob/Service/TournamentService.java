@@ -29,8 +29,8 @@ public class TournamentService {
         return tournamentRepository.findTournamentById(id);
     }
 
-    public void saveTournament(Tournament tournament, Integer organizerId) {
-        Organizer org = organizerRepository.findOrganizerById(organizerId);
+    public void saveTournament(Tournament tournament, Integer organizer) {
+        Organizer org = organizerRepository.findOrganizerById(organizer);
         if (org == null) {
             throw new ApiException("Organizer not found");
         }
@@ -41,8 +41,7 @@ public class TournamentService {
         tournamentRepository.save(tournament);
     }
 
-    public void updateTournament(Integer tournamentId, Tournament updatedTournament, Integer organizerId) {
-        checkOrganizerAuthorization(tournamentId, organizerId);
+    public void updateTournament(Integer tournamentId, Tournament updatedTournament) {
         Tournament tournament = tournamentRepository.findTournamentById(tournamentId);
         if (tournament != null) {
             tournament.setName(updatedTournament.getName());
@@ -60,58 +59,56 @@ public class TournamentService {
         }
     }
 
-    public void deleteTournament(Integer tournamentId, Integer organizerId) {
-        checkOrganizerAuthorization(tournamentId, organizerId);
-        Tournament tournament = tournamentRepository.findByTournamentIdAndOrganizerId(tournamentId, organizerId);
-        if (tournament == null) {
-            throw new ApiException("Tournament not found or not authorized to delete.");
-        }
+    public void deleteTournament(Integer tournamentId) {
         tournamentRepository.deleteById(tournamentId);
     }
-
-    public void startTournament(Integer tournamentId, Integer organizerId) {
-        checkOrganizerAuthorization(tournamentId, organizerId);
+    public void startTournament(Integer tournamentId) {
         Tournament tournament = tournamentRepository.findTournamentById(tournamentId);
 
         if (tournament == null) {
             throw new ApiException("Tournament not found");
         }
 
+        // Check if the tournament is already active or completed
         if (tournament.getStatus().equals(Tournament.Status.ACTIVE)) {
             throw new ApiException("Tournament is already active");
         } else if (tournament.getStatus().equals(Tournament.Status.FINISHED)) {
             throw new ApiException("Tournament has already been finished");
         }
 
+        // Check if the start date is today or in the future
         LocalDate today = LocalDate.now();
         if (tournament.getStartDate().isAfter(today)) {
             throw new ApiException("Tournament cannot be started before the start date");
         }
 
+        // Change the status to active
         tournament.setStatus(Tournament.Status.ACTIVE);
         tournamentRepository.save(tournament);
     }
-
-    public void checkInParticipant(Integer tournamentId, Integer participantId, Integer organizerId) {
-        checkOrganizerAuthorization(tournamentId, organizerId);
-
+    public void checkInParticipant(Integer tournamentId, Integer participantId) {
+        // Find the tournament by ID
         Tournament tournament = tournamentRepository.findTournamentById(tournamentId);
         if (tournament == null) {
             throw new ApiException("Tournament not found");
         }
 
+        // Find the participant by ID
         Participant participant = participantRepository.findParticipantById(participantId);
         if (participant == null) {
             throw new ApiException("Participant not found");
         }
 
+        // Check if the participant is associated with the given tournament
         if (!participant.getTournament().getId().equals(tournamentId)) {
             throw new ApiException("Participant is not associated with the specified tournament");
         }
 
+        // Check-in the participant by changing the status
         participant.setStatus(Participant.Status.CHECKED_IN);
         participantRepository.save(participant);
     }
+
 
     public List<Tournament> getTournamentsByGame(String game) {
         return tournamentRepository.findByGame(game);
@@ -138,16 +135,23 @@ public class TournamentService {
     }
 
     public List<Tournament> getTournamentsByStatusClosingSoon() {
+        // Get the list of all tournaments that have a start date in the future
         List<Tournament> upcomingTournaments = tournamentRepository.findUpcomingTournaments();
+
+        // Calculate 'tomorrow' based on the current date
         LocalDate tomorrow = LocalDate.now().plusDays(1);
+
+        // Initialize a list to store tournaments that are starting soon
         List<Tournament> closingSoonTournaments = new ArrayList<>();
 
+        // Use a for loop to filter the tournaments that start exactly one day from now
         for (Tournament tournament : upcomingTournaments) {
             if (tournament.getStartDate().equals(tomorrow)) {
                 closingSoonTournaments.add(tournament);
             }
         }
 
+        // Return the filtered list
         return closingSoonTournaments;
     }
 
@@ -175,16 +179,17 @@ public class TournamentService {
             throw new ApiException("Tournament not found");
         }
 
+        // Sort participants by seed, handling null seeds by placing them last
         return tournament.getParticipants().stream()
                 .sorted((p1, p2) -> {
                     if (p1.getSeed() == null && p2.getSeed() == null) {
-                        return 0;
+                        return 0; // Both seeds are null, consider them equal
                     } else if (p1.getSeed() == null) {
-                        return 1;
+                        return 1; // p1 is null, place it after p2
                     } else if (p2.getSeed() == null) {
-                        return -1;
+                        return -1; // p2 is null, place it after p1
                     } else {
-                        return Integer.compare(p2.getSeed(), p1.getSeed());
+                        return Integer.compare(p2.getSeed(), p1.getSeed()); // Normal comparison
                     }
                 })
                 .collect(Collectors.toList());
@@ -214,8 +219,7 @@ public class TournamentService {
         return matchRepository.findByTournamentAndStatus(tournament, "NotStarted");
     }
 
-    public void finalizeTournament(Integer tournamentId, Integer organizerId) {
-        checkOrganizerAuthorization(tournamentId, organizerId);
+    public void finalizeTournament(Integer tournamentId) {
         Tournament tournament = tournamentRepository.findTournamentById(tournamentId);
         if (tournament == null) {
             throw new ApiException("Tournament not found");
@@ -226,20 +230,24 @@ public class TournamentService {
 
         List<Match> matches = matchRepository.findByTournament(tournament);
 
+        // Check if all matches are completed
         if (matches.stream().anyMatch(match ->
                 !(match.getStatus().equalsIgnoreCase("Completed") || match.getStatus().equalsIgnoreCase("Completed_bye")))) {
             throw new ApiException("All matches must be completed or completed by a bye before finalizing the tournament.");
         }
 
+        // Determine the final ranking based on bracket progression
         List<Participant> sortedParticipants = determineFinalRankingByBracket(matches, tournament);
 
+        // Assign seeding to participants based on final ranking
         for (int i = 0; i < sortedParticipants.size(); i++) {
             Participant participant = sortedParticipants.get(i);
-            participant.setSeed(i + 1);
+            participant.setSeed(i + 1); // Seed starts from 1 for the winner
             participant.setStatus(Participant.Status.FINALIZED);
             participantRepository.save(participant);
         }
 
+        // Update the tournament status to finished
         tournament.setStatus(Tournament.Status.FINISHED);
         tournamentRepository.save(tournament);
     }
@@ -249,6 +257,7 @@ public class TournamentService {
         Participant winner = null;
         Participant runnerUp = null;
 
+        // Identify the winner and runner-up
         for (Match match : matches) {
             if ("Completed".equalsIgnoreCase(match.getStatus())) {
                 int roundNumber = match.getRound().getRoundNumber();
@@ -261,6 +270,7 @@ public class TournamentService {
             }
         }
 
+        // Assign winner and runner-up
         List<Participant> sortedParticipants = new ArrayList<>();
         if (winner != null) {
             sortedParticipants.add(winner);
@@ -269,6 +279,7 @@ public class TournamentService {
             sortedParticipants.add(runnerUp);
         }
 
+        // Sort the remaining participants by the round they were eliminated in, in reverse order
         Map<Integer, List<Participant>> participantsByEliminationRound = new HashMap<>();
         for (Map.Entry<Participant, Integer> entry : eliminationRounds.entrySet()) {
             participantsByEliminationRound
@@ -276,6 +287,7 @@ public class TournamentService {
                     .add(entry.getKey());
         }
 
+        // Process participants round by round
         List<Integer> sortedRounds = new ArrayList<>(participantsByEliminationRound.keySet());
         sortedRounds.sort(Collections.reverseOrder());
 
@@ -287,18 +299,12 @@ public class TournamentService {
         return sortedParticipants;
     }
 
+
     private int getMaxRoundNumber(List<Match> matches) {
         return matches.stream()
                 .mapToInt(match -> match.getRound().getRoundNumber())
                 .max()
                 .orElse(0);
-    }
-
-    public void checkOrganizerAuthorization(Integer tournamentId, Integer organizerId) {
-        Tournament tournament = tournamentRepository.findByTournamentIdAndOrganizerId(tournamentId, organizerId);
-        if (tournament == null) {
-            throw new ApiException("Unauthorized action: You are not the organizer of this tournament.");
-        }
     }
 
     public List<Match> getTournamentMatchesByStatusCompleted(Integer tournamentId) {
@@ -324,4 +330,7 @@ public class TournamentService {
         }
         return matchRepository.findByTournamentAndStatus(tournament, "NOT_STARTED");
     }
+
+
+
 }

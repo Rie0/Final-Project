@@ -26,38 +26,34 @@ public class MatchService {
         return matchRepository.findMatchById(id);
     }
 
-    public Match saveMatch(Match match, User user) {
-        validateOrganizerForMatch(user, match); // Validate if the user is the correct organizer
+    public Match saveMatch(Match match) {
+
         return matchRepository.save(match);
     }
 
-    public void updateMatch(Integer matchId, Match updatedMatch, User user) {
+    public void updateMatch(Integer matchId, Match updatedMatch) {
         Match match = matchRepository.findMatchById(matchId);
-        if (match == null) {
-            throw new ApiException("Match not found");
+        if (match != null) {
+            match.setParticipant1(updatedMatch.getParticipant1());
+            match.setParticipant2(updatedMatch.getParticipant2());
+            match.setWinner(updatedMatch.getWinner());
+            match.setLoser(updatedMatch.getLoser());
+            match.setStartTime(updatedMatch.getStartTime());
+            match.setEndTime(updatedMatch.getEndTime());
+            match.setStatus(updatedMatch.getStatus());
+            //match.setScore(updatedMatch.getScore());
+            match.setTournament(updatedMatch.getTournament());
+            match.setRound(updatedMatch.getRound());
+            matchRepository.save(match);
         }
-
-        validateOrganizerForMatch(user, match); // Validate if the user is the correct organizer
-
-        match.setParticipant1(updatedMatch.getParticipant1());
-        match.setParticipant2(updatedMatch.getParticipant2());
-        match.setWinner(updatedMatch.getWinner());
-        match.setLoser(updatedMatch.getLoser());
-        match.setStartTime(updatedMatch.getStartTime());
-        match.setEndTime(updatedMatch.getEndTime());
-        match.setStatus(updatedMatch.getStatus());
-        match.setTournament(updatedMatch.getTournament());
-        match.setRound(updatedMatch.getRound());
-        matchRepository.save(match);
     }
 
-    public void deleteMatch(Integer matchId, User user) {
+    public void deleteMatch(Integer matchId) {
         Match match = matchRepository.findMatchById(matchId);
         if (match == null) {
             throw new ApiException("Match not found");
         }
 
-        validateOrganizerForMatch(user, match); // Validate if the user is the correct organizer
 
         matchRepository.deleteById(matchId);
     }
@@ -95,12 +91,12 @@ public class MatchService {
             throw new IllegalStateException("Requester is not participant 2 for this match.");
         }
     }
-
     public Map<String, Player> getMatchParticipants(Integer matchId) {
         Match match = matchRepository.findMatchById(matchId);
         if (match == null) {
             throw new ApiException("Match not found");
         }
+
 
         Map<String, Player> participants = new HashMap<>();
         participants.put("participant1", match.getParticipant1().getPlayer());
@@ -109,13 +105,12 @@ public class MatchService {
         return participants;
     }
 
-    public void setMatchWinnerAndLoser(Integer matchId, Integer winnerId, int score_winner, int score_loser, User user) {
+    public void setMatchWinnerAndLoser(Integer matchId, Integer winnerId) {
         Match match = matchRepository.findMatchById(matchId);
         if (match == null) {
             throw new ApiException("Match not found");
         }
 
-        validateOrganizerForMatch(user, match); // Validate if the user is the correct organizer
 
         Participant winner = participantRepository.findParticipantById(winnerId);
         if (winner == null) {
@@ -136,28 +131,20 @@ public class MatchService {
         // Set the winner and loser of the match
         match.setWinner(winner);
         match.setLoser(loser);
-
-        if (winner.equals(match.getParticipant1())) {
-            match.setParticipant1score(score_winner);
-            match.setParticipant2score(score_loser);
-        } else {
-            match.setParticipant1score(score_loser);
-            match.setParticipant2score(score_winner);
-        }
-
         match.setStatus("COMPLETED");  // Update the match status to completed
 
         // Save the updated match object
         matchRepository.save(match);
     }
 
-    public void advanceWinnerToNextMatch(Integer matchId, User user) {
+
+
+    public void advanceWinnerToNextMatch(Integer matchId) {
+        // Retrieve the current match
         Match currentMatch = matchRepository.findMatchById(matchId);
         if (currentMatch == null) {
             throw new ApiException("Match not found");
         }
-
-        validateOrganizerForMatch(user, currentMatch); // Validate if the user is the correct organizer
 
         // Check if a winner has been set
         Participant winner = currentMatch.getWinner();
@@ -190,28 +177,62 @@ public class MatchService {
         matchRepository.save(nextMatch);
     }
 
-    public void setMatchWinnerByBye(Integer matchId, Integer participantId, User user) {
+    private Round findNextRound(Round currentRound) {
+        Bracket bracket = currentRound.getBracket(); // Get the bracket this round belongs to
+        List<Round> rounds = new ArrayList<>(bracket.getRounds()); // Convert the rounds set to a list
+
+        // Sort rounds based on some identifiable attribute, like an ID or a sequence number if available
+        rounds.sort(Comparator.comparingInt(Round::getId)); // Assuming each round has a unique ID that increases sequentially
+
+        // Find the current round in the list and return the next one
+        for (int i = 0; i < rounds.size(); i++) {
+            if (rounds.get(i).equals(currentRound)) {
+                if (i + 1 < rounds.size()) { // Ensure there's a next round in the list
+                    return rounds.get(i + 1);
+                }
+                break; // Current round is the last one in the list
+            }
+        }
+        return null; // No next round found, or current round is the last round
+    }
+
+    private Match getNextMatchForWinner(Round nextRound) {
+        // Check all matches in the given round to find an available slot
+        for (Match match : nextRound.getMatches()) {
+            // Check if either participant1 or participant2 is null (i.e., slot available)
+            if (match.getParticipant1() == null || match.getParticipant2() == null) {
+                return match; // Return the first match found with an available slot
+            }
+        }
+        return null; // Return null if no match is found with an available slot
+    }
+
+    public void setMatchWinnerByBye(Integer matchId, Integer participantId) {
+        // Retrieve the current match
         Match match = matchRepository.findMatchById(matchId);
         if (match == null) {
             throw new ApiException("Match not found");
         }
 
-        validateOrganizerForMatch(user, match); // Validate if the user is the correct organizer
-
+        // Retrieve the participant
         Participant participant = participantRepository.findParticipantById(participantId);
         if (participant == null) {
             throw new ApiException("Participant not found");
         }
 
+        // Check if the participant is part of this match
         if (!participant.equals(match.getParticipant1()) && !participant.equals(match.getParticipant2())) {
             throw new IllegalArgumentException("The participant is not in this match.");
         }
 
+        // Determine which participant is the winner
         Participant winner;
         Participant loser = null;
 
         if (match.getParticipant1() == null || match.getParticipant2() == null) {
+            // Set the participant as the winner because the other slot is empty
             winner = participant;
+            // If both slots are empty, it's an invalid match setup
             if (match.getParticipant1() == null && match.getParticipant2() == null) {
                 throw new IllegalStateException("Both participants cannot be null for a match.");
             }
@@ -219,10 +240,12 @@ public class MatchService {
             throw new IllegalStateException("This method should only be used for matches with a bye.");
         }
 
+        // Set the winner and update the match status
         match.setWinner(winner);
         match.setLoser(loser); // No loser in a bye match
-        match.setStatus("COMPLETED_BYE");
+        match.setStatus("COMPLETED_BYE");  // Custom status for a bye match
 
+        // Save the updated match object
         matchRepository.save(match);
     }
 
@@ -232,44 +255,14 @@ public class MatchService {
             throw new ApiException("No matches found between the given players");
         }
 
-        return matchHistory.stream()
-                .filter(match -> match.getWinner() != null)
+        // Group matches by the winner's ID
+        Map<Integer, List<Match>> matchesGroupedByWinner = matchHistory.stream()
+                .filter(match -> match.getWinner() != null) // Ensure there is a winner
                 .collect(Collectors.groupingBy(match -> match.getWinner().getId()));
+
+        return matchesGroupedByWinner;
     }
 
-    private void validateOrganizerForMatch(User user, Match match) {
-        if (!user.getRole().equals("ORGANIZER")) {
-            throw new ApiException("Access denied: Only organizers can perform this action.");
-        }
 
-        if (!match.getTournament().getOrganizer().getId().equals(user.getId())) {
-            throw new ApiException("Access denied: You are not the organizer of this tournament.");
-        }
-    }
 
-    private Round findNextRound(Round currentRound) {
-        Bracket bracket = currentRound.getBracket();
-        List<Round> rounds = new ArrayList<>(bracket.getRounds());
-
-        rounds.sort(Comparator.comparingInt(Round::getId));
-
-        for (int i = 0; i < rounds.size(); i++) {
-            if (rounds.get(i).equals(currentRound)) {
-                if (i + 1 < rounds.size()) {
-                    return rounds.get(i + 1);
-                }
-                break;
-            }
-        }
-        return null;
-    }
-
-    private Match getNextMatchForWinner(Round nextRound) {
-        for (Match match : nextRound.getMatches()) {
-            if (match.getParticipant1() == null || match.getParticipant2() == null) {
-                return match;
-            }
-        }
-        return null;
-    }
 }

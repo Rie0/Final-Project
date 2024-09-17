@@ -18,6 +18,7 @@ import java.util.Set;
 public class Organizer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id; // Unique identifier for the organizer
 
     @NotEmpty(message = "Name cannot be empty")
@@ -41,8 +42,4 @@ public class Organizer {
     @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<League> leagues; // List of leagues created by the organizer
-
-    @OneToOne
-    @MapsId
-    private User user; // User associated with the organizer
 }
