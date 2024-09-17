@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.twspring.noob.Api.ApiResponse;
+import org.twspring.noob.DTO.MultiInviteDTO;
 import org.twspring.noob.DTO.TeamDTO;
 import org.twspring.noob.DTO.TeamInviteDTO;
 import org.twspring.noob.Model.User;
@@ -72,6 +73,16 @@ public class TeamController { //RAFEEF
         teamService.invitePlayerToTeam(team.getId(), PlayerUsername, teamInviteDTO);
         return ResponseEntity.status(200).body(new ApiResponse("Player invited successfully"));
     }
+
+    @PostMapping("/invites/invite-multiple-players")
+    public ResponseEntity inviteMultiplePlayersToTeam(@RequestBody MultiInviteDTO multiInviteDTO,
+                                                      @AuthenticationPrincipal User team) {
+        teamService.inviteMultiPlayersToTeam(team.getId(), multiInviteDTO);
+        return ResponseEntity.status(200).body("Players invited to the team successfully");
+    }
+
+
+
 
     @PutMapping("/update-bio")
     public ResponseEntity updateBio(@AuthenticationPrincipal User team, @RequestBody String bio) {

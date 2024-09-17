@@ -191,7 +191,7 @@ public class ConfigSecurity {
                         "/api/v1/team/players/get-all",
                         "/api/v1/team/invites/get-invites",
                         "/api/v1/team/invites/invite/{PlayerUsername}",
-                        "/api/v1/team/invite-multiple-players",
+                        "/api/v1/team/invites/invite-multiple-players",
                         "/api/v1/team/invites/{inviteId}/delete",
                         "/api/v1/team/update-bio"
                 ).hasAuthority("TEAM")

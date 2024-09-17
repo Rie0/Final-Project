@@ -5,10 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
-import org.twspring.noob.DTO.PlayerProfileDTO;
-import org.twspring.noob.DTO.ProfileDTO;
-import org.twspring.noob.DTO.TeamDTO;
-import org.twspring.noob.DTO.TeamInviteDTO;
+import org.twspring.noob.DTO.*;
 import org.twspring.noob.Model.Player;
 import org.twspring.noob.Model.Team;
 import org.twspring.noob.Model.TeamInvite;
@@ -143,37 +140,48 @@ public class TeamService { //RAFEEF
         teamInviteRepository.save(teamInvite);
     }
 
-    //not working
-    public void inviteMultiPlayersToTeam(Integer teamId,List<String> playerUsernames,TeamInviteDTO teamInviteDTO) {
+    public void inviteMultiPlayersToTeam(Integer teamId, MultiInviteDTO multiInviteDTO) {
         Team team = teamRepository.findTeamById(teamId);
 
+        List<String> playerUsernames = multiInviteDTO.getPlayerUsernames();
         for (String playerUsername : playerUsernames) {
             User user = authRepository.findByUsername(playerUsername);
 
             if (user == null) {
-                throw new ApiException("Player with username" + playerUsername + " not found");
+                throw new ApiException("Player with username " + playerUsername + " not found");
             }
+
             if (!user.getRole().equals("PLAYER")) {
                 throw new ApiException("Only players can be invited to teams, user " + user.getUsername() + " is not a player");
             }
+
             Player player = playerRepository.findPlayerById(user.getId());
-            if (player.getTeam() != null) {
-                if (player.getTeam() == team) {
-                    throw new ApiException("Player is already a member of this team");
-                }
-                throw new ApiException("Player " + playerUsername + " is already a member of another team");
+
+            if (player == null) {
+                throw new ApiException("Player not found for user " + playerUsername);
             }
 
-            //create a team invite.
+            if (player.getTeam() != null) {
+                if (player.getTeam().getId().equals(team.getId())) {
+                    throw new ApiException("Player " + playerUsername + " is already a member of this team");
+                } else {
+                    throw new ApiException("Player " + playerUsername + " is already a member of another team");
+                }
+            }
+
+            // Create a team invite
             TeamInvite teamInvite = new TeamInvite();
             teamInvite.setTeam(team);
             teamInvite.setPlayer(player);
             teamInvite.setStatus(TeamInvite.Status.PENDING);
-            teamInvite.setTitle(teamInviteDTO.getTitle());
-            teamInvite.setMessage(teamInviteDTO.getMessage());
+            teamInvite.setTeamName(team.getUser().getUsername());
+            teamInvite.setTitle(multiInviteDTO.getTitle());
+            teamInvite.setMessage(multiInviteDTO.getMessage());
+
             teamInviteRepository.save(teamInvite);
         }
     }
+
 
     public void deleteTeamInvite(Integer teamId, Integer teamInviteId) {
         Team team = teamRepository.findTeamById(teamId);

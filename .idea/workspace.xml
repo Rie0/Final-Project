@@ -5,8 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b947b4ef-297e-4c50-811c-9161e0997d87" name="Changes" comment="Security Added">
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/MatchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/MatchController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/DTO/MultiInviteDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Config/ConfigSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Config/ConfigSecurity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/TeamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/TeamController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/TeamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/TeamService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Config/ConfigSecurity.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Config/ConfigSecurity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/MatchController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/MatchController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/TeamController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/TeamController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/TeamService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/TeamService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
