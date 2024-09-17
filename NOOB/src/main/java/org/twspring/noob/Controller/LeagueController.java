@@ -89,6 +89,14 @@ public class LeagueController {
         return ResponseEntity.status(200).body("Player withdrawn from league successfully");
     }
 
+    @PutMapping("/{leagueId}/kick-participant/{playerId}")
+    public ResponseEntity kickParticipant(@PathVariable Integer leagueId,
+                                          @PathVariable Integer playerId,
+                                          @AuthenticationPrincipal User organizer) {
+        leagueService.kickParticipant(organizer.getId(), playerId, leagueId);
+        return ResponseEntity.status(200).body("Participant kicked successfully");
+    }
+
     //SETTING DATES
     @PutMapping("/{leagueId}/change-dates")
     public ResponseEntity changeLeagueDates(@PathVariable Integer leagueId,
@@ -165,6 +173,13 @@ public class LeagueController {
                                       @AuthenticationPrincipal User organizer){
         leagueService.finishMatch(organizer.getId(),leagueId,matchId);
         return ResponseEntity.status(200).body("Match ended successfully");
+    }
+    @PutMapping("/{leagueId}/match/{matchId}/cancel-match")
+    public ResponseEntity cancelMatch(@PathVariable Integer leagueId,
+                                      @PathVariable Integer matchId,
+                                      @AuthenticationPrincipal User organizer) {
+        leagueService.cancelMatch(organizer.getId(), matchId, leagueId);
+        return ResponseEntity.status(200).body("Match canceled successfully");
     }
     @PutMapping("/{leagueId}/finalize")
     public ResponseEntity finalizeLeague(@PathVariable Integer leagueId,

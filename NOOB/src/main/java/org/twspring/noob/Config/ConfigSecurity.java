@@ -117,7 +117,10 @@ public class ConfigSecurity {
                         "/api/v1/league/{leagueId}/finalize",
                         "/api/v1/league/delete/{id}",
                         "/api/v1/league/update/{id}",
-                        "/api/v1/tournament/*/finalize"
+                        "/api/v1/tournament/*/finalize",
+                        "/api/v1/league/{leagueId}/match/{matchId}/cancel-match",
+                        "/api/v1/league/{leagueId}/kick-participant/{playerId}",
+                        "/api/v1/league/{leagueId}/withdraw"
                 ).hasAuthority("ORGANIZER")
 
                 .requestMatchers("/api/v1/tournament/*/participant/*/checkin").hasAnyAuthority("ADMIN", "ORGANIZER")

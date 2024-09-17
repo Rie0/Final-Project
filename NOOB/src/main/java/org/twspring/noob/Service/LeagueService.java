@@ -201,6 +201,55 @@ public class LeagueService { //RAFEEF
         leagueRepository.save(league);
     }
 
+    public void kickParticipant(Integer organizerId, Integer participantId, Integer leagueId) {
+        League league = leagueRepository.findLeagueById(leagueId);
+        Participant participant = participantRepository.findParticipantById(participantId);
+
+        if (league == null) {
+            throw new ApiException("League not found");
+        }
+
+        if (!league.getOrganizer().getId().equals(organizerId)) {
+            throw new ApiException("You do not have permission to kick participants from this league");
+        }
+
+        if (participant == null) {
+            throw new ApiException("Participant not found");
+        }
+
+        if (!league.getParticipants().contains(participant)) {
+            throw new ApiException("Participant is not registered for this league");
+        }
+
+        if (league.getStatus()== League.Status.ENDED){
+            throw new ApiException("League has already ended");
+        }
+
+        // Before the league starts, just remove the participant
+        if (league.getStatus() == League.Status.FULL || league.getStatus() == League.Status.OPEN) {
+            league.getParticipants().remove(participant);
+            participant.setPlayer(null);
+            participantRepository.delete(participant);
+            if (league.getStatus() == League.Status.FULL) {
+                league.setStatus(League.Status.OPEN);
+            }
+        }
+
+        // If the league has started, cancel all matches with the participant
+        if (league.getStatus() == League.Status.ONGOING) {
+            for (Match match : matchRepository.findMatchByLeagueId(leagueId)) {
+                if (match.getParticipant1().getId().equals(participant.getId()) ||
+                        match.getParticipant2().getId().equals(participant.getId())) {
+                    match.setStatus("CANCELLED");
+                    matchRepository.save(match);
+                }
+            }
+        }
+
+        league.setCurrentParticipants(league.getCurrentParticipants() - 1);
+        leagueRepository.save(league);
+    }
+
     //===========================================================================================================
     //================================================DATES======================================================
     public void setLeagueRoundDate(Integer organizerId, Integer leagueId, Integer roundId, LocalDate roundDate) {
@@ -310,7 +359,7 @@ public class LeagueService { //RAFEEF
     }
 
     //===========================================================================================================
-    //===========================================MATCHES/ROUNDS==================================================
+    //===========================================FLOW MANAGEMENT=================================================
 
     public void setLeagueToReady(Integer organizerId, Integer leagueId) {
         League league = leagueRepository.findLeagueById(leagueId);
@@ -334,8 +383,6 @@ public class LeagueService { //RAFEEF
         if (league.getCurrentParticipants()%2!=0){
             throw new ApiException("You can only start the league when the number of players is even");
         }
-
-        //add date condition when finished when testing
 
         //Randomize players in matches, making sure each player verses the other ONCE
         List<Participant> participants = participantRepository.findParticipantByLeagueId(leagueId);
@@ -394,7 +441,7 @@ public class LeagueService { //RAFEEF
     }
 
     //Why are the methods written like this? Because game matches are so much like football,each goal is a score, it's more logical
-    //to increase it once. And decrease it once when a mistake/bug(in game) happens
+    //to increase it once. And decrease it once when a mistake/bug(in game) happens.
     public void add1toParticipant1Score(Integer organizerId, Integer leagueId, Integer matchId) {
         League league = leagueRepository.findLeagueById(leagueId);
         Match match = matchRepository.findMatchById(matchId);
@@ -522,6 +569,39 @@ public class LeagueService { //RAFEEF
         participantRepository.save(participant1);
         participantRepository.save(participant2);
     }
+
+    public void cancelMatch(Integer organizerId, Integer matchId, Integer leagueId) {
+        League league = leagueRepository.findLeagueById(leagueId);
+        Match match = matchRepository.findMatchById(matchId);
+
+        if (league == null) {
+            throw new ApiException("League not found");
+        }
+
+        if (!league.getOrganizer().getId().equals(organizerId)) {
+            throw new ApiException("You do not have permission to cancel matches for this league");
+        }
+
+        if (match == null) {
+            throw new ApiException("Match not found");
+        }
+
+        if (!match.getLeague().getId().equals(leagueId)) {
+            throw new ApiException("This match does not belong to the specified league");
+        }
+
+        if (match.getStatus().equals("FINISHED")) {
+            throw new ApiException("Match is already finished");
+        }
+
+        if (match.getStatus().equals("CANCELLED")) {
+            throw new ApiException("Match is already cancelled");
+        }
+
+        match.setStatus("CANCELLED");
+        matchRepository.save(match);
+    }
+
 
     public void finalizeLeague(Integer organizerId, Integer leagueId){
         League league = leagueRepository.findLeagueById(leagueId);
