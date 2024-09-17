@@ -35,13 +35,29 @@ public class ConfigSecurity {
                 .authorizeHttpRequests()
                 // Allow open access for specific endpoints
                 .requestMatchers("/api/v1/organizer/add").permitAll() // Anyone can add an organizer
-                .requestMatchers("/api/v1/tournament/get").permitAll() // Anyone can view tournaments
                 .requestMatchers("/api/v1/match/get").permitAll() // Anyone can view matches
                 .requestMatchers("/api/v1/participant/get").permitAll() // Anyone can view participants
                 .requestMatchers("/api/v1/player/register").permitAll() // Anyone can Register player
                 .requestMatchers("/api/v1/coach/register").permitAll() // Open registration for coaches
                 .requestMatchers("/api/v1/coach/get-all").permitAll()
                 .requestMatchers("/api/v1/coach/get/**").permitAll()
+                .requestMatchers("/api/v1/tournament/get",
+                        "/api/v1/tournament/by-game",
+                        "/api/v1/tournament/by-city",
+                        "/api/v1/tournament/online",
+                        "/api/v1/tournament/onsite",
+                        "/api/v1/tournament/status/ongoing",
+                        "/api/v1/tournament/status/active",
+                        "/api/v1/tournament/status/closing-soon",
+                        "/api/v1/tournament/status/finished",
+                        "/api/v1/tournament/{id}",
+                        "/api/v1/tournament/{id}/description",
+                        "/api/v1/tournament/{id}/matches",
+                        "/api/v1/tournament/{id}/bracket",
+                        "/api/v1/tournament/{id}/standing",
+                        "/api/v1/tournament/{tournamentId}/matches/completed",
+                        "/api/v1/tournament/{tournamentId}/matches/in-progress",
+                        "/api/v1/tournament/{tournamentId}/matches/not-started").permitAll()
 
                 // Admin and Coach can view all coaches
                 .requestMatchers("/api/v1/coach/update/**", "/api/v1/coach/delete/**").hasAuthority("COACH") // Only the coach can update or delete their info

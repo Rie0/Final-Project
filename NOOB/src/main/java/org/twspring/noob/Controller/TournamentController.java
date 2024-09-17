@@ -65,6 +65,21 @@ public class TournamentController {
         tournamentService.startTournament(id, user.getId());
         return ResponseEntity.ok("Tournament started successfully.");
     }
+    @PostMapping("/{tournamentId}/finalize")
+    public ResponseEntity finalizeTournament(
+            @AuthenticationPrincipal User user,
+            @PathVariable Integer tournamentId) {
+        tournamentService.finalizeTournament(tournamentId, user.getId());
+        return ResponseEntity.status(HttpStatus.OK).body("Tournament finalized successfully.");
+    }
+
+    @PostMapping("/{tournamentId}/participant/{participantId}/checkin")
+    public ResponseEntity checkInParticipant(@PathVariable Integer tournamentId,
+                                             @PathVariable Integer participantId,
+                                             @AuthenticationPrincipal User user) {
+        tournamentService.checkInParticipant(tournamentId, participantId, user.getId());
+        return ResponseEntity.ok("Participant checked in successfully for the tournament.");
+    }
 
     @GetMapping("/by-game")
     public ResponseEntity getTournamentsByGame(@RequestParam String game) {
@@ -112,7 +127,7 @@ public class TournamentController {
     }
 
     @GetMapping("/{id}/description")
-    public ResponseEntity<String> getTournamentDescriptionById(@PathVariable Integer id) {
+    public ResponseEntity getTournamentDescriptionById(@PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentDescriptionById(id));
     }
 
@@ -131,21 +146,7 @@ public class TournamentController {
         return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentStandingById(id));
     }
 
-    @PostMapping("/{tournamentId}/finalize")
-    public ResponseEntity finalizeTournament(
-            @AuthenticationPrincipal User user,
-            @PathVariable Integer tournamentId) {
-        tournamentService.finalizeTournament(tournamentId, user.getId());
-        return ResponseEntity.status(HttpStatus.OK).body("Tournament finalized successfully.");
-    }
 
-    @PostMapping("/{tournamentId}/participant/{participantId}/checkin")
-    public ResponseEntity checkInParticipant(@PathVariable Integer tournamentId,
-                                             @PathVariable Integer participantId,
-                                             @AuthenticationPrincipal User user) {
-        tournamentService.checkInParticipant(tournamentId, participantId, user.getId());
-        return ResponseEntity.ok("Participant checked in successfully for the tournament.");
-    }
 
     @GetMapping("/{tournamentId}/matches/completed")
     public ResponseEntity getTournamentMatchesByStatusCompleted(@PathVariable Integer tournamentId) {

@@ -130,11 +130,11 @@ public class TournamentService {
     }
 
     public List<Tournament> getTournamentsByStatusOngoing() {
-        return tournamentRepository.findByStatus("OPEN");
+        return tournamentRepository.findByStatus(Tournament.Status.OPEN);
     }
 
     public List<Tournament> getTournamentsByStatusActive() {
-        return tournamentRepository.findByStatus("ACTIVE");
+        return tournamentRepository.findByStatus(Tournament.Status.ACTIVE);
     }
 
     public List<Tournament> getTournamentsByStatusClosingSoon() {
@@ -152,7 +152,7 @@ public class TournamentService {
     }
 
     public List<Tournament> getTournamentsByStatusFinished() {
-        return tournamentRepository.findByStatus("FINISHED");
+        return tournamentRepository.findByStatus(Tournament.Status.FINISHED);
     }
 
     public String getTournamentDescriptionById(Integer id) {
