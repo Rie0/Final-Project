@@ -67,4 +67,12 @@ public class PlayerController {
         return ResponseEntity.status(200).body(new ApiResponse("You left the team successfully"));
     }
 
+
+    // Mohammed Extra endpoint
+    @PostMapping("/add-review/{playerId}/{coachId}")
+    public ResponseEntity<ApiResponse> addReview(@PathVariable Integer playerId, @PathVariable Integer coachId, @RequestParam String comment, @RequestParam Float rating) {
+        playerService.addReview(playerId, coachId, comment, rating);
+        return ResponseEntity.status(200).body(new ApiResponse("Review added successfully"));
+    }
+
 }

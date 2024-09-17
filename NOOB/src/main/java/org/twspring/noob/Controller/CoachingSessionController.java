@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.twspring.noob.Api.ApiResponse;
+import org.twspring.noob.DTO.DateTimeDTO;
 import org.twspring.noob.Model.Coach;
 import org.twspring.noob.Model.CoachingSession;
 import org.twspring.noob.Service.CoachService;
@@ -30,10 +31,10 @@ public class CoachingSessionController {
     }
 
     // CRUD register
-    @PostMapping("/register")
-    public ResponseEntity registerCoachingSession(@RequestBody @Valid CoachingSession coachingSession) {
-        coachingSessionService.addCoachingSession(coachingSession);
-        return ResponseEntity.status(200).body(new ApiResponse("Coaching session registered successfully"));
+    @PostMapping("/reserve/{scheduleId}/{playerId}")
+    public ResponseEntity<ApiResponse> reserveCoachingSession(@PathVariable Integer scheduleId, @PathVariable Integer playerId, @RequestBody @Valid DateTimeDTO dateTimeDTO, @RequestParam String sessionStyle) {
+        coachingSessionService.reserveCoachingSession(scheduleId, playerId, dateTimeDTO, sessionStyle);
+        return ResponseEntity.status(200).body(new ApiResponse("Coaching session reserved successfully"));
     }
 
     // CRUD update
@@ -55,16 +56,22 @@ public class CoachingSessionController {
         return ResponseEntity.status(200).body(coachingSessionService.getCoachingSessionById(sessionId));
     }
 
-    @PostMapping("/{id}/request-reschedule/{newDate}/{newStartTime}/{newEndTime}")
-    public ResponseEntity<ApiResponse> requestReschedule(@PathVariable Integer id, @PathVariable String newDate, @PathVariable String newStartTime, @PathVariable String newEndTime) {
-        coachingSessionService.requestReschedule(id, LocalDate.parse(newDate), LocalTime.parse(newStartTime), LocalTime.parse(newEndTime));
+    @PostMapping("/request-reschedule/{coachingSessionId}/{playerId}")
+    public ResponseEntity<ApiResponse> requestReschedule(@PathVariable Integer coachingSessionId, @PathVariable Integer playerId, @RequestBody @Valid DateTimeDTO dateTimeDTO) {
+        coachingSessionService.requestReschedule(coachingSessionId, dateTimeDTO, playerId);
         return ResponseEntity.status(200).body(new ApiResponse("Reschedule request submitted successfully"));
     }
 
-    @PostMapping("/respond-reschedule/{id}/{accept}")
-    public ResponseEntity<ApiResponse> respondReschedule(@PathVariable Integer id, @PathVariable boolean accept) {
-        coachingSessionService.respondReschedule(id, accept);
-        return ResponseEntity.status(200).body(new ApiResponse("Reschedule response submitted successfully"));
+    @PostMapping("/approve-reschedule/{coachingSessionId}/{coachId}")
+    public ResponseEntity<ApiResponse> approveReschedule(@PathVariable Integer coachingSessionId, @PathVariable Integer coachId) {
+        coachingSessionService.approveReschedule(coachingSessionId, coachId);
+        return ResponseEntity.status(200).body(new ApiResponse("Reschedule approved successfully"));
+    }
+
+    @PostMapping("/reject-reschedule/{coachingSessionId}/{coachId}")
+    public ResponseEntity<ApiResponse> rejectReschedule(@PathVariable Integer coachingSessionId, @PathVariable Integer coachId) {
+        coachingSessionService.rejectedReschedule(coachingSessionId, coachId);
+        return ResponseEntity.status(200).body(new ApiResponse("Reschedule rejected successfully"));
     }
 
 

@@ -42,9 +42,8 @@ public class ScheduleService {
         if (schedule == null) {
             throw new ApiException("Schedule not found");
         }
-        schedule.setDate(scheduleDetails.getDate());
-        schedule.setStartTime(scheduleDetails.getStartTime());
-        schedule.setEndTime(scheduleDetails.getEndTime());
+        schedule.setStartDate(scheduleDetails.getStartDate());
+        schedule.setEndDate(scheduleDetails.getEndDate());
         schedule.setIsBooked(scheduleDetails.getIsBooked());
         scheduleRepository.save(schedule);
     }

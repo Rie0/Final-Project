@@ -22,19 +22,24 @@ public class Coach {
 
     @NotBlank(message = "Name is mandatory")
     @Size(max = 100, message = "Name should not exceed 100 characters")
+    @Column(columnDefinition = "varchar(75) not null")
     private String name;
 
+
     @Size(max = 500, message = "Bio should not exceed 500 characters")
+    @Column(columnDefinition = "varchar(150) not null")
     private String bio;
 
     @NotBlank(message = "Expertise is mandatory")
     @Size(max = 100, message = "Expertise should not exceed 100 characters")
+    @Column(columnDefinition = "varchar(125) not null")
     private String expertise;
 
-    @NotNull(message = "Rating is mandatory")
-    @Min(value = 0, message = "Rating should not be less than 0")
-    @Max(value = 5, message = "Rating should not be more than 5")
-    private Float rating;
+
+    @NotNull(message = "hourlyRate is mandatory")
+    @Positive(message = "hourlyRate should be positive")
+    @Column(columnDefinition = "varchar(25) not null")
+    private Integer hourlyRate;
 
     @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
     private Set<Schedule> schedules;

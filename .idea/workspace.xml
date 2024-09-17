@@ -4,7 +4,49 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a9644da5-5f07-4fbf-aece-32244b4e84b4" name="Changes" comment="changes" />
+    <list default="true" id="a9644da5-5f07-4fbf-aece-32244b4e84b4" name="Changes" comment="changes">
+      <change afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/DTO/CoachDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Review.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/ReviewRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_11_2024_2_19_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_11_2024_2_19_PM__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/CoachingSessionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/CoachingSessionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PlayerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Coach.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Coach.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/CoachingSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/CoachingSession.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Schedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Schedule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/CoachRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/CoachRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/CoachingSessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/CoachingSessionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/ScheduleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/ScheduleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/CoachController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/CoachController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/CoachingSessionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/CoachingSessionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/DTO/CoachDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/DTO/CoachDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/Coach.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/Coach.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/CoachingSession.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/CoachingSession.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/Review.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/Review.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/Schedule.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/Schedule.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Repository/CoachRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Repository/CoachRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Repository/CoachingSessionRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Repository/CoachingSessionRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/CoachService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/CoachService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/CoachingSessionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/CoachingSessionService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/PlayerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/PlayerService.class" afterDir="false" />
+    </list>
+    <list id="8c09b00c-84e6-4b7b-be4b-30f7133f5ce2" name="Changes by hasso" comment="">
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/CoachController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/CoachController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Coach.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Coach.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/CoachingSessionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/CoachingSessionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/ScheduleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/ScheduleRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/CoachService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/CoachService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/CoachingSessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/CoachingSessionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/PlayerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/PlayerService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +56,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -31,12 +74,49 @@
     &quot;assignee&quot;: &quot;HussamMohammed7&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Rie0/Final-Project.git",
-    "accountId": "b8e44a87-2fa7-4297-8387-9a4b39b83745"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Rie0/Final-Project.git&quot;,
+    &quot;accountId&quot;: &quot;b8e44a87-2fa7-4297-8387-9a4b39b83745&quot;
   }
-}]]></component>
+}</component>
+  <component name="LineStatusTrackerManager">
+    <file path="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/User.java">
+      <ranges>
+        <range start1="47" end1="47" start2="47" end2="49" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="74" end1="74" start2="76" end2="82" changelist="8c09b00c-84e6-4b7b-be4b-30f7133f5ce2" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Coach.java">
+      <ranges>
+        <range start1="24" end1="24" start2="24" end2="25" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="26" end1="26" start2="27" end2="28" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="27" end1="27" start2="29" end2="30" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="31" end1="31" start2="34" end2="35" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="33" end1="37" start2="37" end2="42" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="46" end1="46" start2="51" end2="59" changelist="8c09b00c-84e6-4b7b-be4b-30f7133f5ce2" />
+      </ranges>
+    </file>
+    <file path="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/CoachingSessionService.java">
+      <ranges>
+        <range start1="5" end1="5" start2="5" end2="7" changelist="8c09b00c-84e6-4b7b-be4b-30f7133f5ce2" />
+        <range start1="30" end1="31" start2="32" end2="59" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="32" end1="32" start2="60" end2="61" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="33" end1="34" start2="62" end2="62" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="40" end1="44" start2="68" end2="69" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="46" end1="46" start2="71" end2="72" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="66" end1="71" start2="92" end2="97" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="72" end1="79" start2="98" end2="100" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="80" end1="97" start2="101" end2="105" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="98" end1="98" start2="106" end2="107" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="100" end1="103" start2="109" end2="111" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="104" end1="112" start2="112" end2="114" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="114" end1="118" start2="116" end2="123" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="119" end1="119" start2="124" end2="125" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+        <range start1="122" end1="122" start2="128" end2="148" changelist="a9644da5-5f07-4fbf-aece-32244b4e84b4" />
+      </ranges>
+    </file>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -48,30 +128,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.NoobApplication.executor": "Run",
-    "com.codeium.enabled": "true",
-    "com.google.cloudcode.ide_session_index": "20240915_0001",
-    "git-widget-placeholder": "MohammedV2",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Rafeef/IdeaProjects/Exercise-Repository",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.NoobApplication.executor&quot;: &quot;Run&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;com.google.cloudcode.ide_session_index&quot;: &quot;20240915_0001&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;MohammedV2&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Rafeef/IdeaProjects/Exercise-Repository&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="NoobApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="NOOB" />

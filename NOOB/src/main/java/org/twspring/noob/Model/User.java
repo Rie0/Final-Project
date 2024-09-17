@@ -46,6 +46,8 @@ public class User implements UserDetails {
     @Pattern(regexp = "^(PLAYER|TEAM|ORGANIZER|VENDOR|COACH|ADMIN)$")
     private String role;
 
+
+
     //GENERAL VARS
 
     @Column(columnDefinition = "VARCHAR(50) NOT NULL UNIQUE")

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Set;
 
@@ -28,14 +29,11 @@ public class Schedule {
     @JsonIgnore
     private Coach coach;
 
-    @NotNull(message = "Date is mandatory")
-    private LocalDate date;
-
     @NotNull(message = "Start time is mandatory")
-    private LocalTime startTime;
+    private LocalDateTime startDate;
 
     @NotNull(message = "End time is mandatory")
-    private LocalTime endTime;
+    private LocalDateTime endDate;
 
     @NotNull(message = "Booking status is mandatory")
     private Boolean isBooked = false;
