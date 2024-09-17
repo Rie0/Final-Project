@@ -9,6 +9,7 @@ import org.twspring.noob.DTO.PlayerDTO;
 import org.twspring.noob.DTO.PlayerProfileDTO;
 import org.twspring.noob.Model.*;
 import org.twspring.noob.Repository.AuthRepository;
+import org.twspring.noob.Repository.ParticipantRepository;
 import org.twspring.noob.Repository.PlayerRepository;
 import org.twspring.noob.Repository.TeamInviteRepository;
 
@@ -24,6 +25,7 @@ public class PlayerService { //RAFEEF
     private final PlayerRepository playerRepository;
     private final AuthRepository authRepository;
     private final TeamInviteRepository teamInviteRepository;
+    private final ParticipantRepository participantRepository;
 
     //START OF CRUD
     public List<Player> getPlayers() {
@@ -42,6 +44,9 @@ public class PlayerService { //RAFEEF
         user.setAge(Period.between(user.getBirthday(), LocalDate.now()).getYears());
         if (user.getAge()<13){
             throw new ApiException("Players under the age of 13 are prohibited from registering in our system");
+        }
+        if ((user.getAge()>13&&user.getAge()<18)&&playerDTO.getParentApproval()==null){
+            throw new ApiException("Minors must include a parental approval before registering");
         }
         user.setRole("PLAYER");
         authRepository.save(user);
@@ -64,6 +69,13 @@ public class PlayerService { //RAFEEF
     }
 
     public void deletePlayer(Integer playerId) {
+        Player player = playerRepository.findPlayerById(playerId);
+        for (Participant participant : player.getParticipants()) {
+            participant.setPlayer(null);
+            player.getParticipants().remove(participant);
+            playerRepository.save(player);
+            participantRepository.delete(participant);
+        }
         authRepository.deleteById(playerId);
     }
     //END OF CRUD

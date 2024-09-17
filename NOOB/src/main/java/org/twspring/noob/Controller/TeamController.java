@@ -79,14 +79,6 @@ public class TeamController { //RAFEEF
         return ResponseEntity.status(200).body(new ApiResponse("Team updated successfully"));
     }
 
-//    @PostMapping("/{teamId}/invite-multiple-players") //not working yet
-//    public ResponseEntity inviteMultiplePlayersToTeam(@AuthenticationPrincipal User team,
-//                                                      @RequestBody @Valid TeamInviteDTO teamInviteDTO,
-//                                                      @RequestBody List<String> playerUsernames) {
-//        teamService.inviteMultiPlayersToTeam(team.getId(), playerUsernames, teamInviteDTO);
-//        return ResponseEntity.status(200).body(new ApiResponse("Players invited successfully"));
-//    }
-
     @DeleteMapping("/invites/{inviteId}/delete")
     public ResponseEntity deleteTeamInvite(@AuthenticationPrincipal User team,
                                            @PathVariable Integer inviteId) {

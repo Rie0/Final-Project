@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class TeamInvite {
+public class TeamInvite { //rafeef
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

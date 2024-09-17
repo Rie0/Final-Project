@@ -18,6 +18,7 @@ public class AdminController {
 
     private final AdminService adminService;
 
+    //ONLY EXECUTED ONCE, COMMENTED LATER
     @PostMapping("/add")
     public ResponseEntity addAdmin(@RequestBody@Valid User user) {
         adminService.createAdmin(user);

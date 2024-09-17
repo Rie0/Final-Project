@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-public class OrganizerDTO {
+public class OrganizerDTO { //rafeef
 
     @NotEmpty(message = "Username cannot be empty")
     @Size(min=4,max = 10,

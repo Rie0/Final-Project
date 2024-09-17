@@ -23,7 +23,7 @@ import java.util.Collections;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User implements UserDetails {
+public class User implements UserDetails { //rafeef
 
     //VARIABLES
 

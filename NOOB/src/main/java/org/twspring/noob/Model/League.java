@@ -75,8 +75,9 @@ public class League { //RAFEEF
             message = "Organizer name must have between 4 to 10 characters")
     private String organizerName;
 
-    //add prizes
+    //RELATIONS
 
+    //Rafeef
     @ManyToOne
     @JsonIgnore
     private Organizer organizer;

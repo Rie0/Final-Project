@@ -1,6 +1,7 @@
 package org.twspring.noob.DTO;
 
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
-public class PlayerDTO {
+public class PlayerDTO { //rafeef
 
     @NotEmpty(message = "Username cannot be empty")
     @Size(min=4,max = 10,
@@ -38,6 +39,9 @@ public class PlayerDTO {
     @Past(message = "Birthdate cannot be in the past")
     @NotNull(message = "Birthday cannot be null")
     private LocalDate birthday;
+
+    @Size(max = 150, message = "parent approval must have between 20 to 150 characters")
+    private String parentApproval;
 
     @CreationTimestamp
     private final LocalDateTime joinedAt = LocalDateTime.now();

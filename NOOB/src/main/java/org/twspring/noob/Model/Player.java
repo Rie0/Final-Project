@@ -33,11 +33,10 @@ public class Player { //Rafeef
     @Column(columnDefinition = "VARCHAR(150) NOT NULL")
     @NotNull(message = "bio cannot be null")
     @Size(max = 150, message = "Bio must have between 0 to 150 characters")
-    private String bio ="";//bio can be empty.
+    private String bio ="";
 
 
     @Column(columnDefinition = "VARCHAR(150)") //only for minors (under 18)
-    @Size(max = 150, message = "parent approval must have between 20 to 150 characters")
     private String parentApproval;
 
     //RELATIONSHIP RELATED VARS
@@ -53,23 +52,22 @@ public class Player { //Rafeef
     @MapsId
     private User user;
 
-
-    //Rafeef
     @ManyToOne
     @JsonIgnore
     private Team team;
 
-    //Rafeef
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     @JsonIgnore
     private Set<TeamInvite> teamInvites;
 
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
-    private Set<SubscripeBy> subscripeBIES;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     @JsonIgnore
     private Set<Participant> participants;
+
+    //hassan
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
+    private Set<SubscripeBy> subscripeBIES;
+
+
 
 }

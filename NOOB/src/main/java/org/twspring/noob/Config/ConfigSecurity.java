@@ -95,7 +95,9 @@ public class ConfigSecurity {
                         "/api/v1/league/{leagueId}/match/{matchId}/add-1score-to-participant2",
                         "/api/v1/league/{leagueId}/match/{matchId}/sub-1score-from-participant1",
                         "/api/v1/league/{leagueId}/match/{matchId}/sub-1score-from-participant2",
-                        "/api/v1/league/{leagueId}/finalize"
+                        "/api/v1/league/{leagueId}/finalize",
+                        "/api/v1/league/delete/{id}",
+                        "/api/v1/league/update/{id}"
                 ).hasAuthority("ORGANIZER")
 
                 //ADMIN AND ORGANIZER
@@ -148,10 +150,13 @@ public class ConfigSecurity {
 
                         "/api/v1/player/get-all",
                         "/api/v1/player/get/{playerId}",
+                        "/api/v1/player/delete-account-by-admin/{id}",
 
                         "/api/v1/team/get-all",
                         "/api/v1/team/get/{teamId}",
-                        "/api/v1/organizer/get"
+                        "/api/v1/organizer/get",
+                        "/api/v1/league/admin/delete/{id}",
+                        "api/v1/league/admin/update/{id}"
                 ).hasAuthority("ADMIN")
 
                 //TEAM

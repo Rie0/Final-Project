@@ -69,7 +69,7 @@ public class LeagueService { //RAFEEF
         }
     }
 
-    public void updateLeague(Integer leagueId, League updatedLeague) {
+    public void updateLeagueByAdmin(Integer leagueId, League updatedLeague) { //for admin
         League league = leagueRepository.findLeagueById(leagueId);
         if (league != null) {
             league.setName(updatedLeague.getName());
@@ -84,12 +84,48 @@ public class LeagueService { //RAFEEF
             throw new ApiException("League not found");
         }
     }
+    public void updateLeagueByOrganizer(Integer leagueId, Integer organizerId, League updatedLeague) {
+        Organizer organizer = organizerRepository.findOrganizerById(organizerId);
+        League league = leagueRepository.findLeagueById(leagueId);
 
-    public void deleteLeague(Integer leagueId) {
+        if (organizer.getId()!=league.getOrganizer().getId()){
+            throw new ApiException("Organizer doesn't own this league");
+        }
+
+        if (league != null) {
+            league.setName(updatedLeague.getName());
+            league.setDescription(updatedLeague.getDescription());
+            league.setStartDate(updatedLeague.getStartDate());
+            league.setEndDate(updatedLeague.getEndDate());
+            league.setStatus(updatedLeague.getStatus());
+            league.setLocation(updatedLeague.getLocation());
+            league.setMaxParticipants(updatedLeague.getMaxParticipants());
+            leagueRepository.save(league);
+        } else {
+            throw new ApiException("League not found");
+        }
+    }
+
+    public void deleteLeagueByAdmin(Integer leagueId) {
         League league = leagueRepository.findLeagueById(leagueId);
         if (league == null) {
             throw new ApiException("League not found");
         }
+        leagueRepository.deleteById(leagueId);
+    }
+
+    public void deleteLeagueByOrganizer(Integer leagueId, Integer organizerId) {
+        Organizer organizer = organizerRepository.findOrganizerById(organizerId);
+        League league = leagueRepository.findLeagueById(leagueId);
+
+        if (organizer.getId()!=league.getOrganizer().getId()){
+            throw new ApiException("Organizer doesn't own this league");
+        }
+
+        if (league == null) {
+            throw new ApiException("League not found");
+        }
+
         leagueRepository.deleteById(leagueId);
     }
 

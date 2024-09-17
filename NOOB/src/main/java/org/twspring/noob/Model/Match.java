@@ -81,11 +81,12 @@ public class Match {
     private Tournament tournament; // Reference to the Tournament this match belongs to
 
     @ManyToOne
-    @JsonIgnore
-    private League league; // Reference to the League this participant is associated with
-
-    @ManyToOne
     @JoinColumn(name = "round_id")
     @JsonIgnore
     private Round round; // Reference to the Round this match is part of
+
+    //rafeef
+    @ManyToOne
+    @JsonIgnore
+    private League league;
 }

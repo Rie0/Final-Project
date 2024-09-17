@@ -32,16 +32,32 @@ public class LeagueController {
         return ResponseEntity.status(200).body("League added successfully");
     }
 
+    @PutMapping("/admin/update/{id}")
+    public ResponseEntity updateLeagueByAdmin(@PathVariable Integer id,
+                                       @Valid @RequestBody League league) {
+        leagueService.updateLeagueByAdmin(id, league);
+        return ResponseEntity.status(200).body("League updated successfully");
+    }
+
     @PutMapping("/update/{id}")
     public ResponseEntity updateLeague(@PathVariable Integer id,
-                                       @Valid @RequestBody League league) {
-        leagueService.updateLeague(id, league);
+                                       @Valid @RequestBody League league,
+                                       @AuthenticationPrincipal User organizer) {
+        leagueService.updateLeagueByOrganizer(id, organizer.getId(),league);
         return ResponseEntity.status(200).body("League updated successfully");
+    }
+
+
+    @DeleteMapping("/admin/delete/{id}")
+    public ResponseEntity deleteLeagueByAdmin(@PathVariable Integer id,
+                                       @AuthenticationPrincipal User organizer) {
+        leagueService.deleteLeagueByOrganizer(id,organizer.getId());
+        return ResponseEntity.status(200).body("League deleted successfully");
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity deleteLeague(@PathVariable Integer id) {
-        leagueService.deleteLeague(id);
+        leagueService.deleteLeagueByAdmin(id);
         return ResponseEntity.status(200).body("League deleted successfully");
     }
     //EXTRA
@@ -58,8 +74,7 @@ public class LeagueController {
         return ResponseEntity.status(200).body(leagueService.getParticipantsByLeague(leagueId));
     }
 
-    //changed path
-    @PutMapping("/{leagueId}/participate") //DTO FOR FORM?
+    @PutMapping("/{leagueId}/participate")
     public ResponseEntity participateInLeague(@PathVariable Integer leagueId,
                                               @AuthenticationPrincipal User player,
                                               @RequestBody String name) {
@@ -67,7 +82,6 @@ public class LeagueController {
         return ResponseEntity.status(200).body("Player participated successfully in league");
     }
 
-    //changed path
     @PutMapping("/{leagueId}/withdraw")
     public ResponseEntity withdrawFromLeague(@PathVariable Integer leagueId,
                                              @AuthenticationPrincipal User player){
@@ -158,7 +172,6 @@ public class LeagueController {
         leagueService.finalizeLeague(organizer.getId(),leagueId);
         return ResponseEntity.status(200).body("League finalized successfully");
     }
-
 
     //GET INFO
     @GetMapping("/{leagueId}/get-rounds")

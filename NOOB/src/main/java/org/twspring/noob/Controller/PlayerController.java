@@ -13,7 +13,7 @@ import org.twspring.noob.Service.PlayerService;
 @RestController
 @RequestMapping("/api/v1/player")
 @RequiredArgsConstructor
-public class PlayerController {
+public class PlayerController { //Rafeef
     private final PlayerService playerService;
 
     @GetMapping("/get-all")
@@ -26,14 +26,20 @@ public class PlayerController {
         playerService.registerPlayer(playerDTO);
         return ResponseEntity.status(200).body(new ApiResponse("Player registered successfully"));
     }
-    @PutMapping("update-my-info")
+    @PutMapping("/update-my-info")
     public ResponseEntity updateMyInfo(@AuthenticationPrincipal User player, @RequestBody@Valid  PlayerDTO playerDTO){
         playerService.updatePlayer(player.getId(), playerDTO);
         return ResponseEntity.status(200).body(new ApiResponse("Player updated successfully"));
     }
-    @DeleteMapping("delete-my-account")
+    @DeleteMapping("/delete-my-account")
     public ResponseEntity deleteMyAccount(@AuthenticationPrincipal User player){
         playerService.deletePlayer(player.getId());
+        return ResponseEntity.status(200).body(new ApiResponse("Player deleted successfully"));
+    }
+
+    @DeleteMapping("/delete-account-by-admin/{id}")
+    public ResponseEntity deleteAccount(@PathVariable Integer id){
+        playerService.deletePlayer(id);
         return ResponseEntity.status(200).body(new ApiResponse("Player deleted successfully"));
     }
 

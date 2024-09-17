@@ -42,8 +42,9 @@ public class Organizer {
     @JsonIgnore
     private List<League> leagues; // List of leagues created by the organizer
 
+    //rafeef
     @OneToOne
     @MapsId
-    private User user; // User associated with the organizer
+    private User user;
 }
 

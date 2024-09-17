@@ -6,25 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="a9644da5-5f07-4fbf-aece-32244b4e84b4" name="Changes" comment="changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Advice/ControllerAdvice.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Advice/ControllerAdvice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Config/ConfigSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Config/ConfigSecurity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/MatchController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/MatchController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PlayerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/TeamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/TeamController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/DTO/PlayerProfileDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/DTO/PlayerProfileDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/DTO/ProfileDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/DTO/ProfileDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/DTO/PlayerDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/DTO/PlayerDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/League.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/League.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Match.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/AuthRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/AuthRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/PlayerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/PlayerRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/AdminService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/LeagueService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/LeagueService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/PlayerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/PlayerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/TeamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/TeamService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Config/ConfigSecurity.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Config/ConfigSecurity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/MatchController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/MatchController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/LeagueController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/LeagueController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/League.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/League.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/LeagueService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/LeagueService.class" afterDir="false" />
     </list>
@@ -239,7 +232,7 @@
       <workItem from="1726555409246" duration="5039000" />
       <workItem from="1726560526426" duration="333000" />
       <workItem from="1726561011947" duration="322000" />
-      <workItem from="1726561395971" duration="15720000" />
+      <workItem from="1726561395971" duration="21794000" />
     </task>
     <task id="LOCAL-00001" summary="changes">
       <option name="closed" value="true" />
@@ -332,7 +325,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/LeagueService.java</url>
-          <line>99</line>
+          <line>135</line>
           <properties class="org.twspring.noob.Service.LeagueService" method="getParticipantsByLeague">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -341,7 +334,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/LeagueService.java</url>
-          <line>134</line>
+          <line>170</line>
           <properties class="org.twspring.noob.Service.LeagueService" method="withdrawFromLeague">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -350,7 +343,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/LeagueService.java</url>
-          <line>489</line>
+          <line>525</line>
           <properties class="org.twspring.noob.Service.LeagueService" method="finalizeLeague">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -359,7 +352,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/LeagueService.java</url>
-          <line>510</line>
+          <line>546</line>
           <properties class="org.twspring.noob.Service.LeagueService" method="getLeaderBoard">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -368,7 +361,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/LeagueService.java</url>
-          <line>428</line>
+          <line>464</line>
           <properties class="org.twspring.noob.Service.LeagueService" method="subtract1fromParticipant2Score">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -377,7 +370,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/LeagueService.java</url>
-          <line>406</line>
+          <line>442</line>
           <properties class="org.twspring.noob.Service.LeagueService" method="subtract1fromParticipant1Score">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -386,7 +379,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/LeagueService.java</url>
-          <line>450</line>
+          <line>486</line>
           <properties class="org.twspring.noob.Service.LeagueService" method="finishMatch">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -395,7 +388,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/LeagueService.java</url>
-          <line>107</line>
+          <line>143</line>
           <properties class="org.twspring.noob.Service.LeagueService" method="participateInLeague">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -403,17 +396,8 @@
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>62</line>
-          <properties class="org.twspring.noob.Controller.LeagueController" method="participateInLeague">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/LeagueService.java</url>
-          <line>87</line>
+          <line>108</line>
           <properties class="org.twspring.noob.Service.LeagueService" method="deleteLeague">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -431,30 +415,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/PlayerService.java</url>
-          <line>28</line>
+          <line>30</line>
           <properties class="org.twspring.noob.Service.PlayerService" method="getPlayers">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/PlayerService.java</url>
-          <line>32</line>
-          <properties class="org.twspring.noob.Service.PlayerService">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/PlayerService.java</url>
-          <line>52</line>
-          <properties class="org.twspring.noob.Service.PlayerService">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/TeamService.java</url>
@@ -494,7 +460,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PlayerController.java</url>
-          <line>63</line>
+          <line>69</line>
           <properties class="org.twspring.noob.Controller.PlayerController" method="getInvites">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -503,7 +469,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PlayerController.java</url>
-          <line>68</line>
+          <line>74</line>
           <properties class="org.twspring.noob.Controller.PlayerController" method="acceptInvite">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -512,7 +478,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PlayerController.java</url>
-          <line>74</line>
+          <line>80</line>
           <properties class="org.twspring.noob.Controller.PlayerController" method="declineInvite">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -521,7 +487,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PlayerController.java</url>
-          <line>80</line>
+          <line>86</line>
           <properties class="org.twspring.noob.Controller.PlayerController" method="leaveTeam">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -593,7 +559,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PlayerController.java</url>
-          <line>57</line>
+          <line>63</line>
           <properties class="org.twspring.noob.Controller.PlayerController" method="editBio">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -611,15 +577,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>28</line>
-          <properties class="org.twspring.noob.Controller.LeagueController" method="addLeague">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="90" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
           <line>35</line>
           <properties class="org.twspring.noob.Controller.LeagueController" method="updateLeague">
             <option name="EMULATED" value="true" />
@@ -629,7 +586,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>42</line>
+          <line>51</line>
           <properties class="org.twspring.noob.Controller.LeagueController" method="deleteLeague">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -638,16 +595,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>23</line>
-          <properties class="org.twspring.noob.Controller.LeagueController" method="getLeagues">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="93" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>71</line>
+          <line>86</line>
           <properties class="org.twspring.noob.Controller.LeagueController" method="withdrawFromLeague">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -656,25 +604,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>56</line>
-          <properties class="org.twspring.noob.Controller.LeagueController" method="getAllParticipants">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="98" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>49</line>
-          <properties class="org.twspring.noob.Controller.LeagueController" method="getLeague">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="99" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>79</line>
+          <line>94</line>
           <properties class="org.twspring.noob.Controller.LeagueController" method="changeLeagueDates">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -683,7 +613,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>87</line>
+          <line>102</line>
           <properties class="org.twspring.noob.Controller.LeagueController" method="setLeagueRoundDate">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -692,7 +622,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>96</line>
+          <line>111</line>
           <properties class="org.twspring.noob.Controller.LeagueController" method="setLeagueMatchDate">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -701,7 +631,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>106</line>
+          <line>121</line>
           <properties class="org.twspring.noob.Controller.LeagueController" method="setLeagueToReady">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -710,7 +640,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>113</line>
+          <line>128</line>
           <properties class="org.twspring.noob.Controller.LeagueController" method="startMatch">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -719,7 +649,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>120</line>
+          <line>135</line>
           <properties class="org.twspring.noob.Controller.LeagueController" method="add1toParticipant1Score">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -728,7 +658,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>155</line>
+          <line>170</line>
           <properties class="org.twspring.noob.Controller.LeagueController" method="finalizeLeague">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -737,7 +667,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>148</line>
+          <line>163</line>
           <properties class="org.twspring.noob.Controller.LeagueController" method="finishMatch">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -746,7 +676,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>141</line>
+          <line>156</line>
           <properties class="org.twspring.noob.Controller.LeagueController" method="sub1fromParticipant2Score">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -755,7 +685,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>134</line>
+          <line>149</line>
           <properties class="org.twspring.noob.Controller.LeagueController" method="sub1fromParticipant1Score">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -764,7 +694,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>127</line>
+          <line>142</line>
           <properties class="org.twspring.noob.Controller.LeagueController" method="add1toParticipant2Score">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -773,7 +703,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>164</line>
+          <line>179</line>
           <properties class="org.twspring.noob.Controller.LeagueController" method="getRounds">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -782,7 +712,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>168</line>
+          <line>183</line>
           <properties class="org.twspring.noob.Controller.LeagueController" method="getMatches">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -791,7 +721,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>172</line>
+          <line>187</line>
           <properties class="org.twspring.noob.Controller.LeagueController" method="getLeaderboard">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -800,7 +730,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PlayerController.java</url>
-          <line>52</line>
+          <line>58</line>
           <properties class="org.twspring.noob.Controller.PlayerController" method="getPlayerProfiles">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -809,7 +739,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PlayerController.java</url>
-          <line>47</line>
+          <line>53</line>
           <properties class="org.twspring.noob.Controller.PlayerController" method="getPlayerProfile">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -825,9 +755,27 @@
           </properties>
           <option name="timeStamp" value="131" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
+          <line>42</line>
+          <properties class="org.twspring.noob.Controller.LeagueController" method="updateLeague">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="135" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/PlayerService.java</url>
+          <line>35</line>
+          <properties class="org.twspring.noob.Service.PlayerService" method="registerPlayer">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="136" />
+        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/LeagueService.java</url>
-          <line>301</line>
+          <line>337</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -836,13 +784,8 @@
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>61</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/LeagueService.java</url>
-          <line>88</line>
+          <line>109</line>
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -854,11 +797,6 @@
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/MatchController.java</url>
           <line>48</line>
           <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/PlayerService.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/CoachService.java</url>
@@ -877,78 +815,83 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>43</line>
+          <line>53</line>
           <option name="timeStamp" value="95" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>70</line>
+          <line>85</line>
           <option name="timeStamp" value="97" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>78</line>
+          <line>93</line>
           <option name="timeStamp" value="102" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>86</line>
+          <line>101</line>
           <option name="timeStamp" value="103" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>95</line>
+          <line>110</line>
           <option name="timeStamp" value="106" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>105</line>
+          <line>120</line>
           <option name="timeStamp" value="108" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>112</line>
+          <line>127</line>
           <option name="timeStamp" value="109" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>119</line>
+          <line>134</line>
           <option name="timeStamp" value="111" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>154</line>
+          <line>169</line>
           <option name="timeStamp" value="114" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>147</line>
+          <line>162</line>
           <option name="timeStamp" value="116" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>140</line>
+          <line>155</line>
           <option name="timeStamp" value="118" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>133</line>
+          <line>148</line>
           <option name="timeStamp" value="120" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
-          <line>126</line>
+          <line>141</line>
           <option name="timeStamp" value="122" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/League.java</url>
-          <line>77</line>
-          <option name="timeStamp" value="127" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/TeamController.java</url>
           <line>33</line>
           <option name="timeStamp" value="130" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/LeagueController.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="134" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PlayerController.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="137" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
