@@ -19,4 +19,6 @@ public class PlayerProfileDTO {
     private String bio;
 
     private String teamName;
+
+    private LocalDateTime joinDate;
 }

@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
+import org.twspring.noob.DTO.PlayerProfileDTO;
 import org.twspring.noob.DTO.ProfileDTO;
 import org.twspring.noob.DTO.TeamDTO;
 import org.twspring.noob.DTO.TeamInviteDTO;
@@ -19,6 +20,7 @@ import org.twspring.noob.Repository.TeamRepository;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -83,16 +85,22 @@ public class TeamService { //RAFEEF
         return team;
     }
 
-    public ProfileDTO getTeamProfile(Integer teamId){
+    public ProfileDTO getTeamProfileById(Integer teamId){
         Team team = getTeamById(teamId);
         if(team == null) {
             throw new ApiException("Team not found");
         }
-        return new ProfileDTO(team.getUser().getUsername(),team.getBio());
+        return new ProfileDTO(team.getUser().getUsername(),team.getBio(),team.getUser().getJoinedAt());
     }
 
-    public List<Player> getPlayersByTeamId(Integer teamId) {
-        return playerRepository.findPlayerByTeamId(teamId);
+    public List<PlayerProfileDTO> getPlayersByTeamId(Integer teamId) {
+        Team team = getTeamById(teamId);
+        List<PlayerProfileDTO> teamPlayers = new ArrayList<>();
+        for (Player player: playerRepository.findPlayerByTeamId(teamId)){
+            PlayerProfileDTO teamPlayer = new PlayerProfileDTO(player.getUser().getUsername(),player.getUser().getAge(),player.getBio(),team.getUser().getUsername(),player.getUser().getJoinedAt());
+            teamPlayers.add(teamPlayer);
+        }
+        return teamPlayers;
     }
 
     //START OF TEAM INVITES

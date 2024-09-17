@@ -137,4 +137,9 @@ public class ControllerAdvice {
         String message = e.getMessage();
         return ResponseEntity.status(400).body(message);
     }
+    @ExceptionHandler(value = IllegalStateException.class)
+    public ResponseEntity<String> handleIllegalStateException(IllegalStateException e) {
+        String message = e.getMessage();
+        return ResponseEntity.status(400).body(message);
+    }
 }

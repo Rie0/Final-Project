@@ -44,6 +44,16 @@ public class PlayerController {
         return ResponseEntity.status(200).body(playerService.getPlayerById(playerId));
     }
 
+    @GetMapping("/get/profile/{playerId}")
+    public ResponseEntity getPlayerProfile(@PathVariable Integer playerId){
+        return ResponseEntity.status(200).body(playerService.getPlayerProfileById(playerId));
+    }
+
+    @GetMapping("/get/profile/by-username/{username}")
+    public ResponseEntity getPlayerProfiles(@PathVariable String username){
+        return ResponseEntity.status(200).body(playerService.getPlayerProfilesByUsernameContaining(username));
+    }
+
     @PutMapping("/edit-bio")
     public ResponseEntity editBio(@AuthenticationPrincipal User player, @RequestBody String bio){
         playerService.updateBio(player.getId(), bio);

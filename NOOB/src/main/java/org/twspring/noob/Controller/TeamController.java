@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/team")
 @RequiredArgsConstructor
-public class TeamController {
+public class TeamController { //RAFEEF
     private final TeamService teamService;
 
     // Public endpoints
@@ -29,11 +29,6 @@ public class TeamController {
     public ResponseEntity registerTeam(@RequestBody@Valid TeamDTO teamDTO) {
         teamService.registerTeam(teamDTO);
         return ResponseEntity.status(200).body(new ApiResponse("Team registered successfully"));
-    }
-
-    @GetMapping("/get/{teamId}")
-    public ResponseEntity getTeamById(@PathVariable Integer teamId) {
-        return ResponseEntity.status(200).body(teamService.getTeamById(teamId));
     }
 
     // Team-related actions requiring authentication
@@ -49,6 +44,15 @@ public class TeamController {
         return ResponseEntity.status(200).body(new ApiResponse("Team deleted successfully"));
     }
 
+    //EXTRA
+    @GetMapping("/get/{teamId}")
+    public ResponseEntity getTeamById(@PathVariable Integer teamId) {
+        return ResponseEntity.status(200).body(teamService.getTeamById(teamId));
+    }
+    @GetMapping("/get/profile/{teamId}")
+    public ResponseEntity getTeamProfile(@PathVariable Integer teamId) {
+        return ResponseEntity.status(200).body(teamService.getTeamProfileById(teamId));
+    }
     // Player management
     @GetMapping("/players/get-all")
     public ResponseEntity getAllTeamPlayers(@AuthenticationPrincipal User team) {
@@ -67,6 +71,12 @@ public class TeamController {
                                              @RequestBody @Valid TeamInviteDTO teamInviteDTO) {
         teamService.invitePlayerToTeam(team.getId(), PlayerUsername, teamInviteDTO);
         return ResponseEntity.status(200).body(new ApiResponse("Player invited successfully"));
+    }
+
+    @PutMapping("/update-bio")
+    public ResponseEntity updateBio(@AuthenticationPrincipal User team, @RequestBody String bio) {
+        teamService.updateBio(team.getId(), bio);
+        return ResponseEntity.status(200).body(new ApiResponse("Team updated successfully"));
     }
 
 //    @PostMapping("/{teamId}/invite-multiple-players") //not working yet

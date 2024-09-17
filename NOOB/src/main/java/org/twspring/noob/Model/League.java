@@ -20,7 +20,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class League {
+public class League { //RAFEEF
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,13 +31,14 @@ public class League {
     @Size(min = 2, max = 100, message = "Name must have between 2 to 100 characters")
     private String name;
 
-    @Column(columnDefinition = "TEXT")
+    @NotNull(message = "Description cannot be null")
+    @Column(columnDefinition = "TEXT NOT NULL")
     private String description;
 
-    @Column(columnDefinition = "TIMESTAMP")
+    @Column(columnDefinition = "DATE NOT NULL")
     private LocalDate startDate;
 
-    @Column(columnDefinition = "TIMESTAMP")
+    @Column(columnDefinition = "DATE NOT NULL")
     private LocalDate endDate;
 
     @Enumerated(EnumType.STRING)
@@ -51,6 +52,7 @@ public class League {
         ENDED //LEAGUE ENDED
     }
 
+    @NotNull(message = "Location cannot be null")
     @Column(columnDefinition = "VARCHAR(255)")
     private String location;
 
@@ -63,9 +65,20 @@ public class League {
     @Column(columnDefinition = "INT")
     private Integer currentParticipants;
 
-    //add game+prize
+    @NotNull(message = "Game cannot be null")
+    @Column(columnDefinition = "VARCHAR(50)") //some games have really long names
+    @Size(max = 50, min = 4, message = "Game must have between 4 to 50 characters")
+    private String game;
+
+    @Column(columnDefinition = "VARCHAR(10) NOT NULL")
+    @Size(min=4,max = 10,
+            message = "Organizer name must have between 4 to 10 characters")
+    private String organizerName;
+
+    //add prizes
 
     @ManyToOne
+    @JsonIgnore
     private Organizer organizer;
 
     @OneToMany(mappedBy = "league", cascade = CascadeType.ALL)

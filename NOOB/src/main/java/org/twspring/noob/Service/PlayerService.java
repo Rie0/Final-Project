@@ -15,11 +15,12 @@ import org.twspring.noob.Repository.TeamInviteRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class PlayerService {
+public class PlayerService { //RAFEEF
     private final PlayerRepository playerRepository;
     private final AuthRepository authRepository;
     private final TeamInviteRepository teamInviteRepository;
@@ -74,13 +75,32 @@ public class PlayerService {
         return player;
     }
 
-    public PlayerProfileDTO getPlayerProfile(Integer playerId) {
+    public PlayerProfileDTO getPlayerProfileById(Integer playerId) {
         Player player= playerRepository.findPlayerById(playerId);
         if (player == null) {
             throw new ApiException("Player not found");
         }
-        return new PlayerProfileDTO(player.getUser().getUsername(),player.getUser().getAge(),player.getBio(),player.getTeam().getUser().getUsername());
+        if (player.getTeam()==null){
+            return new PlayerProfileDTO(player.getUser().getUsername(),player.getUser().getAge(),player.getBio(),"Not in team.",player.getUser().getJoinedAt());
+        }
+        return new PlayerProfileDTO(player.getUser().getUsername(),player.getUser().getAge(),player.getBio(),player.getTeam().getUser().getUsername(),player.getUser().getJoinedAt());
     }
+
+    public List<PlayerProfileDTO> getPlayerProfilesByUsernameContaining(String username) {
+        List<Player> foundPlayer= playerRepository.findPlayersByUserUsernameContaining(username);
+        List<PlayerProfileDTO> foundPlayerProfiles= new ArrayList<>();
+        for (Player player : foundPlayer) {
+            if (player.getTeam()==null){
+                PlayerProfileDTO playerProfileDTO = new PlayerProfileDTO(player.getUser().getUsername(),player.getUser().getAge(),player.getBio(),"Not in team.",player.getUser().getJoinedAt());
+                foundPlayerProfiles.add(playerProfileDTO);
+                continue;
+            }
+            PlayerProfileDTO playerProfileDTO = new PlayerProfileDTO(player.getUser().getUsername(),player.getUser().getAge(),player.getBio(),player.getTeam().getUser().getUsername(),player.getUser().getJoinedAt());
+            foundPlayerProfiles.add(playerProfileDTO);
+        }
+        return foundPlayerProfiles;
+    }
+
 
     public void updateBio(Integer playerId, String bio) {
         Player player = playerRepository.findPlayerById(playerId);

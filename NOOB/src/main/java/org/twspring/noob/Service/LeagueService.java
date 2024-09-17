@@ -45,6 +45,7 @@ public class LeagueService { //RAFEEF
         league.setStatus(League.Status.INACTIVE);
         league.setOrganizer(organizer);
         league.setCurrentParticipants(0);
+        league.setOrganizerName(organizer.getUser().getUsername());
         leagueRepository.save(league);
 
         //Create rounds
@@ -141,10 +142,25 @@ public class LeagueService { //RAFEEF
         if (!league.getParticipants().contains(participantRepository.findParticipantByPlayerIdAndLeagueId(playerId, leagueId))) {
             throw new ApiException("Participant is not registered for this league");
         }
-        if (league.getStatus()== League.Status.ONGOING){}
-        league.getParticipants().remove(participant);
-        participant.setPlayer(null);
-        participantRepository.delete(participant);
+        //in case it didn't get started, no consequences
+        if (league.getStatus() == League.Status.FULL||league.getStatus()==League.Status.OPEN) {
+            league.getParticipants().remove(participant);
+            participant.setPlayer(null);
+            participantRepository.delete(participant);
+            if (league.getStatus() == League.Status.FULL){
+                league.setStatus(League.Status.OPEN);
+            }
+        }
+
+        //in case the league started; cancel all matches with participant but don't delete.
+        if (league.getStatus() == League.Status.ONGOING){
+            for(Match match : matchRepository.findMatchByLeagueId(leagueId)){
+                if (match.getParticipant1().getPlayer().getId()==participant.getPlayer().getId()||match.getParticipant2().getPlayer().getId()==participant.getPlayer().getId()){
+                    match.setStatus("CANCELLED");
+                    matchRepository.save(match);
+                }
+            }
+        }
         league.setCurrentParticipants(league.getCurrentParticipants() - 1);
         leagueRepository.save(league);
     }
@@ -330,6 +346,9 @@ public class LeagueService { //RAFEEF
         if (match.getLeague().getId()!=league.getId()) {
             throw new ApiException("This match doesn't belong to this league");
         }
+        if (league.getStatus()!=League.Status.ONGOING) {
+            throw new ApiException("You can only start the match when the league started");
+        }
         if (!match.isParticipant1Ready()&&!match.isParticipant2Ready()) {
             throw new ApiException("You can only start the match when the all participants are ready");
         }
@@ -480,7 +499,7 @@ public class LeagueService { //RAFEEF
         }
         //make sure all matches are finished
         for (Match match : matches) {
-            if (!match.getStatus().equals("FINISHED")) {
+            if (!match.getStatus().equals("FINISHED")&&!match.getStatus().equals("CANCELLED")) {
                 throw new ApiException("All matches must be finished before finalizing the league");
             }
         }
@@ -491,6 +510,9 @@ public class LeagueService { //RAFEEF
     }
     public List<Participant> getLeaderBoard(Integer leagueId){
         League league = leagueRepository.findLeagueById(leagueId);
+        if (league==null){
+            throw new ApiException("League not found");
+        }
         if (!league.getStatus().equals(League.Status.ENDED)&&!league.getStatus().equals(League.Status.ONGOING)){
             throw new ApiException("League didn't start yet");
         }

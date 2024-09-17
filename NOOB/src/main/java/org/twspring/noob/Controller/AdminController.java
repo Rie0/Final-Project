@@ -1,6 +1,7 @@
 package org.twspring.noob.Controller;
 
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,10 +16,10 @@ import org.twspring.noob.Service.AdminService;
 @RequiredArgsConstructor
 public class AdminController {
 
-    private AdminService adminService;
+    private final AdminService adminService;
 
     @PostMapping("/add")
-    public ResponseEntity addAdmin(@RequestBody User user) {
+    public ResponseEntity addAdmin(@RequestBody@Valid User user) {
         adminService.createAdmin(user);
         return ResponseEntity.ok().build();
     }

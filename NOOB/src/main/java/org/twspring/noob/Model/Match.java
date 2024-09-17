@@ -25,12 +25,12 @@ public class Match {
 
     @ManyToOne
     @JoinColumn(name = "participant1_id")
-    //@JsonIgnore
+    @JsonIgnore
     private Participant participant1; // Reference to the first participant
 
     @ManyToOne
     @JoinColumn(name = "participant2_id")
-    //@JsonIgnore
+    @JsonIgnore
     private Participant participant2; // Reference to the second participant
 
     @ManyToOne

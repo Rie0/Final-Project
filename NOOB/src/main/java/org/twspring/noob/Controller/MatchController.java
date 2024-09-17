@@ -40,15 +40,15 @@ public class MatchController {
         return ResponseEntity.status(HttpStatus.OK).body("Match deleted successfully");
     }
 
-    @PostMapping("/{matchId}/ready/participant1/{playerId}")
-    public ResponseEntity setParticipant1Ready(@PathVariable Integer matchId, @PathVariable Integer playerId, @AuthenticationPrincipal User user) {
-        matchService.setParticipant1Ready(matchId, playerId);
+    @PostMapping("/{matchId}/ready/participant1")
+    public ResponseEntity setParticipant1Ready(@PathVariable Integer matchId, @AuthenticationPrincipal User user) {
+        matchService.setParticipant1Ready(matchId, user.getId());
         return ResponseEntity.ok("Participant 1 is now ready.");
     }
 
-    @PostMapping("/{matchId}/ready/participant2/{playerId}")
-    public ResponseEntity<String> setParticipant2Ready(@PathVariable Integer matchId, @PathVariable Integer playerId, @AuthenticationPrincipal User user) {
-        matchService.setParticipant2Ready(matchId, playerId);
+    @PostMapping("/{matchId}/ready/participant2")
+    public ResponseEntity<String> setParticipant2Ready(@PathVariable Integer matchId, @AuthenticationPrincipal User user) {
+        matchService.setParticipant2Ready(matchId, user.getId());
         return ResponseEntity.ok("Participant 2 is now ready.");
     }
 
@@ -97,5 +97,9 @@ public class MatchController {
     @GetMapping("/get-by-participant/{participantId}")
     public ResponseEntity getParticipantMatches(@PathVariable Integer participantId) {
         return ResponseEntity.status(200).body(matchService.participantGetMatches(participantId));
+    }
+    @GetMapping("/get-by-id/{matchId}")
+    public ResponseEntity getMatchById(@PathVariable Integer matchId) {
+        return ResponseEntity.status(200).body(matchService.getMatchById(matchId));
     }
 }
