@@ -14,7 +14,7 @@ public interface TournamentRepository extends JpaRepository<Tournament, Integer>
     List<Tournament> findByGame(String game);
     List<Tournament> findByCity(String city);
     List<Tournament> findByAttendanceType(String attendanceType);
-    List<Tournament> findByStatus(String status);
+    List<Tournament> findByStatus(Tournament.Status status);
     @Query("SELECT t FROM Tournament t WHERE t.startDate >= CURRENT_DATE")
     List<Tournament> findUpcomingTournaments();
 

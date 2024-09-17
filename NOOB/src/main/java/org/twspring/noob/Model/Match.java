@@ -63,16 +63,16 @@ public class Match {
 //    @Column(columnDefinition = "VARCHAR(20)")
 //    private String score; // Score of the match (e.g., "2-1")
 
-    @Column(columnDefinition = "INT NOT NULL DEFAULT 0")
-    private Integer participant1score;
+    @Column(columnDefinition = "INT DEFAULT 0")
+    private Integer participant1score = 0;
 
-    @Column(columnDefinition = "INT NOT NULL DEFAULT 0")
-    private Integer participant2score;
+    @Column(columnDefinition = "INT DEFAULT 0")
+    private Integer participant2score = 0;
 
-    @Column(columnDefinition = "VARCHAR(50) NOT NULL")
+    @Column(columnDefinition = "VARCHAR(50) ")
     private String participant1Name;
 
-    @Column(columnDefinition = "VARCHAR(50) NOT NULL")
+    @Column(columnDefinition = "VARCHAR(50) ")
     private String participant2Name;
 
     @ManyToOne

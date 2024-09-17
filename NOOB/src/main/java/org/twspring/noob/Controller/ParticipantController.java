@@ -24,11 +24,11 @@ public class ParticipantController {
 
     @PostMapping("/add/{tournamentId}")
     public ResponseEntity addParticipant(@AuthenticationPrincipal User user,
-                                         @Valid @RequestBody Participant participant,
+                                         @RequestParam String name,
                                          @PathVariable Integer tournamentId
                                          ) {
         // The security check is handled by the security configuration
-        participantService.saveParticipant(participant, tournamentId, user.getId());
+        participantService.participateInTournament(  user.getId(),tournamentId,name);
         return ResponseEntity.status(HttpStatus.OK).body("Participant added successfully");
     }
 

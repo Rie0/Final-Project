@@ -33,6 +33,12 @@ public class ConfigSecurity {
                 .and()
                 .authenticationProvider(daoAuthenticationProvider())
                 .authorizeHttpRequests()
+                // Allow open access for specific endpoints
+                .requestMatchers("/api/v1/organizer/add").permitAll()
+                .requestMatchers("/api/v1/match/get").permitAll()
+                .requestMatchers("/api/v1/participant/get").permitAll()
+                .requestMatchers("/api/v1/player/register").permitAll()
+                .requestMatchers("/api/v1/coach/register").permitAll()
 
                //ALL
                 .requestMatchers(
@@ -64,15 +70,32 @@ public class ConfigSecurity {
                 .requestMatchers("/api/v1/coach/register").permitAll() // Open registration for coaches
                 .requestMatchers("/api/v1/coach/get-all").permitAll()
                 .requestMatchers("/api/v1/coach/get/**").permitAll()
+                .requestMatchers("/api/v1/tournament/get",
+                        "/api/v1/tournament/by-game",
+                        "/api/v1/tournament/by-city",
+                        "/api/v1/tournament/online",
+                        "/api/v1/tournament/onsite",
+                        "/api/v1/tournament/status/ongoing",
+                        "/api/v1/tournament/status/active",
+                        "/api/v1/tournament/status/closing-soon",
+                        "/api/v1/tournament/status/finished",
+                        "/api/v1/tournament/{id}",
+                        "/api/v1/tournament/{id}/description",
+                        "/api/v1/tournament/{id}/matches",
+                        "/api/v1/tournament/{id}/bracket",
+                        "/api/v1/tournament/{id}/standing",
+                        "/api/v1/tournament/{tournamentId}/matches/completed",
+                        "/api/v1/tournament/{tournamentId}/matches/in-progress",
+                        "/api/v1/tournament/{tournamentId}/matches/not-started").permitAll()
 
                 //COACH
                 .requestMatchers("/api/v1/coach/update/**", "/api/v1/coach/delete/**").hasAuthority("COACH")
 
                 //ORGANIZER
-                .requestMatchers(
-                        //tournaments
-                        "/api/v1/tournament/update/**",
+                .requestMatchers("/api/v1/tournament/update/**",
+                        "/api/v1/tournament/add",
                         "/api/v1/tournament/*/initializeBracket",
+                        "/api/v1/tournament/*/initializeDoubleEliminationBracket",
                         "/api/v1/tournament/*/start",
                         "/api/v1/tournament/delete/**",
                         "/api/v1/tournament/*/finalize",
@@ -97,8 +120,11 @@ public class ConfigSecurity {
                         "/api/v1/league/{leagueId}/match/{matchId}/sub-1score-from-participant2",
                         "/api/v1/league/{leagueId}/finalize",
                         "/api/v1/league/delete/{id}",
-                        "/api/v1/league/update/{id}"
+                        "/api/v1/league/update/{id}",
+                        "/api/v1/tournament/*/finalize"
                 ).hasAuthority("ORGANIZER")
+
+                .requestMatchers("/api/v1/tournament/*/participant/*/checkin").hasAnyAuthority("ADMIN", "ORGANIZER")
 
                 //ADMIN AND ORGANIZER
                 .requestMatchers(
@@ -116,7 +142,7 @@ public class ConfigSecurity {
                 //PLAYER AND ADMIN
                 .requestMatchers("/api/v1/participant/add/**",
                         "/api/v1/participant/update/**",
-                        ("/api/v1/participant/get/**"),
+                        "/api/v1/participant/get/**",
                         "/api/v1/participant/delete/**").hasAnyAuthority("PLAYER", "ADMIN")
 
                 //ADMIN ORGANIZER PLAYER
