@@ -1,5 +1,6 @@
 package org.twspring.noob.Advice;
 
+import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.dao.InvalidDataAccessResourceUsageException;
@@ -139,6 +140,11 @@ public class ControllerAdvice {
     }
     @ExceptionHandler(value = IllegalStateException.class)
     public ResponseEntity<String> handleIllegalStateException(IllegalStateException e) {
+        String message = e.getMessage();
+        return ResponseEntity.status(400).body(message);
+    }
+    @ExceptionHandler(value = ConstraintViolationException.class)
+    public ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException e) {
         String message = e.getMessage();
         return ResponseEntity.status(400).body(message);
     }
