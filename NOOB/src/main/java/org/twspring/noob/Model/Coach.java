@@ -50,4 +50,14 @@ public class Coach {
 
     @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
     private Set<CoachingSession> coachingSessions;
+
+
+    @OneToOne
+    @MapsId
+    @JsonIgnore
+
+    private User user;
+
+    @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
+    private Set<Review> reviews;
 }

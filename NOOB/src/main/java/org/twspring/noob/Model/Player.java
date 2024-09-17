@@ -61,7 +61,8 @@ public class Player {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     private Set<SubscripeBy> subscripeBIES;
 
-
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+    private Set<Review> reviews;
 
     //GAMES
 }

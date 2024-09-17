@@ -75,6 +75,12 @@ public class User implements UserDetails {
     private Player player;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+
+    @PrimaryKeyJoinColumn
+    private Coach coach;
+
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonIgnore
     @PrimaryKeyJoinColumn
     private Team team;

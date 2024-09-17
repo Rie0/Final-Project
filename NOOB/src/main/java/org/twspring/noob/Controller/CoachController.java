@@ -2,14 +2,11 @@ package org.twspring.noob.Controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.twspring.noob.Api.ApiResponse;
-import org.twspring.noob.Model.Coach;
+import org.twspring.noob.DTO.CoachDTO;
 import org.twspring.noob.Service.CoachService;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/coach")
@@ -26,15 +23,15 @@ public class CoachController {
 
     // CRUD register
     @PostMapping("/register")
-    public ResponseEntity registerCoach(@RequestBody @Valid Coach coach) {
-        coachService.addCoach(coach);
+    public ResponseEntity registerCoach(@RequestBody @Valid CoachDTO coachDTO) {
+        coachService.addCoach(coachDTO);
         return ResponseEntity.status(200).body(new ApiResponse("Coach registered successfully"));
     }
 
     // CRUD update
     @PutMapping("/update/{coachId}")
-    public ResponseEntity updateMyInfo(@PathVariable Integer coachId, @RequestBody @Valid Coach coachDetails) {
-        coachService.updateCoach(coachId, coachDetails);
+    public ResponseEntity updateMyInfo(@PathVariable Integer coachId, @RequestBody @Valid CoachDTO coachDTO) {
+        coachService.updateCoach(coachId, coachDTO);
         return ResponseEntity.status(200).body(new ApiResponse("Coach updated successfully"));
     }
 
@@ -49,6 +46,11 @@ public class CoachController {
     @GetMapping("/get/{coachId}")
     public ResponseEntity getCoachById(@PathVariable Integer coachId) {
         return ResponseEntity.status(200).body(coachService.getCoachById(coachId));
+    }
+
+    @GetMapping("/get-by-hourly-rate-range/{minRate}/{maxRate}")
+    public ResponseEntity getCoachesByHourlyRateRange(@PathVariable Integer minRate, @PathVariable Integer maxRate) {
+        return ResponseEntity.status(200).body(coachService.getCoachesByHourlyRateRange(minRate, maxRate));
     }
 
 

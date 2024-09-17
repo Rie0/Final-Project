@@ -5,13 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
 import org.twspring.noob.DTO.PlayerDTO;
-import org.twspring.noob.Model.Player;
-import org.twspring.noob.Model.Team;
-import org.twspring.noob.Model.TeamInvite;
-import org.twspring.noob.Model.User;
-import org.twspring.noob.Repository.AuthRepository;
-import org.twspring.noob.Repository.PlayerRepository;
-import org.twspring.noob.Repository.TeamInviteRepository;
+import org.twspring.noob.Model.*;
+import org.twspring.noob.Repository.*;
 
 import java.util.List;
 
@@ -21,6 +16,10 @@ public class PlayerService {
     private final PlayerRepository playerRepository;
     private final AuthRepository authRepository;
     private final TeamInviteRepository teamInviteRepository;
+    private final CoachingSessionRepository coachingSessionRepository;
+    private final ReviewRepository reviewRepository;
+    private final CoachRepository coachRepository;
+
 
     //START OF CRUD
     public List<Player> getPlayers() {
@@ -127,4 +126,98 @@ public class PlayerService {
         player.setTeam(null);
         playerRepository.save(player);
     }
+
+    public void addReview(Integer playerId, Integer coachId, Integer coachingSessionId, String comment, Float rating) {
+
+        CoachingSession coachingSession = coachingSessionRepository.findCoachingSessionById(coachingSessionId);
+        if (coachingSession == null) {
+            throw new ApiException("Coaching session not found");
+        }
+
+        // Check if the player and coach are associated with the coaching session
+        if (!coachingSession.getPlayer().getId().equals(playerId) || !coachingSession.getCoach().getId().equals(coachId)) {
+            throw new ApiException("Player and coach are not associated with this coaching session");
+        }
+
+        // Ensure the coaching session status is "ended"
+        if (!"ended".equalsIgnoreCase(coachingSession.getStatus())) {
+            throw new ApiException("Coaching session is not ended yet");
+        }
+
+        // Create and save the review
+        Review review = new Review();
+        review.setPlayer(coachingSession.getPlayer());
+        review.setCoach(coachingSession.getCoach());
+        review.setCoachingSession(coachingSession);
+        review.setComment(comment);
+        review.setRating(rating);
+
+        reviewRepository.save(review);
+    }
+
+    // CRUD get all
+    public List<Review> getAllReviews() {
+        return reviewRepository.findAll();
+    }
+
+    // CRUD update
+    public void updateReview(Integer id, Review review) {
+        Review existingReview = reviewRepository.findReviewById(id);
+        if (existingReview == null) {
+            new ApiException("Review not found");
+        }
+
+        Player player = playerRepository.findPlayerById(review.getPlayer().getId());
+        if (player == null) {
+               new ApiException("Player not found");
+        }
+        Coach coach = coachRepository.findCoachById(review.getCoach().getId());
+
+        if (coach == null) {
+            new ApiException("Coach not found");
+        }
+        CoachingSession coachingSession = coachingSessionRepository.findCoachingSessionById(review.getCoachingSession().getId());
+        if (coachingSession == null){
+            new ApiException("Coaching session not found");
+        }
+
+        existingReview.setPlayer(player);
+        existingReview.setCoach(coach);
+        existingReview.setCoachingSession(coachingSession);
+        existingReview.setRating(review.getRating());
+        existingReview.setComment(review.getComment());
+
+        reviewRepository.save(existingReview);
+    }
+
+    // CRUD delete
+    public void deleteReview(Integer id) {
+        Review review = reviewRepository.findReviewById(id);
+        if (review == null) {
+            new ApiException("Review not found");
+        }
+        reviewRepository.delete(review);
+    }
+
+
+    public List<Review> getReviewsForPlayer(Integer playerId) {
+        Player player = playerRepository.findPlayerById(playerId);
+        if (player == null) {
+            throw new ApiException("Player not found");
+        }
+        return reviewRepository.findByPlayer(player);
+    }
+
+    // EXTRA endpoint: getting a review by id
+    public Review getReviewById(Integer id) {
+        Review review = reviewRepository.findReviewById(id);
+        if (review == null) {
+            throw new ApiException("Review not found");
+        }
+        return review;
+    }
+
+
+
+
 }
