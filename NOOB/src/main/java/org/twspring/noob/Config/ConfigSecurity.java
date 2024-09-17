@@ -34,10 +34,6 @@ public class ConfigSecurity {
                 .authenticationProvider(daoAuthenticationProvider())
                 .authorizeHttpRequests()
                 // Allow open access for specific endpoints
-                .requestMatchers("/api/v1/organizer/add").permitAll()
-                .requestMatchers("/api/v1/match/get").permitAll()
-                .requestMatchers("/api/v1/participant/get").permitAll()
-                .requestMatchers("/api/v1/player/register").permitAll()
                 .requestMatchers("/api/v1/coach/register").permitAll()
 
                //ALL
