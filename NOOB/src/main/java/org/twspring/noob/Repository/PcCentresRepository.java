@@ -19,5 +19,8 @@ PcCentres findPcCentresByCentreName(String centreName);
 
 List<PcCentres>findPcCentresByLocation(String location);
 
+List<PcCentres> findPcCentresByApprovedFalse();
+    List<PcCentres> findPcCentresByApprovedTrue();
+
 }
 

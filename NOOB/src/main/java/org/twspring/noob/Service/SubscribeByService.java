@@ -18,30 +18,34 @@ public class SubscribeByService {
     private final PlayerRepository playerRepository;
     private final PcCentresRepository pcCentresRepository;
     private final ZoneRepository zoneRepository;
-private final VendorRepository vendorRepository;
+    private final VendorRepository vendorRepository;
+    private final SubscriptionRepository subscriptionRepository;
 
     public List<SubscripeBy> getAllsubscribeBy() {
         return subscribeByRepository.findAll();
     }
 
-
-    public void addSubscripeBy(SubscripeBy subscripeBy,Integer vendorId,Integer pcCenterID,Integer zoneId) {
+    public void addSubscripeBy(SubscripeBy subscripeBy, Integer vendorId, Integer pcCenterID, Integer zoneId, Integer playerId) {
         PcCentres pcCentres = pcCentresRepository.findPcCentreById(pcCenterID);
-        Zone zone=zoneRepository.findZoneById(zoneId);
-        Vendor vendor=vendorRepository.findVendorById(vendorId);
-        if (vendor==null){
+        Zone zone = zoneRepository.findZoneById(zoneId);
+        Vendor vendor = vendorRepository.findVendorById(vendorId);
+        Player player = playerRepository.findPlayerById(playerId);
+        if (player == null) {
+            throw new ApiException("Player not found");
+        }
+        if (vendor == null) {
             throw new ApiException("vendor not found");
         }
-        if(pcCentres==null) {
+        if (pcCentres == null) {
             throw new ApiException("pcCentre not found");
         }
-        if(zone==null) {
+        if (zone == null) {
             throw new ApiException("zone not found");
         }
-        if (vendor.getId()!=pcCentres.getVendor().getId()) {
+        if (vendor.getId() != pcCentres.getVendor().getId()) {
             throw new ApiException("vendor id not match");
         }
-
+        subscripeBy.setPlayer(player);
         subscribeByRepository.save(subscripeBy);
 
     }
@@ -61,46 +65,93 @@ private final VendorRepository vendorRepository;
         }
         subscribeByRepository.delete(subscripeBy);
     }
-//////
+
+    //////
     public List<SubscripeBy> getSubscribedByPlayerId(Integer playerId) {
-        Player player=playerRepository.findPlayerById(playerId);
+        Player player = playerRepository.findPlayerById(playerId);
         if (player == null) {
             throw new ApiException("Player not found");
         }
 
-return subscribeByRepository.findSubscripeBIESByPlayerId(playerId);
+        return subscribeByRepository.findSubscripeBIESByPlayerId(playerId);
     }
 
-public void reduceSubscribedByRemainingHours(Integer subscribeById, Integer playedHours,Integer vendorId) {
-       SubscripeBy subscripeBy=subscribeByRepository.findSubscripeBIESById(subscribeById);
-       if (subscripeBy == null) {
-           throw new ApiException("Subscribe By not found");
+    ///////////////////////
 
-       }
+    public void subscribePlayerToSubscription(Integer playerId, Integer subscriptionId, Integer zoneId,
+                                              int playerMembers, String coupan, String name) {
 
+        Player player = playerRepository.findPlayerById(playerId);
+        if (player == null)
+            throw new ApiException("Player not found");
 
-       if (playedHours>subscripeBy.getRemainingHours()) {
-           subscripeBy.setStatus(false);
-           subscripeBy.setRemainingHours(0);
-           throw new ApiException("you used your remaining hours");
-       }
+        Zone zone = zoneRepository.findZoneById(zoneId);
+        if (zone == null)
+            throw new ApiException("Zone not found");
 
-       if (subscripeBy.getEndDate().after(subscripeBy.getEndDate())) {
-          throw new ApiException("your subscription is ended");
-       }
+        Subscription subscription = subscriptionRepository.findSubscriptionById(subscriptionId);
+        if (subscription == null)
+            throw new ApiException("Subscription not found");
 
-       subscripeBy.setRemainingHours(subscripeBy.getRemainingHours()-playedHours);
-subscribeByRepository.save(subscripeBy);
-   }
+        SubscripeBy subscripeBy = new SubscripeBy();
+        subscripeBy.setPlayer(player);
+        subscripeBy.setSubscription(subscription);
+        subscripeBy.setStartDate(new Date());
+        subscripeBy.setRemainingHours(subscription.getSubscriptionHours());
+        subscripeBy.setStatus(true);
+        subscripeBy.setPlayerMembers(playerMembers);
 
+        if (playerMembers > 2) {
+            double originalPrice = subscription.getPrice();
+            double discountedPrice = originalPrice * 0.80;
+            subscription.setPrice(discountedPrice);
+        }
+        if (coupan.equalsIgnoreCase("94")) {
+            subscription.setPrice(subscription.getPrice() - 94);
+        }
+        if (name.equalsIgnoreCase("pro")) {
+            subscription.setSubscriptionNmae("pro");
+            subscription.setPrice(subscription.getSubscriptionHours() + 10);
 
+        }
+        if (name.equalsIgnoreCase("basic")) {
+            subscription.setSubscriptionNmae("basic");
+            subscription.setPrice(subscription.getSubscriptionHours() + 2);
+        }
 
+        subscribeByRepository.save(subscripeBy);
+    }
 
-       }
+    ////////////////////////
 
+    public void playerReturnSubscription(Integer subscripeById) {
+        SubscripeBy subscripeBy = subscribeByRepository.findSubscripeBIESById(subscripeById);
+        if (subscripeBy == null) {
+            throw new ApiException("subscribBy id not found");
+        }
 
+        long timeElapsed = new Date().getTime() - subscripeBy.getStartDate().getTime();
+        long twentyFiveMinutesInMillis = 25 * 60 * 1000;
 
+        if (timeElapsed > twentyFiveMinutesInMillis) {
+            throw new ApiException("Cannot return subscription after 25 minutes");
+        }
 
+        subscripeBy.setEndDate(new Date());
+        subscripeBy.setStatus(false);
 
+        subscribeByRepository.save(subscripeBy);
 
+        Subscription subscription = subscripeBy.getSubscription();
+        if (subscription != null) {
+            subscription.setPrice(subscription.getPrice() + calculateRefundAmount(subscripeBy)); // Adjust subscription
 
+            subscriptionRepository.save(subscription);
+        }
+    }
+
+    private double calculateRefundAmount(SubscripeBy subscripeBy) {
+        return subscripeBy.getSubscription().getPrice();
+    }
+
+}

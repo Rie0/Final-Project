@@ -3,9 +3,11 @@ package org.twspring.noob.Controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.twspring.noob.Model.PC;
 import org.twspring.noob.Model.PcCentres;
+import org.twspring.noob.Model.User;
 import org.twspring.noob.Model.Zone;
 import org.twspring.noob.Service.ZoneService;
 
@@ -21,21 +23,21 @@ public class ZoneController {
         return ResponseEntity.status(200).body(zoneService.getAllPcZone());
     }
 
-    @PostMapping("add-zone/{centreId}/{vendorId}")
-    public ResponseEntity addZone(@PathVariable Integer vendorId, @PathVariable Integer centreId, @Valid @RequestBody Zone zone) {
-        zoneService.addZone(zone, centreId, vendorId);
+    @PostMapping("/add-zone/{centreId}/{vendorId}")
+    public ResponseEntity addZone(@AuthenticationPrincipal User user, @PathVariable Integer centreId, @Valid @RequestBody Zone zone) {
+        zoneService.addZone(zone, centreId, user.getId());
         return ResponseEntity.status(200).body("Zone added successfully");
     }
 
-    @PutMapping("update-zone/{id}")
-    public ResponseEntity updateZone(@PathVariable Integer id, @Valid @RequestBody Zone zone) {
-        zoneService.updateZone(id, zone);
+    @PutMapping("/update-zone/{zoneId}")
+    public ResponseEntity updateZone(@PathVariable Integer zoneId,@AuthenticationPrincipal User user, @Valid @RequestBody Zone zone) {
+        zoneService.updateZone(zoneId, zone, user.getId());
         return ResponseEntity.status(200).body("Zone updated successfully");
     }
 
-    @DeleteMapping("/delete-zone/{id}")
-    public ResponseEntity deleteZone(@PathVariable Integer id) {
-        zoneService.deleteZone(id);
+    @DeleteMapping("/delete-zone/{zoneId}")
+    public ResponseEntity deleteZone(@PathVariable Integer zoneId,@AuthenticationPrincipal User user) {
+        zoneService.deleteZone(zoneId, user.getId());
         return ResponseEntity.status(200).body("Zone deleted successfully");
     }
 
@@ -45,9 +47,9 @@ public class ZoneController {
         return ResponseEntity.status(200).body(zoneService.getZoneByPcCentre(pcCentreId));
     }
 
-    @PutMapping("chang-zone-status/{PcCentre}/{zone_id}/{vendorId}")
-    public ResponseEntity changZoneStatus(@PathVariable Integer PcCentre, @PathVariable Integer zone_id, @PathVariable Integer vendorId, @RequestBody Zone zone) {
-        zoneService.isAvailableZone(zone_id, PcCentre, vendorId);
+    @PutMapping("/chang-zone-status/{PcCentre}/{zone_id}")
+    public ResponseEntity changZoneStatus(@PathVariable Integer pcCentreId, @PathVariable Integer zone_id, @RequestBody Zone zone,@AuthenticationPrincipal User user) {
+        zoneService.isAvailableZone(pcCentreId, zone_id, user.getId());
         return ResponseEntity.status(200).body("status changed successfully");
 
     }

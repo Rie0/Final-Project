@@ -60,6 +60,10 @@ public class Player {
     private Set<SubscripeBy> subscripeBIES;
 
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
+    private Set<ReviewPcCentre> reviewPcCentres;
+
+
 
     //GAMES
 }

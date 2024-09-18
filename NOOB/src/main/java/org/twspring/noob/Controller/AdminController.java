@@ -15,7 +15,7 @@ import org.twspring.noob.Service.AdminService;
 @RequiredArgsConstructor
 public class AdminController {
 
-    private AdminService adminService;
+    private  final AdminService adminService;
 
     @PostMapping("/add")
     public ResponseEntity addAdmin(@RequestBody User user) {

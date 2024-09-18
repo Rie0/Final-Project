@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +26,7 @@ public class Subscription {
     private Integer id;
     @NotEmpty(message = "Subscription Tie   can not be empty")
     @Column(columnDefinition = "varchar(30) not null")
-    private String subscriptionTie;
+    private String subscriptionNmae;
     @NotNull(message = "price can not be empty")
     @Column(columnDefinition = "int not null")
     private double price;
@@ -36,6 +37,8 @@ public class Subscription {
     @Column(columnDefinition = "int not null")
 private int members;
 private Date subscriptionDate;
+
+private String coupon;
 
 
 

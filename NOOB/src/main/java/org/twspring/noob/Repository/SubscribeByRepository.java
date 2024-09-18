@@ -2,6 +2,8 @@ package org.twspring.noob.Repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.twspring.noob.Model.PcCentres;
+import org.twspring.noob.Model.Player;
 import org.twspring.noob.Model.SubscripeBy;
 
 import java.util.List;
@@ -11,4 +13,8 @@ public interface SubscribeByRepository extends JpaRepository<SubscripeBy, Intege
     SubscripeBy findSubscripeBIESById(Integer id);
 
    List<SubscripeBy>findSubscripeBIESByPlayerId(Integer id);
+
+
+    boolean existsByPlayerAndSubscriptionPcCentres(Player player, PcCentres pcCentres);
+
 }
