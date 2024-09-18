@@ -23,12 +23,12 @@ public class SubscripeBy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-private Date startDate;
-    private Date endDate;
 
+    private Date startDate;
+    private Date endDate;
+    private int playerMembers;
     private boolean status;
     private int remainingHours;
-
 
     @ManyToOne
     @JsonIgnore

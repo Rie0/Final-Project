@@ -4,10 +4,13 @@ import jakarta.validation.Valid;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.twspring.noob.Model.PC;
 import org.twspring.noob.Model.Subscription;
+import org.twspring.noob.Model.User;
 import org.twspring.noob.Service.SubscriptionService;
+
 
 @RestController
 @RequestMapping("/api/v1/subscription")
@@ -23,29 +26,30 @@ public class SubscriptionController {
         return ResponseEntity.status(200).body(subscriptionService.getAllsubscription());
     }
 
-    @PostMapping("add-subscription")
-    public ResponseEntity addsubscription(@Valid @RequestBody Subscription subscription){
-        subscriptionService.addsubscription(subscription);
+    @PostMapping("/add-subscription/{subscriprionId}")
+    public ResponseEntity addsubscription(@PathVariable Integer subscriprionId, @AuthenticationPrincipal User user, @Valid @RequestBody Subscription subscription){
+        subscriptionService.addsubscription(subscription,subscriprionId, user.getId());
         return ResponseEntity.status(200).body("subscription added successfully");
 
     }
-    @PutMapping("update-subscription/{id}")
-    public ResponseEntity updatesubscription(@PathVariable Integer id,@Valid @RequestBody Subscription subscription){
-        subscriptionService.updatesubScription(id,subscription);
+    @PutMapping("/update-subscription/{subscriptionId}")
+    public ResponseEntity updatesubscription(@PathVariable Integer subscriptionId,@Valid @RequestBody Subscription subscription,@AuthenticationPrincipal User user){
+        subscriptionService.updatesubScription(subscriptionId,subscription, user.getId());
         return ResponseEntity.status(200).body("subscription updated successfully");
     }
-    @DeleteMapping("/delete-subscription/{id}")
-    public ResponseEntity deletesubscription(@PathVariable Integer id){
-        subscriptionService.deleteSubscription(id);
+    @DeleteMapping("/delete-subscription/{subscriptionId}")
+    public ResponseEntity deletesubscription(@PathVariable Integer subscriptionId, @AuthenticationPrincipal User user){
+        subscriptionService.deleteSubscription(user.getId(), subscriptionId);
         return ResponseEntity.status(200).body("subscription deleted successfully");
     }
 
-    /////
-@PostMapping("/supscripe/{playerId}/{SubscrptionId}/{zoneId}")
-    public ResponseEntity supscribe(@PathVariable Integer playerId,@PathVariable Integer SubscrptionId,@PathVariable Integer zoneId){
-        subscriptionService.subscribePlayerToSubscription(playerId,SubscrptionId,zoneId);
-        return ResponseEntity.status(200).body("subscription added successfully");
+    @GetMapping("/get-subscription/pc-center/{pcCenterId}")
+    public ResponseEntity getSubscriptionsByPcCenter(@PathVariable Integer pcCenterId){
+        return ResponseEntity.status(200).body(subscriptionService.getsubscriptionbyPcCentreId(pcCenterId));
+    }
+
+
+
 }
 
 
-}

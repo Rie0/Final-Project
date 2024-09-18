@@ -6,6 +6,7 @@ import org.twspring.noob.Model.PcCentres;
 
 import java.util.List;
 
+
 @Repository
 public interface PcCentresRepository extends JpaRepository<PcCentres, Integer> {
 
@@ -15,9 +16,12 @@ public interface PcCentresRepository extends JpaRepository<PcCentres, Integer> {
     List<PcCentres>findPcCentresByRating(Integer rating);
 
     List<PcCentres> findByRatingBetween(int minRating, int maxRating);
-PcCentres findPcCentresByCentreName(String centreName);
+    PcCentres findPcCentresByCentreName(String centreName);
 
-List<PcCentres>findPcCentresByLocation(String location);
+    List<PcCentres>findPcCentresByLocation(String location);
+
+    List<PcCentres> findPcCentresByApprovedFalse();
+    List<PcCentres> findPcCentresByApprovedTrue();
 
 }
 

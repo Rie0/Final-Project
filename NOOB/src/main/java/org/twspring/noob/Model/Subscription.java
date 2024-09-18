@@ -25,7 +25,7 @@ public class Subscription {
     private Integer id;
     @NotEmpty(message = "Subscription Tie   can not be empty")
     @Column(columnDefinition = "varchar(30) not null")
-    private String subscriptionTie;
+    private String subscriptionNmae;
     @NotNull(message = "price can not be empty")
     @Column(columnDefinition = "int not null")
     private double price;
@@ -34,8 +34,10 @@ public class Subscription {
     private int subscriptionHours;
     @NotNull(message = "members can not be empty")
     @Column(columnDefinition = "int not null")
-private int members;
-private Date subscriptionDate;
+    private int members;
+    private Date subscriptionDate;
+
+    private String coupon;
 
 
 

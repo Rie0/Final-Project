@@ -19,6 +19,7 @@ public class SubscribeByService {
     private final PcCentresRepository pcCentresRepository;
     private final ZoneRepository zoneRepository;
 private final VendorRepository vendorRepository;
+private final SubscriptionRepository subscriptionRepository;
 
     public List<SubscripeBy> getAllsubscribeBy() {
         return subscribeByRepository.findAll();
@@ -71,6 +72,50 @@ private final VendorRepository vendorRepository;
 return subscribeByRepository.findSubscripeBIESByPlayerId(playerId);
     }
 
+    public void subscribePlayerToSubscription(Integer playerId, Integer subscriptionId, Integer zoneId,
+                                              int playerMembers, String coupan, String name) {
+
+        Player player = playerRepository.findPlayerById(playerId);
+        if (player == null)
+            throw new ApiException("Player not found");
+
+        Zone zone = zoneRepository.findZoneById(zoneId);
+        if (zone == null)
+            throw new ApiException("Zone not found");
+
+        Subscription subscription = subscriptionRepository.findSubscriptionById(subscriptionId);
+        if (subscription == null)
+            throw new ApiException("Subscription not found");
+
+        SubscripeBy subscripeBy = new SubscripeBy();
+        subscripeBy.setPlayer(player);
+        subscripeBy.setSubscription(subscription);
+        subscripeBy.setStartDate(new Date());
+        subscripeBy.setRemainingHours(subscription.getSubscriptionHours());
+        subscripeBy.setStatus(true);
+        subscripeBy.setPlayerMembers(playerMembers);
+
+        if (playerMembers > 2) {
+            double originalPrice = subscription.getPrice();
+            double discountedPrice = originalPrice * 0.80;
+            subscription.setPrice(discountedPrice);
+        }
+        if (coupan.equalsIgnoreCase("94")) {
+            subscription.setPrice(subscription.getPrice() - 94);
+        }
+        if (name.equalsIgnoreCase("pro")) {
+            subscription.setSubscriptionNmae("pro");
+            subscription.setPrice(subscription.getSubscriptionHours() + 10);
+
+        }
+        if (name.equalsIgnoreCase("basic")) {
+            subscription.setSubscriptionNmae("basic");
+            subscription.setPrice(subscription.getSubscriptionHours() + 2);
+        }
+
+        subscribeByRepository.save(subscripeBy);
+    }
+
 public void reduceSubscribedByRemainingHours(Integer subscribeById, Integer playedHours,Integer vendorId) {
        SubscripeBy subscripeBy=subscribeByRepository.findSubscripeBIESById(subscribeById);
        if (subscripeBy == null) {
@@ -93,10 +138,33 @@ public void reduceSubscribedByRemainingHours(Integer subscribeById, Integer play
 subscribeByRepository.save(subscripeBy);
    }
 
+    public void playerReturnSubscription(Integer subscripeById) {
+        SubscripeBy subscripeBy = subscribeByRepository.findSubscripeBIESById(subscripeById);
+        if (subscripeBy == null) {
+            throw new ApiException("subscribBy id not found");
+        }
+
+        long timeElapsed = new Date().getTime() - subscripeBy.getStartDate().getTime();
+        long twentyFiveMinutesInMillis = 25 * 60 * 1000;
+
+        if (timeElapsed > twentyFiveMinutesInMillis) {
+            throw new ApiException("Cannot return subscription after 25 minutes");
+        }
+
+        subscripeBy.setEndDate(new Date());
+        subscripeBy.setStatus(false);
+
+        subscribeByRepository.save(subscripeBy);
+
+
+        }
+    }
 
 
 
-       }
+
+
+
 
 
 

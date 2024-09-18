@@ -9,7 +9,6 @@ import org.twspring.noob.Repository.*;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class SubscriptionService {
@@ -18,34 +17,63 @@ public class SubscriptionService {
     private final PlayerRepository playerRepository;
     private final AuthRepository authRepository;
     private final SubscribeByRepository subscribeByRepository;
-private final  VendorRepository vendorRepository;
-private final ZoneRepository zoneRepository;
+    private final  VendorRepository vendorRepository;
+    private final ZoneRepository zoneRepository;
 
     public List<Subscription> getAllsubscription() {
         return subscriptionRepository.findAll();
     }
 
 
-    public void addsubscription(Subscription subscription) {
+    public void addsubscription(Subscription subscription,  Integer id, Integer vendorId) {
+        PcCentres pcCentres = pcCentresRepository.findPcCentreById(id);
+        if (pcCentres == null) {
+            throw new ApiException("PC Centre not found");
+
+        }
+        Vendor vendor = vendorRepository.findVendorById(vendorId);
+        if (vendor == null) {
+            throw new ApiException("Vendor not found");
+        }
+        if (vendor.getId()!=subscription.getPcCentres().getVendor().getId()){
+            throw new ApiException("you dont have authority");
+        }
+
+
+        subscription.setPcCentres(pcCentres);
         subscriptionRepository.save(subscription);
 
     }
 
-    public void updatesubScription(Integer id, Subscription subscription) {
-        Subscription subscription1 = subscriptionRepository.findSubscriptionById(id);
+    public void updatesubScription(Integer subscriptionId, Subscription subscription,Integer vendorId) {
+        Subscription subscription1 = subscriptionRepository.findSubscriptionById(subscriptionId);
         if (subscription1 == null) {
             throw new ApiException("subscription not found");
         }
-     subscription1.setSubscriptionTie(subscription.getSubscriptionTie());
+        Vendor vendor = vendorRepository.findVendorById(vendorId);
+        if (vendor == null) {
+            throw new ApiException("vendor not found");
+        }
+        if (vendor.getId()!=subscription.getPcCentres().getVendor().getId()){
+            throw new ApiException("you dont have authority");
+        }
+        subscription1.setSubscriptionNmae(subscription.getSubscriptionNmae());
         subscription1.setSubscriptionHours(subscription.getSubscriptionHours());
         subscription1.setPrice(subscription.getPrice());
         subscription1.setMembers(subscription.getMembers());
-subscriptionRepository.save(subscription1);    }
+        subscriptionRepository.save(subscription1);    }
 
-    public void deleteSubscription(Integer id) {
+    public void deleteSubscription(Integer id,Integer vendorId) {
         Subscription subscription = subscriptionRepository.findSubscriptionById(id);
         if (subscription == null) {
             throw new ApiException("subscription not found");
+        }
+        Vendor vendor = vendorRepository.findVendorById(vendorId);
+        if (vendor == null) {
+            throw new ApiException("vendor not found");
+        }
+        if (vendor.getId()!=subscription.getPcCentres().getVendor().getId()){
+            throw new ApiException("you dont have authority");
         }
         subscriptionRepository.delete(subscription);
     }
@@ -59,42 +87,6 @@ subscriptionRepository.save(subscription1);    }
 
         }
         return subscriptionRepository.findSubscriptionByPcCentresId(pcCentreId);
-    }
-
-
-
-    public void subscribePlayerToSubscription(Integer playerId, Integer subscriptionId,Integer zoneId) {
-
-        Player player = playerRepository.findPlayerById(playerId);
-        if (player == null) {
-            throw new ApiException("player not found");
-        }
-
-        Zone zone=zoneRepository.findZoneById(zoneId);
-        if (zone == null) {
-            throw new ApiException("zone not found");
-        }
-
-
-
-
-        Subscription subscription = subscriptionRepository.findSubscriptionById(subscriptionId);
-        if (subscription == null) {
-            throw new ApiException("subscription not found");
-        }
-
-
-
-
-
-        SubscripeBy subscripeBy = new SubscripeBy();
-        subscripeBy.setPlayer(player);
-        subscripeBy.setSubscription(subscription);
-        subscripeBy.setStartDate(new Date());
-        subscripeBy.setRemainingHours(subscription.getSubscriptionHours());
-        subscripeBy.setStatus(true);
-
-        subscribeByRepository.save(subscripeBy);
     }
 
 }
