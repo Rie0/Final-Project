@@ -18,14 +18,14 @@ import java.util.Set;
 public class Bracket {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Automatically generate IDs
     private Integer id;
 
-    @OneToOne
-    @MapsId
-    @JsonIgnore
-    private Tournament tournament;
+    @ManyToOne
+    @JoinColumn(name = "tournament_id")
+    private Tournament tournament; // Changed from OneToOne to ManyToOne
 
-    @OneToMany(mappedBy = "bracket", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "bracket", cascade = CascadeType.ALL)
     private Set<Round> rounds;
 
     @Column(columnDefinition = "VARCHAR(50) NOT NULL")

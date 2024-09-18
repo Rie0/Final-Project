@@ -95,6 +95,9 @@ public class ConfigSecurity {
                         "/api/v1/tournament/*/start",
                         "/api/v1/tournament/delete/**",
                         "/api/v1/tournament/*/finalize",
+                        "api/v1/tournament/*/distribute-prizes",
+
+
                         //rounds
                         "/api/v1/round/add",
                         "/api/v1/round/update/**",
@@ -129,6 +132,7 @@ public class ConfigSecurity {
                 .requestMatchers(
                         "/api/v1/tournament/*/participant/*/checkin",
                         "/api/v1/bracket/get",
+                        "api/v1/bracket/delete/{id}",
                         "/api/v1/bracket/add",
                         "/api/v1/bracket/update/**",
                         "/api/v1/round/get",

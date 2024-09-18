@@ -1,9 +1,14 @@
 package org.twspring.noob.Service;
 
-import org.twspring.noob.Model.*;
-import org.twspring.noob.Repository.*;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.twspring.noob.Api.ApiException;
+import org.twspring.noob.Model.*;
+import org.twspring.noob.Repository.*;
 import lombok.RequiredArgsConstructor;
 
 import java.util.*;
@@ -13,34 +18,48 @@ import java.util.*;
 @RequiredArgsConstructor
 public class BracketService {
 
+    @PersistenceContext
+    private final EntityManager entityManager;
+
     private final BracketRepository bracketRepository;
     private final TournamentRepository tournamentRepository;
     private final RoundRepository roundRepository;
     private final MatchRepository matchRepository;
     private final ParticipantRepository participantRepository;
 
+    private static final Logger logger = LoggerFactory.getLogger(BracketService.class);
+
     public List<Bracket> getAllBrackets() {
         return bracketRepository.findAll();
     }
 
-    public void deleteBracket(Integer bracketId) {
+    public void deleteBracket(Integer organizerId, Integer bracketId) {
+        logger.info("Attempting to delete bracket with ID: {} by user ID: {}", bracketId, organizerId);
+
+        // Fetch the bracket by its ID
         Bracket bracket = bracketRepository.findBracketById(bracketId);
         if (bracket == null) {
             throw new RuntimeException("Bracket not found");
         }
-        bracket.getRounds().forEach(round -> round.getMatches().clear());
-        bracket.getRounds().clear();
+
+        // Check if the bracket is associated with a tournament created by the organizer
         Tournament tournament = bracket.getTournament();
-        if (tournament != null) {
-            tournament.setBracket(null);
+        if (tournament == null || tournament.getOrganizer() == null || !tournament.getOrganizer().getId().equals(organizerId)) {
+            throw new RuntimeException("Bracket not associated with the specified organizer");
         }
+
+        // Remove rounds and their matches
+        for (Round round : bracket.getRounds()) {
+            round.getMatches().clear();
+            roundRepository.delete(round);
+        }
+
+        // Delete the bracket
         bracketRepository.delete(bracket);
     }
 
-    // **Single Elimination Logic**
-
     public Bracket createBracketForTournament(Integer tournamentId) {
-        return initializeBracket(tournamentId);
+        return initializeBracket(tournamentId, "Single Elimination");
     }
 
     private int nextPowerOfTwo(int number) {
@@ -51,19 +70,22 @@ public class BracketService {
         return power;
     }
 
-    private Bracket initializeBracket(Integer tournamentId) {
+    private Bracket initializeBracket(Integer tournamentId, String bracketType) {
         Tournament tournament = tournamentRepository.findTournamentById(tournamentId);
         if (tournament == null) {
             throw new RuntimeException("Tournament not found");
         }
 
-        // Check if a bracket for single elimination already exists
-        Bracket bracket = bracketRepository.findByTournamentAndBracketType(tournament, "Single Elimination");
+        // Check if a bracket for the given type already exists
+        Bracket bracket = bracketRepository.findByTournamentAndBracketType(tournament, bracketType);
         if (bracket == null) {
             bracket = new Bracket();
             bracket.setTournament(tournament);
-            bracket.setBracketType("Single Elimination");
+            bracket.setBracketType(bracketType);
             bracketRepository.save(bracket);
+        }else {
+            throw new ApiException("A " + bracketType + " bracket already exists for this tournament");
+
         }
 
         // Proceed with initializing rounds
@@ -87,7 +109,7 @@ public class BracketService {
         List<Round> rounds = new ArrayList<>();
 
         for (int i = 0; i < numberOfRounds; i++) {
-            Round round = roundRepository.findByBracketAndRoundNumber(bracket, i + 1); // Ensure no duplicates
+            Round round = roundRepository.findByBracketAndRoundNumber(bracket, i + 1);
             if (round == null) {
                 round = new Round();
                 round.setBracket(bracket);
@@ -141,9 +163,8 @@ public class BracketService {
         Match match = new Match();
         match.setParticipant1(p1);
         match.setParticipant2(p2);
-        match.setParticipant1Name(p1.getName()); // Ensure participant1name is set
-        match.setParticipant2(p2);
-        match.setParticipant2Name(p2.getName()); // Ensure participant2name is set
+        match.setParticipant1Name(p1.getName());
+        match.setParticipant2Name(p2.getName());
         match.setRound(round);
         match.setTournament(tournament);
         match.setStatus("Scheduled");
@@ -171,26 +192,16 @@ public class BracketService {
         }
     }
 
-    // **Double Elimination Logic**
-
     public Bracket createDoubleEliminationBracket(Integer tournamentId) {
+        entityManager.clear();
+
         Tournament tournament = tournamentRepository.findTournamentById(tournamentId);
         if (tournament == null) {
             throw new RuntimeException("Tournament not found");
         }
 
-        // Retrieve or create Winners' Bracket
-        Bracket winnersBracket = bracketRepository.findByTournamentAndBracketType(tournament, "Double Elimination - Winners");
-        if (winnersBracket == null) {
-            winnersBracket = new Bracket();
-            winnersBracket.setBracketType("Double Elimination - Winners");
-            winnersBracket.setTournament(tournament);
-            bracketRepository.save(winnersBracket);
-        }
+        Bracket winnersBracket = initializeBracket(tournamentId, "Double Elimination - Winners");
 
-        initializeBracket(tournamentId); // Initialize the Winners' Bracket
-
-        // Retrieve or create Losers' Bracket
         Bracket losersBracket = bracketRepository.findByTournamentAndBracketType(tournament, "Double Elimination - Losers");
         if (losersBracket == null) {
             losersBracket = new Bracket();
@@ -199,7 +210,6 @@ public class BracketService {
             bracketRepository.save(losersBracket);
         }
 
-        // Return the Winners' Bracket (or both if needed)
         return winnersBracket;
     }
 
@@ -214,13 +224,11 @@ public class BracketService {
             throw new RuntimeException("Losers' Bracket not found");
         }
 
-        // Directly use participantRepository method
         Participant loser = participantRepository.findParticipantById(loserParticipantId);
         if (loser == null) {
             throw new RuntimeException("Participant not found");
         }
 
-        // Get the current round and add the loser to the next available match
         Round nextAvailableRound = getNextAvailableRound(losersBracket);
         if (nextAvailableRound == null) {
             throw new RuntimeException("No available rounds in Losers' Bracket");
@@ -235,31 +243,25 @@ public class BracketService {
     }
 
     private Round getNextAvailableRound(Bracket losersBracket) {
-        // Ensure rounds are sorted by round number before checking
         List<Round> sortedRounds = new ArrayList<>(losersBracket.getRounds());
         sortedRounds.sort(Comparator.comparingInt(Round::getRoundNumber));
 
-        // Iterate over the sorted rounds to find the next round with available match slots
         for (Round round : sortedRounds) {
             int expectedNumberOfMatches = getNumberOfMatches(round.getRoundNumber(), losersBracket.getTournament().getMaxParticipants());
 
-            // If the number of existing matches is less than expected, return this round
             if (round.getMatches().size() < expectedNumberOfMatches) {
                 return round;
             }
         }
 
-        // If no available round is found, return null
         return null;
     }
 
     private int getNumberOfMatches(int roundNumber, int bracketSize) {
-        // In the first round, the number of matches is half the bracket size
         if (roundNumber == 1) {
             return bracketSize / 2;
         }
 
-        // For subsequent rounds, the number of matches is half of the matches in the previous round
         return (int) Math.ceil(bracketSize / Math.pow(2, roundNumber));
     }
 
@@ -267,9 +269,18 @@ public class BracketService {
         Bracket winnersBracket = bracketRepository.findByTournamentAndBracketType(tournament, "Double Elimination - Winners");
         Bracket losersBracket = bracketRepository.findByTournamentAndBracketType(tournament, "Double Elimination - Losers");
 
+        if (winnersBracket == null || losersBracket == null) {
+            throw new RuntimeException("Both winners and losers brackets must be present to manage the final match.");
+        }
+
         Participant winnerFinalist = findFinalistFromBracket(winnersBracket);
         Participant loserFinalist = findFinalistFromBracket(losersBracket);
 
+        if (winnerFinalist == null || loserFinalist == null) {
+            throw new RuntimeException("Finalists could not be determined from the brackets.");
+        }
+
+        // Create final round and match
         Round finalRound = new Round();
         finalRound.setBracket(winnersBracket);
         finalRound.setRoundNumber(winnersBracket.getRounds().size() + 1);
@@ -285,10 +296,13 @@ public class BracketService {
     }
 
     private Participant findFinalistFromBracket(Bracket bracket) {
+        // Find the last completed match in the bracket to determine the finalist
         return bracket.getRounds().stream()
                 .flatMap(round -> round.getMatches().stream())
                 .filter(match -> match.getStatus().equals("Completed"))
                 .map(Match::getWinner)
-                .reduce((first, second) -> second).orElse(null);
+                .reduce((first, second) -> second)
+                .orElse(null);
     }
 }
+

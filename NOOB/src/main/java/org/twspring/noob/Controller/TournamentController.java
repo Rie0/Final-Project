@@ -149,9 +149,9 @@ public class TournamentController {
         return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentMatchesById(id));
     }
 
-    @GetMapping("/{id}/bracket")
-    public ResponseEntity<Bracket> getTournamentBracketById(@PathVariable Integer id) {
-        return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentBracketById(id));
+    @GetMapping("/{id}/bracket{bracketId}")
+    public ResponseEntity<Bracket> getTournamentBracketById(@PathVariable Integer id,@PathVariable Integer bracketId) {
+        return ResponseEntity.status(HttpStatus.OK).body(tournamentService.getTournamentBracketById(id,bracketId));
     }
 
     @GetMapping("/{id}/standing")

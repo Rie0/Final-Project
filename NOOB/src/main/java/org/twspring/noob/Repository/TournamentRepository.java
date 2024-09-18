@@ -10,7 +10,9 @@ import java.util.List;
 @Repository
 public interface TournamentRepository extends JpaRepository<Tournament, Integer> {
     Tournament findTournamentById(Integer id);
-    Tournament findTournamentByBracketId(Integer bracketId);
+    // Custom method to find a tournament by a specific bracket ID
+    @Query("SELECT t FROM Tournament t JOIN t.brackets b WHERE b.id = ?1")
+    Tournament findByBracketId(Integer bracketId);
     List<Tournament> findByGame(String game);
     List<Tournament> findByCity(String city);
     List<Tournament> findByAttendanceType(String attendanceType);

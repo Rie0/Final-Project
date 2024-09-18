@@ -49,9 +49,9 @@ public class TournamentRepositoryTest {
         organizerRepository.save(organizer); // Save the Organizer entity after the User has been saved
 
         // Create Tournament entities linked to the Organizer
-        tournament1 = new Tournament(null, "Tournament1", "Description1", LocalDate.now(), LocalDate.now().plusDays(1), Tournament.Status.OPEN, "Location1", 10, 0, "Chess", "Players", "City1", "Online", 1000, 500, null, null, null, organizer);
-        tournament2 = new Tournament(null, "Tournament2", "Description2", LocalDate.now(), LocalDate.now().plusDays(2), Tournament.Status.ACTIVE, "Location2", 20, 5, "Soccer", "Teams", "City2", "Onsite", 2000, 1000, null, null, null, organizer);
-        tournament3 = new Tournament(null, "Tournament3", "Description3", LocalDate.now().plusDays(3), LocalDate.now().plusDays(4), Tournament.Status.FINISHED, "Location3", 30, 10, "Basketball", "Teams", "City3", "Online", 3000, 1500, null, null, null, organizer);
+        tournament1 = new Tournament(null, "Tournament1", "Description1", LocalDate.now(), LocalDate.now().plusDays(1), Tournament.Status.OPEN, "Location1", 10, 0, "Chess", "Players", "City1", "Online",null, 1000, 500, null, null, null, organizer);
+        tournament2 = new Tournament(null, "Tournament2", "Description2", LocalDate.now(), LocalDate.now().plusDays(2), Tournament.Status.ACTIVE, "Location2", 20, 5, "Soccer", "Teams", "City2", "Online",null, 2000, 1000, null, null, null, organizer);
+        tournament3 = new Tournament(null, "Tournament3", "Description3", LocalDate.now().plusDays(3), LocalDate.now().plusDays(4), Tournament.Status.FINISHED, "Location3", 30, 10, "Basketball", "Teams", "City3","Online", null, 3000, 1500, null, null, null, organizer);
     }
 
 
