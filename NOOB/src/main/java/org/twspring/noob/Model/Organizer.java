@@ -34,6 +34,8 @@ public class Organizer {
     @Size(min = 2, max = 100, message = "Organization name must have between 2 to 100 characters")
     private String organizationName; // Name of the organization
 
+
+
     @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Tournament> tournaments; // List of tournaments created by the organizer

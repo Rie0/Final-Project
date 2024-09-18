@@ -23,7 +23,7 @@ public class BracketController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity deleteBracket(@AuthenticationPrincipal User user ,@PathVariable Integer id) {
-        bracketService.deleteBracket(id);
+        bracketService.deleteBracket(user.getId(),id);
         return ResponseEntity.ok("Bracket deleted successfully");
     }
 }

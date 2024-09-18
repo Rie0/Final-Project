@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
 import org.twspring.noob.Model.*;
-import org.twspring.noob.Repository.MatchRepository;
-import org.twspring.noob.Repository.OrganizerRepository;
-import org.twspring.noob.Repository.ParticipantRepository;
-import org.twspring.noob.Repository.TournamentRepository;
+import org.twspring.noob.Repository.*;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -20,6 +17,7 @@ public class TournamentService {
     private final TournamentRepository tournamentRepository;
     private final MatchRepository matchRepository;
     private final ParticipantRepository participantRepository;
+    private final BracketRepository bracketRepository;
 
     public List<Tournament> getTournaments() {
         return tournamentRepository.findAll();
@@ -37,27 +35,57 @@ public class TournamentService {
         if (tournament.getEndDate().isBefore(tournament.getStartDate())) {
             throw new ApiException("End date must be the same as or after the start date");
         }
+        // Check if the tournament is onsite and validate the permit
+        if ("Onsite".equalsIgnoreCase(tournament.getAttendanceType())) {
+            if (tournament.getPermit() == null || tournament.getPermit().trim().isEmpty()) {
+                throw new ApiException("Organizer does not have a valid permit to create an onsite tournament");
+            }
+        }
         tournament.setOrganizer(org);
         tournamentRepository.save(tournament);
     }
 
     public void updateTournament(Integer tournamentId, Tournament updatedTournament, Integer organizerId) {
+        // Check organizer authorization
         checkOrganizerAuthorization(tournamentId, organizerId);
+
+        // Find the existing tournament
         Tournament tournament = tournamentRepository.findTournamentById(tournamentId);
-        if (tournament != null) {
-            tournament.setName(updatedTournament.getName());
-            tournament.setDescription(updatedTournament.getDescription());
-            tournament.setStartDate(updatedTournament.getStartDate());
-            tournament.setEndDate(updatedTournament.getEndDate());
-            tournament.setStatus(updatedTournament.getStatus());
-            tournament.setLocation(updatedTournament.getLocation());
-            tournament.setMaxParticipants(updatedTournament.getMaxParticipants());
-            tournament.setCurrentParticipants(updatedTournament.getCurrentParticipants());
-            tournament.setParticipants(updatedTournament.getParticipants());
-            tournament.setMatches(updatedTournament.getMatches());
-            tournament.setBracket(updatedTournament.getBracket());
-            tournamentRepository.save(tournament);
+        if (tournament == null) {
+            throw new ApiException("Tournament not found");
         }
+
+        // Update tournament basic fields
+        tournament.setName(updatedTournament.getName());
+        tournament.setDescription(updatedTournament.getDescription());
+        tournament.setStartDate(updatedTournament.getStartDate());
+        tournament.setEndDate(updatedTournament.getEndDate());
+        tournament.setStatus(updatedTournament.getStatus());
+        tournament.setLocation(updatedTournament.getLocation());
+        tournament.setMaxParticipants(updatedTournament.getMaxParticipants());
+        tournament.setCurrentParticipants(updatedTournament.getCurrentParticipants());
+
+        // Handle related entities carefully
+        // Update participants
+        if (updatedTournament.getParticipants() != null) {
+            tournament.getParticipants().clear();
+            tournament.getParticipants().addAll(updatedTournament.getParticipants());
+        }
+
+        // Update matches
+        if (updatedTournament.getMatches() != null) {
+            tournament.getMatches().clear();
+            tournament.getMatches().addAll(updatedTournament.getMatches());
+        }
+
+        // Update brackets
+        if (updatedTournament.getBrackets() != null) {
+            tournament.getBrackets().clear();
+            tournament.getBrackets().addAll(updatedTournament.getBrackets());
+        }
+
+        // Save the updated tournament
+        tournamentRepository.save(tournament);
     }
 
     public void deleteTournament(Integer tournamentId, Integer organizerId) {
@@ -70,25 +98,32 @@ public class TournamentService {
     }
 
     public void startTournament(Integer tournamentId, Integer organizerId) {
+        // Check if the organizer is authorized to manage the tournament
         checkOrganizerAuthorization(tournamentId, organizerId);
-        Tournament tournament = tournamentRepository.findTournamentById(tournamentId);
 
+        // Retrieve the tournament from the repository
+        Tournament tournament = tournamentRepository.findTournamentById(tournamentId);
         if (tournament == null) {
             throw new ApiException("Tournament not found");
         }
 
+        // Check if the tournament is already active or finished
         if (tournament.getStatus().equals(Tournament.Status.ACTIVE)) {
             throw new ApiException("Tournament is already active");
         } else if (tournament.getStatus().equals(Tournament.Status.FINISHED)) {
             throw new ApiException("Tournament has already been finished");
         }
 
+        // Ensure the tournament start date is today or earlier
         LocalDate today = LocalDate.now();
         if (tournament.getStartDate().isAfter(today)) {
             throw new ApiException("Tournament cannot be started before the start date");
         }
 
+        // Set the tournament status to ACTIVE
         tournament.setStatus(Tournament.Status.ACTIVE);
+
+        // Save the updated tournament to the repository
         tournamentRepository.save(tournament);
     }
 
@@ -164,9 +199,13 @@ public class TournamentService {
         return matchRepository.findByTournament(tournament);
     }
 
-    public Bracket getTournamentBracketById(Integer id) {
-        Tournament tournament = tournamentRepository.findTournamentById(id);
-        return tournament.getBracket();
+    public Bracket getTournamentBracketById(Integer tournamentId, Integer bracketId) {
+        // Use the repository method to find the bracket by its ID and associated tournament ID
+        Bracket bracket = bracketRepository.findByIdAndTournamentId(bracketId, tournamentId);
+        if (bracket == null) {
+            throw new RuntimeException("Bracket not found or not associated with the given tournament");
+        }
+        return bracket;
     }
 
     public List<Participant> getTournamentStandingById(Integer id) {
@@ -215,24 +254,33 @@ public class TournamentService {
     }
 
     public void finalizeTournament(Integer tournamentId, Integer organizerId) {
+        // Ensure the organizer has authorization for the tournament
         checkOrganizerAuthorization(tournamentId, organizerId);
+
+        // Retrieve the tournament
         Tournament tournament = tournamentRepository.findTournamentById(tournamentId);
         if (tournament == null) {
             throw new ApiException("Tournament not found");
         }
-        if (tournament.getBracket() == null) {
-            throw new ApiException("Tournament has no bracket");
+
+        // Check if the tournament has any brackets associated
+        if (tournament.getBrackets() == null || tournament.getBrackets().isEmpty()) {
+            throw new ApiException("Tournament has no brackets");
         }
 
+        // Retrieve all matches associated with the tournament
         List<Match> matches = matchRepository.findByTournament(tournament);
 
+        // Ensure all matches are completed or completed by a bye
         if (matches.stream().anyMatch(match ->
                 !(match.getStatus().equalsIgnoreCase("Completed") || match.getStatus().equalsIgnoreCase("Completed_bye")))) {
             throw new ApiException("All matches must be completed or completed by a bye before finalizing the tournament.");
         }
 
+        // Determine the final ranking by processing matches across all brackets
         List<Participant> sortedParticipants = determineFinalRankingByBracket(matches, tournament);
 
+        // Update participant status and ranking
         for (int i = 0; i < sortedParticipants.size(); i++) {
             Participant participant = sortedParticipants.get(i);
             participant.setSeed(i + 1);
@@ -240,6 +288,7 @@ public class TournamentService {
             participantRepository.save(participant);
         }
 
+        // Update the tournament status to finished
         tournament.setStatus(Tournament.Status.FINISHED);
         tournamentRepository.save(tournament);
     }

@@ -75,6 +75,11 @@ public class Tournament {
     @Column(columnDefinition = "VARCHAR(50) NOT NULL")
     private String attendanceType; // Attendance type (e.g., "Online", "Onsite")
 
+
+    @Column(columnDefinition = "VARCHAR(100) ")
+    @Size(min = 2, max = 100, message = "Permit name must have between 2 to 100 characters")
+    private String permit; // Name of the Permit
+
     @Column(columnDefinition = "INT")
     @Positive(message = "Prize pool must be a positive number")
     private int prizePool;
@@ -92,8 +97,9 @@ public class Tournament {
     @JsonIgnore
     private Set<Match> matches;
 
-    @OneToOne(mappedBy = "tournament", cascade = CascadeType.ALL)
-    private Bracket bracket;
+    @OneToMany(mappedBy = "tournament", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<Bracket> brackets;
 
     @ManyToOne
     @JoinColumn(name = "organizer_id")
