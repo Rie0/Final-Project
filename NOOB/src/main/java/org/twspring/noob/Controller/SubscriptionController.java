@@ -27,9 +27,9 @@ public class SubscriptionController {
         return ResponseEntity.status(200).body(subscriptionService.getAllsubscription());
     }
 
-    @PostMapping("/add-subscription/{subscriprionId}")
-    public ResponseEntity addsubscription(@PathVariable Integer subscriprionId,@AuthenticationPrincipal User user,@Valid @RequestBody Subscription subscription){
-        subscriptionService.addsubscription(subscription,subscriprionId, user.getId());
+    @PostMapping("/add-subscription/{pcCenterId}")
+    public ResponseEntity addsubscription(@PathVariable Integer pcCenterId,@AuthenticationPrincipal User user,@Valid @RequestBody Subscription subscription){
+        subscriptionService.addsubscription(subscription,pcCenterId, user.getId());
         return ResponseEntity.status(200).body("subscription added successfully");
 
     }

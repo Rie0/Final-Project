@@ -128,6 +128,7 @@ subscripeBy.setPlayer(player);
     }
 
     //EXTRA ENDPOINT
+
 ////Hassan Alzahrani
     public void playerReturnSubscription(Integer subscripeById) {
         SubscripeBy subscripeBy = subscribeByRepository.findSubscripeBIESById(subscripeById);

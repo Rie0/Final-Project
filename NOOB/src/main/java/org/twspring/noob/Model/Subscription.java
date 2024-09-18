@@ -25,7 +25,7 @@ public class Subscription {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @NotEmpty(message = "Subscription Tie   can not be empty")
+    @NotEmpty(message = "Subscription name   can not be empty")
     @Column(columnDefinition = "varchar(30) not null")
     private String subscriptionNmae;
     @NotNull(message = "price can not be empty")
@@ -40,9 +40,6 @@ public class Subscription {
     private Date subscriptionDate;
 
     private String coupon;
-
-private String coupon;
-
 
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "subscription")

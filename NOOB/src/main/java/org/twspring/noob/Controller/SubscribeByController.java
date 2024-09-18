@@ -56,8 +56,8 @@ public class SubscribeByController {
     }
 
     /////
-    @PostMapping("/supscripe/{SubscrptionId}/{zoneId}")
-    public ResponseEntity supscribe(@AuthenticationPrincipal User user, @PathVariable Integer SubscrptionId, @PathVariable Integer zoneId, @RequestParam int members, @RequestParam String coupon, @RequestParam String name) {
+    @PostMapping("/supscripe/{SubscrptionId}/{zoneId}/{members}/{coupon}/{name}")
+    public ResponseEntity supscribe(@AuthenticationPrincipal User user, @PathVariable Integer SubscrptionId, @PathVariable Integer zoneId, @PathVariable int members, @PathVariable String coupon, @PathVariable String name) {
         subscribeByService.subscribePlayerToSubscription(user.getId(), SubscrptionId, zoneId, members, coupon, name);
         return ResponseEntity.status(200).body("subscription added successfully");
 

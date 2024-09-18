@@ -83,7 +83,7 @@ public class ConfigSecurity {
                         "/api/v1/tournament/{id}/standing",
                         "/api/v1/tournament/{tournamentId}/matches/completed",
                         "/api/v1/tournament/{tournamentId}/matches/in-progress",
-                        "/api/v1/tournament/{tournamentId}/matches/not-started","/api/v1/vendor/register","/api/v1/pc-centre/add-pcCentre","/api/v1/subscription/add-subscription/{subscriprionId}").permitAll()
+                        "/api/v1/tournament/{tournamentId}/matches/not-started","/api/v1/vendor/register","/api/v1/pc-centre/**","/api/v1/subscription/**","/api/v1/vendor/**","/api/v1/zone/**","/api/v1/SubscripeBy","/api/v1/zone/supscripe/{SubscrptionId}/{zoneId}/{members}/{coupon}/{name}").permitAll()
 
                 //COACH
                 .requestMatchers("/api/v1/coach/update/**", "/api/v1/coach/delete/**").hasAuthority("COACH")

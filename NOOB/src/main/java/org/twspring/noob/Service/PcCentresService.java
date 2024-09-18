@@ -27,14 +27,9 @@ public class PcCentresService {
     ////Hassan Alzahrani
     public void addPcCentres(PcCentres pcCentres, Integer vendorID) {
         Vendor vendor = vendorRepository.findVendorById(vendorID);
-        if (vendor == null) {
-            throw new ApiException("Vendor with ID " + vendorID + " not found");
-        }
         pcCentres.setApproved(false);
-        pcCentres.setVendor(vendor);
-        pcCentresRepository.save(pcCentres);
-        //vendor.setPcCentres(Set.of(pcCentres2));
-        vendorRepository.save(vendor);
+      pcCentres.setVendor(vendor);
+      pcCentresRepository.save(pcCentres);
 
     }
     //CRUD

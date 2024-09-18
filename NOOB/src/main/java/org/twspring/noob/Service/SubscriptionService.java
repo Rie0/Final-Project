@@ -40,9 +40,7 @@ public class SubscriptionService {
         if (vendor == null) {
             throw new ApiException("Vendor not found");
         }
-        if (vendor.getId() != pcCentres.getId()) {
-            throw new ApiException("Vendor id mismatch");
-        }
+
 
 
         subscription.setPcCentres(pcCentres);
