@@ -3,9 +3,8 @@ package org.twspring.noob.Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
-import org.twspring.noob.Model.CoachingSession;
-import org.twspring.noob.Model.Player;
-import org.twspring.noob.Model.Schedule;
+import org.twspring.noob.DTO.DateTimeDTO;
+import org.twspring.noob.Model.*;
 import org.twspring.noob.Repository.CoachingSessionRepository;
 import org.twspring.noob.Repository.PlayerRepository;
 import org.twspring.noob.Repository.ScheduleRepository;
@@ -27,23 +26,49 @@ public class CoachingSessionService {
         return coachingSessionRepository.findAll();
     }
 
-    // CRUD register
-    public void addCoachingSession(CoachingSession coachingSession) {
-        coachingSessionRepository.save(coachingSession);
-    }
+    // CRUD register String sessionStyle
+    public void reserveCoachingSession(Integer scheduleId, Integer playerId, DateTimeDTO dateTimeDTO) {
 
+
+        Player player = playerRepository.findPlayerById(playerId);
+        if (player == null) {
+            throw new ApiException("Player not found");
+        }
+
+        Schedule schedule = scheduleRepository.findScheduleById(scheduleId);
+                if(schedule == null) {
+                         new ApiException("Schedule not found");
+                }
+        Coach coach = schedule.getCoach();
+
+        if (schedule.getIsBooked()) {
+            throw new ApiException("Invalid or unavailable schedule for this coach");
+        }
+
+        CoachingSession coachingSession = new CoachingSession();
+
+        coachingSession.setPlayer(player);
+        coachingSession.setCoach(coach);
+        coachingSession.setSchedule(schedule);
+        //coachingSession.setSessionStyle(sessionStyle);
+        coachingSession.setStartDate(dateTimeDTO.getStartDate());
+        coachingSession.setEndDate(dateTimeDTO.getEndDate());
+
+        schedule.setIsBooked(true);
+
+        coachingSessionRepository.save(coachingSession);
+        scheduleRepository.save(schedule);
+    }
     // CRUD update
     public void updateCoachingSession(Integer id, CoachingSession coachingSessionDetails) {
         CoachingSession coachingSession = coachingSessionRepository.findCoachingSessionById(id);
         if (coachingSession == null) {
             throw new ApiException("Coaching session not found");
         }
-        coachingSession.setScheduledTime(coachingSessionDetails.getScheduledTime());
-        coachingSession.setSessionType(coachingSessionDetails.getSessionType());
-        coachingSession.setFeedBack(coachingSessionDetails.getFeedBack());
-        coachingSession.setPricing(coachingSessionDetails.getPricing());
+       // coachingSession.setSessionStyle(coachingSession.getSessionStyle());
         coachingSession.setCoach(coachingSessionDetails.getCoach());
         coachingSessionRepository.save(coachingSession);
+        
     }
 
     // CRUD delete
@@ -64,60 +89,84 @@ public class CoachingSessionService {
         return coachingSession;
     }
 
-    public void bookCoachingSession(Integer scheduleId, Integer playerId) {
-        Schedule schedule = scheduleRepository.findById(scheduleId).orElse(null);
-        if (schedule == null) {
-            throw new ApiException("Schedule not found");
-        }
+    public void requestReschedule(Integer coachingSessionId, DateTimeDTO dateTimeDTO, Integer playerId) {
+        CoachingSession coachingSession = coachingSessionRepository.findCoachingSessionById(coachingSessionId);
+        if (coachingSession == null) {
+            throw new ApiException("Coaching session not found");
+        } ;
 
-        Player player = playerRepository.findById(playerId).orElse(null);
-        if (player == null) {
-            throw new ApiException("Player not found");
+        if (coachingSession.getPlayer().getId() != playerId) {
+            throw new ApiException("Player does not own this coaching session");
         }
-
-        if (schedule.getIsBooked()) {
-            throw new ApiException("Schedule is already booked");
-        }
-
-        schedule.setIsBooked(true);
-        CoachingSession coachingSession = new CoachingSession();
-        coachingSession.setPlayer(player);
-        coachingSession.setSchedule(schedule);
+        
+        coachingSession.setStartDate(dateTimeDTO.getStartDate());
+        coachingSession.setEndDate(dateTimeDTO.getEndDate());
+        coachingSession.setStatus("Waiting For Coach Approval");
         coachingSessionRepository.save(coachingSession);
-        scheduleRepository.save(schedule);
+        
     }
 
-    public void requestReschedule(Integer coachingSessionId, LocalDate newDate, LocalTime newStartTime, LocalTime newEndTime) {
-        CoachingSession coachingSession = coachingSessionRepository.findById(coachingSessionId)
-                .orElseThrow(() -> new ApiException("Coaching session not found"));
+    public void approveReschedule(Integer coachingSessionId, Integer coachId) {
+        CoachingSession coachingSession = coachingSessionRepository.findCoachingSessionById(coachingSessionId);
 
-        coachingSession.setRescheduleRequested(true);
-        coachingSession.setNewDate(newDate);
-        coachingSession.setNewStartTime(newStartTime);
-        coachingSession.setNewEndTime(newEndTime);
+        if (coachingSession == null) {
+            new ApiException("Coaching session not found");
+        }
+
+        if (coachingSession.getCoach().getId() != coachId) {
+            throw new ApiException("Coach does not own this coaching session");
+        }
+
+
+
+       coachingSession.setStatus("Approved");
+        coachingSessionRepository.save(coachingSession);
+
+    }
+
+
+    public void rejectedReschedule(Integer coachingSessionId, Integer coachId) {
+        CoachingSession coachingSession = coachingSessionRepository.findCoachingSessionById(coachingSessionId);
+
+        if (coachingSession == null) {
+            new ApiException("Coaching session not found");
+        }
+
+        if (coachingSession.getCoach().getId() != coachId) {
+            throw new ApiException("Coach does not own this coaching session");
+        }
+
+
+
+        coachingSession.setStatus("Rescheduling Rejected");
+
+        coachingSessionRepository.save(coachingSession);
+
+    }
+
+
+    public void endCoachingSession(Integer coachingSessionId, Integer coachId) {
+        CoachingSession coachingSession = coachingSessionRepository.findCoachingSessionById(coachingSessionId);
+        if (coachingSession == null) {
+            new ApiException("Coaching session not found");
+        }
+
+        if (coachingSession.getCoach().getId() != coachId) {
+            throw new ApiException("Coach does not own this coaching session");
+        }
+
+        coachingSession.setStatus("Ended");
         coachingSessionRepository.save(coachingSession);
     }
 
-    public void respondReschedule(Integer coachingSessionId, boolean accept) {
-        CoachingSession coachingSession = coachingSessionRepository.findById(coachingSessionId)
-                .orElseThrow(() -> new ApiException("Coaching session not found"));
 
-        if (!coachingSession.isRescheduleRequested()) {
-            throw new ApiException("No reschedule request found");
-        }
-
-        if (accept) {
-            coachingSession.getSchedule().setDate(coachingSession.getNewDate());
-            coachingSession.getSchedule().setStartTime(coachingSession.getNewStartTime());
-            coachingSession.getSchedule().setEndTime(coachingSession.getNewEndTime());
-        }
-
-        coachingSession.setRescheduleRequested(false);
-        coachingSession.setNewDate(null);
-        coachingSession.setNewStartTime(null);
-        coachingSession.setNewEndTime(null);
-        coachingSessionRepository.save(coachingSession);
+    public List<CoachingSession> getPendingApprovalSessionsByCoach(Integer coachId) {
+        return coachingSessionRepository.findByStatusAndCoachId("Waiting For Coach Approval", coachId);
     }
+
+
+
+
 
 
 }

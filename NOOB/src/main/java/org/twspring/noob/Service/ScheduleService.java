@@ -31,6 +31,7 @@ public class ScheduleService {
         if (coach == null) {
             throw new ApiException("Coach not found");
         }
+
         schedule.setCoach(coach);
         coach.getSchedules().add(schedule);
         scheduleRepository.save(schedule);
@@ -42,9 +43,8 @@ public class ScheduleService {
         if (schedule == null) {
             throw new ApiException("Schedule not found");
         }
-        schedule.setDate(scheduleDetails.getDate());
-        schedule.setStartTime(scheduleDetails.getStartTime());
-        schedule.setEndTime(scheduleDetails.getEndTime());
+        schedule.setStartDate(scheduleDetails.getStartDate());
+        schedule.setEndDate(scheduleDetails.getEndDate());
         schedule.setIsBooked(scheduleDetails.getIsBooked());
         scheduleRepository.save(schedule);
     }
@@ -70,27 +70,6 @@ public class ScheduleService {
     public List<Schedule> getSchedulesByCoachId(Integer coachId) {
         return scheduleRepository.findSchedulesByCoachId(coachId);
     }
-
-
-    // EXTRA endpoint: booking a coaching session
-    public void bookCoachingSession(Integer scheduleId, Integer playerId) {
-        Schedule schedule = scheduleRepository.findScheduleById(scheduleId);
-        if (schedule == null) {
-            throw new ApiException("Schedule not found");
-        }
-        if (schedule.getIsBooked()) {
-            throw new ApiException("Schedule is already booked");
-        }
-        Player player = playerRepository.findPlayerById(playerId);
-        if (player == null) {
-            throw new ApiException("Player not found");
-        }
-        schedule.setIsBooked(true);
-        schedule.setPlayer(player);
-        scheduleRepository.save(schedule);
-    }
-
-
 
 
 }

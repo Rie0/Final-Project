@@ -8,8 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -17,6 +16,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+// Mohammed
 public class Schedule {
 
     @Id
@@ -28,14 +28,11 @@ public class Schedule {
     @JsonIgnore
     private Coach coach;
 
-    @NotNull(message = "Date is mandatory")
-    private LocalDate date;
-
     @NotNull(message = "Start time is mandatory")
-    private LocalTime startTime;
+    private LocalDateTime startDate;
 
     @NotNull(message = "End time is mandatory")
-    private LocalTime endTime;
+    private LocalDateTime endDate;
 
     @NotNull(message = "Booking status is mandatory")
     private Boolean isBooked = false;
@@ -43,17 +40,11 @@ public class Schedule {
 
 
 
-//    @ManyToOne
-//    @JoinColumn(name = "master_class_id")
-//    private MasterClass masterClass;
 
     @OneToOne(mappedBy = "schedule", cascade = CascadeType.ALL)
     @JsonIgnore
     private CoachingSession coachingSession;
 
-    @ManyToOne
-    @JoinColumn(name = "player_id")
-    private Player player;
 
 
 

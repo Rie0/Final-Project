@@ -1,15 +1,17 @@
 package org.twspring.noob.Service;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
 import org.twspring.noob.DTO.ProfileDTO;
 import org.twspring.noob.DTO.CoachDTO;
 import org.twspring.noob.Model.Coach;
+import org.twspring.noob.Model.Review;
 import org.twspring.noob.Model.User;
 import org.twspring.noob.Repository.AuthRepository;
 import org.twspring.noob.Repository.CoachRepository;
+import org.twspring.noob.Repository.CoachingSessionRepository;
+import org.twspring.noob.Repository.ReviewRepository;
 
 import java.util.List;
 
@@ -19,70 +21,65 @@ public class CoachService {
 
     private final CoachRepository coachRepository;
     private final AuthRepository userRepository;
+    private final AuthRepository authRepository;
+    private final ReviewRepository reviewRepository;
 
-    // Get all coaches
+    // CRUD get all
     public List<Coach> getAllCoaches() {
         return coachRepository.findAll();
     }
 
-    // Register a new coach
-    public void registerCoach(CoachDTO coachDTO) {
-        // Create and save the User entity
+    // CRUD register
+    public void addCoach(CoachDTO coachDTO) {
         User user = new User();
-        String hash = new BCryptPasswordEncoder().encode(coachDTO.getPassword());
-
         user.setUsername(coachDTO.getUsername());
-        user.setPassword(hash);
+        user.setPassword(coachDTO.getPassword());
         user.setEmail(coachDTO.getEmail());
         user.setPhoneNumber(coachDTO.getPhoneNumber());
         user.setRole("COACH");
-        userRepository.save(user);
 
-        // Create and save the Coach entity
         Coach coach = new Coach();
+        coach.setUser(user);
         coach.setName(coachDTO.getName());
         coach.setBio(coachDTO.getBio());
         coach.setExpertise(coachDTO.getExpertise());
-        coach.setUser(user);
-        coachRepository.save(coach);
+        coach.setHourlyRate(coachDTO.getHourlyRate());
+
+        user.setCoach(coach); // Set the bidirectional relationship
+        userRepository.save(user);
     }
 
-    // Update an existing coach
-    public void updateCoach(Integer coachId, CoachDTO coachDTO) {
-        Coach existingCoach = coachRepository.findCoachById(coachId);
-        if (existingCoach == null) {
-            throw new ApiException("Coach not found");
-        }
-
-        User existingUser = existingCoach.getUser();
-        String hash = new BCryptPasswordEncoder().encode(coachDTO.getPassword());
-
-        existingUser.setUsername(coachDTO.getUsername());
-        existingUser.setPassword(hash);
-        existingUser.setEmail(coachDTO.getEmail());
-        existingUser.setPhoneNumber(coachDTO.getPhoneNumber());
-        userRepository.save(existingUser);
-
-        existingCoach.setName(coachDTO.getName());
-        existingCoach.setBio(coachDTO.getBio());
-        existingCoach.setExpertise(coachDTO.getExpertise());
-        coachRepository.save(existingCoach);
-    }
-
-    // Delete a coach
-    public void deleteCoach(Integer coachId) {
-        Coach coach = coachRepository.findCoachById(coachId);
+    // CRUD update
+    public void updateCoach(Integer id, CoachDTO coachDTO) {
+        Coach coach = coachRepository.findCoachById(id);
         if (coach == null) {
             throw new ApiException("Coach not found");
         }
-
-        userRepository.deleteById(coach.getUser().getId());
-        coachRepository.deleteById(coachId);
+        User user = coach.getUser();
+        user.setUsername(coachDTO.getUsername());
+        user.setPassword(coachDTO.getPassword());
+        user.setEmail(coachDTO.getEmail());
+        user.setPhoneNumber(coachDTO.getPhoneNumber());
+        coach.setName(coachDTO.getName());
+        coach.setBio(coachDTO.getBio());
+        coach.setExpertise(coachDTO.getExpertise());
+        coach.setHourlyRate(coachDTO.getHourlyRate());
+        userRepository.save(user); // Save both coach and user details
     }
 
-    // Get a coach by id
-    public Coach getCoachById(Integer coachId) {
-        Coach coach = coachRepository.findCoachById(coachId);
+    // CRUD delete
+    public void deleteCoach(Integer id) {
+        Coach coach = coachRepository.findCoachById(id);
+        if (coach == null) {
+            throw new ApiException("Coach not found");
+        }
+        User user = authRepository.findUserById(id);
+        authRepository.delete(user);
+    }
+
+    // EXTRA endpoint: getting a coach by id
+    public Coach getCoachById(Integer id) {
+        Coach coach = coachRepository.findCoachById(id);
         if (coach == null) {
             throw new ApiException("Coach not found");
         }
@@ -101,4 +98,16 @@ public class CoachService {
         }
        // ProfileDTO profileDTO = new ProfileDTO(coach.getUser(), coach.getBio());
     }
+    public List<Coach> getCoachesByHourlyRateRange(Integer minRate, Integer maxRate) {
+        if (minRate == null || maxRate == null || minRate < 0 || maxRate < 0 || minRate > maxRate) {
+            throw new ApiException("Invalid hourly rate range");
+        }
+        return coachRepository.findByHourlyRateBetween(minRate, maxRate);
+    }
+
+
+    public List<Review> getAllReviewsByCoach(Integer coachId) {
+        return reviewRepository.findByCoachId(coachId);
+    }
+
 }

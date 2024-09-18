@@ -50,6 +50,8 @@ public class Player { //Rafeef
     //Rafeef
     @OneToOne
     @MapsId
+    @JsonIgnore
+
     private User user;
 
     @ManyToOne
@@ -63,6 +65,9 @@ public class Player { //Rafeef
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")
     @JsonIgnore
     private Set<Participant> participants;
+
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
+    private Set<Review> reviews;
 
     //hassan
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "player")

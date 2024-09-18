@@ -48,6 +48,8 @@ public class User implements UserDetails { //rafeef
     @Pattern(regexp = "^(PLAYER|TEAM|ORGANIZER|VENDOR|COACH|ADMIN)$")
     private String role;
 
+
+
     //GENERAL VARS
 
     @Column(columnDefinition = "VARCHAR(50) NOT NULL UNIQUE")
@@ -76,9 +78,14 @@ public class User implements UserDetails { //rafeef
     //RELATIONSHIPS
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    @JsonIgnore
     @PrimaryKeyJoinColumn
     private Player player;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
+
+    @PrimaryKeyJoinColumn
+    private Coach coach;
+
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     @JsonIgnore
@@ -89,17 +96,6 @@ public class User implements UserDetails { //rafeef
     @JsonIgnore
     @PrimaryKeyJoinColumn
     private Vendor vendor;
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    @JsonIgnore
-    @PrimaryKeyJoinColumn
-    private Organizer organizer;
-
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    @JsonIgnore
-    @PrimaryKeyJoinColumn
-    private Coach coach;
 
 
     //USER DETAILS METHODS (after security)

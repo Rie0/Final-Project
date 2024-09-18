@@ -2,8 +2,8 @@ package org.twspring.noob.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -15,6 +15,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+
+// Mohammed
 @Entity
 @Getter
 @Setter
@@ -22,48 +24,43 @@ import java.time.LocalTime;
 @NoArgsConstructor
 public class CoachingSession {
 
+    // GENERAL VARIABLES
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, columnDefinition = "INT")
     private Integer id;
 
-    @NotNull(message = "Scheduled time is mandatory")
-    private LocalDateTime scheduledTime;
+    //@NotNull(message = "Start time is mandatory")
+    private LocalDateTime startDate;
 
-    @NotBlank(message = "Session type is mandatory")
-    @Size(max = 100, message = "Session type should not exceed 100 characters")
-    private String sessionType;
+    //@NotNull(message = "End time is mandatory")
+    private LocalDateTime endDate;
 
     @Size(max = 500, message = "Feedback should not exceed 500 characters")
-    private String feedBack;
+    @Column(name = "feedback", length = 500, columnDefinition = "VARCHAR(500)")
+    private String feedback;
 
-    @NotNull(message = "Pricing is mandatory")
-    @Min(value = 0, message = "Pricing should not be less than 0")
-    private Integer pricing;
+    //@NotEmpty(message = "status is mandatory")
+    @Column(name = "status", length = 500, columnDefinition = "VARCHAR(200)")
+    private String status = "UPCOMING";
 
-    private boolean rescheduleRequested = false;
-
-    private LocalDate newDate;
-
-    private LocalTime newStartTime;
-
-    private LocalTime newEndTime;
+    // RELATIONSHIPS
 
     @ManyToOne
     @JoinColumn(name = "coach_id", nullable = false)
-    @NotNull(message = "Coach is mandatory")
     @JsonIgnore
     private Coach coach;
 
-
     @OneToOne
     @JoinColumn(name = "schedule_id", nullable = false)
-    @NotNull(message = "Schedule is mandatory")
     @JsonIgnore
     private Schedule schedule;
 
     @ManyToOne
     @JoinColumn(name = "player_id", nullable = false)
-    @NotNull(message = "Player is mandatory")
     private Player player;
 
+    @OneToOne(mappedBy = "coachingSession", cascade = CascadeType.ALL)
+    private Review review;
 }

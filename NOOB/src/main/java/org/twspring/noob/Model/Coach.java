@@ -1,5 +1,6 @@
 package org.twspring.noob.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Setter;
 
 import java.util.Set;
 
+// Mohammed
 @Entity
 @Getter
 @Setter
@@ -20,24 +22,26 @@ public class Coach {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(columnDefinition = "varchar(30) not null")
     @NotBlank(message = "Name is mandatory")
     @Size(max = 100, message = "Name should not exceed 100 characters")
+    @Column(columnDefinition = "varchar(75) not null")
     private String name;
 
-    @Column(columnDefinition = "TEXT")
+
     @Size(max = 500, message = "Bio should not exceed 500 characters")
+    @Column(columnDefinition = "varchar(150) not null")
     private String bio;
 
-    @Column(columnDefinition = "varchar(100) not null")
     @NotBlank(message = "Expertise is mandatory")
     @Size(max = 100, message = "Expertise should not exceed 100 characters")
+    @Column(columnDefinition = "varchar(125) not null")
     private String expertise;
 
-    @Min(value = 0, message = "Rating should not be less than 0")
-    @Max(value = 5, message = "Rating should not be more than 5")
-    @Column(columnDefinition = "varchar(30) not null")
-    private double rating = 0;
+
+    @NotNull(message = "hourlyRate is mandatory")
+    @Positive(message = "hourlyRate should be positive")
+    @Column(columnDefinition = "varchar(25) not null")
+    private Integer hourlyRate;
 
     @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
     private Set<Schedule> schedules;
@@ -48,7 +52,13 @@ public class Coach {
     @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
     private Set<CoachingSession> coachingSessions;
 
+
     @OneToOne
     @MapsId
+    @JsonIgnore
+
     private User user;
+
+    @OneToMany(mappedBy = "coach", cascade = CascadeType.ALL)
+    private Set<Review> reviews;
 }
