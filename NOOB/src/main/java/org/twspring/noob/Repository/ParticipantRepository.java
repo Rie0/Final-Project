@@ -20,5 +20,7 @@ public interface ParticipantRepository extends JpaRepository<Participant, Intege
 
     @Query(value = "SELECT * FROM Participant WHERE tournament_id = ?1 ORDER BY seed ASC LIMIT ?2", nativeQuery = true)
     List<Participant> findTopParticipantsByTournamentId(Integer tournamentId, int limit);
-
+    // Custom query to find a participant by user ID and tournament ID
+    @Query("SELECT p FROM Participant p WHERE p.player.user.id = ?1 AND p.tournament.id = ?2")
+    Participant findByUserIdAndTournamentId(Integer userId, Integer tournamentId);
 }

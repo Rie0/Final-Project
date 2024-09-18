@@ -47,7 +47,17 @@ public class TournamentService {
         tournament.setOrganizer(org);
         tournamentRepository.save(tournament);
     }
+    public void deleteTournament(Integer tournamentId, Integer organizerId) {
+        // Find the tournament by ID and organizer ID to ensure the authenticated organizer owns it
+        Tournament tournament = tournamentRepository.findByTournamentIdAndOrganizerId(tournamentId, organizerId);
 
+        if (tournament == null) {
+            throw new ApiException("Tournament not found or you are not authorized to delete it");
+        }
+
+        // Proceed with deleting the tournament
+        tournamentRepository.delete(tournament);
+    }
     public void updateTournament(Integer tournamentId, Tournament updatedTournament, Integer organizerId) {
         // Check organizer authorization
         checkOrganizerAuthorization(tournamentId, organizerId);
@@ -91,14 +101,22 @@ public class TournamentService {
         tournamentRepository.save(tournament);
     }
 
-    public void deleteTournament(Integer tournamentId, Integer organizerId) {
-        checkOrganizerAuthorization(tournamentId, organizerId);
-        Tournament tournament = tournamentRepository.findByTournamentIdAndOrganizerId(tournamentId, organizerId);
-        if (tournament == null) {
-            throw new ApiException("Tournament not found or not authorized to delete.");
+    public void deleteParticipant(Integer userId, Integer tournamentId) {
+        Participant participant = participantRepository.findByUserIdAndTournamentId(userId, tournamentId);
+
+        if (participant == null) {
+            throw new ApiException("Participant not found in the specified tournament");
         }
-        tournamentRepository.deleteById(tournamentId);
+
+        // Authorization Check: Only the participant themselves or the tournament organizer can delete the participant
+        if (!participant.getPlayer().getUser().getId().equals(userId) &&
+                !participant.getTournament().getOrganizer().getId().equals(userId)) {
+            throw new ApiException("Access denied: You are not authorized to delete this participant.");
+        }
+
+        participantRepository.delete(participant);
     }
+
 
     public void startTournament(Integer tournamentId, Integer organizerId) {
         // Check if the organizer is authorized to manage the tournament

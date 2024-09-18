@@ -28,7 +28,7 @@ public class ParticipantController {
     public ResponseEntity addParticipant(@AuthenticationPrincipal User user,
                                          @RequestParam String name,
                                          @PathVariable Integer tournamentId
-                                         ) {
+    ) {
         // The security check is handled by the security configuration
         participantService.participateInTournament(  user.getId(),tournamentId,name);
         return ResponseEntity.status(HttpStatus.OK).body("Participant added successfully");
@@ -37,9 +37,8 @@ public class ParticipantController {
 
 
     @DeleteMapping("/delete/{tournamentId}")
-    public ResponseEntity deleteParticipant(@AuthenticationPrincipal User user,
-                                            @PathVariable Integer tournamentId) {
-        // The security check is handled by the security configuration
+    public ResponseEntity<String> deleteParticipant(@AuthenticationPrincipal User user,
+                                                    @PathVariable Integer tournamentId) {
         participantService.deleteParticipant(user.getId(),tournamentId);
         return ResponseEntity.status(HttpStatus.OK).body("Participant deleted successfully");
     }

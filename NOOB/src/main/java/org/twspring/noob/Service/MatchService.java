@@ -29,7 +29,7 @@ public class MatchService {
         return matchRepository.findMatchById(id);
     }
 
-    public Match saveMatch(Match match, User user) {
+    public Match saveMatch( User user,Match match) {
         validateOrganizerForMatch(user, match); // Validate if the user is the correct organizer
         return matchRepository.save(match);
     }

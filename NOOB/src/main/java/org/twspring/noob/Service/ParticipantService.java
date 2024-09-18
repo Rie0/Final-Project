@@ -86,12 +86,22 @@ public class ParticipantService {
         }
     }
 
-    public void deleteParticipant(Integer participantId) {
+    public void deleteParticipant(Integer participantId, Integer tournamentId) {
+        // Find the participant by ID
         Participant participant = participantRepository.findParticipantById(participantId);
         if (participant == null) {
             throw new ApiException("Participant not found");
         }
+
+        // Check if the participant is associated with the given tournament
+        if (!participant.getTournament().getId().equals(tournamentId)) {
+            throw new ApiException("Participant is not associated with the specified tournament");
+        }
+
+        // Proceed with deletion
         participantRepository.deleteById(participantId);
     }
+
+
 
 }
