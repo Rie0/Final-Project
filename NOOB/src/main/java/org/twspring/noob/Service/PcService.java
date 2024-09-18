@@ -27,7 +27,7 @@ private final PcCentresRepository pcCentresRepository;
         return pcRepository.findAll();
     }
 
-
+//////////
     public void addPc(PC pc,Integer pcCenterId,Integer vendorId) {
         Vendor vendor=vendorRepository.findVendorById(vendorId);
         PcCentres pcCentres=pcCentresRepository.findPcCentreById(pcCenterId);
@@ -37,18 +37,27 @@ private final PcCentresRepository pcCentresRepository;
         if(vendor==null) {
             throw new ApiException("Vendor Not Found");
         }
-//        if (vendor.getId()!=pcCentres.getId()) {
-//            throw new ApiException("Vendor Id Not Match");
-//        }
+        if (vendor.getId()!=pcCentres.getVendor().getId()){
+            throw new ApiException("Vendor Id Not Match");
+        }
+
 
 
     }
 
-    public void updatePc(Integer id, PC pc) {
-        PC pc1 = pcRepository.findPCById(id);
+    public void updatePc(Integer pcId, PC pc, Integer vendorId ) {
+        PC pc1 = pcRepository.findPCById(pcId);
         if (pc1 == null) {
             throw new ApiException("PC not found");
         }
+        Vendor vendor=vendorRepository.findVendorById(vendorId);
+        if(vendor==null) {
+            throw new ApiException("Vendor Not Found");
+        }
+if (vendor.getId()!=pc.getPcCentre().getVendor().getId()){
+    throw new ApiException("Vendor Id Not Match");
+}
+
         pc1.setAvailable(true);
         pc1.setBrand(pc.getBrand());
         pc1.setModel(pc.getModel());
@@ -56,10 +65,17 @@ private final PcCentresRepository pcCentresRepository;
         pcRepository.save(pc1);
     }
 
-    public void deletePc(Integer id) {
-        PC pc1 = pcRepository.findPCById(id);
+    public void deletePc(Integer pcid,Integer vendorId) {
+        PC pc1 = pcRepository.findPCById(pcid);
         if (pc1 == null) {
             throw new ApiException("PC not found");
+        }
+        Vendor vendor=vendorRepository.findVendorById(vendorId);
+        if(vendor==null) {
+            throw new ApiException("Vendor Not Found");
+        }
+        if (vendor.getId()!=pc1.getPcCentre().getVendor().getId()){
+            throw new ApiException("Vendor Id Not Match");
         }
         pcRepository.delete(pc1);
     }

@@ -23,5 +23,8 @@ public interface PcCentresRepository extends JpaRepository<PcCentres, Integer> {
     List<PcCentres> findPcCentresByApprovedFalse();
     List<PcCentres> findPcCentresByApprovedTrue();
 
+List<PcCentres> findPcCentresByApprovedFalse();
+    List<PcCentres> findPcCentresByApprovedTrue();
+
 }
 

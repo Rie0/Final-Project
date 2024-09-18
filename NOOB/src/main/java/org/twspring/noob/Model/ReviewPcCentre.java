@@ -2,43 +2,34 @@ package org.twspring.noob.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.AssertFalse;
-import jakarta.validation.constraints.Future;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
 @Entity
-@Setter
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SubscripeBy {
-
+public class ReviewPcCentre {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-private Date startDate;
-    private Date endDate;
-private int playerMembers;
-    private boolean status;
-    private int remainingHours;
+    private int rating;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date returnDate;
-
-
-    @ManyToOne
-    @JsonIgnore
-    private Subscription subscription;
+    private String commnet;
 
     @ManyToOne
     @JsonIgnore
     private Player player;
+
+    @ManyToOne
+    @JsonIgnore
+    private PcCentres pcCentre;
+
+
 
 }

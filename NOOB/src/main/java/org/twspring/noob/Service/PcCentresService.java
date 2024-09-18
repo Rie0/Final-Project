@@ -86,16 +86,16 @@ public class PcCentresService {
     //@Transactional
     public void adminAprovedPcCenter(Integer pcCenterId) {
 
-        PcCentres pcCentres = pcCentresRepository.findPcCentreById(pcCenterId);
-        if (pcCentres == null) {
-            throw new ApiException("PC Centre not found");
-        } else {
+                PcCentres pcCentres = pcCentresRepository.findPcCentreById(pcCenterId);
+                if (pcCentres == null) {
+                    throw new ApiException("PC Centre not found");
+                } else {
 
-            pcCentres.setApproved(true);
-            pcCentresRepository.save(pcCentres);
+                    pcCentres.setApproved(true);
+                    pcCentresRepository.save(pcCentres);
+                }
+
         }
-
-    }
 
     /// =============
 
@@ -127,7 +127,7 @@ public class PcCentresService {
 
 
     public List<PcCentres>getApprovedPcCentres(){
-        return pcCentresRepository.findPcCentresByApprovedTrue();
+  return pcCentresRepository.findPcCentresByApprovedTrue();
     }
 
     public List<PcCentres>getAllNotApprovedPcCentre(){

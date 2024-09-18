@@ -11,7 +11,6 @@ import org.twspring.noob.Model.Subscription;
 import org.twspring.noob.Model.User;
 import org.twspring.noob.Service.SubscriptionService;
 
-
 @RestController
 @RequestMapping("/api/v1/subscription")
 @RequiredArgsConstructor
@@ -26,8 +25,8 @@ public class SubscriptionController {
         return ResponseEntity.status(200).body(subscriptionService.getAllsubscription());
     }
 
-    @PostMapping("/add-subscription/{subscriprionId}")
-    public ResponseEntity addsubscription(@PathVariable Integer subscriprionId, @AuthenticationPrincipal User user, @Valid @RequestBody Subscription subscription){
+    @PostMapping("/add-subscription/{id}")
+    public ResponseEntity addsubscription(@PathVariable Integer subscriprionId,@AuthenticationPrincipal User user,@Valid @RequestBody Subscription subscription){
         subscriptionService.addsubscription(subscription,subscriprionId, user.getId());
         return ResponseEntity.status(200).body("subscription added successfully");
 
@@ -51,5 +50,3 @@ public class SubscriptionController {
 
 
 }
-
-
