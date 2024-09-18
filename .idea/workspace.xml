@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b947b4ef-297e-4c50-811c-9161e0997d87" name="Changes" comment="Security Added">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/PlayerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/PlayerService.java" afterDir="false" />
-    </list>
+    <list default="true" id="b947b4ef-297e-4c50-811c-9161e0997d87" name="Changes" comment="Security Added" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -211,7 +208,7 @@
       <workItem from="1726640562876" duration="388000" />
       <workItem from="1726641078506" duration="1871000" />
       <workItem from="1726642984651" duration="305000" />
-      <workItem from="1726643569302" duration="1691000" />
+      <workItem from="1726643569302" duration="2230000" />
     </task>
     <task id="LOCAL-00001" summary="changes">
       <option name="closed" value="true" />
