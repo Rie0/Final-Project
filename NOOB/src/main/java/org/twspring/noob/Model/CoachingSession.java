@@ -15,6 +15,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+
+// Mohammed
 @Entity
 @Getter
 @Setter
@@ -35,17 +37,12 @@ public class CoachingSession {
     //@NotNull(message = "End time is mandatory")
     private LocalDateTime endDate;
 
-//    @NotBlank(message = "Session type is mandatory")
-//    @Size(max = 100, message = "Session type should not exceed 100 characters")
-//    @Column(name = "session_type", length = 100, nullable = false, columnDefinition = "VARCHAR(100)")
-//    private String sessionStyle;
-
     @Size(max = 500, message = "Feedback should not exceed 500 characters")
     @Column(name = "feedback", length = 500, columnDefinition = "VARCHAR(500)")
     private String feedback;
 
     //@NotEmpty(message = "status is mandatory")
-    @Column(name = "status", length = 500, columnDefinition = "VARCHAR(25)")
+    @Column(name = "status", length = 500, columnDefinition = "VARCHAR(200)")
     private String status = "UPCOMING";
 
     // RELATIONSHIPS

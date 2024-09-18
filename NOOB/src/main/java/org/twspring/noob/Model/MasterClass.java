@@ -21,6 +21,7 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+// Mohammed
 public class MasterClass {
 
     @Id
@@ -32,9 +33,7 @@ public class MasterClass {
     @JsonIgnore
     private Coach coach;
 
-//    @OneToMany(mappedBy = "masterClass", cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    private Set<Schedule> schedules;
+
 
     @ManyToMany
     @JoinTable(

@@ -5,9 +5,12 @@ import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
 import org.twspring.noob.DTO.CoachDTO;
 import org.twspring.noob.Model.Coach;
+import org.twspring.noob.Model.Review;
 import org.twspring.noob.Model.User;
 import org.twspring.noob.Repository.AuthRepository;
 import org.twspring.noob.Repository.CoachRepository;
+import org.twspring.noob.Repository.CoachingSessionRepository;
+import org.twspring.noob.Repository.ReviewRepository;
 
 import java.util.List;
 
@@ -18,6 +21,7 @@ public class CoachService {
     private final CoachRepository coachRepository;
     private final AuthRepository userRepository;
     private final AuthRepository authRepository;
+    private final ReviewRepository reviewRepository;
 
     // CRUD get all
     public List<Coach> getAllCoaches() {
@@ -87,5 +91,11 @@ public class CoachService {
         }
         return coachRepository.findByHourlyRateBetween(minRate, maxRate);
     }
+
+
+    public List<Review> getAllReviewsByCoach(Integer coachId) {
+        return reviewRepository.findByCoachId(coachId);
+    }
+
 
 }

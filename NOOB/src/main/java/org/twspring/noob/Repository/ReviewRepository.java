@@ -32,4 +32,7 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
     List<Review> findReviewsByPlayerIdAndCoachId(Integer playerId, Integer coachId);
 
     List<Review> findByPlayer(Player player);
+
+    List<Review> findByCoachId(Integer coachId);
+
 }

@@ -31,6 +31,7 @@ public class ScheduleService {
         if (coach == null) {
             throw new ApiException("Coach not found");
         }
+
         schedule.setCoach(coach);
         coach.getSchedules().add(schedule);
         scheduleRepository.save(schedule);

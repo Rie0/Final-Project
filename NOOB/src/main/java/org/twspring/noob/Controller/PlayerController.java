@@ -3,10 +3,12 @@ package org.twspring.noob.Controller;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.twspring.noob.Api.ApiResponse;
 import org.twspring.noob.DTO.PlayerDTO;
 import org.twspring.noob.Model.Review;
+import org.twspring.noob.Model.User;
 import org.twspring.noob.Service.PlayerService;
 
 import java.util.List;
@@ -71,45 +73,47 @@ public class PlayerController {
     }
 
 
-    // Mohammed
-    @PostMapping("/add-review/{playerId}/{coachId}/{coachingSessionId}/{comment}/{rating}")
-    public ResponseEntity addReview(@PathVariable Integer playerId, @PathVariable Integer coachId, @PathVariable Integer coachingSessionId, @PathVariable String comment, @PathVariable Float rating) {
-        playerService.addReview(playerId, coachId, coachingSessionId, comment, rating);
+    // Mohammed Area below
+    @PostMapping("/add-review/{coachId}/{coachingSessionId}/{comment}/{rating}")
+    public ResponseEntity addReview(@AuthenticationPrincipal User player, @PathVariable Integer coachId, @PathVariable Integer coachingSessionId, @PathVariable String comment, @PathVariable Float rating) {
+        playerService.addReview(player.getId(), coachId, coachingSessionId, comment, rating);
         return ResponseEntity.status(200).body(new ApiResponse("Review added successfully"));
     }
 
 
-        // CRUD get all
+        //Mohammed - CRUD get all
         @GetMapping("/get-all-reviews")
         public ResponseEntity<List<Review>> getAllReviews() {
             return ResponseEntity.status(200).body(playerService.getAllReviews());
         }
 
-        // CRUD update
+        // Mohammed - CRUD update
         @PutMapping("/update-review/{reviewId}")
-        public ResponseEntity<ApiResponse> updateReview(@PathVariable Integer reviewId, @RequestBody @Valid Review review) {
+        public ResponseEntity<ApiResponse> updateReview(@PathVariable Integer reviewId, @RequestBody @Valid Review review, @AuthenticationPrincipal User player) {
             playerService.updateReview(reviewId, review);
             return ResponseEntity.status(200).body(new ApiResponse("Review updated successfully"));
         }
 
-        // CRUD delete
+        // Mohammed -CRUD delete
         @DeleteMapping("/delete-review/{reviewId}")
-        public ResponseEntity<ApiResponse> deleteReview(@PathVariable Integer reviewId) {
+        public ResponseEntity<ApiResponse> deleteReview(@PathVariable Integer reviewId, @AuthenticationPrincipal User player) {
             playerService.deleteReview(reviewId);
             return ResponseEntity.status(200).body(new ApiResponse("Review deleted successfully"));
         }
 
-        // EXTRA endpoint: getting a review by id
+        // Mohammed - EXTRA endpoint: getting a review by id
         @GetMapping("/get/{reviewId}")
         public ResponseEntity getReviewById(@PathVariable Integer reviewId) {
             return ResponseEntity.status(200).body(playerService.getReviewById(reviewId));
         }
 
-        // EXTRA endpoint: getting reviews for a player
+        // Mohammed - EXTRA endpoint: getting reviews for a player
         @GetMapping("/get-by-player/{playerId}")
         public ResponseEntity<List<Review>> getReviewsForPlayer(@PathVariable Integer playerId) {
             return ResponseEntity.status(200).body(playerService.getReviewsForPlayer(playerId));
         }
+
+
 
 
 

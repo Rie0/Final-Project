@@ -4,10 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.twspring.noob.Api.ApiException;
 import org.twspring.noob.DTO.DateTimeDTO;
-import org.twspring.noob.Model.Coach;
-import org.twspring.noob.Model.CoachingSession;
-import org.twspring.noob.Model.Player;
-import org.twspring.noob.Model.Schedule;
+import org.twspring.noob.Model.*;
 import org.twspring.noob.Repository.CoachingSessionRepository;
 import org.twspring.noob.Repository.PlayerRepository;
 import org.twspring.noob.Repository.ScheduleRepository;
@@ -95,10 +92,10 @@ public class CoachingSessionService {
     public void requestReschedule(Integer coachingSessionId, DateTimeDTO dateTimeDTO, Integer playerId) {
         CoachingSession coachingSession = coachingSessionRepository.findCoachingSessionById(coachingSessionId);
         if (coachingSession == null) {
-            new ApiException("Coaching session not found");
+            throw new ApiException("Coaching session not found");
         } ;
 
-        if (coachingSession.getPlayer().getId() == playerId) {
+        if (coachingSession.getPlayer().getId() != playerId) {
             throw new ApiException("Player does not own this coaching session");
         }
         
@@ -148,15 +145,28 @@ public class CoachingSessionService {
     }
 
 
-    public void endCoachingSession(Integer coachingSessionId) {
+    public void endCoachingSession(Integer coachingSessionId, Integer coachId) {
         CoachingSession coachingSession = coachingSessionRepository.findCoachingSessionById(coachingSessionId);
         if (coachingSession == null) {
             new ApiException("Coaching session not found");
         }
 
+        if (coachingSession.getCoach().getId() != coachId) {
+            throw new ApiException("Coach does not own this coaching session");
+        }
+
         coachingSession.setStatus("Ended");
         coachingSessionRepository.save(coachingSession);
     }
+
+
+    public List<CoachingSession> getPendingApprovalSessionsByCoach(Integer coachId) {
+        return coachingSessionRepository.findByStatusAndCoachId("Waiting For Coach Approval", coachId);
+    }
+
+
+
+
 
 
 }

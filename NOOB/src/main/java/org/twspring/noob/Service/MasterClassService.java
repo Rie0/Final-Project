@@ -41,16 +41,26 @@ public class MasterClassService {
         if (coach == null) {
             throw new ApiException("Coach not found");
         }
+
+        if (coach.getId() != masterClass.getCoach().getId()) {
+            throw new ApiException("Coach id does not match");
+        }
+
         masterClass.setCoach(coach);
         masterClassRepository.save(masterClass);
     }
 
     // CRUD update
-    public void updateMasterClass(Integer id, MasterClass masterClassDetails) {
+    public void updateMasterClass(Integer id, MasterClass masterClassDetails, Integer coachId) {
         MasterClass masterClass = masterClassRepository.findMasterClassById(id);
         if (masterClass == null) {
             throw new ApiException("MasterClass not found");
         }
+
+        if (coachId != masterClass.getCoach().getId()) {
+            throw new ApiException("Coach id does not match");
+        }
+
         masterClass.setTitle(masterClassDetails.getTitle());
         masterClass.setDescription(masterClassDetails.getDescription());
         masterClass.setStartDate(masterClassDetails.getStartDate());
@@ -60,10 +70,14 @@ public class MasterClassService {
     }
 
     // CRUD delete
-    public void deleteMasterClass(Integer id) {
+    public void deleteMasterClass(Integer id, Integer coachId) {
         MasterClass masterClass = masterClassRepository.findMasterClassById(id);
         if (masterClass == null) {
             throw new ApiException("MasterClass not found");
+        }
+
+        if (coachId != masterClass.getCoach().getId()) {
+            throw new ApiException("Coach id does not match");
         }
         masterClassRepository.delete(masterClass);
     }
@@ -88,30 +102,39 @@ public class MasterClassService {
     }
 
     // EXTRA endpoint: starting a master class
-    public void startMasterClass(Integer masterClassId) {
+    public void startMasterClass(Integer masterClassId, Integer coachId) {
         MasterClass masterClass = masterClassRepository.findMasterClassById(masterClassId);
         if (masterClass == null) {
             throw new ApiException("MasterClass not found");
+        }
+        if (coachId != masterClass.getCoach().getId()) {
+            throw new ApiException("Coach id does not match");
         }
         masterClass.setStatus("Started");
         masterClassRepository.save(masterClass);
     }
 
     // EXTRA endpoint: closing a master class
-    public void closeMasterClass(Integer masterClassId) {
+    public void closeMasterClass(Integer masterClassId, Integer coachId) {
         MasterClass masterClass = masterClassRepository.findMasterClassById(masterClassId);
         if (masterClass == null) {
             throw new ApiException("MasterClass not found");
+        }
+        if (coachId != masterClass.getCoach().getId()) {
+            throw new ApiException("Coach id does not match");
         }
         masterClass.setStatus("Closed");
         masterClassRepository.save(masterClass);
     }
 
     // EXTRA endpoint: canceling a master class
-    public void cancelMasterClass(Integer masterClassId) {
+    public void cancelMasterClass(Integer masterClassId, Integer coachId) {
         MasterClass masterClass = masterClassRepository.findMasterClassById(masterClassId);
         if (masterClass == null) {
             throw new ApiException("MasterClass not found");
+        }
+        if (coachId != masterClass.getCoach().getId()) {
+            throw new ApiException("Coach id does not match");
         }
         masterClass.setStatus("Canceled");
         // We need to do the refund here after my colleague finish off
@@ -131,6 +154,7 @@ public class MasterClassService {
         if (masterClass.getPlayers().size() >= masterClass.getMaxPlayers()) {
             throw new ApiException("MasterClass is full");
         }
+
         Player player = playerRepository.findPlayerById(playerId);
         if (player == null) {
             throw new ApiException("Player not found");
