@@ -8,12 +8,15 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+//Hussam
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+
+//Hussam
 public class Participant {
 
     @Id
