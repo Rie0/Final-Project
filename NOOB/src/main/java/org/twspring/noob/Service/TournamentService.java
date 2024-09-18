@@ -10,6 +10,9 @@ import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
+
+//Hussam
 @Service
 @RequiredArgsConstructor
 public class TournamentService {
@@ -374,6 +377,8 @@ public class TournamentService {
         return matchRepository.findByTournamentAndStatus(tournament, "NOT_STARTED");
     }
 
+
+    //////////Mohammed
     public void distributePrizes(Integer tournamentId) {
         Tournament tournament = tournamentRepository.findTournamentById(tournamentId);
         if (tournament == null) {
@@ -399,6 +404,9 @@ public class TournamentService {
             participantRepository.save(participant);
         }
     }
+
+
+    //////////Mohammed
 
     // Method to calculate prize distribution dynamically
     private double[] calculatePrizeDistribution(int participantsPrize, double prizePool) {

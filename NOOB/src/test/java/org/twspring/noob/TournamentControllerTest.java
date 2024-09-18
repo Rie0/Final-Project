@@ -55,8 +55,8 @@ public class TournamentControllerTest {
         user = new User(1, "OrganizerUser", "ORGANIZER", "org@example.com", "password", "+966577345678", null, null, null, null, null, null, null);
         organizer = new Organizer(null, "Organizer1", "contact@example.com", "Organization1", null, null, user); // Set ID to null for generated ID
 
-        tournament1 = new Tournament(null, "Tournament1", "Description1", LocalDate.now(), LocalDate.now().plusDays(1), Tournament.Status.OPEN, "Location1", 10, 0, "Chess", "Players", "City1", "Online", 1000, 500, null, null, null, organizer);
-        tournament2 = new Tournament(null, "Tournament2", "Description2", LocalDate.now(), LocalDate.now().plusDays(2), Tournament.Status.ACTIVE, "Location2", 20, 5, "Soccer", "Teams", "City2", "Onsite", 2000, 1000, null, null, null, organizer);
+        tournament1 = new Tournament(null, "Tournament1", "Description1", LocalDate.now(), LocalDate.now().plusDays(1), Tournament.Status.OPEN, "Location1", 10, 0, "Chess", "Players", "City1", "Online",null, 1000, 500, null, null, null, organizer);
+        tournament2 = new Tournament(null, "Tournament2", "Description2", LocalDate.now(), LocalDate.now().plusDays(2), Tournament.Status.ACTIVE, "Location2", 20, 5, "Soccer", "Teams", "City2", "Onsite",null, 2000, 1000, null, null, null, organizer);
         tournaments = Arrays.asList(tournament1, tournament2);
         bracket = new Bracket();
     }
