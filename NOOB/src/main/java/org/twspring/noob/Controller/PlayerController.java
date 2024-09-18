@@ -8,9 +8,11 @@ import org.twspring.noob.Api.ApiResponse;
 import org.twspring.noob.DTO.PlayerDTO;
 import org.twspring.noob.Service.PlayerService;
 
+
 @RestController
 @RequestMapping("/api/v1/player")
 @RequiredArgsConstructor
+////Hassan Alzahrani
 public class PlayerController {
     private final PlayerService playerService;
 
@@ -18,6 +20,8 @@ public class PlayerController {
     public ResponseEntity getAllPlayers(){
         return ResponseEntity.status(200).body(playerService.getPlayers());
     }
+
+
 
     @PostMapping("/register")
     public ResponseEntity registerPlayer(@RequestBody@Valid PlayerDTO playerDTO){

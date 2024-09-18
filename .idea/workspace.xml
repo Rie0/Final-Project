@@ -5,59 +5,70 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a9644da5-5f07-4fbf-aece-32244b4e84b4" name="Changes" comment="changes">
-      <change afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/ReviewPcCentreController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/ReviewPcCentre.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/ReviewPcCentreRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/ReviewPcCentreService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NOOB/src/test/java/PcCentrControllerTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/PcCentresRepositoryTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/PcCentresServiceTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/SubscriptionRepositoryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_11_2024_2_19_PM__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_9_11_2024_2_19_PM__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Config/ConfigSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Config/ConfigSecurity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/AdminController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PcCentresController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PcCentresController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PcController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PcController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PlayerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/ReviewPcCentreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/ReviewPcCentreController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/SubscribeByController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/SubscribeByController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/SubscriptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/SubscriptionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/VendorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/VendorController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/ZoneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/ZoneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/DTO/VendotDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/DTO/VendotDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/PC.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/PC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/PcCentres.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/PcCentres.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/ReviewPcCentre.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/ReviewPcCentre.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/SubscripeBy.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/SubscripeBy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Subscription.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Subscription.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Vendor.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Vendor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Zone.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Zone.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/PcCentresRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/PcCentresRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/SubscribeByRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Repository/SubscribeByRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/AdminService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/AdminService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/GameService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/PcCentresService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/PcCentresService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/PcService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/PcService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/ReviewPcCentreService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/ReviewPcCentreService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/SubscribeByService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/SubscribeByService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/SubscriptionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/SubscriptionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/TournamentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/TournamentService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/VendorService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/VendorService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/ZoneService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/ZoneService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/test/java/PcCentrControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/test/java/PcCentrControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/PcCentresRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/PcCentresRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/PcCentresServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/PcCentresServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/SubscriptionRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/SubscriptionRepositoryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Config/ConfigSecurity.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Config/ConfigSecurity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/AdminController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/GameController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/PcCentresController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/PcCentresController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/PcController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/PcController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/PlayerController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/PlayerController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/ReviewPcCentreController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/ReviewPcCentreController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/SubscribeByController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/SubscribeByController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/SubscriptionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/SubscriptionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/VendorController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/VendorController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/ZoneController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/ZoneController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/DTO/VendotDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/DTO/VendotDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/PC.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/PC.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/PcCentres.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/PcCentres.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/ReviewPcCentre.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/ReviewPcCentre.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/SubscripeBy.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/SubscripeBy.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/Subscription.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/Subscription.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Repository/PcCentresRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Repository/PcCentresRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Repository/SubscribeByRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Repository/SubscribeByRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/AdminService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/AdminService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/Vendor.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/Vendor.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/Zone.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Model/Zone.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/GameService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/GameService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/PcCentresService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/PcCentresService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/PcService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/PcService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/ReviewPcCentreService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/ReviewPcCentreService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/SubscribeByService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/SubscribeByService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/SubscriptionService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/SubscriptionService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/VendorService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/VendorService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/ZoneService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/ZoneService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/test-classes/PcCentresControllerTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/test-classes/org/twspring/noob/PcCentresRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/test-classes/org/twspring/noob/PcCentresRepositoryTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/test-classes/org/twspring/noob/PcCentresServiceTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/NOOB/target/test-classes/org/twspring/noob/SubscriptionRepositoryTest.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +104,9 @@
     &quot;accountId&quot;: &quot;07025f09-2b5a-46e2-b58f-aaf91de4e3b4&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="DEPENDENCY_CHECKER_PROBLEMS_TAB" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -104,86 +118,61 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.PcCentresControllerTest.addPcCentres_ShouldReturnSuccessMessage.executor": "Run",
-    "JUnit.PcCentresControllerTest.approvedPcCenter_ShouldReturnSuccessMessage.executor": "Run",
-    "JUnit.PcCentresControllerTest.deletePcCentres_ShouldReturnSuccessMessage.executor": "Run",
-    "JUnit.PcCentresControllerTest.executor": "Run",
-    "JUnit.PcCentresControllerTest.getAllPcCentres_ShouldReturnListOfPcCentres.executor": "Run",
-    "JUnit.PcCentresControllerTest.getPcCentreByLocation_ShouldReturnPcCentresList.executor": "Run",
-    "JUnit.PcCentresControllerTest.getPcCentreByName_ShouldReturnPcCentres.executor": "Run",
-    "JUnit.PcCentresControllerTest.getPcCentreByVendor_ShouldReturnPcCentresList.executor": "Run",
-    "JUnit.PcCentresControllerTest.getPcCentresByRatingRange_ShouldReturnPcCentresList.executor": "Run",
-    "JUnit.PcCentresControllerTest.getRatings_ShouldReturnPcCentresList.executor": "Run",
-    "JUnit.PcCentresControllerTest.updatePcCentres_ShouldReturnSuccessMessage.executor": "Run",
-    "JUnit.PcCentresRepositoryTest.executor": "Run",
-    "JUnit.PcCentresRepositoryTest.testFindPcCentreById.executor": "Run",
-    "JUnit.PcCentresRepositoryTest.testFindPcCentresByCentreName.executor": "Run",
-    "JUnit.PcCentresRepositoryTest.testFindPcCentresByLocation.executor": "Run",
-    "JUnit.PcCentresRepositoryTest.testFindPcCentresByRating.executor": "Run",
-    "JUnit.PcCentresRepositoryTest.testGetPcCentresByVendorId.executor": "Run",
-    "JUnit.PcCentresServiceTest.executor": "Run",
-    "JUnit.SubscriptionRepositoryTest.executor": "Run",
-    "JUnit.SubscriptionRepositoryTest.saveValidSubscription_ShouldSaveSuccessfully.executor": "Run",
-    "JUnit.ZoneRepositoryTest.findZoneById.executor": "Run",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.NoobApplication.executor": "Run",
-    "com.codeium.enabled": "true",
-    "com.google.cloudcode.ide_session_index": "20240915_0001",
-    "git-widget-placeholder": "hassan",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Rafeef/IdeaProjects/Exercise-Repository",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.PcCentresControllerTest.addPcCentres_ShouldReturnSuccessMessage.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresControllerTest.approvedPcCenter_ShouldReturnSuccessMessage.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresControllerTest.deletePcCentres_ShouldReturnSuccessMessage.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresControllerTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresControllerTest.getAllPcCentres_ShouldReturnListOfPcCentres.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresControllerTest.getPcCentreByLocation_ShouldReturnPcCentresList.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresControllerTest.getPcCentreByName_ShouldReturnPcCentres.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresControllerTest.getPcCentreByVendor_ShouldReturnPcCentresList.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresControllerTest.getPcCentresByRatingRange_ShouldReturnPcCentresList.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresControllerTest.getRatings_ShouldReturnPcCentresList.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresControllerTest.updatePcCentres_ShouldReturnSuccessMessage.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresRepositoryTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresRepositoryTest.testFindPcCentreById.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresRepositoryTest.testFindPcCentresByCentreName.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresRepositoryTest.testFindPcCentresByLocation.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresRepositoryTest.testFindPcCentresByRating.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresRepositoryTest.testGetPcCentresByVendorId.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresServiceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresServiceTest.testAddPcCentres_InvalidVendor.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresServiceTest.testAdminAprovedPcCenter_InvalidAdmin.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.PcCentresServiceTest.testUpdatePcCentres_ValidId.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SubscriptionRepositoryTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SubscriptionRepositoryTest.saveValidSubscription_ShouldSaveSuccessfully.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SubscriptionRepositoryTest.updateSubscription_ShouldUpdateFieldsSuccessfully.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.ZoneRepositoryTest.findZoneById.executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.NoobApplication.executor&quot;: &quot;Run&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;com.google.cloudcode.ide_session_index&quot;: &quot;20240915_0001&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;hassan&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Rafeef/IdeaProjects/Exercise-Repository&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Spring Boot.NoobApplication">
-    <configuration name="PcCentresControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="NOOB" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PcCentresControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PcCentresControllerTest.addPcCentres_ShouldReturnSuccessMessage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="NOOB" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PcCentresControllerTest" />
-      <option name="METHOD_NAME" value="addPcCentres_ShouldReturnSuccessMessage" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PcCentresControllerTest.approvedPcCenter_ShouldReturnSuccessMessage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="NOOB" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="PcCentresControllerTest" />
-      <option name="METHOD_NAME" value="approvedPcCenter_ShouldReturnSuccessMessage" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="PcCentresRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="NOOB" />
       <extension name="coverage">
@@ -199,7 +188,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PcCentresServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="PcCentresServiceTest.testAddPcCentres_InvalidVendor" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="NOOB" />
       <extension name="coverage">
         <pattern>
@@ -209,7 +198,56 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.twspring.noob" />
       <option name="MAIN_CLASS_NAME" value="org.twspring.noob.PcCentresServiceTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="testAddPcCentres_InvalidVendor" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PcCentresServiceTest.testAdminAprovedPcCenter_InvalidAdmin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="NOOB" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.twspring.noob.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.twspring.noob" />
+      <option name="MAIN_CLASS_NAME" value="org.twspring.noob.PcCentresServiceTest" />
+      <option name="METHOD_NAME" value="testAdminAprovedPcCenter_InvalidAdmin" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PcCentresServiceTest.testUpdatePcCentres_ValidId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="NOOB" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.twspring.noob.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.twspring.noob" />
+      <option name="MAIN_CLASS_NAME" value="org.twspring.noob.PcCentresServiceTest" />
+      <option name="METHOD_NAME" value="testUpdatePcCentres_ValidId" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SubscriptionRepositoryTest.updateSubscription_ShouldUpdateFieldsSuccessfully" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="NOOB" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.twspring.noob.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.twspring.noob" />
+      <option name="MAIN_CLASS_NAME" value="org.twspring.noob.SubscriptionRepositoryTest" />
+      <option name="METHOD_NAME" value="updateSubscription_ShouldUpdateFieldsSuccessfully" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -223,11 +261,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.PcCentresControllerTest.approvedPcCenter_ShouldReturnSuccessMessage" />
-        <item itemvalue="JUnit.PcCentresServiceTest" />
         <item itemvalue="JUnit.PcCentresRepositoryTest" />
-        <item itemvalue="JUnit.PcCentresControllerTest.addPcCentres_ShouldReturnSuccessMessage" />
-        <item itemvalue="JUnit.PcCentresControllerTest" />
+        <item itemvalue="JUnit.SubscriptionRepositoryTest.updateSubscription_ShouldUpdateFieldsSuccessfully" />
+        <item itemvalue="JUnit.PcCentresServiceTest.testUpdatePcCentres_ValidId" />
+        <item itemvalue="JUnit.PcCentresServiceTest.testAddPcCentres_InvalidVendor" />
+        <item itemvalue="JUnit.PcCentresServiceTest.testAdminAprovedPcCenter_InvalidAdmin" />
       </list>
     </recent_temporary>
   </component>
@@ -250,7 +288,9 @@
       <workItem from="1726050803660" duration="2458000" />
       <workItem from="1726382877549" duration="10448000" />
       <workItem from="1726614166523" duration="69000" />
-      <workItem from="1726624680760" duration="26103000" />
+      <workItem from="1726624680760" duration="54381000" />
+      <workItem from="1726696228781" duration="1178000" />
+      <workItem from="1726697566783" duration="1152000" />
     </task>
     <task id="LOCAL-00001" summary="changes">
       <option name="closed" value="true" />
@@ -316,7 +356,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-field">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Model/Subscription.java</url>
-          <line>35</line>
+          <line>36</line>
           <properties field="members" class="org.twspring.noob.Model.Subscription" />
           <option name="timeStamp" value="34" />
         </line-breakpoint>
@@ -385,7 +425,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/NOOB/src/test/java/PcCentrControllerTest.java</url>
-          <line>104</line>
+          <line>107</line>
           <properties class="PcCentresControllerTest" method="approvedPcCenter_ShouldReturnSuccessMessage">
             <option name="EMULATED" value="true" />
             <option name="WATCH_EXIT" value="false" />
@@ -414,22 +454,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/PcController.java</url>
-          <line>25</line>
+          <line>27</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/PcCentresRepositoryTest.java</url>
-          <line>24</line>
+          <line>27</line>
           <option name="timeStamp" value="37" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/test/java/org/twspring/noob/SubscriptionRepositoryTest.java</url>
-          <line>30</line>
+          <line>32</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/SubscribeByService.java</url>
-          <line>68</line>
+          <line>72</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
       </breakpoints>

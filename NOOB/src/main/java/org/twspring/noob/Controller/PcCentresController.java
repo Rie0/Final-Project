@@ -11,10 +11,10 @@ import org.twspring.noob.Service.PcCentresService;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/api/v1/pc-centre")
 @RequiredArgsConstructor
+////Hassan Alzahrani
 public class PcCentresController {
     private final PcCentresService pcCentresService;
 
@@ -31,13 +31,13 @@ public class PcCentresController {
 
     }
     @PutMapping("update-pcCentre/{id}")
-    public ResponseEntity updatePcCentres(@PathVariable Integer id,@Valid @RequestBody PcCentres pcCentres){
-        pcCentresService.updatePcCentres(id, pcCentres);
+    public ResponseEntity updatePcCentres(@AuthenticationPrincipal User user,@PathVariable Integer id,@Valid @RequestBody PcCentres pcCentres){
+        pcCentresService.updatePcCentres(id, pcCentres, user.getId());
         return ResponseEntity.status(200).body("PC Centres  updated successfully");
     }
-    @DeleteMapping("/delete-pcCentre/{id}")
-    public ResponseEntity deletePcCentres(@PathVariable Integer id){
-        pcCentresService.deletePcCentres(id);
+    @DeleteMapping("/delete-pcCentre/{pcCenterId}")
+    public ResponseEntity deletePcCentres(@AuthenticationPrincipal User user,@PathVariable Integer pcCenterId){
+        pcCentresService.deletePcCentres(pcCenterId, user.getId());
         return ResponseEntity.status(200).body("PC Centres deleted successfully");
     }
 

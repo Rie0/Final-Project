@@ -15,6 +15,7 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+////Hassan Alzahrani
 public class PC {
 
 
@@ -27,7 +28,7 @@ public class PC {
     @NotEmpty(message = "model Name  can not be empty")
     @Column(columnDefinition = "varchar(30) not null")
     private String model;
-    @NotEmpty(message = "specs Name  can not be empty")
+   @NotEmpty(message = "specs Name  can not be empty")
     @Column(columnDefinition = "varchar(30) not null")
     private String specs;
     private boolean isAvailable;
@@ -46,10 +47,5 @@ public class PC {
     @ManyToOne
     @JsonIgnore
     private Zone zone;
-
-
-
-
-
 
 }

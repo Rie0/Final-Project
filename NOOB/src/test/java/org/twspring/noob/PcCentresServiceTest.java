@@ -27,6 +27,8 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
 
+
+////Hassan Alzahrani
 @ExtendWith(MockitoExtension.class)
 public class PcCentresServiceTest {
 
@@ -57,7 +59,7 @@ public class PcCentresServiceTest {
         pcCentre.setId(1);
         pcCentre.setCentreName("Tech Centre 1");
         pcCentre.setLocation("New York");
-        pcCentre.setManyReview(5);
+        pcCentre.setRating(5);
         pcCentre.setVendor(vendor);
         pcCentre.setApproved(false);
 
@@ -96,14 +98,14 @@ public class PcCentresServiceTest {
         updatedPcCentre.setCentreName("Updated Centre");
         updatedPcCentre.setLocation("Los Angeles");
         updatedPcCentre.setNumberOfPc(30);
-        updatedPcCentre.setManyReview(4);
+        updatedPcCentre.setRating(4);
 
         pcCentresService.updatePcCentres(pcCentre.getId(), updatedPcCentre);
 
         assertEquals("Updated Centre", pcCentre.getCentreName());
         assertEquals("Los Angeles", pcCentre.getLocation());
         assertEquals(30, pcCentre.getNumberOfPc());
-        assertEquals(4, pcCentre.getManyReview());
+        assertEquals(4, pcCentre.getRating());
         verify(pcCentresRepository).save(pcCentre);
     }
 
@@ -172,7 +174,7 @@ public class PcCentresServiceTest {
 
         assertNotNull(result);
         assertEquals(1, result.size());
-        assertEquals(5, result.get(0).getManyReview());
+        assertEquals(5, result.get(0).getRating());
     }
 
     @Test

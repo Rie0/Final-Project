@@ -13,14 +13,15 @@ public interface PcCentresRepository extends JpaRepository<PcCentres, Integer> {
 
     List<PcCentres>getPcCentresByVendorId(Integer id);
     List<PcCentres>findPcCentresByRating(Integer rating);
-
     List<PcCentres> findByRatingBetween(int minRating, int maxRating);
 PcCentres findPcCentresByCentreName(String centreName);
-
 List<PcCentres>findPcCentresByLocation(String location);
-
 List<PcCentres> findPcCentresByApprovedFalse();
     List<PcCentres> findPcCentresByApprovedTrue();
+
+//    List<PcCentres> findPcCentresByAverageRating(Integer averageRating);
+//    List<PcCentres> findPcCentresByAverageRatingBetween(Integer minRating, Integer maxRating);
+
 
 }
 

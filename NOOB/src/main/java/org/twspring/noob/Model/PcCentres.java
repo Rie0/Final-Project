@@ -18,38 +18,39 @@ import java.util.Set;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+////Hassan Alzahrani
 public class PcCentres {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-//
-//    @NotEmpty(message = "centre name can not be empty")
-//    @Column(columnDefinition = "varchar(10) not null")
+
+    @NotEmpty(message = "centre name can not be empty")
+   @Column(columnDefinition = "varchar(10) not null")
     private String centreName;
-//
-//    @NotEmpty(message = "location can not be empty")
-//    @Column(columnDefinition = "varchar(30) not null")
+
+    @NotEmpty(message = "location can not be empty")
+    @Column(columnDefinition = "varchar(30) not null")
     private String location;
-//
-//    @NotEmpty(message = "opening Hours can not be empty")
-//    @Column(columnDefinition = "varchar(30) not null")
+
+    @NotEmpty(message = "opening Hours can not be empty")
+    @Column(columnDefinition = "varchar(30) not null")
     private String openingHours;
-//
-//    @NotNull(message = "number of PC Capacity can not be empty")
-//    @Column(columnDefinition = "int not null")
+
+    @NotNull(message = "number of PC Capacity can not be empty")
+    @Column(columnDefinition = "int not null")
     private int numberOfPc;
-//    @NotEmpty(message = "Contact Number can not be empty")
-//    @Column(columnDefinition = "varchar(30) not null")
-   // @Pattern(regexp = "^\\+9665\\d{8}$", message = "Phone number must be a valid Saudi phone number")
+    @NotEmpty(message = "Contact Number can not be empty")
+    @Column(columnDefinition = "varchar(30) not null")
+    @Pattern(regexp = "^\\+9665\\d{8}$", message = "Phone number must be a valid Saudi phone number")
     private String contactNumber;
 
     private boolean approved=false;
-//    @NotNull(message = "rating can not be empty")
-//    @Column(columnDefinition = "int not null")
+    @NotNull(message = "rating can not be empty")
+    @Column(columnDefinition = "int not null")
     private int rating =0;
-//    @NotEmpty(message = "Contact Number can not be empty")
-//    @Column(columnDefinition = "varchar(30) not null")
+    @NotEmpty(message = "Contact Number can not be empty")
+    @Column(columnDefinition = "varchar(30) not null")
 private String Commercialregister;
 
 

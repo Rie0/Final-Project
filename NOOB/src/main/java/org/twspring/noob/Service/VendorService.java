@@ -11,17 +11,19 @@ import org.twspring.noob.Repository.AuthRepository;
 import org.twspring.noob.Repository.VendorRepository;
 
 import java.util.List;
-
+////Hassan Alzahrani
 @Service
 @RequiredArgsConstructor
 public class VendorService {
     private final VendorRepository vendorRepository;
     private final AuthRepository authRepository;
-
+    //CRUD
+    ////Hassan Alzahrani
     public List<Vendor> getAllVendors() {
         return vendorRepository.findAll();
     }
-
+    //CRUD
+    ////Hassan Alzahrani
     public void registerVendor(VendotDTO vendotDTO) {
         String hash = new BCryptPasswordEncoder().encode(vendotDTO.getPassword());
         User user = new User();
@@ -37,7 +39,8 @@ public class VendorService {
         vendor.setUser(user);
         vendorRepository.save(vendor);
     }
-
+    //CRUD
+    ////Hassan Alzahrani
     public void updateVendor(Integer vendorId, VendotDTO vendotDTO) {
         String hash = new BCryptPasswordEncoder().encode(vendotDTO.getPassword());
 
@@ -52,12 +55,14 @@ public class VendorService {
         vendor.setVenueName(vendotDTO.getVenueName());
         vendorRepository.save(vendor);
     }
-
+    //CRUD
+    ////Hassan Alzahrani
     public void deleteVendor(Integer vendorId) {
         authRepository.deleteById(vendorId);
     }
 
-    //// =============
+    //EXTRA ENDPOINT
+    ////Hassan Alzahrani
     public Vendor getVendorById(Integer vendorId) {
         Vendor vendor = vendorRepository.findVendorById(vendorId);
         if (vendor == null) {

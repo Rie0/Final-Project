@@ -11,9 +11,12 @@ import org.twspring.noob.Model.Game;
 import org.twspring.noob.Model.Vendor;
 import org.twspring.noob.Service.VendorService;
 
+
+
 @RestController
 @RequestMapping("/api/v1/vendor")
 @RequiredArgsConstructor
+////Hassan Alzahrani
 public class VendorController {
 
     private final VendorService vendorService;
@@ -32,7 +35,7 @@ public class VendorController {
         vendorService.updateVendor(vendorId, vendotDTO);
         return ResponseEntity.status(200).body(new ApiResponse("vendor updated successfully"));
     }
-    @DeleteMapping("/{vendorId}/delete-my-account")
+    @DeleteMapping("{vendorId}/delete-my-account")
     public ResponseEntity deleteMyAccount(@PathVariable Integer vendorId){
         vendorService.deleteVendor(vendorId);
         return ResponseEntity.status(200).body(new ApiResponse("Vendor deleted successfully"));
