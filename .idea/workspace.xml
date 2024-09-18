@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b947b4ef-297e-4c50-811c-9161e0997d87" name="Changes" comment="Security Added">
-      <change afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/DTO/MultiInviteDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Config/ConfigSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Config/ConfigSecurity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/TeamController.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Controller/TeamController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/TeamService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/src/main/java/org/twspring/noob/Service/TeamService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Config/ConfigSecurity.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Config/ConfigSecurity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/MatchController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/MatchController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/TeamController.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Controller/TeamController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/TeamService.class" beforeDir="false" afterPath="$PROJECT_DIR$/NOOB/target/classes/org/twspring/noob/Service/TeamService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,46 +51,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;JUnit.TournamentControllerTest.addTournamentTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TournamentControllerTest.getAllTournamentsTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TournamentControllerTest.getTournamentsByGameTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TournamentControllerTest.getTournamentsTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TournamentRepositoryTest.findByAttendanceTypeTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TournamentRepositoryTest.findByCityTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TournamentRepositoryTest.findByGameTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TournamentRepositoryTest.findByTournamentIdAndOrganizerIdTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TournamentRepositoryTest.findTournamentByIdTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TournamentRepositoryTest.findUpcomingTournamentsTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TournamentServiceTest.deleteTournamentTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TournamentServiceTest.deleteTournamentUnauthorizedTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TournamentServiceTest.getAllTournamentsTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TournamentServiceTest.getTournamentByIdTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TournamentServiceTest.saveTournamentTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TournamentServiceTest.startTournamentTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TournamentServiceTest.updateTournamentTest.executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.NoobApplication.executor&quot;: &quot;Run&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;com.google.cloudcode.ide_session_index&quot;: &quot;20240916_0003&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;RafeefV3&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "JUnit.TournamentControllerTest.addTournamentTest.executor": "Run",
+    "JUnit.TournamentControllerTest.getAllTournamentsTest.executor": "Run",
+    "JUnit.TournamentControllerTest.getTournamentsByGameTest.executor": "Run",
+    "JUnit.TournamentControllerTest.getTournamentsTest.executor": "Run",
+    "JUnit.TournamentRepositoryTest.findByAttendanceTypeTest.executor": "Run",
+    "JUnit.TournamentRepositoryTest.findByCityTest.executor": "Run",
+    "JUnit.TournamentRepositoryTest.findByGameTest.executor": "Run",
+    "JUnit.TournamentRepositoryTest.findByTournamentIdAndOrganizerIdTest.executor": "Run",
+    "JUnit.TournamentRepositoryTest.findTournamentByIdTest.executor": "Run",
+    "JUnit.TournamentRepositoryTest.findUpcomingTournamentsTest.executor": "Run",
+    "JUnit.TournamentServiceTest.deleteTournamentTest.executor": "Run",
+    "JUnit.TournamentServiceTest.deleteTournamentUnauthorizedTest.executor": "Run",
+    "JUnit.TournamentServiceTest.getAllTournamentsTest.executor": "Run",
+    "JUnit.TournamentServiceTest.getTournamentByIdTest.executor": "Run",
+    "JUnit.TournamentServiceTest.saveTournamentTest.executor": "Run",
+    "JUnit.TournamentServiceTest.startTournamentTest.executor": "Run",
+    "JUnit.TournamentServiceTest.updateTournamentTest.executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.NoobApplication.executor": "Run",
+    "com.codeium.enabled": "true",
+    "com.google.cloudcode.ide_session_index": "20240916_0003",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Spring Boot.NoobApplication">
     <configuration name="TournamentControllerTest.addTournamentTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="NOOB" />
