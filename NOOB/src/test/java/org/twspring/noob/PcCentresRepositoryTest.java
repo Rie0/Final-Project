@@ -19,6 +19,9 @@ import org.twspring.noob.Repository.VendorRepository;
 import java.util.List;
 import java.util.Set;
 
+
+
+////Hassan Alzahrani
 @DataJpaTest
 @ExtendWith(SpringExtension.class)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
@@ -43,7 +46,7 @@ public class PcCentresRepositoryTest {
         pcCentre1.setCentreName("Tech Centre 1");
         pcCentre1.setLocation("New York");
         pcCentre1.setNumberOfPc(20);
-        pcCentre1.setManyReview(5);
+        pcCentre1.setRating(5);
         pcCentre1.setOpeningHours("5");
         pcCentre1.setContactNumber("+966512345678");
         pcCentre1.setCommercialregister("abx");
@@ -54,7 +57,7 @@ public class PcCentresRepositoryTest {
         pcCentre2.setCentreName("Tech Centre 2");
         pcCentre2.setLocation("Los Angeles");
         pcCentre2.setNumberOfPc(15);
-        pcCentre2.setManyReview(4);
+        pcCentre2.setRating(4);
         pcCentre2.setOpeningHours("5");
         pcCentre2.setContactNumber("+966512345679");
         pcCentre2.setCommercialregister("abx");

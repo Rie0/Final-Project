@@ -11,7 +11,7 @@ import org.twspring.noob.Repository.PcCentresRepository;
 import org.twspring.noob.Repository.VendorRepository;
 
 import java.util.List;
-
+////Hassan Alzahrani
 @Service
 @RequiredArgsConstructor
 public class PcCentresService {
@@ -23,7 +23,8 @@ public class PcCentresService {
     public List<PcCentres> getAllPcCentres() {
         return pcCentresRepository.findAll();
     }
-
+    //CRUD
+    ////Hassan Alzahrani
     public void addPcCentres(PcCentres pcCentres, Integer vendorID) {
         Vendor vendor = vendorRepository.findVendorById(vendorID);
         if (vendor == null) {
@@ -36,27 +37,34 @@ public class PcCentresService {
         vendorRepository.save(vendor);
 
     }
-
-    public void updatePcCentres(Integer id, PcCentres pcCentres) {
+    //CRUD
+    ////Hassan Alzahrani
+    public void updatePcCentres(Integer id, PcCentres pcCentres,Integer vendorId) {
+        Vendor vendor = vendorRepository.findVendorById(vendorId);
         PcCentres pcCentres1 = pcCentresRepository.findPcCentreById(id);
         if (pcCentres1 == null) {
             throw new ApiException("PC Centre not found");
         }
-        if (pcCentres1.getVendor().getId() != pcCentres.getVendor().getId()) {
-            throw new ApiException("PC Centres don't match");
-        }
+     if (vendor == null) {
+         throw new ApiException("Vendor with ID " + vendorId + " not found");
+     }
+     if (vendorId!=pcCentres1.getVendor().getId()) {
+         throw new ApiException("Vendor with ID " + vendorId + " is changed");
+     }
         pcCentres1.setCentreName(pcCentres.getCentreName());
         pcCentres1.setLocation(pcCentres.getLocation());
         pcCentres1.setOpeningHours(pcCentres.getOpeningHours());
         pcCentres1.setContactNumber(pcCentres.getContactNumber());
         pcCentres1.setNumberOfPc(pcCentres.getNumberOfPc());
         pcCentres1.setRating(pcCentres.getRating());
-        pcCentres1.setApproved(pcCentres.isApproved());
+
+
 
         pcCentresRepository.save(pcCentres1);
     }
-
-    public void deletePcCentres(Integer id) {
+    //CRUD
+    ////Hassan Alzahrani
+    public void deletePcCentres(Integer id,Integer vendorId) {
         PcCentres pcCentres = pcCentresRepository.findPcCentreById(id);
         if (pcCentres == null) {
             throw new ApiException("PC Centres not found");
@@ -64,9 +72,18 @@ public class PcCentresService {
         if (pcCentres.getVendor().getId() != pcCentres.getVendor().getId()) {
             throw new ApiException("PC Centres don't match");
         }
+        Vendor vendor = vendorRepository.findVendorById(vendorId);
+        if (vendor == null) {
+            throw new ApiException("Vendor with ID " + vendorId + " not found");
+        }
+        if (vendorId!=pcCentres.getVendor().getId()) {
+            throw new ApiException("Vendor with ID " + vendorId + " is changed");
+        }
         pcCentresRepository.delete(pcCentres);
     }
 
+    //EXTRA ENDPOINT
+    ////Hassan Alzahrani
     public List<PcCentres> getPcCentresByVendorID(Integer vendorId) {
         Vendor vendor = vendorRepository.findVendorById(vendorId);
         if (vendor == null) {
@@ -81,9 +98,9 @@ public class PcCentresService {
 
     }
 
-    // ======
 
-    //@Transactional
+    //EXTRA ENDPOINT
+    ////Hassan Alzahrani
     public void adminAprovedPcCenter(Integer pcCenterId) {
 
                 PcCentres pcCentres = pcCentresRepository.findPcCentreById(pcCenterId);
@@ -97,8 +114,8 @@ public class PcCentresService {
 
         }
 
-    /// =============
-
+    //EXTRA ENDPOINT
+////Hassan Alzahrani
     public List<PcCentres> getPcCentresByRating(Integer rating) {
         if (rating == null) {
             throw new ApiException("Rating not found");
@@ -125,11 +142,13 @@ public class PcCentresService {
         return pcCentresRepository.findPcCentresByLocation(location);
     }
 
-
+    //EXTRA ENDPOINT
+    ////Hassan Alzahrani
     public List<PcCentres>getApprovedPcCentres(){
   return pcCentresRepository.findPcCentresByApprovedTrue();
     }
-
+    //EXTRA ENDPOINT
+    ////Hassan Alzahrani
     public List<PcCentres>getAllNotApprovedPcCentre(){
         return pcCentresRepository.findPcCentresByApprovedFalse();
     }

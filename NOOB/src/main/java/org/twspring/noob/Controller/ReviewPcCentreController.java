@@ -12,8 +12,9 @@ import org.twspring.noob.Service.ReviewPcCentreService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/PcCetreRating")
+@RequestMapping("/api/v1/reviewPcCentre")
 @RequiredArgsConstructor
+////Hassan Alzahrani
 public class ReviewPcCentreController {
     private final ReviewPcCentreService reviewPcCentreService;
 
@@ -23,11 +24,14 @@ public class ReviewPcCentreController {
 
     }
 
+
     @PostMapping("/add/{pcCentreId}")
-    public ResponseEntity add(@AuthenticationPrincipal User user , @PathVariable Integer pcCentreId, @RequestBody ReviewPcCentre reviewPcCentre) {
+    public ResponseEntity addReviewToPcCentre(@AuthenticationPrincipal User user, @PathVariable Integer pcCentreId,@RequestBody ReviewPcCentre reviewPcCentre) {
         reviewPcCentreService.addReviewToPcCentre(user.getId(), pcCentreId, reviewPcCentre);
-        return ResponseEntity.status(200).body("review added successfully");
+        return ResponseEntity.status(200).body("Review added successfully and rating updated.");
     }
+
+
     @PutMapping("/update/{reviewPcCentreId}")
     public ResponseEntity update(@AuthenticationPrincipal User user , @PathVariable Integer reviewPcCentreId, @RequestBody @Valid ReviewPcCentre reviewPcCentre) {
         reviewPcCentreService.updateReviewPcCentre(user.getId(), reviewPcCentreId, reviewPcCentre);

@@ -8,7 +8,7 @@ import org.twspring.noob.Repository.*;
 
 import java.util.Date;
 import java.util.List;
-
+////Hassan Alzahrani
 @Service
 @RequiredArgsConstructor
 public class SubscribeByService {
@@ -20,11 +20,13 @@ public class SubscribeByService {
     private final ZoneRepository zoneRepository;
     private final VendorRepository vendorRepository;
     private final SubscriptionRepository subscriptionRepository;
-
+    //CRUD
+    ////Hassan Alzahrani
     public List<SubscripeBy> getAllsubscribeBy() {
         return subscribeByRepository.findAll();
     }
-
+    //CRUD
+    ////Hassan Alzahrani
     public void addSubscripeBy(SubscripeBy subscripeBy, Integer vendorId, Integer pcCenterID, Integer zoneId, Integer playerId) {
         PcCentres pcCentres = pcCentresRepository.findPcCentreById(pcCenterID);
         Zone zone = zoneRepository.findZoneById(zoneId);
@@ -49,16 +51,18 @@ public class SubscribeByService {
         subscribeByRepository.save(subscripeBy);
 
     }
-
-    public void updateSubscribeBy(Integer id, SubscripeBy subscripeBy) {
+    //CRUD
+    ////Hassan Alzahrani
+    public void updateSubscribeById(Integer id, SubscripeBy subscripeBy) {
         SubscripeBy subscripeBy1 = subscribeByRepository.findSubscripeBIESById(id);
         if (subscripeBy1 == null) {
             throw new ApiException("Subscribe By not found");
         }
         subscripeBy1.setSubscription(subscripeBy.getSubscription());
     }
-
-    public void deleteSubscripeBy(Integer id) {
+    //CRUD
+    ////Hassan Alzahrani
+    public void deleteSubscripeById(Integer id) {
         SubscripeBy subscripeBy = subscribeByRepository.findSubscripeBIESById(id);
         if (subscripeBy == null) {
             throw new ApiException("Subscribe By not found");
@@ -66,7 +70,7 @@ public class SubscribeByService {
         subscribeByRepository.delete(subscripeBy);
     }
 
-    //////
+    //EXTRA ENDPOINT
     public List<SubscripeBy> getSubscribedByPlayerId(Integer playerId) {
         Player player = playerRepository.findPlayerById(playerId);
         if (player == null) {
@@ -76,7 +80,8 @@ public class SubscribeByService {
         return subscribeByRepository.findSubscripeBIESByPlayerId(playerId);
     }
 
-    ///////////////////////
+    //EXTRA ENDPOINT
+    ////Hassan Alzahrani
 
     public void subscribePlayerToSubscription(Integer playerId, Integer subscriptionId, Integer zoneId,
                                               int playerMembers, String coupan, String name) {
@@ -118,12 +123,12 @@ public class SubscribeByService {
             subscription.setSubscriptionNmae("basic");
             subscription.setPrice(subscription.getSubscriptionHours() + 2);
         }
-
+subscripeBy.setPlayer(player);
         subscribeByRepository.save(subscripeBy);
     }
 
-    ////////////////////////
-
+    //EXTRA ENDPOINT
+////Hassan Alzahrani
     public void playerReturnSubscription(Integer subscripeById) {
         SubscripeBy subscripeBy = subscribeByRepository.findSubscripeBIESById(subscripeById);
         if (subscripeBy == null) {

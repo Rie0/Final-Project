@@ -12,6 +12,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+//Hassan Alzhrani
 public class GameService {
     private final GameRepository gameRepository;
 private final PcRepository pcRepository;
@@ -26,6 +27,7 @@ private final PcRepository pcRepository;
         if(pc==null) {
             throw new ApiException("PC not found");
         }
+
         gameRepository.save(game);
 
     }

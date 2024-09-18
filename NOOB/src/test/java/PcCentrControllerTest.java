@@ -18,6 +18,9 @@ import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
+
+
+////Hassan Alzahrani
 class PcCentresControllerTest {
 
     @Mock
@@ -46,19 +49,19 @@ class PcCentresControllerTest {
         assertEquals(pcCentresList, response.getBody());
     }
 
-//    @Test
-//    void addPcCentres_ShouldReturnSuccessMessage() {
-//        // Arrange
-//        PcCentres pcCentre = new PcCentres();
-//        doNothing().when(pcCentresService).addPcCentres(any(PcCentres.class), anyInt());
-//
-//        // Act
-//        ResponseEntity response = pcCentresController.addPcCentres(1, pcCentre);
-//
-//        // Assert
-//        assertEquals(200, response.getStatusCodeValue());
-//        assertEquals("PC Centre added successfully", response.getBody());
-//    }
+    @Test
+    void addPcCentres_ShouldReturnSuccessMessage() {
+        // Arrange
+        PcCentres pcCentre = new PcCentres();
+        doNothing().when(pcCentresService).addPcCentres(any(PcCentres.class), anyInt());
+
+        // Act
+        ResponseEntity response = pcCentresController.addPcCentres(1, pcCentre);
+
+        // Assert
+        assertEquals(200, response.getStatusCodeValue());
+        assertEquals("PC Centre added successfully", response.getBody());
+    }
 
     @Test
     void updatePcCentres_ShouldReturnSuccessMessage() {

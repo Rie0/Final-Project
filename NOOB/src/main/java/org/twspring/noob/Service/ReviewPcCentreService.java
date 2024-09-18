@@ -13,7 +13,7 @@ import org.twspring.noob.Repository.SubscribeByRepository;
 
 import java.util.List;
 
-
+////Hassan Alzahrani
 @Service
 @RequiredArgsConstructor
 public class ReviewPcCentreService {
@@ -23,20 +23,23 @@ public class ReviewPcCentreService {
     private final PcCentresRepository pcCentresRepository;
     private final SubscribeByRepository subscribeByRepository;
 
-
-    public List<ReviewPcCentre>getAllReviewPcCentre(){
+    //CRUD
+    ////Hassan Alzahrani
+    public List<ReviewPcCentre> getAllReviewPcCentre() {
         return reviewPcCentreRepository.findAll();
     }
-    /////
-    public void addReviewToPcCentre(Integer playerId, Integer pcCentreId,ReviewPcCentre reviewPcCentre) {
+
+    //CRUD
+    ////Hassan Alzahrani
+    public void addReviewToPcCentre(Integer playerId, Integer pcCentreId, ReviewPcCentre reviewPcCentre) {
         Player player = playerRepository.findPlayerById(playerId);
         if (player == null) {
             throw new ApiException("Player not found");
         }
 
-        PcCentres pcCentre = pcCentresRepository.findById(pcCentreId).orElse(null);
+        PcCentres pcCentre = pcCentresRepository.findPcCentreById(pcCentreId);
         if (pcCentre == null) {
-            throw new ApiException("PC Centre not found");
+            throw new ApiException("PcCentre not found");
         }
 
         boolean hasSubscribed = subscribeByRepository.existsByPlayerAndSubscriptionPcCentres(player, pcCentre);
@@ -44,13 +47,13 @@ public class ReviewPcCentreService {
             throw new ApiException("Player has not subscribed to this PC Centre and cannot add a review");
         }
 
-
         reviewPcCentre.setPlayer(player);
         reviewPcCentre.setPcCentre(pcCentre);
-
         reviewPcCentreRepository.save(reviewPcCentre);
     }
 
+    //CRUD
+    ////Hassan Alzahrani
     public void deleteReview(Integer playerId, Integer reviewId) {
         Player player = playerRepository.findPlayerById(playerId);
         if (player == null) {
@@ -61,12 +64,14 @@ public class ReviewPcCentreService {
         reviewPcCentreRepository.deleteById(reviewId);
     }
 
-    public void updateReviewPcCentre(Integer playerId, Integer reviewPcCentreId,ReviewPcCentre reviewPcCentre) {
+    //CRUD
+    ////Hassan Alzahrani
+    public void updateReviewPcCentre(Integer playerId, Integer reviewPcCentreId, ReviewPcCentre reviewPcCentre) {
         Player player = playerRepository.findPlayerById(playerId);
         if (player == null) {
             throw new ApiException("Player not found");
         }
-        ReviewPcCentre reviewPcCentre1 =reviewPcCentreRepository.findREVPcCentreById(reviewPcCentreId);
+        ReviewPcCentre reviewPcCentre1 = reviewPcCentreRepository.findREVPcCentreById(reviewPcCentreId);
         if (reviewPcCentre1 == null) {
             throw new ApiException("ReviewPcCentre not found");
         }
@@ -77,6 +82,8 @@ public class ReviewPcCentreService {
         reviewPcCentreRepository.save(reviewPcCentre1);
     }
 
+    //EXTRA ENDPOINT
+    ////Hassan Alzahrani
     public ReviewPcCentre getReviewCentreByPlayerId(Integer playerId) {
         Player player = playerRepository.findPlayerById(playerId);
         if (player == null) {

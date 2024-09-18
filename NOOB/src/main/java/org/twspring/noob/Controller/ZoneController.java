@@ -5,15 +5,15 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import org.twspring.noob.Model.PC;
-import org.twspring.noob.Model.PcCentres;
 import org.twspring.noob.Model.User;
 import org.twspring.noob.Model.Zone;
 import org.twspring.noob.Service.ZoneService;
 
+
 @RestController
 @RequestMapping("/api/v1/zone")
 @RequiredArgsConstructor
+////Hassan Alzahrani
 public class ZoneController {
 
     private final ZoneService zoneService;
@@ -23,9 +23,9 @@ public class ZoneController {
         return ResponseEntity.status(200).body(zoneService.getAllPcZone());
     }
 
-    @PostMapping("/add-zone/{centreId}/{vendorId}")
-    public ResponseEntity addZone(@AuthenticationPrincipal User user, @PathVariable Integer centreId, @Valid @RequestBody Zone zone) {
-        zoneService.addZone(zone, centreId, user.getId());
+    @PostMapping("/add-zone/{pcentreId}")
+    public ResponseEntity addZone(@AuthenticationPrincipal User user, @PathVariable Integer pcentreId, @Valid @RequestBody Zone zone) {
+        zoneService.addZone(zone, pcentreId, user.getId());
         return ResponseEntity.status(200).body("Zone added successfully");
     }
 
@@ -47,9 +47,9 @@ public class ZoneController {
         return ResponseEntity.status(200).body(zoneService.getZoneByPcCentre(pcCentreId));
     }
 
-    @PutMapping("/chang-zone-status/{PcCentre}/{zone_id}")
+    @PutMapping("/chang-zone-status/{pcCentreId}/{zone_id}")
     public ResponseEntity changZoneStatus(@PathVariable Integer pcCentreId, @PathVariable Integer zone_id, @RequestBody Zone zone,@AuthenticationPrincipal User user) {
-        zoneService.isAvailableZone(pcCentreId, zone_id, user.getId());
+        zoneService.changeZoneStatus(pcCentreId, zone_id, user.getId());
         return ResponseEntity.status(200).body("status changed successfully");
 
     }
